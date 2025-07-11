@@ -3,6 +3,7 @@
 
 import { useGlobalContext } from "@/Context/GlobalContext";
 import Image from "next/image"
+import Link from "next/link";
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import {useSelector, useDispatch} from 'react-redux'
 import { removeItem, setLoading, updateQuantity, setCartItems, setError } from "../../../store/cartSlice";
