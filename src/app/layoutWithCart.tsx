@@ -70,7 +70,7 @@ export default function LayoutWithCart({ children, detectedCountry }: Props) {
        <div 
           className="box3 items-center cursor-pointer xl:text-md text-xs">
           <p className="ticker-text">
-          Stay tuned for New releases coming soon. Sign up for our newsletter and get 10% off
+          Sign up for our newsletter to get details about future releases straight to your inbox!
           </p>
         </div>
       {isCartOpen && !isCartPage && (

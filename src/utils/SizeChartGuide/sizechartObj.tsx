@@ -1,4 +1,3 @@
-
 export const getSizeChart = [
     {
       id: "2",
@@ -86,5 +85,41 @@ export const getSizeChart = [
             
              <p class="size-text">The size unit is in centimeter, the ruler size table for the physical manual measurement will have 1-3cm errors</p>
             `,
+    },
+    {
+      id: "2",
+      category: "Denims",
+      sizeChart: `
+      <table>
+      <thead>
+         <tr>
+            <th>Inseam (inches)</th>
+            <th>Height</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <td>30</td>
+            <td>5'6" - 5'8"</td>
+         </tr>
+         <tr>
+            <td>32</td>
+            <td>5'8" - 6'0"</td>
+         </tr>
+         <tr>
+            <td>34</td>
+            <td>6'0" - 6'4"</td>
+         </tr>
+         <tr>
+            <td>36</td>
+            <td>6'4" - 6'6"</td>
+         </tr>
+         <tr>
+            <td>38</td>
+            <td>6'4" - 6'8"</td>
+         </tr>
+      </tbody>
+      </table>
+      `,
     },
   ];
