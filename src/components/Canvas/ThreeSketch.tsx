@@ -5,15 +5,16 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { useCanvas } from '../../Context/context/CanvasContext';
 import * as motion from "motion/react-client"
-
+import { useRouter } from "next/navigation";
 
 
 const ThreeSketch = () => {
   const { backgroundCanvasRef } = useCanvas()
   const modelRef = useRef<THREE.Group | null>(null);
-
+  const router = useRouter();
 
   const [box2Pos, setBox2Pos] = useState({ x: 0, y: 0 });
+  const [activeBox, setActiveBox] = useState<string | null>(null);
 
 
   
@@ -151,7 +152,13 @@ const ThreeSketch = () => {
           initial={{ x: -100, y: -400 }}
           animate={{ x: -10, y: 300}}
           transition={{ duration: 2, ease: 'easeIn' }}
-          className="box box1 flex  justify-center items-center relative cursor-grab">
+          className="box box1 flex  justify-center items-center relative cursor-grab"
+          onTouchStart={() => setActiveBox('box1')}
+          onTouchEnd={() => setActiveBox(null)}
+          onMouseDown={() => setActiveBox('box1')}
+          onMouseUp={() => setActiveBox(null)}
+          onClick={() => router.push('/shop/collections/new-releases')}
+        >
           <video 
             autoPlay 
             loop 
@@ -167,9 +174,8 @@ const ThreeSketch = () => {
             src="https://res.cloudinary.com/dnlk9ni2i/video/upload/v1752161010/TANKREEL1_srw8nk.mov"
             />
           </video>
-         
            {/* Overlay */}
-          <div className="absolute inset-0 bg-black/20 z-10"></div>
+          <div className="absolute inset-0 bg-black/20 z-10 transition-colors duration-200" style={{background: activeBox === 'box1' ? 'rgba(255,140,0,0.5)' : 'rgba(0,0,0,0.2)'}}></div>
 
           {/* Text */}
           <h1 className="z-20 text-white text-xl font-bold">New Releases</h1>
@@ -183,6 +189,10 @@ const ThreeSketch = () => {
           animate={{ x: 500, y: 300}}
           transition={{ duration: 1, ease: 'easeIn' }}
           className="box box2 flex justify-center items-center relative cursor-grab p-4"  
+          onTouchStart={() => setActiveBox('box2')}
+          onTouchEnd={() => setActiveBox(null)}
+          onMouseDown={() => setActiveBox('box2')}
+          onMouseUp={() => setActiveBox(null)}
         >
           <video 
             width="300" 
@@ -198,11 +208,11 @@ const ThreeSketch = () => {
             onContextMenu={e => e.preventDefault()}
           >
             <source 
-            src="https://res.cloudinary.com/dnlk9ni2i/video/upload/v1752160913/aboutvid1_nufcct.mp4"
+            src="https://res.cloudinary.com/dnlk9ni2i/video/upload/v1752225379/rvryulcal_tbtijd.mp4"
             />
           </video>
            {/* Overlay */}
-          <div className="absolute inset-0 bg-black/20"></div>
+          <div className="absolute inset-0 bg-black/20 transition-colors duration-200" style={{background: activeBox === 'box2' ? 'rgba(255,140,0,0.5)' : 'rgba(0,0,0,0.2)'}}></div>
 
           {/* Text */}
           <h1 className="z-20 text-white text-xl font-bold">About</h1>
