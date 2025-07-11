@@ -26,7 +26,7 @@ import { formatMoney } from '../../utils/formatMoney';
   type LineItemTypes = {
     merchandiseId: string,
     quantity: number,
-    attributes: {}
+    attributes: { key: string, value: string }[]
   };
   
   type ShopifyCartID = {
@@ -74,7 +74,10 @@ export default function ProdDetailsConfiguration({id, title, priceRange, variant
 
   const {quantityAvailable, setQuantityAvailable, sizeInfo, setSizeInfo, cartId, setCartId, setIsCartOpen}= useGlobalContext()
 
-  const sizeDetails = sizeInfo.selectedOptions[1] ?? null;
+  // Default sizeDetails to a safe object if not present
+  const sizeDetails = (sizeInfo.selectedOptions && sizeInfo.selectedOptions[1])
+    ? sizeInfo.selectedOptions[1]
+    : { name: 'Size', value: '' };
 
   const collectionItemSearch = collections.edges.map((item:any) => item.node.title)
   const collectionItems = collectionItemSearch.filter((item:any) => item !== "All")
@@ -189,7 +192,7 @@ export default function ProdDetailsConfiguration({id, title, priceRange, variant
               merchandiseId: productVariantID,
               quantity: selectedQuantity,
               attributes: [
-                { key: 'Size', value: sizeDetails.value }
+                { key: sizeDetails.name, value: sizeDetails.value }
               ]
             }]
           })
@@ -215,10 +218,9 @@ export default function ProdDetailsConfiguration({id, title, priceRange, variant
       const lineItems:LineItemTypes[] = [{
         merchandiseId: productVariantID,
         quantity: selectedQuantity,
-        attributes: ({
-          key: sizeDetails.name,
-          value: sizeDetails.value
-        })
+        attributes: [
+          { key: sizeDetails.name, value: sizeDetails.value }
+        ]
       }]
 
       setIsItemAddedToCart('loading')
@@ -263,17 +265,26 @@ export default function ProdDetailsConfiguration({id, title, priceRange, variant
             const selectedQuantity = quantity[isButtonSelected!] || 1;
 
 
+           const productVariantID = sizeInfo?.id
+           if(!productVariantID) {
+             console.error("Variant ID is missing")
+             return;
+           }
+           if (!productVariantID || typeof productVariantID !== 'string' || productVariantID.trim() === '') {
+             setCartError('Invalid product variant. Please select a size.');
+             return;
+           }
            const cartItem: CartItem = {
-             id: `temp_${productVariantID}`, // Use temporary ID initially
+             id: `temp_${productVariantID}`,
              title: title,
              price: Number(productPrice),
              quantity: selectedQuantity,
              image: productImage,
              currencyCode:
-               variants.edges[0]?.node.priceV2.currencyCode || "USD", // Get from variants
+               variants.edges[0]?.node.priceV2.currencyCode || "USD",
              size: {
-               name: sizeDetails.name,
-               value: sizeDetails.value,
+               name: sizeDetails?.name ?? '',
+               value: sizeDetails?.value ?? '',
              },
              variantId: productVariantID,
              merchandise: {
@@ -385,7 +396,7 @@ export default function ProdDetailsConfiguration({id, title, priceRange, variant
               className={`
                 ${isButtonSelected == prices.id && quantityAvailable !== 0 ? `glassBox-green` : `glassBox`} rounded-xl p-3 cursor-pointer`}
             >
-              {prices.selectedOptions[1].value}
+              {prices.selectedOptions[1]?.value || prices.selectedOptions[0]?.value || 'N/A'}
             </button>
           );
         })}
@@ -437,17 +448,21 @@ export default function ProdDetailsConfiguration({id, title, priceRange, variant
           disabled={
             quantityAvailable === null ||
             quantityAvailable === 0 ||
-            isItemAddedToCart === 'loading'
+            isItemAddedToCart === 'loading' ||
+            !isButtonSelected ||
+            !sizeDetails.value // Disable if no real size selected
           }
           className={
-            (quantityAvailable === null || quantityAvailable === 0 || isItemAddedToCart === 'loading'
+            (quantityAvailable === null || quantityAvailable === 0 || isItemAddedToCart === 'loading' || !isButtonSelected || !sizeDetails.value
               ? 'prodDetailsOptionsBox'
               : 'addToCartBox text-zinc-800 font-semibold text-xl cursor-pointer') + ' p-4 rounded-lg'
           }
           onClick={() => {
             if (
               quantityAvailable !== 0 &&
-              isItemAddedToCart !== 'loading'
+              isItemAddedToCart !== 'loading' &&
+              isButtonSelected &&
+              sizeDetails.value // Only allow if real size selected
             ) {
               // Only pass the selected variant's quantity
               AddToCart({
