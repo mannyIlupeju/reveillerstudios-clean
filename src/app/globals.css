@@ -12,12 +12,33 @@
   font-display: swap;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/WEB/fonts/Satoshi-Regular.woff2') format('woff2'),
+       url('/WEB/fonts/Satoshi-Regular.woff') format('woff'),
+       url('/WEB/fonts/Satoshi-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi-Medium';
+  src: url('/WEB/fonts/Satoshi-Medium.woff2') format('woff2'),
+       url('/WEB/fonts/Satoshi-Medium.woff') format('woff'),
+       url('/WEB/fonts/Satoshi-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+
 @font-face {
   font-family: 'Satoshi-Black';
    src: url('/WEB/fonts/Satoshi-Black.woff2') format('woff2'),
         url('/WEB/fonts/Satoshi-Black.woff') format('woff'),
         url('/WEB/fonts/Satoshi-Black.ttf') format('truetype');
-   font-weight: 900;
+   font-weight: 800;
    font-display: swap;
    font-style: normal; 
  }
@@ -31,7 +52,25 @@
   font-display: swap;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Switzer-Medium';
+  src: url('/Switzer/fonts/Switzer-Medium.woff2') format('woff2'),
+    url('/Switzer/fonts/Switzer-Medium.woff') format('woff'),
+    url('/Switzer/fonts/Switzer-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
 
+@font-face {
+  font-family: 'Switzer-Black';
+  src: url('/Switzer/fonts/Switzer-Black.woff2') format('woff2'),
+    url('/Switzer/fonts/Switzer-Black.woff') format('woff'),
+    url('/Switzer/fonts/Switzer-Black.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
 
 
 /* @font-face {
@@ -317,6 +356,7 @@ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(5px);
 -webkit-backdrop-filter: blur(5px);
 border: 1px solid rgba(251, 251, 251, 0.3);
+font-family: 'Satoshi-Medium', sans-serif;
 }
 
 

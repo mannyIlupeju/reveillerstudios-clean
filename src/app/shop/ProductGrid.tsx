@@ -85,9 +85,15 @@ export default function ProductGrid({ items, isProductGrid = true }: Props) {
               onMouseLeave={handleMouseLeave}
               onTouchStart={() => handleMouseEnter(id)}
               onTouchEnd={handleMouseLeave}
-              onClick={() => {
+              onClick={(e) => {
                 if (window.innerWidth <= 768) {
-                  setHoveredId(isHovered ? null : id);
+                  // Prevent navigation on first tap, show hover instead
+                  if (!isHovered) {
+                    e.preventDefault();
+                    setHoveredId(id);
+                  } else {
+                    setHoveredId(null);
+                  }
                 }
               }}
               className="relative w-full aspect-[2/3]"

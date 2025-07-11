@@ -62,8 +62,10 @@ const ProductCategories: React.FC<ProductCategoriesProps> = ({ collections }) =>
             data-original-text={title}
             onMouseEnter={(e) => handleMouseEnter(e, id, title)}
             onMouseLeave={handleMouseLeave}
+            onTouchStart={(e) => handleMouseEnter(e as any, id, title)}
+            onTouchEnd={handleMouseLeave}
           >
-            <span className="font-semibold uppercase">
+            <span className="font-bold Satoshi-Medium uppercase">
               {hoveredID === id && reversedTitle ? reversedTitle : title}
             </span>
           </Link>
