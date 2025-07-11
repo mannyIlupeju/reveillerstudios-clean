@@ -62,40 +62,15 @@ const ProductDetails = ({ products, recommendations }: any) => {
     infinite: true,
     slidesToShow: 2,
     slidesToScroll: 1,
-    speed:0,
-    autoplay: false,
-    autoplaySpeed:0,
+    speed: 500,
+    autoplay: true,
+    autoplaySpeed: 5000, // 5s pause between slides
     cssEase: "linear",
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-
+    nextArrow: <NextArrow />, // Will be hidden on mobile
+    prevArrow: <PrevArrow />, // Will be hidden on mobile
+    swipe: true,
+    swipeToSlide: true,
     responsive: [
-        {
-        breakpoint: 1600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: true,
-          centerPadding: "25rem",
-          speed:2000,
-          autoplay:true,
-          autoplaySpeed: 4000,
-          cssEase: "linear",
-        }
-      },
-      {
-        breakpoint: 1600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: true,
-          centerPadding: "25rem",
-          speed: 2000,
-          autoplay: true,
-          autoplaySpeed: 4000,
-          cssEase: "linear",
-        },
-      },
       {
         breakpoint: 1024,
         settings: {
@@ -103,10 +78,11 @@ const ProductDetails = ({ products, recommendations }: any) => {
           slidesToScroll: 2,
           infinite: true,
           centerPadding: "25rem",
-          speed: 2000,
+          speed: 500,
           autoplay: true,
-          autoplaySpeed: 4000,
+          autoplaySpeed: 5000,
           cssEase: "linear",
+          arrows: false, // Hide arrows on tablet/mobile
         },
       },
       {
@@ -116,10 +92,11 @@ const ProductDetails = ({ products, recommendations }: any) => {
           slidesToScroll: 2,
           initialSlide: Math.min(2, imageUrl.length - 1),
           speed: 500,
-          autoplay: false,
+          autoplay: true,
           centerPadding: "1px",
-          autoplaySpeed: 0,
+          autoplaySpeed: 5000,
           cssEase: "linear",
+          arrows: false, // Hide arrows on mobile
         },
       },
       {
@@ -128,10 +105,11 @@ const ProductDetails = ({ products, recommendations }: any) => {
           slidesToShow: 1,
           slidesToScroll: 1,
           centerPadding: "1px",
-          speed: 2000,
+          speed: 500,
           autoplay: true,
-          autoplaySpeed:0,
+          autoplaySpeed: 5000,
           cssEase: "linear",
+          arrows: false, // Hide arrows on mobile
         },
       },
     ],
