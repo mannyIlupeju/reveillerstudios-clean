@@ -19,8 +19,8 @@ export const dynamic = 'force-dynamic';
 
 const Page = async () => {
   // 2️⃣ Detect country from cookie or header
-  const cookieStore = cookies();
-  const headerStore = headers();
+  const cookieStore = await cookies();
+  const headerStore = await headers();
   const cookieCountry = cookieStore.get('user-country')?.value;
   const headerCountry = headerStore.get('x-vercel-ip-country');
   const country = cookieCountry === 'CA' || headerCountry === 'CA' ? 'CA' : 'US';
