@@ -87,7 +87,7 @@ export default function SideCart() {
     className={`
       fixed z-30 shadow-lg flex flex-col glassBox transition
       ${isMobile ? 'bottom-16 left-50 w-full max-h-[60vh]' : 'top-0 right-0 xl:w-[35vw]  h-screen'}
-      bg-gray-200
+      SideCart
     `}
     >
   
