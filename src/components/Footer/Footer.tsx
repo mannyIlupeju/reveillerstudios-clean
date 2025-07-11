@@ -35,10 +35,10 @@ export default function Footer() {
                         <Link href='/contact'className="footer-link">About</Link>
                         <Link href=''className="footer-link">Privacy policy</Link>
                     </div>
-                    <div className="flex flex-col gap-5">
+                    {/* <div className="flex flex-col gap-5">
                         <Link href=''className="footer-link">Shipping</Link>
                         <Link href=''className="footer-link xl:w-32">Delivery & Returns</Link>
-                    </div>
+                    </div> */}
                         
 
                     <div className="flex flex-col lg:gap-5">
@@ -47,14 +47,20 @@ export default function Footer() {
                         <div>
                             <p className="xl:w-32">Connect with us!</p>
                             <ul className="flex gap-2 mt-4">
-                            <li>
+                            <li >
+                                <a href="https://tiktok.com/@reveillerstudios" target="_blank" rel="noopener noreferrer    ">
                                 <Image src="/images/tiktokpng.webp" alt="tiktok logo" width={60} height={60}/>
+                                </a>
                             </li>
                             <li>
+                                <a href="https://instagram.com/reveillerstudios" target="_blank" rel="noopener noreferrer ">
                                 <Image src="/images/instagramlogo.webp" alt="instagram logo" width={60} height={60}/>
+                                </a>
                             </li>
                             <li>
-                                <Image src="/images/pinterestlogo.png" alt="pinterest logo" width={60} height={60}/>
+                                <a href='https://youtube.com/@reveillerstudios7473?si=IscpXCCkSra0prU4' target="_blank" rel="noopener noreferrer"   >
+                                <Image src="/images/youtube3.png" alt="pinterest logo" width={70} height={60}/>
+                                </a>
                             </li>
                             </ul>
                         </div>
