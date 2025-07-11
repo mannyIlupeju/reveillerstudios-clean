@@ -86,7 +86,7 @@ export default function SideCart() {
     transition={{ type: 'tween', duration: 0.15, ease: 'easeInOut' }}
     className={`
       fixed z-30 shadow-lg flex flex-col glassBox transition
-      ${isMobile ? 'bottom-18 left-50 w-full max-h-[60vh]' : 'top-0 right-0 xl:w-[35vw]  h-screen'}
+      ${isMobile ? 'bottom-[85px] left-50 w-full max-h-[60vh]' : 'top-0 right-0 xl:w-[35vw]  h-screen'}
       SideCart
     `}
     >
