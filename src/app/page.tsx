@@ -34,10 +34,8 @@ export default function Home() {
           ( 
             <main className="flex items-center flex-col relative overflow-x-hidden min-h-200">
             <ThreeSketch/>
-            <Newsletter/>
+            {/* <Newsletter/> */}
 
-          
-            
             </main>   
            
           )
