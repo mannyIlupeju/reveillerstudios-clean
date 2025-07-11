@@ -188,6 +188,9 @@ export default function CartDisplay({cart}:CartProps){
             ) : (
                 <div className="flex justify-center">
                     <h1>Cart is empty</h1>
+                    <Link href="/shop" className="text-blue-600 underline">
+                        Continue Shopping
+                    </Link>
                 </div>
             )}
         </main>

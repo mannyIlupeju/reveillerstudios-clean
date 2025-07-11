@@ -40,8 +40,6 @@ const Page = async () => {
           <ProductGrid items={products} isProductGrid={false} />
         </section>
       </main>
-
-      <Footer />
     </>
   );
 };

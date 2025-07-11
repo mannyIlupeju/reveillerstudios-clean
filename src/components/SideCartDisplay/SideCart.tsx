@@ -173,7 +173,7 @@ export default function SideCart() {
                       </button>
                   </div>
               </div>
-          )) : 'what are you waiting for ? '}
+          )) : 'You miss 100% of the shots you dont take - Wayne Gretzky - Michale Scott? '}
           <div className="mt-8 flex flex-col gap-4">
             <div className="flex justify-between">
               <span className="text-lg">Sub Total:  </span>
