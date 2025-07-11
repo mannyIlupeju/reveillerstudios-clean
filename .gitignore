@@ -24,4 +24,4 @@ sanity.cli.ts
 # IDE
 .vscode/
 
-fallback-build-manifest.json
+fallback-build-manifest.jsondist/
