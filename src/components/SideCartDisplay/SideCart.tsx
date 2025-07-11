@@ -86,7 +86,7 @@ export default function SideCart() {
     transition={{ type: 'tween', duration: 0.15, ease: 'easeInOut' }}
     className={`
       fixed z-30 shadow-lg flex flex-col glassBox transition
-      ${isMobile ? 'bottom-16 left-50 w-full max-h-[60vh]' : 'top-0 right-0 xl:w-[35vw]  h-screen'}
+      ${isMobile ? 'bottom-18 left-50 w-full max-h-[60vh]' : 'top-0 right-0 xl:w-[35vw]  h-screen'}
       SideCart
     `}
     >
@@ -189,7 +189,7 @@ export default function SideCart() {
         
       </div>
      
-      <p className="text-xl mx-auto">Estimated Total: {currency.code} {formatMoney(Number(cartTotal), currency.code)} </p>
+      <p className="text-xl mx-auto my-4">Estimated Total: {currency.code} {formatMoney(Number(cartTotal), currency.code)} </p>
       <button 
         className="bg-zinc-800 w-full text-white p-4 mx-auto"
         onClick={() => handleCheckout(cartId)}
