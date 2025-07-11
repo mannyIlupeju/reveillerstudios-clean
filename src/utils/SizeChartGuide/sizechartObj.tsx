@@ -88,7 +88,7 @@ export const getSizeChart = [
     },
     {
       id: "2",
-      category: "Denims",
+      category: "denims",
       sizeChart: `
       <table>
       <thead>

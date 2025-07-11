@@ -279,7 +279,7 @@ backdrop-filter: blur(7.2px);
 border: 1px solid rgba(235, 120, 22, 0.3);
   /* Orange-500 */
   animation: 0.5s ease-in-out forwards;
- width: 100%;
+ width: fit-content;
 }
 
 /*  */
