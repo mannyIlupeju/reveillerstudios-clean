@@ -4,7 +4,7 @@ import React, {useEffect, useState, ReactNode} from 'react'
 import Loading from '../components/Loading/Loading'
 import { useLoading} from '../Context/context/LoadingContext'
 import ThreeSketch from '../components/Canvas/ThreeSketch'
-import Newsletter from '../components/Newsletter/Newsletter'
+
 
 
 
