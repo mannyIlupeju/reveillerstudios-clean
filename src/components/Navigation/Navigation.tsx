@@ -10,7 +10,6 @@ import type { RootState } from '../../../store/store';
 import { CartItem } from '../../../store/cartSlice';
 import NavLogo from './NavLogo/NavLogo';
 import { useGlobalContext } from '../../Context/GlobalContext'
-import { Router } from 'next/router';
 
 type NavLinkType = {
   name: string;
@@ -89,7 +88,7 @@ const Navigation = () => {
   const router = useRouter()
 
   
-  const navLinks = ['Shop', 'Archive', 'About', 'Account'].map((name) => ({
+  const navLinks = ['Shop', 'About'].map((name) => ({
     name,
     href: `/${name.toLowerCase().replace(/\s+/g, '')}`,
   }));
@@ -103,10 +102,6 @@ const Navigation = () => {
   useEffect(() => {
     setCartQuantity(cartQty)
   }, [cartQty]);
-
-  const goHome = () => {
-    router.push('/home')
-  }
 
   return (
     <nav className="flex xl:justify-between justify-center gap-4 mx-auto p-2 nav-font xl:sticky z-20 top-0 glassBox">
@@ -122,7 +117,9 @@ const Navigation = () => {
             />
           </div>
 
-          <NavLogo/>
+          <div>   
+          <NavLogo width={200} height={100}/>
+          </div>
          
           <div className="p-2 flex flex-col justify-start items-center w-full">
             <span className="text-zinc-800 text-xs">
@@ -149,15 +146,16 @@ const Navigation = () => {
       </div>
 
       {/* Responsive menu */}
-      <div className="xl:hidden justify-center cursor-pointer">
-        <Link href="/">
-          <Image
-            src="/images/rvrspinninglogo-unscreen2.gif"
-            width={50}
-            height={50}
-            alt="rvr spinning logo"
-          />
-        </Link>
+      <div className="xl:hidden flex flex-col h-fit cursor-pointer ">
+        <div className="flex justify-items-start h-fit" onClick={() => router.push('/') }>
+         <NavLogo width={200} height={100} className="mx-auto"/>
+        </div>
+
+         <div className="flex justify-center w-full -mt-4">
+            <span className="text-zinc-800 text-xs">
+              Existence precedes Essence.
+            </span>
+          </div>
       </div>
       
     </nav>
