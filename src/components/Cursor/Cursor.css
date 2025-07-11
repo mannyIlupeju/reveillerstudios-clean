@@ -1,0 +1,14 @@
+.custom-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20rem;
+  height: 20rem;
+  pointer-events: none;
+  cursor: pointer;;
+  background-image: url('/images/reveillerstudioslogo3.png');
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+}

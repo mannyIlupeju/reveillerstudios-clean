@@ -1,0 +1,27 @@
+node_modules/
+.env
+.env.local
+
+
+dist/
+*.gz
+*.pack.gz.old
+.next/
+.cache/
+out/
+build/
+*.log
+
+.DS_Store
+
+# Vercel/Netlify
+.vercel/
+.netlify/
+
+# Sanity
+sanity.cli.ts
+
+# IDE
+.vscode/
+
+fallback-build-manifest.json
