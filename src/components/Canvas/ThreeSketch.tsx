@@ -152,7 +152,17 @@ const ThreeSketch = () => {
           animate={{ x: -10, y: 300}}
           transition={{ duration: 2, ease: 'easeIn' }}
           className="box box1 flex  justify-center items-center relative cursor-grab">
-          <video autoPlay loop muted className="videoOverlay absolute inset-0 w-full h-full object-cover z-9">
+          <video 
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            disablePictureInPicture
+            controls={false}
+            className="videoOverlay absolute inset-0 w-full h-full object-cover z-9 select-none pointer-events-none"
+            tabIndex={-1}
+            onContextMenu={e => e.preventDefault()}
+          >
             <source 
             src="https://res.cloudinary.com/dnlk9ni2i/video/upload/v1752161010/TANKREEL1_srw8nk.mov"
             />
@@ -174,7 +184,19 @@ const ThreeSketch = () => {
           transition={{ duration: 1, ease: 'easeIn' }}
           className="box box2 flex justify-center items-center relative cursor-grab p-4"  
         >
-          <video width="300" height="auto" autoPlay loop muted className="videoOverlay absolute inset-0 w-full h-full object-cover z-9">
+          <video 
+            width="300" 
+            height="auto" 
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            disablePictureInPicture
+            controls={false}
+            className="videoOverlay absolute inset-0 w-full h-full object-cover z-9 select-none pointer-events-none"
+            tabIndex={-1}
+            onContextMenu={e => e.preventDefault()}
+          >
             <source 
             src="https://res.cloudinary.com/dnlk9ni2i/video/upload/v1752160913/aboutvid1_nufcct.mp4"
             />
