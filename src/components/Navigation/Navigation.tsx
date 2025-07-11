@@ -27,7 +27,7 @@ const NavLink = ({ name, href }: NavLinkType) => {
   const [linkName, setLinkName] = useState(name);
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
   const [isReversed, setIsReversed] = useState(false);
-  
+  const isExternal = href.startsWith('http');
   
   
   const pathName = usePathname();
@@ -57,16 +57,33 @@ const NavLink = ({ name, href }: NavLinkType) => {
 
   return (
     <div className="group">
-      <Link href={href}>
-        <span
-          className={`${underlineVisible || isActive ? 'scale-x-100' : 'scale-x-0'}`}
-          data-original-text={linkName}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+      {isExternal ? (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          {linkName}
-        </span>
-      </Link>
+          <span
+            className={`${underlineVisible || isActive ? 'scale-x-100' : 'scale-x-0'}`}
+            data-original-text={linkName}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            {linkName}
+          </span>
+        </a>
+      ) : (
+        <Link href={href}>
+          <span
+            className={`${underlineVisible || isActive ? 'scale-x-100' : 'scale-x-0'}`}
+            data-original-text={linkName}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            {linkName}
+          </span>
+        </Link>
+      )}
     </div>
   );
 };
@@ -88,10 +105,15 @@ const Navigation = () => {
   const router = useRouter()
 
   
-  const navLinks = ['Shop', 'About'].map((name) => ({
-    name,
-    href: `/${name.toLowerCase().replace(/\s+/g, '')}`,
-  }));
+  // const navLinks = ['Shop', 'About'].map((name) => ({
+  //   name,
+  //   href: `/${name.toLowerCase().replace(/\s+/g, '')}`,
+  // }));
+
+  const navLinks = [
+    { name: 'Shop', href: '/shop' },
+    { name: 'About', href: 'https://instagram.com/reveillerstudios' }
+  ];
 
 
 

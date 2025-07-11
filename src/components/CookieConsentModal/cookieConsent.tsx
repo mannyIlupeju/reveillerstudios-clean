@@ -24,7 +24,7 @@ export default function CookieConsentModal() {
   if (!showModal) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 md:left-8 md:right-8 p-4 bg-white shadow-md border border-gray-200 rounded-xl z-50 flex flex-col md:flex-row items-center justify-between gap-4 text-sm font-satoshi">
+    <div className="fixed bottom-16 left-4 right-4 md:left-8 md:right-8 p-4 bg-white shadow-md border border-gray-200 rounded-xl z-50 flex flex-col md:flex-row items-center justify-between gap-4 text-sm font-satoshi">
       <p>
         We use cookies to improve your experience. By using our site, you agree to our cookie policy.
       </p>

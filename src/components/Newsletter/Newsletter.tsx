@@ -82,30 +82,21 @@ export default function Newsletter() {
  
 
   return (
-    <main className="fixed z-10 translate-y-50 inset-0 flex items-center justify-center xl:top-22 top-32 ">
-        <div className="w-96 bg-zinc-200 p-5 flex flex-col justify-center gap-10 text-sm  ">
-           <div className="flex justify-end button">
-            <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  strokeWidth="1.5" 
-                  stroke="currentColor" 
-                  className="size-6 hover:rotate-45 transition-transform duration-300 w-10 h-10 cursor-pointer"
-                  onClick={() => setShowModal(false)}
-              >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-              </svg>
-           </div>
-
-          <div className="">
-           <h1 className="text-xl items-center">Join the RVS community</h1>
-           <p>Be the first to know about exclusive drops, restocks and special offers - straight to your inbox</p>
-          </div>
-           
-
-            <div className="flex flex-col gap-4">
-           <input 
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="w-96 bg-zinc-200 p-5 flex flex-col justify-center gap-10 text-sm relative rounded-lg shadow-lg">
+        <button
+          className="absolute top-2 right-2 text-2xl text-zinc-700 hover:text-zinc-900 focus:outline-none"
+          onClick={() => setShowModal(false)}
+          aria-label="Close newsletter modal"
+        >
+          &times;
+        </button>
+        <div className="">
+          <h1 className="text-xl items-center">Join the RVS community</h1>
+          <p>Be the first to know about exclusive drops, restocks and special offers - straight to your inbox</p>
+        </div>
+        <div className="flex flex-col gap-4">
+          <input
             type="name"
             id="fullName"
             name="fullName"
@@ -114,50 +105,48 @@ export default function Newsletter() {
             required
             placeholder='Full Name'
             className="p-2 border border-zinc-400 rounded-md"
-           />
-           <input 
+          />
+          <input
             type="email"
-            id="email"  
+            id="email"
             name="email"
-            value={userData.email}  
+            value={userData.email}
             onChange={(e) => setUserData({...userData, email: e.target.value})}
             required
             placeholder='Email Address'
             className="p-2 border border-zinc-400 rounded-md"
-           />
-           </div>
-
-           <form className="flex flex-col  gap-4">
-           <div className="flex justify-start gap-2">
-                <input
-                type="checkbox"
-                id="requestUpdate" 
-                onChange={(e) => setUserData({...userData, requestUpdate: e.target.checked})}
-                checked={userData.requestUpdate} 
-                name="requestUpdate"
-                value="requestUpdate"
-                />
-                <label htmlFor="continueUpdate">
-                Keep me updated with the latest news and best offers
-                </label>
-            </div>
-            <div className="flex justify-start gap-2">
-                <input
-                type="checkbox"
-                id="termsAgreed"
-                name="termsAgreed"
-                onChange={(e) => setUserData({...userData, termsAgreed: e.target.checked})}     
-                checked={userData.termsAgreed}
-                value="termsAgreed"
-                />
-                <label htmlFor="privacyPolicyAgreement">
-                I agree to the Privacy Policy and Cookie Policy
-                </label>
-            </div>
-           </form>
-
-           <button className="text-xl" onClick={submitRegistration}>Subscribe</button>
+          />
         </div>
-    </main>
+        <form className="flex flex-col gap-4">
+          <div className="flex justify-start gap-2">
+            <input
+              type="checkbox"
+              id="requestUpdate"
+              onChange={(e) => setUserData({...userData, requestUpdate: e.target.checked})}
+              checked={userData.requestUpdate}
+              name="requestUpdate"
+              value="requestUpdate"
+            />
+            <label htmlFor="continueUpdate">
+              Keep me updated with the latest news and best offers
+            </label>
+          </div>
+          <div className="flex justify-start gap-2">
+            <input
+              type="checkbox"
+              id="termsAgreed"
+              name="termsAgreed"
+              onChange={(e) => setUserData({...userData, termsAgreed: e.target.checked})}
+              checked={userData.termsAgreed}
+              value="termsAgreed"
+            />
+            <label htmlFor="privacyPolicyAgreement">
+              I agree to the Privacy Policy and Cookie Policy
+            </label>
+          </div>
+        </form>
+        <button className="text-xl bg-zinc-800 text-white rounded p-2 mt-2" onClick={submitRegistration}>Subscribe</button>
+      </div>
+    </div>
   )
 }

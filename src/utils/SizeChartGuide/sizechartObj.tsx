@@ -122,4 +122,78 @@ export const getSizeChart = [
       </table>
       `,
     },
+    {
+      id: "2",
+      category: "tops",
+      sizeChart: `<table>
+      <caption><strong>Tank-Top Vest Measurements (inches)</strong></caption>
+      <thead>
+        <tr>
+          <th>POI</th>
+          <th>Measurement</th>
+          <th>XXS</th>
+          <th>XS</th>
+          <th>S</th>
+          <th>M</th>
+          <th>L</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>A</td>
+          <td>Body Length</td>
+          <td>21.5</td>
+          <td>21.75</td>
+          <td>22.25</td>
+          <td>23</td>
+          <td>23</td>
+        </tr>
+        <tr>
+          <td>B</td>
+          <td>Chest Width</td>
+          <td>10.75</td>
+          <td>11.25</td>
+          <td>11.5</td>
+          <td>12.25</td>
+          <td>13</td>
+        </tr>
+        <tr>
+          <td>C</td>
+          <td>Arm Opening</td>
+          <td>6.5</td>
+          <td>7.5</td>
+          <td>8.5</td>
+          <td>9.5</td>
+          <td>10.5</td>
+        </tr>
+        <tr>
+          <td>D</td>
+          <td>Back Neck Width</td>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+          <td>8</td>
+          <td>9</td>
+        </tr>
+        <tr>
+          <td>E</td>
+          <td>Front Neck Depth</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+        </tr>
+        <tr>
+          <td>F</td>
+          <td>Neck Trim Depth</td>
+          <td>0.4</td>
+          <td>0.4</td>
+          <td>0.4</td>
+          <td>0.4</td>
+          <td>0.4</td>
+        </tr>
+      </tbody>
+    </table> `    
+    },
   ];
