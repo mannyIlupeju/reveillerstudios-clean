@@ -301,7 +301,7 @@ border: 1px solid rgba(235, 120, 22, 0.3);
 
 
 .glassBox {
-  background: rgba(255, 255, 255, 0.677);
+  background: rgba(208, 205, 205, 0.677);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(7.9px);
