@@ -24,7 +24,7 @@ export default function SideCart() {
 
   const {setIsCartOpen, isCartOpen} = useGlobalContext();
 
-  console.log(isCartOpen)
+  // console.log(isCartOpen)
 
   const { currency } = useCurrency();
 
@@ -192,7 +192,18 @@ export default function SideCart() {
       <p className="text-xl mx-auto my-4">Estimated Total: {currency.code} {formatMoney(Number(cartTotal), currency.code)} </p>
       <button 
         className="bg-zinc-800 w-full text-white p-4 mx-auto"
-        onClick={() => handleCheckout(cartId)}
+        onClick={async () => {
+          if (!cartId) {
+            alert('Cart not found. Please add an item to your cart first.');
+            return;
+          }
+          try {
+            await handleCheckout(cartId);
+          } catch (error) {
+            console.error('Checkout failed:', error);
+            alert('There was a problem redirecting to checkout. Please try again.');
+          }
+        }}
         >
         Continue to Checkout
       </button>
