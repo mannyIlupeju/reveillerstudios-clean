@@ -59,7 +59,7 @@ export async function getProductRecommendations(productId: string, country: stri
         },
       });
 
-      console.log(response)
+      // console.log(response)
   
       return response.data.productRecommendations.slice(0,4);
     } catch (error) {

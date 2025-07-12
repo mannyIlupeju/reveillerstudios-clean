@@ -20,7 +20,7 @@ export default async function Page({ params }: PageProps): Promise<JSX.Element> 
     const headerCountry = headerStore.get('x-vercel-ip-country');
 
     const country = (cookie === 'CA' || headerCountry === 'CA') ? 'CA' : 'US';
-    console.log('Country:', country);
+   
 
     const response = await client.request(productQuery, { variables: { handle: slug, country } });
     const product = response?.data?.productByHandle;
@@ -35,7 +35,7 @@ export default async function Page({ params }: PageProps): Promise<JSX.Element> 
       <ProductDetails products={product} recommendations={recommendations} />
     );
   } catch (error) {
-    console.error("Error fetching product data:", error);
+    // console.error("Error fetching product data:", error);
     return <h1>Error loading product</h1>;
   }
 }
@@ -49,7 +49,7 @@ export async function generateStaticParams() {
 
     return products.map((p: any) => ({ slug: p.node.handle }));
   } catch (error) {
-    console.error("Error generating static params:", error);
+    // console.error("Error generating static params:", error);
     return []; // Return empty array to prevent build failure
   }
 
