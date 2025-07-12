@@ -1,4 +1,5 @@
 import React from 'react'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import AppProviders from './Providers/AppProviders'
 import LayoutWithCart from './layoutWithCart'
 import { headers } from 'next/headers';
