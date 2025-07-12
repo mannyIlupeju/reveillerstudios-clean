@@ -16,6 +16,7 @@
     "@shopify/shopify-api": "^11.6.1",
     "@shopify/storefront-api-client": "^1.0.3",
     "@types/js-cookie": "^3.0.6",
+    "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "bcryptjs": "^3.0.2",
     "canvas-sketch": "^0.7.7",
