@@ -189,10 +189,14 @@ const ThreeSketch = () => {
           animate={{ x: 500, y: 300}}
           transition={{ duration: 1, ease: 'easeIn' }}
           className="box box2 flex justify-center items-center relative cursor-grab p-4"  
-          onTouchStart={() => setActiveBox('box2')}
+          onTouchStart={() => {
+            setActiveBox('box2');
+            window.open('https://instagram.com/reveillerstudios', '_blank', 'noopener,noreferrer');
+          }}
           onTouchEnd={() => setActiveBox(null)}
           onMouseDown={() => setActiveBox('box2')}
           onMouseUp={() => setActiveBox(null)}
+          onClick={() => window.open('https://instagram.com/reveillerstudios', '_blank', 'noopener,noreferrer')}
         >
           <video 
             width="300" 
