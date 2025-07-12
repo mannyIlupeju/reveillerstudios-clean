@@ -2,8 +2,7 @@
 
 
 import { ReactNode } from 'react';
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import { Analytics } from "@vercel/analytics/next"
+
 import { LoadingProvider } from '../../Context/context/LoadingContext';
 import { CanvasProvider } from '../../Context/context/CanvasContext';
 import { GlobalProvider } from '../../Context/GlobalContext';
@@ -34,7 +33,6 @@ export default function AppProviders({ children }: { children: ReactNode }) {
               <LoadingProvider>
                 <CanvasProvider>
                   {children}
-                  <SpeedInsights />
                 </CanvasProvider>
               </LoadingProvider>
             </GlobalProvider>

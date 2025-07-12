@@ -1,5 +1,6 @@
 import React from 'react'
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/next"
 import AppProviders from './Providers/AppProviders'
 import LayoutWithCart from './layoutWithCart'
 import { headers } from 'next/headers';
@@ -27,6 +28,8 @@ export default async function RootLayout({
       <CookieConsentModal />
         <LayoutWithCart detectedCountry={country}>
           {children}
+          <SpeedInsights/>
+          <Analytics/>
         </LayoutWithCart>
         </AppProviders>
         
