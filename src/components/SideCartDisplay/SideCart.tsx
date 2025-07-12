@@ -190,23 +190,12 @@ export default function SideCart() {
       </div>
      
       <p className="text-xl mx-auto my-4">Estimated Total: {currency.code} {formatMoney(Number(cartTotal), currency.code)} </p>
-      {/* <button 
+      <button 
         className="bg-zinc-800 w-full text-white p-4 mx-auto"
-        onClick={async () => {
-          if (!cartId) {
-            alert('Cart not found. Please add an item to your cart first.');
-            return;
-          }
-          try {
-            await handleCheckout(cartId);
-          } catch (error) {
-            console.error('Checkout failed:', error);
-            alert('There was a problem redirecting to checkout. Please try again.');
-          }
-        }}
-        >
-        Continue to Checkout
-      </button> */}
+        onClick={() => router.push('/cart')}
+       >
+        <h1>VIEW BAG</h1>
+      </button>
      
     </motion.div>
   
