@@ -45,7 +45,7 @@ const SideNav = () => {
                 <div className=" mx-auto flex gap-0 justify-between uppercase items-center font-extrabold">
                     <Link href='/' className={linkClass('/')}>Home</Link>
                     <Link href='/shop' className={linkClass('/shop')}>Shop</Link>
-                    <a href="https://instagram.com/reveillerstudios" target="_blank" rel="noopener noreferrer" className={linkClass('/about')}>Instagram</a>
+                    <a href="https://instagram.com/reveillerstudios" target="_blank" rel="noopener noreferrer" className={linkClass('/about')}>About</a>
                     {/* <Link href='/journal' className={linkClass('/journal')}>Journal</Link> */}
 
                     <div className="flex items-center" >
