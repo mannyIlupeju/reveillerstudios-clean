@@ -183,14 +183,14 @@ export default function SideCart() {
             className="border-black border-2 w-full p-2"
             onClick={() => router.push('/cart')}
             >
-            <h1>OR FULL VIEW BAG</h1>
+            <h1>VIEW BAG</h1>
           </button>
           </div>
         
       </div>
      
       <p className="text-xl mx-auto my-4">Estimated Total: {currency.code} {formatMoney(Number(cartTotal), currency.code)} </p>
-      <button 
+      {/* <button 
         className="bg-zinc-800 w-full text-white p-4 mx-auto"
         onClick={async () => {
           if (!cartId) {
@@ -206,7 +206,7 @@ export default function SideCart() {
         }}
         >
         Continue to Checkout
-      </button>
+      </button> */}
      
     </motion.div>
   
