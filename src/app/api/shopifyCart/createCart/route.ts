@@ -64,7 +64,7 @@ export async function POST(req: Request) {
     });
 
     const data = await response.json();
-    console.log("Shopify API response:", JSON.stringify(data, null, 2));
+    // console.log("Shopify API response:", JSON.stringify(data, null, 2));
 
     const errors = data?.data?.cartCreate?.userErrors;
     if (errors?.length > 0) {

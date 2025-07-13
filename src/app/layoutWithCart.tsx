@@ -3,6 +3,7 @@
 import React, {useEffect} from 'react';
 import Navigation from '../components/Navigation/Navigation';
 import Footer from '../components/Footer/Footer';
+import Newsletter from '../components/Newsletter/Newsletter';
 import SideNav from '../components/SideNavDisplay/SideNav';
 import SideCart from '../components/SideCartDisplay/SideCart';
 import { useGlobalContext } from '../Context/GlobalContext';

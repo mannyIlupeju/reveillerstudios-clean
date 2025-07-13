@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { cartId } = body;
 
-    console.log("Received cartId:", cartId);
+    // console.log("Received cartId:", cartId);
 
     if (!cartId) {
       return NextResponse.json({ error: "Missing cartId" }, { status: 400 });

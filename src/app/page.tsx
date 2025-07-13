@@ -4,6 +4,7 @@ import React, {useEffect, useState, ReactNode} from 'react'
 import Loading from '../components/Loading/Loading'
 import { useLoading} from '../Context/context/LoadingContext'
 import ThreeSketch from '../components/Canvas/ThreeSketch'
+import Newsletter from '../components/Newsletter/Newsletter'
 
 
 
@@ -34,7 +35,7 @@ export default function Home() {
           ( 
             <main className="flex items-center flex-col relative overflow-x-hidden min-h-200">
             <ThreeSketch/>
-            {/* <Newsletter/> */}
+            <Newsletter/>
 
             </main>   
            
