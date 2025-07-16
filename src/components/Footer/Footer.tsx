@@ -4,7 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useGlobalContext } from '../../Context/GlobalContext';
-import NewsletterFooter from '../NewsletterFooter/NewsletterFooter';
+import NewsletterFooter from '../NewsletterFooter/Newsletterfooter';
 
 
 
