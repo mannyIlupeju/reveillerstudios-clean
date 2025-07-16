@@ -42,7 +42,8 @@
     "slick-carousel": "^1.8.1",
     "three": "^0.169.0",
     "uuid": "^11.1.0",
-    "validator": "^13.15.15"
+    "validator": "^13.15.15",
+    "zod": "^4.0.5"
   },
   "devDependencies": {
     "@babel/traverse": "^7.23.2",
