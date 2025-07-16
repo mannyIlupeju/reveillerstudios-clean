@@ -22,14 +22,14 @@ const ConfirmationMessage: React.FC<ConfirmationMessageProps> = ({ status, error
             className="absolute right-0 top-0 mt-3 mr-3 cursor-pointer"
           />
           <h2 className="text-xl">Thanks for Subscribing!</h2>
-          <p>We're thrilled to have you as part of our community.
+          <p>We&apos;re thrilled to have you as part of our community.
             <br/><br/>
-            Your support means the world to us, and we can’t wait to share exclusive updates, behind-the-scenes content, and more directly with you.
+            Your support means the world to us, and we can&apos;t wait to share exclusive updates, behind-the-scenes content, and more directly with you.
             <br/><br/>    
             Keep an eye on your inbox, something exciting is always around the corner. 
             <br/><br/>
-            If you ever have questions or just want to say hello, we’re only a message away.  
-          </p> 
+            If you ever have questions or just want to say hello, we&apos;re only a message away.  
+          </p>
         </div>
       </div>
     );
