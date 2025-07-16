@@ -71,6 +71,10 @@ type GlobalContextType = {
   showMessage: boolean;
   setShowMessage: () => void;
   showConfirmationMessage: () => void;
+  status: "idle" | "loading" | "success" | "error";
+  setStatus: React.Dispatch<React.SetStateAction<"idle" | "loading"| "success" | "error">>;
+  errorMsg: string | null;
+  setErrorMsg: React.Dispatch<React.SetStateAction<string | null>>; 
   
 };
 
@@ -102,6 +106,8 @@ export const GlobalProvider: React.FC<ProviderProps> = ({ children }) => {
   const [sizeInfo, setSizeInfo] = useState<SizeInfo>({availableForSale:false, id:"", priceV2:{amount:"", currencyCode:""},quantityAvailable:0, title:"", selectedOptions:[]})
   const dispatch = useDispatch()
   const [showMessage, setShowMessage] = useState<boolean>(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
 
 
@@ -188,7 +194,11 @@ export const GlobalProvider: React.FC<ProviderProps> = ({ children }) => {
         toggleCart,
         showMessage,
         setShowMessage: showConfirmationMessage,
-        showConfirmationMessage
+        showConfirmationMessage,
+        status,
+        setStatus,
+        errorMsg,
+        setErrorMsg
       }}>
       {children}
     </GlobalContext.Provider>

@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
+import dotenv from 'dotenv';  
 import { z } from 'zod'
 
+dotenv.config();
 
 // Zod schema for request validation
 const requestBodySchema = z.object({
@@ -22,8 +24,15 @@ export async function POST(req: Request) {
     const validated = requestBodySchema.parse(body);
     console.log("Validated data:", validated);  
 
+    const apiBase = process.env.API_BASE_URL 
+    console.log("API Base URL:", apiBase);
+    
+    if(!apiBase) {
+      return NextResponse.json({ error: "API base URL not configured" }, { status: 500 });  
+    }// Fallback to local if not set
+
     // Forward to Express backend
-    const response = await fetch('http://localhost:5001/api/rvr/registerSubscriber', {
+    const response = await fetch(`${apiBase}/api/rvr/registerSubscriber`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

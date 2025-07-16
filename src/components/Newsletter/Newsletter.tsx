@@ -1,8 +1,11 @@
-import React, {useState, useEffect} from 'react'
-
+import React, { useState, useEffect } from 'react'
+import ConfirmationMessage from '../ResponseMessages/confirmationMessage';
 
 export default function Newsletter() {
   const [showModal, setShowModal] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [userData, setUserData] = useState({
     fullName: '',
     email: '',
@@ -12,7 +15,6 @@ export default function Newsletter() {
 
   useEffect(() => {
     const hasShownModal = sessionStorage.getItem("hasSeenNewsletterPopup");
-
     if (!hasShownModal) {
       setShowModal(true);
       sessionStorage.setItem("hasSeenNewsletterPopup", "true");
@@ -25,143 +27,137 @@ export default function Newsletter() {
     } else {
       document.body.style.overflow = "auto";
     }
-
     return () => {
-      document.body.style.overflow = "auto"; // Cleanup on unmount
+      document.body.style.overflow = "auto";
     };
   }, [showModal]);
 
-  if (!showModal) return null;
+  if (!showModal && !showConfirmation) return null;
 
-
-
-
-  async function submitRegistration() {
-   
-    console.log(userData)
-    
-    if(!userData.termsAgreed){
+  // Restore submitRegistration function
+  async function submitRegistration(e?: React.FormEvent) {
+    if (e) e.preventDefault();
+    if (!userData.termsAgreed) {
       alert("Please agree to the Terms of Service & Privacy Policy");
       return;
     }
-
-
+    setStatus("loading");
+    setErrorMsg(null);
     try {
-      console.log("Submitting:", userData)
-      
       const res = await fetch('/api/registerSubscriber', {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData)
       });
-
-      console.log(res)
-      
-      const data = await res.json()
-      console.log(data)
-
-      if(!res.ok) {
-        console.error("Registration failed:", res);
-        alert(data.error || `Registration failed with status: ${res.status}`);
+      const data = await res.json();
+      if (!res.ok) {
+        setErrorMsg(data?.error || "Registration failed");
+        setStatus("error");
+        setShowConfirmation(true);
       } else {
-        console.log("User registered:", data)
-        alert("Registration successful!")
+        setStatus("success");
+        setShowConfirmation(true);
+        setShowModal(false);
       }
-
-    } catch (error){
-      console.error("Unexpected error:", error)
-      alert("Something went wrong. Please try again.");
-
+    } catch (error) {
+      setErrorMsg("Something went wrong. Please try again.");
+      setStatus("error");
+      setShowConfirmation(true);
     }
-  
+  }
+ 
+
+  // Handler to close the confirmation modal
+  function handleCloseConfirmation() {
+    setShowConfirmation(false);
   }
 
-  
-
   return (
-    <main className="fixed z-10 translate-y-50 inset-0 flex items-center justify-center xl:top-22 top-32 ">
-        <div className="w-96 glassBox  p-5 flex flex-col justify-center gap-10 text-sm  ">
-           <div className="flex justify-end button">
-            <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  strokeWidth="1.5" 
-                  stroke="currentColor" 
-                  className="size-6 transition-transform duration-300 w-10 h-10 cursor-pointer rotate-0 hover:rotate-45 active:rotate-45 focus:rotate-45"
-                  onClick={() => setShowModal(false)}
-                  onTouchStart={e => e.currentTarget.classList.add('rotate-45')}
-                  onTouchEnd={e => e.currentTarget.classList.remove('rotate-45')}
-                  onMouseDown={e => e.currentTarget.classList.add('rotate-45')}
-                  onMouseUp={e => e.currentTarget.classList.remove('rotate-45')}
-                  tabIndex={0}
+    <>
+      {(status === 'success' || status === 'error') && showConfirmation && (
+        <ConfirmationMessage status={status} errorMsg={errorMsg} onClose={handleCloseConfirmation}/>
+      )}
+      {showModal && !showConfirmation && (
+        <main className="fixed z-10 -translate-y-[3rem] text-zinc-100 inset-0 flex items-center justify-center xl:top-22 top-32 ">
+          <div className="w-96 subscriptionBox p-5 flex flex-col justify-center gap-5 text-sm  ">
+            <div className="flex justify-end button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-6 transition-transform duration-300 w-10 h-10 cursor-pointer rotate-0 hover:rotate-45 active:rotate-45 focus:rotate-45"
+                onClick={() => setShowModal(false)}
+                onTouchStart={e => e.currentTarget.classList.add('rotate-45')}
+                onTouchEnd={e => e.currentTarget.classList.remove('rotate-45')}
+                onMouseDown={e => e.currentTarget.classList.add('rotate-45')}
+                onMouseUp={e => e.currentTarget.classList.remove('rotate-45')}
+                tabIndex={0}
               >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
               </svg>
-           </div>
-
-          <div className="">
-           <h1 className="text-xl items-center">Join the RVS community</h1>
-           <p>Be the first to know about exclusive drops, restocks and special offers - straight to your inbox</p>
-          </div>
-           
-
+            </div>
+            <div className="">
+              <h1 className="text-xl items-center">Join the RVS community</h1>
+              <p>Be the first to know about exclusive drops, restocks and special offers - straight to your inbox</p>
+            </div>
             <div className="flex flex-col gap-4">
-           <input 
-            type="name"
-            id="fullName"
-            name="fullName"
-            value={userData.fullName}
-            onChange={(e) => setUserData({...userData, fullName: e.target.value})}
-            required
-            placeholder='Full Name'
-            className="p-2 border border-zinc-400 rounded-md"
-           />
-           <input 
-            type="email"
-            id="email"  
-            name="email"
-            value={userData.email}  
-            onChange={(e) => setUserData({...userData, email: e.target.value})}
-            required
-            placeholder='Email Address'
-            className="p-2 border border-zinc-400 rounded-md"
-           />
-           </div>
-
-           <form className="flex flex-col  gap-4">
-           <div className="flex justify-start gap-2">
+              <input
+                type="name"
+                id="fullName"
+                name="fullName"
+                value={userData.fullName}
+                onChange={e => setUserData({ ...userData, fullName: e.target.value })}
+                required
+                placeholder='Full Name'
+                className="p-2 border border-zinc-400 text-zinc-800 rounded-md"
+              />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={userData.email}
+                onChange={e => setUserData({ ...userData, email: e.target.value })}
+                required
+                placeholder='Email Address'
+                className="p-2 border border-zinc-400 rounded-md text-zinc-800"
+              />
+            </div>
+            <form className="flex flex-col  gap-2" onSubmit={submitRegistration}>
+              <div className="flex justify-start  gap-2">
                 <input
-                type="checkbox"
-                id="requestUpdate" 
-                onChange={(e) => setUserData({...userData, requestUpdate: e.target.checked})}
-                checked={userData.requestUpdate} 
-                name="requestUpdate"
-                value="requestUpdate"
+                  type="checkbox"
+                  id="requestUpdate"
+                  onChange={e => setUserData({ ...userData, requestUpdate: e.target.checked })}
+                  checked={userData.requestUpdate}
+                  name="requestUpdate"
+                  value="requestUpdate"
                 />
                 <label htmlFor="continueUpdate">
-                Keep me updated with the latest news and best offers
+                  Keep me updated with the latest news and best offers
                 </label>
-            </div>
-            <div className="flex justify-start gap-2">
+              </div>
+              <div className="flex justify-start gap-2">
                 <input
-                type="checkbox"
-                id="termsAgreed"
-                name="termsAgreed"
-                onChange={(e) => setUserData({...userData, termsAgreed: e.target.checked})}     
-                checked={userData.termsAgreed}
-                value="termsAgreed"
+                  type="checkbox"
+                  id="termsAgreed"
+                  name="termsAgreed"
+                  onChange={e => setUserData({ ...userData, termsAgreed: e.target.checked })}
+                  checked={userData.termsAgreed}
+                  value="termsAgreed"
                 />
                 <label htmlFor="privacyPolicyAgreement">
-                I agree to the Privacy Policy and Cookie Policy
+                  I agree to the Privacy Policy and Cookie Policy
                 </label>
-            </div>
-           </form>
-
-           <button className="text-xl" onClick={submitRegistration}>Subscribe</button>
-        </div>
-    </main>
-  )
+              </div>
+              <button className="text-xl" type="submit" disabled={status === "loading"}>
+                {status === "loading" ? "Submitting…" : "Subscribe"}
+              </button>
+            </form>
+          </div>
+        </main>
+      )}
+    </>
+  );
 }

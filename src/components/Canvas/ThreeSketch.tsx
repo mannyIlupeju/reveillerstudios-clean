@@ -181,22 +181,31 @@ const ThreeSketch = () => {
           <h1 className="z-20 text-white text-xl font-bold">New Releases</h1>
 
         </motion.div>
-        <motion.div 
+        <motion.div
           drag
           dragConstraints={backgroundCanvasRef}
           dragElastic={0.05}
           initial={{ x: 500, y: -500 }}
           animate={{ x: 500, y: 300}}
           transition={{ duration: 1, ease: 'easeIn' }}
-          className="box box2 flex justify-center items-center relative cursor-grab p-4"  
-          onTouchStart={() => {
-            setActiveBox('box2');
-            window.open('https://instagram.com/reveillerstudios', '_blank', 'noopener,noreferrer');
+          className="box box2 flex justify-center items-center relative cursor-grab p-4"
+          onTouchStart={() => setActiveBox('box2')}
+          onTouchEnd={e => {
+            setActiveBox(null);
+            // Only open on touch if not a mouse event
+            if (e && e.type === 'touchend') {
+              window.open('https://instagram.com/reveillerstudios', '_blank', 'noopener,noreferrer');
+            }
           }}
-          onTouchEnd={() => setActiveBox(null)}
           onMouseDown={() => setActiveBox('box2')}
-          onMouseUp={() => setActiveBox(null)}
-          onClick={() => window.open('https://instagram.com/reveillerstudios', '_blank', 'noopener,noreferrer')}
+          onMouseUp={e => {
+            setActiveBox(null);
+            // Only open on mouse up if not a touch event
+            if (e && e.type === 'mouseup' && !('ontouchstart' in window)) {
+              window.open('https://instagram.com/reveillerstudios', '_blank', 'noopener,noreferrer');
+            }
+          }}
+          // Remove onClick to prevent double trigger
         >
           <video 
             width="300" 
