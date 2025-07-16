@@ -78,7 +78,7 @@ export default function Newsletter() {
         <ConfirmationMessage status={status} errorMsg={errorMsg} onClose={handleCloseConfirmation}/>
       )}
       {showModal && !showConfirmation && (
-        <main className="fixed z-10 -translate-y-[3rem] text-zinc-100 inset-0 flex items-center justify-center xl:top-22 top-32 ">
+        <main className="fixed z-10 -translate-y-[3rem] text-zinc-900 inset-0 flex items-center justify-center xl:top-22 top-32 ">
           <div className="w-96 subscriptionBox p-5 flex flex-col justify-center gap-5 text-sm  ">
             <div className="flex justify-end button">
               <svg

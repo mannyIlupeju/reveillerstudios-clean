@@ -15,7 +15,7 @@ export default function Footer() {
 
   return (
      
-        <div className="flex flex-col-reverse lg:flex-row justify-between lg:gap-[10vw] pb-24 text-zinc-100 text-lg p-8 w-screen footer-section ">
+        <div className="flex flex-col-reverse lg:flex-row justify-between pb-24 text-zinc-100 text-lg p-12 w-screen footer-section ">
             <div className="flex flex-col md:flex-row gap-10 mt-4">
                 <div className="flex flex-col lg:gap-2 w-[250px] h-[250px]">
                     <Image 
@@ -30,12 +30,13 @@ export default function Footer() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 2xl:grid-cols-3 lg:grid-cols-2 gap-5 w-max text-sm mt-4">
+            <div className="grid grid-cols-1 2xl:grid-cols-3 lg:grid-cols-2 gap-8 w-max text-md mt-4">
                     {/* <div className="flex flex-col xl:gap-5 gap-2">
                         <Link href='/contact'className="footer-link">About</Link>
                         <Link href=''className="footer-link">Privacy policy</Link>
-                    </div> */}
-                    {/* <div className="flex flex-col gap-5">
+                        <Link href=''className="footer-link">Terms and Condition</Link>
+                    </div> 
+                     <div className="flex flex-col gap-5">
                         <Link href=''className="footer-link">Shipping</Link>
                         <Link href=''className="footer-link xl:w-32">Delivery & Returns</Link>
                     </div> */}
@@ -45,7 +46,7 @@ export default function Footer() {
                         {/* <Link href=''className="footer-link ">Contact</Link> */}
 
                         <div>
-                            <p className="xl:w-32">Connect with us!</p>
+                            <p className="xl:w-full">Connect with us!</p>
                             <ul className="flex gap-2 mt-4">
                             <li >
                                 <a href="https://tiktok.com/@reveillerstudios" target="_blank" rel="noopener noreferrer    ">

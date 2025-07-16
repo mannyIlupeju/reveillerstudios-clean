@@ -350,7 +350,7 @@ border: 1px solid rgba(235, 120, 22, 0.3);
 
 .subscriptionBox {
 /* From https://css.glass */
-background: rgba(222, 157, 6, 0.78);
+background: rgba(253, 252, 251, 0.78);
 border-radius: 16px;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(9.9px);

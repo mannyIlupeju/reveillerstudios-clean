@@ -54,7 +54,7 @@ export default function NewsletterFooter() {
   }
 
   return (
-    <div className='text-sm xl:w-fit relative'>
+    <div className='text-sm xl:w-96 relative'>
       {/* Confirmation overlay, centered, but form remains visible */}
       {(status === 'success' || status === 'error') && showConfirmation && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
