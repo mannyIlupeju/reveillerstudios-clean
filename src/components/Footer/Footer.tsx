@@ -30,12 +30,13 @@ export default function Footer() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 2xl:grid-cols-3 lg:grid-cols-2 gap-8 w-max  mt-4">
-                    <div className="flex flex-col xl:gap-5 text-sm gap-2">
+            <div className="grid grid-cols-1 2xl:grid-cols-3 lg:grid-cols-2 gap-8 w-max mt-4">
+                    <div className="flex flex-col xl:gap-5 xl:text-lg text-sm gap-2">
                         <Link href='/privacy'className="footer-link">Privacy policy</Link>
                         <Link href='/terms'className="footer-link">Terms and Condition</Link>
                     </div> 
-                     <div className="flex flex-col text-sm gap-2">
+
+                     <div className="flex flex-col xl:text-lg text-sm xl:gap-5 gap-2">
                         <Link href='/shipping'className="footer-link">Shipping</Link>
                         <Link href='/contact'className="footer-link ">Contact</Link>
                     </div>

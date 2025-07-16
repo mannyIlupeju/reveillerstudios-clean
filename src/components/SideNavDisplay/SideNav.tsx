@@ -43,9 +43,9 @@ const SideNav = () => {
   return (
         <div className="xl:hidden fixed bottom-2 left-1/2 -translate-x-1/2 w-[95%] max-w-md py-3 px-3 shadow-md rounded-t-md SideNav text-sm font-bold z-50 bg-white">
                 <div className=" mx-auto flex justify-center gap-4 uppercase items-center font-extrabold">
-                    <button className="cursor-pointer" onClick={() => setOpenMenu(!isMenuOpen)}>
+                    {/* <button className="cursor-pointer" onClick={() => setOpenMenu(!isMenuOpen)}>
                       <Image src="/images/rvrspinninglogo-unscreen2.gif" alt="rvr spinning logo" width={30} height={30}/>
-                    </button>
+                    </button> */}
                     <Link href='/' className={linkClass('/')}>Home</Link>
                     <Link href='/shop' className={linkClass('/shop')}>Shop</Link>
                     <a href="https://instagram.com/reveillerstudios" target="_blank" rel="noopener noreferrer" className={linkClass('/about')}>About</a>
