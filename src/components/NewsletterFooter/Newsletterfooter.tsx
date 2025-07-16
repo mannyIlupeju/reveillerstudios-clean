@@ -123,7 +123,7 @@ export default function NewsletterFooter() {
       >
         {status === 'loading' ? 'Submitting…' : 'SIGN UP'}
       </button>
-      <div className='mt-12'>
+      <div className='xl:mt-12 my-8'>
         <p className='text-sm'>
           By clicking submit you agree to receive emails from Reveillerstudios
           and accept our web terms of use and privacy and cookie apply. Terms

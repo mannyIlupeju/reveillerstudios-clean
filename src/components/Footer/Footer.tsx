@@ -30,21 +30,18 @@ export default function Footer() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 2xl:grid-cols-3 lg:grid-cols-2 gap-8 w-max text-md mt-4">
-                    {/* <div className="flex flex-col xl:gap-5 gap-2">
-                        <Link href='/contact'className="footer-link">About</Link>
-                        <Link href=''className="footer-link">Privacy policy</Link>
-                        <Link href=''className="footer-link">Terms and Condition</Link>
+            <div className="grid grid-cols-1 2xl:grid-cols-3 lg:grid-cols-2 gap-8 w-max  mt-4">
+                    <div className="flex flex-col xl:gap-5 text-sm gap-2">
+                        <Link href='/privacy'className="footer-link">Privacy policy</Link>
+                        <Link href='/terms'className="footer-link">Terms and Condition</Link>
                     </div> 
-                     <div className="flex flex-col gap-5">
-                        <Link href=''className="footer-link">Shipping</Link>
-                        <Link href=''className="footer-link xl:w-32">Delivery & Returns</Link>
-                    </div> */}
+                     <div className="flex flex-col text-sm gap-2">
+                        <Link href='/shipping'className="footer-link">Shipping</Link>
+                        <Link href='/contact'className="footer-link ">Contact</Link>
+                    </div>
                         
 
                     <div className="flex flex-col text-md lg:gap-5">
-                        {/* <Link href=''className="footer-link ">Contact</Link> */}
-
                         <div>
                             <p className="xl:w-full">Connect with us!</p>
                             <ul className="flex gap-2 mt-4">

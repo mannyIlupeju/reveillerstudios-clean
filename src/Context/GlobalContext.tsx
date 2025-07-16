@@ -147,11 +147,13 @@ export const GlobalProvider: React.FC<ProviderProps> = ({ children }) => {
   const toggleMenu = () => {
     console.log("true")
     setOpenMenu((prevState) => !prevState);
+   
   };
 
 
   const toggleCart = () => {
     setIsCartOpen((prevState) => !prevState)
+    
   }
 
   const showConfirmationMessage = () => {

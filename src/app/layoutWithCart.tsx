@@ -3,13 +3,12 @@
 import React, {useEffect} from 'react';
 import Navigation from '../components/Navigation/Navigation';
 import Footer from '../components/Footer/Footer';
-import Newsletter from '../components/Newsletter/Newsletter';
 import SideNav from '../components/SideNavDisplay/SideNav';
 import SideCart from '../components/SideCartDisplay/SideCart';
 import { useGlobalContext } from '../Context/GlobalContext';
 import { usePathname } from 'next/navigation';
 import CountrySwitchModal from '../components/CountrySwitchModal/CountrySwitchModal';
-
+import BranddetailContainer from '@/components/BrandDetailContainer/BranddetailContainer';
 
 type Props = {
   children: React.ReactNode;
@@ -68,41 +67,39 @@ export default function LayoutWithCart({ children, detectedCountry }: Props) {
 
   return (
     <>
-       <div 
-          className="box3 items-center cursor-pointer xl:text-md text-xs">
-          <p className="ticker-text">
-          Welcome to Reveiller Studios! Free shipping on items over 200$ !
-          </p>
-        </div>
+      <div 
+        className="box3 items-center cursor-pointer xl:text-md text-xs">
+        <p className="ticker-text">
+        Welcome to Reveiller Studios! Free shipping on items over 200$ !
+        </p>
+      </div>
       {isCartOpen && !isCartPage && (
-          <div
-              className="fixed inset-0 bg-black bg-opacity-60 z-30 blur-xl"
-              onClick={() => setIsCartOpen(false)} // Clicking outside closes the cart
-          ></div>
+        <div
+          className="fixed inset-0 bg-black bg-opacity-60 z-30 blur-xl"
+          onClick={() => setIsCartOpen(false)} // Clicking outside closes the cart
+        ></div>
+      )}
+      {isMenuOpen && !isCartOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-60 z-30 blur-xl"
+          onClick={() => toggleMenu()} // Clicking outside closes the menu
+        ></div>
       )}
 
-     
-       <Navigation />
+      <Navigation />
 
-       <CountrySwitchModal detectedCountry={detectedCountry} /> 
+      <CountrySwitchModal detectedCountry={detectedCountry} /> 
 
-       
-        <main className="flex flex-col">
-          {children}
-        </main>
-      
+      <main className="flex flex-col">
+        {children}
+      </main>
+    
       <Footer />
 
-
-    
-      
       <SideNav/>
-      
-      
-
-      
-      {isCartOpen && !isCartPage &&  <SideCart/>}
-  
+    
+      {isMenuOpen && !isCartOpen && <BranddetailContainer/> }
+      {isCartOpen && !isCartPage && !isMenuOpen && <SideCart/>}
     </>
-  );
+  )
 }

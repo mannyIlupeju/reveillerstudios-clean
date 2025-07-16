@@ -2,7 +2,7 @@
 
 import React, {useState, useEffect} from 'react'
 import { useRouter } from 'next/navigation';
-import { FaXmark } from "react-icons/fa6";
+import { IoCloseOutline } from "react-icons/io5";
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import * as motion from "motion/react-client"
 import Image from "next/image"
@@ -92,7 +92,11 @@ export default function SideCart() {
     >
   
         <div className="flex m-5 border-black sticky top-0 z-1 cursor-pointer">
-          <FaXmark onClick={closeCart} size={20}/>
+           <IoCloseOutline 
+            size={24} 
+            onClick={closeCart}
+            className="absolute right-0 top-0  mr-2 cursor-pointer"
+            />
           <h1 className="mx-auto">Your Bag</h1>
         </div>
 
