@@ -16,7 +16,7 @@ export default function TermsOfService() {
       </section>
       <section>
         <h2>3. Use of the Service</h2>
-        <p>You agree to use the Service only for lawful purposes and in a way that does not infringe on the rights of, restrict, or inhibit anyone else's use and enjoyment of the Service. Prohibited behavior includes, but is not limited to:</p>
+        <p>You agree to use the Service only for lawful purposes and in a way that does not infringe on the rights of, restrict, or inhibit anyone else&apos;s use and enjoyment of the Service. Prohibited behavior includes, but is not limited to:</p>
         <ul>
           <li>Uploading or transmitting viruses, spam, or other malicious code</li>
           <li>Harassing, threatening, or defaming any person</li>
@@ -42,7 +42,7 @@ export default function TermsOfService() {
       </section>
       <section>
         <h2>7. Disclaimer of Warranties</h2>
-        <p>The Service is provided on an “AS IS” and “AS AVAILABLE” basis. <strong>Reveiller Studios</strong> makes no representations or warranties of any kind, express or implied, regarding the Service’s operation or the information, content, or materials included. To the fullest extent permissible under applicable law, we disclaim all warranties, express or implied.</p>
+        <p>The Service is provided on an “AS IS” and “AS AVAILABLE” basis. <strong>Reveiller Studios</strong> makes no representations or warranties of any kind, express or implied, regarding the Service&apos;s operation or the information, content, or materials included. To the fullest extent permissible under applicable law, we disclaim all warranties, express or implied.</p>
       </section>
       <section>
         <h2>8. Limitation of Liability</h2>
