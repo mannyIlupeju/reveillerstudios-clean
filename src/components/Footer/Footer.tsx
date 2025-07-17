@@ -15,7 +15,7 @@ export default function Footer() {
 
   return (
      
-        <div className="flex flex-col-reverse lg:flex-row justify-between pb-24 text-zinc-100 text-lg p-12 w-screen footer-section ">
+        <div className="flex flex-col-reverse lg:flex-row xl:gap-4 gap-10 justify-between pb-24 text-zinc-100 text-lg p-12 w-screen footer-section ">
             <div className="flex flex-col md:flex-row gap-10 mt-4">
                 <div className="flex flex-col lg:gap-2 w-[250px] h-[250px]">
                     <Image 
@@ -42,12 +42,12 @@ export default function Footer() {
                     </div>
                         
 
-                    <div className="flex flex-col text-md lg:gap-5">
+                    <div className="flex flex-col items-center text-md lg:gap-5">
                         <div>
                             <p className="xl:w-full">Connect with us!</p>
-                            <ul className="flex gap-2 mt-4">
+                            <ul className="flex justify-center items-center xl:flex-col flex-row gap-2 mt-4">
                             <li >
-                                <a href="https://tiktok.com/@reveillerstudios" target="_blank" rel="noopener noreferrer    ">
+                                <a href="https://tiktok.com/@reveillerstudios" target="_blank" rel="noopener noreferrer">
                                 <Image src="/images/tiktokpng.webp" alt="tiktok logo" width={60} height={60}/>
                                 </a>
                             </li>
