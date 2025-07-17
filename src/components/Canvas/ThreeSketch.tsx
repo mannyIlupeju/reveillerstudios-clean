@@ -208,7 +208,7 @@ const ThreeSketch = () => {
           // Remove onClick to prevent double trigger
         >
           <video 
-            width="300" 
+            width="auto" 
             height="auto" 
             autoPlay 
             loop 
