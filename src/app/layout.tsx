@@ -6,6 +6,8 @@ import LayoutWithCart from './layoutWithCart'
 import { headers } from 'next/headers';
 import CookieConsentModal from '../components/CookieConsentModal/cookieConsent';
 
+
+
 import "./globals.css";
 
 
@@ -21,7 +23,6 @@ export default async function RootLayout({
 
 
   return (
-
      <html lang="en">
       <body>
       <AppProviders> 

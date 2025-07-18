@@ -99,7 +99,7 @@ export default function LayoutWithCart({ children, detectedCountry }: Props) {
       <SideNav/>
     
       {isMenuOpen && !isCartOpen && <BranddetailContainer/> }
-      {isCartOpen && !isCartPage && !isMenuOpen && <SideCart/>}
-    </>
+      {!isCartPage && <SideCart />}    
+</>
   )
 }
