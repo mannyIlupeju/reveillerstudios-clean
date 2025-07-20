@@ -45,7 +45,7 @@ export default function Footer() {
                     <div className="flex flex-col items-center text-md lg:gap-5">
                         <div>
                             <p className="xl:w-full">Connect with us!</p>
-                            <ul className="flex justify-center items-center flex-col lg:flex-row gap-2 mt-4">
+                            <ul className="flex justify-center items-center flex-col xl:flex-row gap-2 mt-4">
                             <li >
                                 <a href="https://tiktok.com/@reveillerstudios" target="_blank" rel="noopener noreferrer">
                                 <Image src="/images/tiktokpng.webp" alt="tiktok logo" width={60} height={60}/>
