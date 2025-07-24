@@ -140,9 +140,7 @@ const ThreeSketch = () => {
   }, [backgroundCanvasRef]);
 
   return (
-    <>
- 
-          
+    <>   
       <canvas ref={backgroundCanvasRef} className="relative"/>
         <motion.div 
           drag

@@ -38,7 +38,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "build/types/**/*.ts"
-  ],
+, "src/app/gallery/allImages/[slug]"  ],
   "exclude": [
     "node_modules"
   ]

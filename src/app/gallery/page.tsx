@@ -1,15 +1,16 @@
-import React from 'react'
+import { listS3Objects } from "@/lib/s3Client";
+import FolderDisplay from './FolderDisplay';
+import MediaGrid from './MediaGrid';
+import React from 'react';
 
 
-function page() {
+export default async function GalleryPage({searchParams}: {searchParams: {prefix?: string}}) {
+  const prefix = searchParams?.prefix || '';
+  const { folders, files } = await listS3Objects(prefix);
   return (
-    <section className="bg-gray-200">
-    <main className="flex items-center flex-col h-screen">
-      <div>Gallery</div>
-    </main>
-  
-    </section>
-  )
+    <div className="overflow-hidden">
+      <FolderDisplay folders={folders} />
+      <MediaGrid files={files} />
+    </div>
+  );
 }
-
-export default page

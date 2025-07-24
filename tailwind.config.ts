@@ -17,10 +17,12 @@ const config: Config = {
         satoshi: ['Satoshi', 'sans-serif'],
         switzer: ['Switzer', 'sans-serif'],
       },
+      rotate: {
+        x30: '30deg',
+        z45: '45deg',
+      },
     },
   },
   plugins: [],
-
-
 };
 export default config;

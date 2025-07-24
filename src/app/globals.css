@@ -533,6 +533,14 @@ th {
   white-space: nowrap;
 }
 
+.imageCardhover {
+  transform: scale(1.05);
+  left: 10px;
+  translate: translateZ(0px);
+  z-index: 50;
+
+}
+
 .ticker-text {
   display: inline-block;
   padding-left: 100%;
