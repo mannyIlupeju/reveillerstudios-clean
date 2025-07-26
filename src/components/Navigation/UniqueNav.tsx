@@ -22,6 +22,7 @@ interface NavLinksProps {
   links: NavLinkType[];
 }
 
+
 const NavLink = ({ name, href }: NavLinkType) => {
   const [underlineVisible, setUnderlineVisible] = useState(false);
   const [linkName, setLinkName] = useState(name);
@@ -104,11 +105,7 @@ const Navigation = () => {
 
   const router = useRouter()
 
-  
-  // const navLinks = ['Shop', 'About'].map((name) => ({
-  //   name,
-  //   href: `/${name.toLowerCase().replace(/\s+/g, '')}`,
-  // }));
+
 
   const navLinks = [
     { name: 'Shop', href: '/shop' },
@@ -126,7 +123,7 @@ const Navigation = () => {
   }, [cartQty]);
 
   return (
-    <nav className="flex xl:justify-between w-full justify-center gap-4 mx-auto p-2 nav-font xl:sticky z-20 top-0 glassBox">
+    <nav className="xl:flex xl:justify-between hidden justify-items-start w-full gap-4 p-2 nav-font sticky z-20 top-0 left-0 glassBox-Unique">
       <div className="xl:flex hidden justify-between items-center">
         <div className="flex lg:flex-row gap-5 flex-col justify-start items-center">
           <div className="hidden lg:flex w-fit items-start">

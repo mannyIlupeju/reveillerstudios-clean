@@ -1,4 +1,7 @@
+'use client';
+
 import React from 'react';
+
 
 type Props = {
   files: string[];
@@ -10,7 +13,7 @@ export default function MediaGrid({ files }: Props) {
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 ps-8">
       {files.map((file, idx) => {
-        const url = `https://${CLOUDFRONT_DOMAIN}/${file}`;
+        const url = `${file}`;
         const ext = file?.split('.').pop()?.toLowerCase();
         const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'svg'].includes(ext || '');
         const isVideo = ['mp4', 'mov', 'webm', 'avi', 'mkv', 'ogg'].includes(ext || '');

@@ -5,7 +5,8 @@ import Loading from '../components/Loading/Loading'
 import { useLoading} from '../Context/context/LoadingContext'
 import ThreeSketch from '../components/Canvas/ThreeSketch'
 import Newsletter from '../components/Newsletter/Newsletter'
-
+import Navigation from '@/components/Navigation/Navigation'
+import Footer from '@/components/Footer/Footer'
 
 
 
@@ -14,7 +15,7 @@ export default function Home() {
  
   return (
     <>
-
+     <Navigation/>
       { !loading ? 
           (<Loading/>)
         :
@@ -28,8 +29,7 @@ export default function Home() {
            
           )
       }
-
-   
+      <Footer/>
     </>   
    )
 

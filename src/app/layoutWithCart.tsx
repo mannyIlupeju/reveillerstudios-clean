@@ -73,6 +73,8 @@ export default function LayoutWithCart({ children, detectedCountry }: Props) {
         Welcome to Reveiller Studios! Free shipping on items over 200$ !
         </p>
       </div>
+      
+
       {isCartOpen && !isCartPage && (
         <div
           className="fixed inset-0 bg-black bg-opacity-60 z-30 blur-xl"
@@ -86,7 +88,7 @@ export default function LayoutWithCart({ children, detectedCountry }: Props) {
         ></div>
       )}
 
-      <Navigation />
+      {/* <Navigation /> */}
 
       <CountrySwitchModal detectedCountry={detectedCountry} /> 
 
@@ -94,7 +96,7 @@ export default function LayoutWithCart({ children, detectedCountry }: Props) {
         {children}
       </main>
     
-      <Footer />
+      {/* <Footer /> */}
 
       <SideNav/>
     
