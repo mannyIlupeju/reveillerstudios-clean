@@ -46,6 +46,9 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
     camera.zoom = getCameraZoom(window.innerWidth);
     camera.updateProjectionMatrix();
 
+
+  
+
     // Handle resizing
     const handleResize = () => {
       const width = window.innerWidth;
@@ -81,6 +84,7 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
         const geometry = new THREE.PlaneGeometry(1000, 700); // Fixed mesh size
         const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
         const plane = new THREE.Mesh(geometry, material);
+      
 
         scene.add(plane);
         planes.push({ mesh: plane, folder });
@@ -189,7 +193,7 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
         let offset = hoveredMeshRef.current === mesh ? 400 : 0;
         const baseX = mesh.userData.baseX ?? mesh.position.x;
         mesh.userData.baseX = baseX;
-        mesh.position.x += (baseX + offset - mesh.position.x) * 0.15;
+        mesh.position.x += (baseX + offset - mesh.position.x) * 0.30;
       });
 
       renderer.render(scene, camera);

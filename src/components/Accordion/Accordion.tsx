@@ -39,7 +39,6 @@ export default function Accordion({
         </div>
         {isActive && (
           <div className="leading-10 mt-8">
-
             {typeof data.content === "string" ? 
             (<CleanMarkUp markUpText= {data.content}/>) :
             (<CleanMarkUp markUpText={data.content.sizeChart}/>)
