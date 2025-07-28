@@ -7,11 +7,9 @@ import { useParams, useRouter } from 'next/navigation';
 import { getArchiveData } from '@/utils/ArchiveDetail/archiveDetail';
 import humanizeString from 'humanize-string';
 
-type MediaPageProps = {
-  searchParams: { prefix?: string };
-};
 
-export default function MediaPage({ searchParams }: MediaPageProps) {
+
+export default function MediaPage() {
   const { prefix } = useParams();
   const decodedPrefix = decodeURIComponent(prefix as string);
 
