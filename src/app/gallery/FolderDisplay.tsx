@@ -193,7 +193,7 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
         let offset = hoveredMeshRef.current === mesh ? 400 : 0;
         const baseX = mesh.userData.baseX ?? mesh.position.x;
         mesh.userData.baseX = baseX;
-        mesh.position.x += (baseX + offset - mesh.position.x) * 0.30;
+        mesh.position.x += (baseX + offset - mesh.position.x) * 0.5;
       });
 
       renderer.render(scene, camera);
