@@ -1,24 +1,18 @@
 'use client'
 
-
 import { ReactNode } from 'react';
 
 import { LoadingProvider } from '../../Context/context/LoadingContext';
 import { CanvasProvider } from '../../Context/context/CanvasContext';
 import { GlobalProvider } from '../../Context/GlobalContext';
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux';
 import { store, persistor } from '../../../store/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { CurrencyProvider } from '../../Context/context/CurrencyContext';
-import Image from 'next/image'
-
-
-
-
+import { FoldersProvider } from '../../Context/context/FoldersContext';
+import Image from 'next/image';
 
 export default function AppProviders({ children }: { children: ReactNode }) {
-
-  
   // You need to get loading from context or props. For demo, let's assume loading is false.
   const loading = false; // Replace with your actual loading state
 
@@ -38,13 +32,15 @@ export default function AppProviders({ children }: { children: ReactNode }) {
         persistor={persistor}
       >
         <CurrencyProvider>
-          <GlobalProvider>
-            <LoadingProvider>
-              <CanvasProvider> 
-                    {children}
-              </CanvasProvider>
-            </LoadingProvider>
-          </GlobalProvider>
+          <FoldersProvider>
+            <GlobalProvider>
+              <LoadingProvider>
+                <CanvasProvider>
+                  {children}
+                </CanvasProvider>
+              </LoadingProvider>
+            </GlobalProvider>
+          </FoldersProvider>
         </CurrencyProvider>
       </PersistGate>
     </Provider>

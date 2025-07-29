@@ -16,10 +16,12 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
 
   useEffect(() => {
     if (!containerRef.current) return;
+    const dpr = window.devicePixelRatio || 1;
 
     // Setup scene and renderer
     const scene = new THREE.Scene();
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(dpr); 
     renderer.setSize(window.innerWidth, window.innerHeight);
     containerRef.current.appendChild(renderer.domElement);
 
@@ -29,7 +31,7 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
       if (width > 768) return 0.35;
       return 0.32;
     };
-
+  
     const frustumSize = 1000;
     const aspect = window.innerWidth / window.innerHeight;
 
@@ -47,7 +49,6 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
     camera.updateProjectionMatrix();
 
 
-  
 
     // Handle resizing
     const handleResize = () => {
@@ -64,6 +65,7 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
 
       renderer.setSize(width, height);
     };
+
     window.addEventListener('resize', handleResize);
 
     // Lights

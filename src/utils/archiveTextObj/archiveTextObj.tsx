@@ -101,16 +101,10 @@ export const ArchiveDetail = [
         <div class="xl:w-96">
         <h1>Are we still connected?</h1>
         <p>
-        Remember how we used to share music? Infrared, bluetooth, sharing earbuds with your friend at a sports event, on a walk or in a room?<br>
-        This is a story of connectivity, connection and sharing. A story of how we used to share music, and how we still do.
+        B-Sides. Unreleased footages.<br>
+        A collection of behind the scenes and friends of Reveiller Studios.<br>
         <br></br>
-        <Strong>Credits:</Strong>
-        <div>
-        Models: Sofi, KwaeKobain and Shancia.<br>
-        Photography: Iyuna.<br>
-        Stylist: Mabel Conteh.<br>
-        Assistance: Tony, David Gageche.<br>
-        </div>
+      
         </div>
         `,
     },

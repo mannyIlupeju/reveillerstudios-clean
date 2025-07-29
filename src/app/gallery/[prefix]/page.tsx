@@ -6,12 +6,18 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { getArchiveData } from '@/utils/ArchiveDetail/archiveDetail';
 import humanizeString from 'humanize-string';
+import { useFolders } from '@/Context/context/FoldersContext';
 
 
 
 export default function MediaPage() {
   const { prefix } = useParams();
   const decodedPrefix = decodeURIComponent(prefix as string);
+
+  const { folders: allFolders } = useFolders();
+  console.log('All folders:', allFolders);
+
+
 
   const [files, setFiles] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
@@ -25,22 +31,16 @@ export default function MediaPage() {
   const archiveData = getArchiveData(decodedPrefix);
 
    // Scroll to next media item in the grid
-  const handleNext = () => {
-    if (!gridRef.current) return;
-    const mediaItems = gridRef.current.querySelectorAll('img, video, a');
-    if (mediaItems.length === 0) return;
-    // Find the first item below the current scroll position
-    const scrollY = window.scrollY;
-    for (let i = 0; i < mediaItems.length; i++) {
-      const el = mediaItems[i] as HTMLElement;
-      const rect = el.getBoundingClientRect();
-      const absoluteTop = rect.top + window.scrollY;
-      if (absoluteTop > scrollY + 10) {
-        window.scrollTo({ top: absoluteTop - 40, behavior: 'smooth' });
-        break;
-      }
-    }
+  // Go to next folder
+  const handleNextFolder = () => {
+    if (!allFolders || allFolders.length === 0) return;
+    const currentIndex = allFolders.indexOf(decodedPrefix);
+    if (currentIndex === -1) return;
+    const nextIndex = (currentIndex + 1) % allFolders.length;
+    const nextFolder = allFolders[nextIndex];
+    router.push(`/gallery/${encodeURIComponent(nextFolder)}`);
   };
+
 
   useEffect(() => {
     const fetchFiles = async () => {
@@ -74,8 +74,9 @@ export default function MediaPage() {
         >
           ← Back to Gallery
         </button>
+
         <button
-          onClick={handleNext}
+          onClick={handleNextFolder}
           className="px-4 py-2 bg-black text-white rounded hover:bg-gray-800 font-medium"
         >
           Next

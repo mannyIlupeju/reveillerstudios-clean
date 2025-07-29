@@ -1,7 +1,8 @@
 'use client';
 
 import React, {useState, useEffect} from 'react';
-
+import Image from 'next/image';
+import { useFolders } from '@/Context/context/FoldersContext';
 
 type Props = {
   files: string[];
@@ -12,6 +13,10 @@ const CLOUDFRONT_DOMAIN = process.env.NEXT_PUBLIC_CLOUDFRONT_DOMAIN || 'dvztt66n
 export default function MediaGrid({ files }: Props) {
 
   const [showScrollTop, setShowScrollTop] = useState(false);
+
+  const {folders, setFolders} = useFolders()
+
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,13 +34,20 @@ export default function MediaGrid({ files }: Props) {
     <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 justify-center align-center justify-items-center">
       {files.map((file, idx) => {
         const url = `${file}`;
+        console.log("File URL:", url);
         const ext = file?.split('.').pop()?.toLowerCase();
         const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'svg'].includes(ext || '');
         const isVideo = ['mp4', 'mov', 'MOV', 'webm', 'avi', 'mkv', 'ogg'].includes(ext || '');
         return (
           <div key={url}>
             {isImage ? (
-              <img src={url} alt={`Image ${idx + 1}`} className="w-full h-auto rounded-lg" />
+              <Image
+              src={url} 
+              alt={`Image ${idx + 1}`} 
+              className="w-full h-auto rounded-lg" 
+              width={800}
+              height={800}
+              />
             ) : isVideo ? (
               <video controls className="w-full rounded-lg">
                 <source src={url} type={`video/${ext}`} />

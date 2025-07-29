@@ -5,13 +5,17 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
+                hostname: 'dvztt66ngx2v3.cloudfront.net',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
                 hostname: 'cdn.shopify.com',
                 port: '',
                 pathname: '/s/files/**',
-
-            }
-        ]
-    }
+            },
+        ],
+    },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
