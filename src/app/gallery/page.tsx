@@ -15,15 +15,13 @@ export default async function GalleryPage({
 }: {
   searchParams?: { prefix?: string };
 }) {
-  const prefix = searchParams?.prefix || "";
+  const prefix = searchParams?.prefix || '';
   const { folders } = await listS3Objects(prefix);
 
   return (
     <div>
       <FolderDisplay
-        folders={folders.filter(
-          (folder): folder is string => typeof folder === "string"
-        )}
+        folders={folders.filter((folder): folder is string => typeof folder === 'string')}
       />
     </div>
   );
