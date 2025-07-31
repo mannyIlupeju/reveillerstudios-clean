@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 type GalleryPageProps = {
   params: Record<string, string>;
-  searchParams?: Promise<{ prefix?: string }>;
+  searchParams?: { prefix?: string };
 };
 
 export default async function GalleryPage({ params, searchParams }: GalleryPageProps) {
