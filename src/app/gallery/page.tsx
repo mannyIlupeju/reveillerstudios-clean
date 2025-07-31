@@ -11,8 +11,10 @@ export const metadata: Metadata = {
 
 
 export default async function GalleryPage({
+  params,
   searchParams,
 }: {
+  params: Record<string, string>;
   searchParams?: { prefix?: string };
 }) {
   const prefix = searchParams?.prefix || '';
