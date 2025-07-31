@@ -50,7 +50,7 @@ export const ArchiveDetail = [
         content: '<p>Content for Bound-By-Bond.</p>',
     },
     {
-        id: '6',
+        id: '5',
         title: 'rvr2025',
         content: `
         <div class="xl:w-96 text-sm">
@@ -68,12 +68,12 @@ export const ArchiveDetail = [
         </div>`,
     },
     {
-        id: '7',
+        id: '6',
         title: 'rvr-pop-up-2018',
         content: '<p>Pop Up shop for our Pain is the essence collection</p>',
     },
     {
-        id: '8',
+        id: '7',
         title: 'existentialist-deathwave',
          content: `
         <div class="xl:w-96 text-sm">
@@ -95,11 +95,11 @@ export const ArchiveDetail = [
         `,
     },
     {
-        id: '9',
-        title: 'BTS-and-friends',
+        id: '8',
+        title: 'bts-and-friends',
         content: `
         <div class="xl:w-96">
-        <h1>Are we still connected?</h1>
+        <h1>Behind the scenes and friends of Reveiller Studios</h1>
         <p>
         B-Sides. Unreleased footages.<br>
         A collection of behind the scenes and friends of Reveiller Studios.<br>
@@ -109,7 +109,7 @@ export const ArchiveDetail = [
         `,
     },
     {
-        id: '10',
+        id: '9',
         title: 'rvr2025-editorial',
         content: `
         <div class="xl:w-96 text-sm">
@@ -129,7 +129,7 @@ export const ArchiveDetail = [
         `
     },
      {
-        id: '9',
+        id: '10',
         title: 'pain-is-the-essence',
         content: `
         <div class="w-96 text-sm ">

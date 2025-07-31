@@ -13,11 +13,8 @@ import { useFolders } from '@/Context/context/FoldersContext';
 export default function MediaPage() {
   const { prefix } = useParams();
   const decodedPrefix = decodeURIComponent(prefix as string);
-
-  const { folders: allFolders } = useFolders();
-  console.log('All folders:', allFolders);
-
-
+  const { savedFolders } = useFolders();
+  console.log('Saved folders:', savedFolders);
 
   const [files, setFiles] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
@@ -33,11 +30,11 @@ export default function MediaPage() {
    // Scroll to next media item in the grid
   // Go to next folder
   const handleNextFolder = () => {
-    if (!allFolders || allFolders.length === 0) return;
-    const currentIndex = allFolders.indexOf(decodedPrefix);
+    if (!savedFolders || savedFolders.length === 0) return;
+    const currentIndex = savedFolders.indexOf(decodedPrefix);
     if (currentIndex === -1) return;
-    const nextIndex = (currentIndex + 1) % allFolders.length;
-    const nextFolder = allFolders[nextIndex];
+    const nextIndex = (currentIndex + 1) % savedFolders.length;
+    const nextFolder = savedFolders[nextIndex];
     router.push(`/gallery/${encodeURIComponent(nextFolder)}`);
   };
 

@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import * as THREE from 'three';
+import { useFolders } from '@/Context/context/FoldersContext';
 
 type FolderDisplayProps = {
   folders: string[];
@@ -13,29 +14,36 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
   const tooltipRef = useRef<HTMLDivElement>(null);
   const hoveredMeshRef = useRef<THREE.Mesh | null>(null);
   const router = useRouter();
+  const { setFolders } = useFolders();
+
+  // Set folders in context
+  useEffect(() => {
+    if (folders && folders.length > 0) {
+      setFolders(folders);
+    }
+  }, [folders, setFolders]);
 
   useEffect(() => {
-    if (!containerRef.current) return;
-    const dpr = window.devicePixelRatio || 1;
+    if (!containerRef.current || !folders || folders.length === 0) return;
 
-    // Setup scene and renderer
+    const dpr = window.devicePixelRatio || 1;
+    const tooltipNode = tooltipRef.current;
+
     const scene = new THREE.Scene();
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(dpr); 
+    renderer.setPixelRatio(dpr);
     renderer.setSize(window.innerWidth, window.innerHeight);
     containerRef.current.appendChild(renderer.domElement);
 
-    // Helper for camera zoom
     const getCameraZoom = (width: number) => {
       if (width > 1280) return 0.5;
       if (width > 768) return 0.35;
       return 0.32;
     };
-  
+
     const frustumSize = 1000;
     const aspect = window.innerWidth / window.innerHeight;
 
-    // Orthographic camera setup
     const camera = new THREE.OrthographicCamera(
       (frustumSize * aspect) / -2,
       (frustumSize * aspect) / 2,
@@ -48,9 +56,6 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
     camera.zoom = getCameraZoom(window.innerWidth);
     camera.updateProjectionMatrix();
 
-
-
-    // Handle resizing
     const handleResize = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
@@ -68,35 +73,22 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
 
     window.addEventListener('resize', handleResize);
 
-    // Lights
     const light = new THREE.AmbientLight(0xffffff, 10);
     scene.add(light);
 
     const loader = new THREE.TextureLoader();
     const planes: { mesh: THREE.Mesh; folder: string }[] = [];
 
-    let scrollIndex = 0;
-    const numFolders = folders.length;
-
-    folders.forEach((folder, index) => {
-      const folderPath = folder.replace(/\/?$/, '/');
-      const imageUrl = `https://${process.env.NEXT_PUBLIC_CLOUDFRONT_DOMAIN}/${folderPath}thumbnail.jpg`;
-
-      loader.load(imageUrl, (texture) => {
-        const geometry = new THREE.PlaneGeometry(1000, 700); // Fixed mesh size
-        const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
-        const plane = new THREE.Mesh(geometry, material);
-      
-
-        scene.add(plane);
-        planes.push({ mesh: plane, folder });
-
-        updatePlanePositions();
-      });
-    });
-
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
+
+    let scrollIndex = 0;
+    let currentIndex = 0;
+    let lastScrollTime = 0;
+    const SCROLL_COOLDOWN = 120;
+    const DELTA_THRESHOLD = 40;
+
+    let cancelled = false;
 
     const onClick = (event: MouseEvent) => {
       if (!renderer.domElement) return;
@@ -137,43 +129,33 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
       }
     };
 
-    let targetIndex = 0;
-    let currentIndex = 0;
-    let lastScrollTime = 0;
-    const SCROLL_COOLDOWN = 120;
-    const DELTA_THRESHOLD = 40;
-
     const onWheel = (event: WheelEvent) => {
-      if (!numFolders || event.deltaMode !== 0) return;
-
+      if (!folders.length || event.deltaMode !== 0) return;
       const now = Date.now();
       if (now - lastScrollTime < SCROLL_COOLDOWN) return;
-
-      scrollIndex = (scrollIndex + (event.deltaY > 0 ? 1 : -1) + numFolders) % numFolders;
+      scrollIndex = (scrollIndex + (event.deltaY > 0 ? 1 : -1) + folders.length) % folders.length;
       lastScrollTime = now;
       updatePlanePositions();
     };
 
     let touchStartY: number | null = null;
     const onTouchStart = (event: TouchEvent) => {
-      if (event.touches.length === 1) {
-        touchStartY = event.touches[0].clientY;
-      }
+      if (event.touches.length === 1) touchStartY = event.touches[0].clientY;
     };
+
     const onTouchMove = (event: TouchEvent) => {
       if (touchStartY === null) return;
-      const touchY = event.touches[0].clientY;
-      const deltaY = touchStartY - touchY;
+      const deltaY = touchStartY - event.touches[0].clientY;
       if (Math.abs(deltaY) > DELTA_THRESHOLD) {
-        scrollIndex = (scrollIndex + (deltaY > 0 ? 1 : -1) + numFolders) % numFolders;
+        scrollIndex = (scrollIndex + (deltaY > 0 ? 1 : -1) + folders.length) % folders.length;
         updatePlanePositions();
-        touchStartY = touchY;
+        touchStartY = event.touches[0].clientY;
       }
     };
 
     const updatePlanePositions = () => {
       planes.forEach((plane, i) => {
-        const displayIndex = (i - scrollIndex + numFolders) % numFolders;
+        const displayIndex = (i - scrollIndex + folders.length) % folders.length;
         const mesh = plane.mesh;
         mesh.position.set(displayIndex * 250, displayIndex * 300, -displayIndex * 200);
         mesh.rotation.set(
@@ -185,14 +167,14 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
       });
     };
 
+    let stop = false;
     const animate = () => {
       if (stop) return;
       requestAnimationFrame(animate);
-
       currentIndex += (scrollIndex - currentIndex) * 0.05;
 
       planes.forEach(({ mesh }) => {
-        let offset = hoveredMeshRef.current === mesh ? 400 : 0;
+        const offset = hoveredMeshRef.current === mesh ? 400 : 0;
         const baseX = mesh.userData.baseX ?? mesh.position.x;
         mesh.userData.baseX = baseX;
         mesh.position.x += (baseX + offset - mesh.position.x) * 0.5;
@@ -200,7 +182,29 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
 
       renderer.render(scene, camera);
     };
-    let stop = false;
+
+    // Clean up planes before loading new ones
+    planes.length = 0;
+
+    folders.forEach((folder, index) => {
+      const folderPath = folder.replace(/\/?$/, '/');
+      const imageUrl = `https://${process.env.NEXT_PUBLIC_CLOUDFRONT_DOMAIN}/${folderPath}thumbnail.jpg`;
+
+      loader.load(imageUrl, (texture) => {
+        if (cancelled) {
+          texture.dispose();
+          return;
+        }
+        const geometry = new THREE.PlaneGeometry(1000, 700);
+        const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
+        const plane = new THREE.Mesh(geometry, material);
+        scene.add(plane);
+        planes.push({ mesh: plane, folder });
+
+        updatePlanePositions();
+      });
+    });
+
     animate();
 
     renderer.domElement.addEventListener('click', onClick);
@@ -211,18 +215,34 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
 
     return () => {
       stop = true;
+      cancelled = true;
       window.removeEventListener('resize', handleResize);
       renderer.domElement.removeEventListener('click', onClick);
       renderer.domElement.removeEventListener('mousemove', onMouseMove);
       renderer.domElement.removeEventListener('wheel', onWheel);
       renderer.domElement.removeEventListener('touchstart', onTouchStart);
       renderer.domElement.removeEventListener('touchmove', onTouchMove);
+
+      // 🧼 Clean up meshes and dispose materials/textures
+      planes.forEach(({ mesh }) => {
+        scene.remove(mesh);
+        if (mesh.material instanceof THREE.Material) {
+          mesh.material.dispose();
+        }
+        mesh.geometry.dispose();
+        if ((mesh.material as any).map) {
+          (mesh.material as any).map.dispose();
+        }
+      });
+
       renderer.dispose();
+
       if (renderer.domElement.parentNode) {
         renderer.domElement.parentNode.removeChild(renderer.domElement);
       }
-      if (tooltipRef.current) {
-        tooltipRef.current.style.display = 'none';
+
+      if (tooltipNode) {
+        tooltipNode.style.display = 'none';
       }
     };
   }, [folders, router]);

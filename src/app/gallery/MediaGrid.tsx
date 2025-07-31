@@ -2,7 +2,6 @@
 
 import React, {useState, useEffect} from 'react';
 import Image from 'next/image';
-import { useFolders } from '@/Context/context/FoldersContext';
 
 type Props = {
   files: string[];
@@ -14,9 +13,6 @@ export default function MediaGrid({ files }: Props) {
 
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  const {folders, setFolders} = useFolders()
-
-  
 
   useEffect(() => {
     const handleScroll = () => {

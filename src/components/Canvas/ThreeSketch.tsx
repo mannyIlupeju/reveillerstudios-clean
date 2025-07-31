@@ -169,7 +169,7 @@ const ThreeSketch = () => {
             onContextMenu={e => e.preventDefault()}
           >
             <source 
-            src="https://res.cloudinary.com/dnlk9ni2i/video/upload/v1752161010/TANKREEL1_srw8nk.mov"
+            src="https://res.cloudinary.com/doynaagx7/video/upload/v1753965430/TANKREEL1_v8qqct.mp4"
             />
           </video>
            {/* Overlay */}
@@ -219,7 +219,7 @@ const ThreeSketch = () => {
             onContextMenu={e => e.preventDefault()}
           >
             <source 
-            src="https://res.cloudinary.com/dnlk9ni2i/video/upload/v1752225379/rvryulcal_tbtijd.mp4"
+            src="https://res.cloudinary.com/doynaagx7/video/upload/v1753965091/rvryulcal_tbtijd_fr1sdk.mp4"
             />
           </video>
            {/* Overlay */}
