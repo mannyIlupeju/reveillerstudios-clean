@@ -8,20 +8,23 @@ export const metadata: Metadata = {
   description: 'Explore our gallery of creative works and projects.',
 };
 
-type GalleryPageProps = {
-  params: Record<string, string>;
+
+
+export default async function GalleryPage({
+  searchParams,
+}: {
   searchParams?: { prefix?: string };
-};
-
-export default async function GalleryPage({ params, searchParams }: GalleryPageProps) {
-  const resolvedSearchParams = await searchParams;
-  const prefix = resolvedSearchParams?.prefix || '';
-
+}) {
+  const prefix = searchParams?.prefix || "";
   const { folders } = await listS3Objects(prefix);
 
   return (
     <div>
-      <FolderDisplay folders={folders.filter((folder): folder is string => typeof folder === 'string')} />
+      <FolderDisplay
+        folders={folders.filter(
+          (folder): folder is string => typeof folder === "string"
+        )}
+      />
     </div>
   );
 }
