@@ -12,11 +12,13 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  // ✅ Get full request URL from headers
-  const headersList = await headers();
-  const url = new URL(headersList.get('x-url') || 'http://localhost'); // fallback for dev
-  const rawPrefix = url.searchParams.get('prefix');
+  const headersList = headers(); // ✅ Fixed here
+  const host = headersList.get('host') || 'localhost:3000';
+  const proto = headersList.get('x-forwarded-proto') || 'http';
+  const pathname = headersList.get('x-next-url') || '/archive';
+  const url = new URL(`${proto}://${host}${pathname}`);
 
+  const rawPrefix = url.searchParams.get('prefix');
   const prefix = rawPrefix || '';
 
   const { folders } = await listS3Objects(prefix);

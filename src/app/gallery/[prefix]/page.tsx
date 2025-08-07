@@ -67,7 +67,7 @@ export default function MediaPage() {
     <div className="p-8">
       <div className="flex gap-4 mb-8">
         <button
-          onClick={() => router.push('/archive')}
+          onClick={() => router.push('/gallery')}
           className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 font-medium"
         >
           ← Back to Archive
