@@ -71,6 +71,7 @@ export const ArchiveDetail = [
         title: 'rvs-25',
         content: `
         <div class="xl:w-96 text-sm">
+        <p>2025</p>
         <p>
         Product shoot for our tanktop and Denim pants capsule.
         </p>
@@ -97,6 +98,7 @@ export const ArchiveDetail = [
         id: '7',
         title: 'existentialist-deathwave',
          content: `
+        <p>2017</p>
         <div class="xl:w-96 text-sm">
         <p>
         The design was inspired by the idea of widespread lies, the subtle effects of confusion and cognitive dissonance and how it breaks down the mind..<br>
@@ -134,6 +136,7 @@ export const ArchiveDetail = [
         title: 'rvs25-editorial',
         content: `
         <div class="xl:w-96 text-sm">
+        <p>2025</p>
         <h1>Are we still connected?</h1>
         <p>
         Remember how we used to share music? Infrared, bluetooth, sharing earbuds with your friend at a sports event, on a walk or in a room?<br>
@@ -157,6 +160,7 @@ export const ArchiveDetail = [
         title: 'pain-is-the-essence',
         content: `
         <div class="max-w-2xl text-sm ">
+        <p>2018</p>
         <p>
         We worked on a lot of DIY pieces this period. Starting a brand with 0 fashion experience or educational background, we were more invested in using what already existed and manipulating it our own way.<br>
         The collection was a reflection of our journey, of the struggles and challenges we faced as a brand. It was a time of growth, of learning and of finding our own identity in the fashion world.<br>
