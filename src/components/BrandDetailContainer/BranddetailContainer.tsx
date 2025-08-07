@@ -7,9 +7,9 @@ import {useGlobalContext} from '../../Context/GlobalContext'
 
 export default function BranddetailContainer() {
 
-  const { isMenuOpen, setIsMenuOpen } = useGlobalContext();
+  const { isMenuOpen, setOpenMenu } = useGlobalContext();
 
-  const handleCloseMenu = () => setIsMenuOpen(false);
+  const handleCloseMenu = () => setOpenMenu(false);
 
   return (
     <div className="bottom-[85px] left-50 w-full max-h-[60vh] fixed z-30 shadow-lg flex flex-col glassBox transition">
