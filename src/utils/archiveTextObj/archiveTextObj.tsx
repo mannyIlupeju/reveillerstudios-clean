@@ -56,11 +56,19 @@ export const ArchiveDetail = [
     {
         id: '4',
         title: 'boundbybond',
-        content: '<p>Content for Bound-By-Bond.</p>',
+        content: `
+        <p>2017</p>
+         <Strong>Credits:</Strong>
+        <div>
+        Models: Callie, Khalid, Deborah, Somefun, Amira, Laila, Fatu, Jacob and Dasia<br>
+        Photography: Dante <br>
+        Stylist: Mabel Conteh.<br>
+        Assistance: Tony, Khalid.<br>
+        </div>`
     },
     {
         id: '5',
-        title: 'rvs2025',
+        title: 'rvs-25',
         content: `
         <div class="xl:w-96 text-sm">
         <p>
@@ -78,7 +86,7 @@ export const ArchiveDetail = [
     },
     {
         id: '6',
-        title: 'rvr-pop-up-2018',
+        title: 'rvspopup',
         content: `
         <p>2018</p>
         <p>Pop Up shop for our Pain is the Essence collection</p><br></br>
@@ -123,7 +131,7 @@ export const ArchiveDetail = [
     },
     {
         id: '9',
-        title: 'rvr2025-editorial',
+        title: 'rvs25-editorial',
         content: `
         <div class="xl:w-96 text-sm">
         <h1>Are we still connected?</h1>
