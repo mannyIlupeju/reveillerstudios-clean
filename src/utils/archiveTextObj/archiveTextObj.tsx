@@ -137,14 +137,17 @@ export const ArchiveDetail = [
         <h1>Are we still connected?</h1>
         <p>
         Remember how we used to share music? Infrared, bluetooth, sharing earbuds with your friend at a sports event, on a walk or in a room?<br>
-        This is a story of connectivity, connection and sharing. A story of how we used to share music, and how we still do.
+        This is a story of connectivity. A story of how we used to share music, and how we still do.
         <br></br>
         <Strong>Credits:</Strong>
         <div>
         Models: Sofi, KwaeKobain and Shancia.<br>
         Photography: Iyuna.<br>
+        Art Direction: Manny.<br>   
+        Creative Direction: Mabel Conteh<br>
         Stylist: Mabel Conteh.<br>
         Assistance: Tony, David Gageche.<br>
+        Make-up: Shancia.<br>
         </div>
         </div>
         `
