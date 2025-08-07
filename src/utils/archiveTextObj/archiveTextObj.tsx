@@ -168,7 +168,7 @@ export const ArchiveDetail = [
         <Strong>Credits:</Strong>
         <div>
         Models: Callie, Fatu, Deborah, Simon, Somefun.<br>
-        Photography: David<br>
+        Photography: David Adewoyin<br>
         Stylist: Mabel Conteh.<br>
         Assistance: Tony, Dante, Khalid.<br>
         </div>
