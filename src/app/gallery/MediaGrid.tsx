@@ -13,6 +13,13 @@ export default function MediaGrid({ files }: Props) {
 
   const [showScrollTop, setShowScrollTop] = useState(false);
 
+  useEffect(() => {
+    document.body.style.overflow = 'auto';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
 
   useEffect(() => {
     const handleScroll = () => {
