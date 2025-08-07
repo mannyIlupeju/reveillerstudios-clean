@@ -7,8 +7,8 @@ import React from 'react';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Gallery',
-  description: 'Explore our gallery of creative works and projects.',
+  title: 'Archive',
+  description: 'Explore our archive of creative works and projects.',
 };
 
 export default async function Page() {

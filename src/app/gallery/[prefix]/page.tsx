@@ -30,14 +30,14 @@ export default function MediaPage() {
 
    // Scroll to next media item in the grid
   // Go to next folder
-  const handleNextFolder = () => {
-    if (!savedFolders || savedFolders.length === 0) return;
-    const currentIndex = savedFolders.indexOf(decodedPrefix);
-    if (currentIndex === -1) return;
-    const nextIndex = (currentIndex + 1) % savedFolders.length;
-    const nextFolder = savedFolders[nextIndex];
-    router.push(`/gallery/${encodeURIComponent(nextFolder)}`);
-  };
+  // const handleNextFolder = () => {
+  //   if (!savedFolders || savedFolders.length === 0) return;
+  //   const currentIndex = savedFolders.indexOf(decodedPrefix);
+  //   if (currentIndex === -1) return;
+  //   const nextIndex = (currentIndex + 1) % savedFolders.length;
+  //   const nextFolder = savedFolders[nextIndex];
+  //   router.push(`/gallery/${encodeURIComponent(nextFolder)}`);
+  // };
 
 
   useEffect(() => {
@@ -67,18 +67,18 @@ export default function MediaPage() {
     <div className="p-8">
       <div className="flex gap-4 mb-8">
         <button
-          onClick={() => router.push('/gallery')}
+          onClick={() => router.push('/archive')}
           className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 font-medium"
         >
-          ← Back to Gallery
+          ← Back to Archive
         </button>
 
-        <button
+        {/* <button
           onClick={handleNextFolder}
           className="px-4 py-2 bg-black text-white rounded hover:bg-gray-800 font-medium"
         >
           Next
-        </button>
+        </button> */}
       </div>
         {archiveData.map((item, idx) => {
           return (
