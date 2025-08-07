@@ -60,7 +60,7 @@ export default function MediaGrid({ files }: Props) {
           onClick={handleScrollTop}
           aria-label="Back to top"
           className={`
-            fixed bottom-15 right-0 bg-black text-white rounded-full p-4 shadow-lg
+            fixed bottom-18 right-0 bg-black text-white rounded-full p-4 shadow-lg
             hover:bg-gray-800 transition-all duration-300 ease-in z-50
             opacity-100 translate-y-0
             `} style={{ fontSize: 28, lineHeight: 1 }}
