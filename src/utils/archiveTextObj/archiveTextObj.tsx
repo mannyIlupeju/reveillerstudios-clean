@@ -2,13 +2,21 @@ export const ArchiveDetail = [
     {
         id: '1',
         title: 'as-above-so-below',
-        content: '<p>Content for as-above-so-below</p>',
+        content: `
+        <p>2022</p>
+        <p>As above So below. The connection between heaven and earth.
+        Graphically, this was an intellectual exploration of the idea of how we are all connected, how we are all part of the same universe, and how we are all part of the same story.<br>
+        I also wanted to explore the concept of using what we know to discover what we don't know.<br></br>
+        Photography wise - the theme of the shoots was streetwear lol.
+        </p>
+        `,
     },
     {
         id: '2',
         title: 'latent-awake',
         content: `
         <div class="xl:w-96 text-sm">
+        <p>2019</p>
         <p>
         We called this latent awake because it represented how I perceived the change in the zeitgeist that was coming up.<br>
         The idea of how the world was changing, how we were becoming more aware of the issues that were affecting us.<br>
@@ -30,6 +38,7 @@ export const ArchiveDetail = [
         title: 'revenge-rampage',
         content: `
         <div class="xl:w-96 text-sm">
+        <p>2016</p>
         <p>Our first offering to the world.<br>
         A statement on individuality, self-expression and community.</p>
         The Youth will Always Win.

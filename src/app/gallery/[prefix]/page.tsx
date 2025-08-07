@@ -82,7 +82,7 @@ export default function MediaPage() {
       </div>
         {archiveData.map((item, idx) => {
           return (
-            <div key={idx} className="2xl:mb-52 mb-4">
+            <div key={idx} className="2xl:mb-52 mb-4 max-w-xl">
               <h2 className="text-xl font-semibold mb-2">
                 {humanizeString(item.title)}
               </h2>
