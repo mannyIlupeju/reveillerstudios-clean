@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const headersList = headers(); // ✅ Fixed here
+  const headersList = await headers(); // ✅ Fixed here
   const host = headersList.get('host') || 'localhost:3000';
   const proto = headersList.get('x-forwarded-proto') || 'http';
   const pathname = headersList.get('x-next-url') || '/archive';
