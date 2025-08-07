@@ -26,6 +26,8 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
   useEffect(() => {
     if (!containerRef.current || !folders || folders.length === 0) return;
 
+    document.body.style.overflow = 'hidden';
+
     const dpr = window.devicePixelRatio || 1;
     const tooltipNode = tooltipRef.current;
 
@@ -216,6 +218,7 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
     return () => {
       stop = true;
       cancelled = true;
+      document.body.style.overflow = 'hidden';
       window.removeEventListener('resize', handleResize);
       renderer.domElement.removeEventListener('click', onClick);
       renderer.domElement.removeEventListener('mousemove', onMouseMove);
@@ -248,7 +251,7 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
   }, [folders, router]);
 
   return (
-    <div ref={containerRef} className="w-full relative">
+    <div ref={containerRef} className="w-full relative overflow-y-hidden">
       <div
         ref={tooltipRef}
         style={{
