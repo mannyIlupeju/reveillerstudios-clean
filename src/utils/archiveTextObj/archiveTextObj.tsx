@@ -18,7 +18,7 @@ export const ArchiveDetail = [
         <div class="xl:w-96 text-sm">
         <p>2019</p>
         <p>
-        We called this latent awake because it represented how I perceived the change in the zeitgeist that was coming up.<br>
+        It represented how I perceived the change in the zeitgeist that was coming up.<br>
         The idea of how the world was changing, how we were becoming more aware of the issues that were affecting us.<br>
         The idea for the shoot was to work in a bunker of some sort, and have a dystopian look to it, with the models wearing masks and holding tanks to represent the idea of how we were starting to take action against the issues that were affecting us.<br>
         </p>
@@ -28,7 +28,7 @@ export const ArchiveDetail = [
         Models: Yulia, Callie, Desire, Mabel, Laila, Somefun.<br>
         Photography: Dante, Machnmb.<br>
         Stylist: Mabel Conteh.<br>
-        Creative Direction: Machnmb.<br>
+        Creative Direction: Manny.<br>
         Assistance: Tony, Khalid.<br>
         </div>
         </div>`,
@@ -47,8 +47,8 @@ export const ArchiveDetail = [
         <div>
         Models: Yulia, Dante, Kieran.<br>
         Photography: Roh<br>
-        Stylist: Machnmb.<br>
-        Creative Direction: Machnmb<br>
+        Stylist: Manny.<br>
+        Creative Direction: Manny.<br>
         </div>
         </div>
         <br></br>`,
@@ -60,7 +60,7 @@ export const ArchiveDetail = [
     },
     {
         id: '5',
-        title: 'rvr2025',
+        title: 'rvs2025',
         content: `
         <div class="xl:w-96 text-sm">
         <p>
@@ -79,7 +79,11 @@ export const ArchiveDetail = [
     {
         id: '6',
         title: 'rvr-pop-up-2018',
-        content: '<p>Pop Up shop for our Pain is the essence collection</p>',
+        content: `
+        <p>2018</p>
+        <p>Pop Up shop for our Pain is the Essence collection</p><br></br>
+        <p>Featuring Reves magazine content</p>
+        `,
     },
     {
         id: '7',
@@ -96,9 +100,9 @@ export const ArchiveDetail = [
         Models: Larissa, Yulia.<br>
         Photography: Nick Kriellaars.<br>
         Stylist: Mabel Conteh.<br>
-        Creative Direction: Machnmb.<br>
+        Creative Direction: Manny.<br>
         Hair and Make-up: Antonia.<br>
-        Assistance: Tony, Khalid, Dante, Machnmb.<br>
+        Assistance: Tony, Khalid, Dante, Manny.<br>
         </div>
         </div>
         `,
@@ -141,7 +145,7 @@ export const ArchiveDetail = [
         id: '10',
         title: 'pain-is-the-essence',
         content: `
-        <div class="w-96 text-sm ">
+        <div class="max-w-2xl text-sm ">
         <p>
         We worked on a lot of DIY pieces this period. Starting a brand with 0 fashion experience or educational background, we were more invested in using what already existed and manipulating it our own way.<br>
         The collection was a reflection of our journey, of the struggles and challenges we faced as a brand. It was a time of growth, of learning and of finding our own identity in the fashion world.<br>
