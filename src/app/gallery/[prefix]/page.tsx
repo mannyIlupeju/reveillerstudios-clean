@@ -13,6 +13,7 @@ import { useFolders } from '@/Context/context/FoldersContext';
 export default function MediaPage() {
   const { prefix } = useParams();
   const decodedPrefix = decodeURIComponent(prefix as string);
+  
   const { savedFolders } = useFolders();
   console.log('Saved folders:', savedFolders);
 

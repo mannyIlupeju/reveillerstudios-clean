@@ -1,5 +1,6 @@
 import { listS3Objects } from "@/lib/s3Client";
 import FolderDisplay from './FolderDisplay';
+
 import { Metadata } from 'next';
 import React from 'react';
 
@@ -8,16 +9,18 @@ export const metadata: Metadata = {
   description: 'Explore our gallery of creative works and projects.',
 };
 
+type PageProps = {
+  params: { prefix: string };
+  searchParams?: { [key: string]: string | undefined };
+};
 
 
-export default async function GalleryPage({
+export default async function Page({
   params,
   searchParams,
-}: {
-  params: Record<string, string>;
-  searchParams?: { prefix?: string };
-}) {
-  const prefix = searchParams?.prefix || '';
+}: PageProps) {
+  const prefix = Array.isArray(params.prefix) ? params.prefix[0] : params.prefix || '';
+  console.log('Prefix:', prefix);
   const { folders } = await listS3Objects(prefix);
 
   return (

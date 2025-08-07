@@ -7,7 +7,7 @@ type Props = {
   files: string[];
 };
 
-const CLOUDFRONT_DOMAIN = process.env.NEXT_PUBLIC_CLOUDFRONT_DOMAIN || 'dvztt66ngx2v3.cloudfront.net';
+const CLOUDFRONT_DOMAIN = process.env.NEXT_PUBLIC_CLOUDFRONT_DOMAIN;
 
 export default function MediaGrid({ files }: Props) {
 

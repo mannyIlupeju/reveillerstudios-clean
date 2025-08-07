@@ -23,6 +23,7 @@ export default function Footer() {
                     alt="footer logo"
                     width={250}
                     height={250}
+                    priority
                     />
 
                     <span className="text-sm items-center">© {timeState.currentYear} Reveillerstudios</span>
