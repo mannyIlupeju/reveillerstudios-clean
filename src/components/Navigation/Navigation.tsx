@@ -160,7 +160,11 @@ const Navigation = () => {
         <div className="flex gap-5">
           <NavLinks links={navLinks}/>
           <div className="flex items-center">
-            <button onClick={toggleCart} className="flex gap-1">
+            <button onClick={() => {
+              if(cartQty > 0 ) toggleCart()
+            }} className={`flex gap-1 ${cartQuantity === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+            disabled={cartQuantity === 0}
+            >
               <h1>Cart</h1> 
               <span>({cartQuantity})</span>
             </button>
