@@ -110,7 +110,7 @@ export default function SideCart() {
             <h1 className="mx-auto">Your Bag</h1>
           </div>
 
-          <div className="flex-col flex-1 overflow-auto p-6 cursor-pointer justify-center gap-8">
+          <div className="flex-col flex-1 overflow-auto p-6 justify-center gap-8">
             <div className="flex flex-col gap-12">
             {cartItems.length !== 0 ? cartItems.map((item) => (
               <div key={item.id} className="flex flex-row">
