@@ -131,7 +131,7 @@ export default function CartDisplay({cart}:CartProps){
         <>
         <Navigation/>
         <section className="flex justify-center ">
-        <main className="flex flex-col justify-center gap-10 border-blac border-dashed p-8 mx-auto my-12 min-h-screen">
+        <main className="flex flex-col justify-center gap-10 border-blac border-dashed p-8 mx-auto mt-8">
             <div className="text-center font-bold mb-4">
             <h1>Your Shopping Cart</h1>
             </div>
@@ -185,7 +185,7 @@ export default function CartDisplay({cart}:CartProps){
                     <p className="text-xl mx-auto">Total: {currency.code} {formatMoney(Number(cartTotal), currency.code)} </p>
 
                     <button 
-                    className="bg-zinc-800 w-96 text-white p-4 mx-auto"
+                    className="bg-zinc-800 w-96 text-white p-4 font-bold text-lg mx-auto checkout-button"
                     onClick={() => handleCheckout(cartId)}
                     >
                         Continue to Checkout

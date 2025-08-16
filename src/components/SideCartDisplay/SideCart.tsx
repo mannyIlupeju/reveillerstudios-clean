@@ -144,7 +144,7 @@ export default function SideCart() {
                   </div>
                   <button
                     onClick={() => handleRemoveItem(item)}
-                    className="flex items-start mt-2 py-2 w-fit text-zinc-800 rounded hover:bg-red-500 hover:justify-center hover:text-center hover:w-32"
+                    className="flex items-center mt-2 py-2 w-32 text-zinc-800 rounded bg-transparent hover:bg-red-500 justify-center text-center transition-colors"
                   >
                     Remove
                   </button>
@@ -158,13 +158,13 @@ export default function SideCart() {
                 <span>{formatMoney(Number(cartTotal), currency.code)}</span>
               </div>
               <button
-                className="border-black border-2 mx-auto w-96 p-2"
+                className="border-black border-2 mx-auto w-96 p-2 checkout-button"
                 onClick={() => handleCheckout(cartId)}
               >
                 <h1>Checkout</h1>
               </button>
             </div>
-          <div className="mt-14">
+          <div className="mt-32">
             <h2 className="text-lg">You might also want to check these out:</h2>
             <ProdRecommendations recommendations={recommendedItems} />
           </div>
