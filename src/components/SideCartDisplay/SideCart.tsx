@@ -158,7 +158,7 @@ export default function SideCart() {
                 <span>{formatMoney(Number(cartTotal), currency.code)}</span>
               </div>
               <button
-                className="border-black border-2 mx-auto w-96 p-2 checkout-button"
+                className="border-black border-2 mx-auto w-96 p-2"
                 onClick={() => handleCheckout(cartId)}
               >
                 <h1>Checkout</h1>
