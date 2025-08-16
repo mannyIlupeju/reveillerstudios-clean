@@ -10,12 +10,11 @@ import { useGlobalContext } from '../../Context/GlobalContext';
 import { RootState } from "../../../store/store";
 import {useSelector, useDispatch} from 'react-redux'
 import { removeItem, setLoading, updateQuantity, setCartItems, setError, clearCart } from "../../../store/cartSlice";
-import { removeCartItem, updateCartQty, refreshCart, handleCheckout } from "../../utils/cartFunctions/cartFunctions";
+import { removeCartItem, updateCartQty, refreshCart, handleCheckout} from "../../utils/cartFunctions/cartFunctions";
 import useIsMobile from '../../../hooks/useIsMobile';
 import { useCurrency } from '../../Context/context/CurrencyContext';
 import { formatMoney } from '../../utils/formatMoney';
 import ProdRecommendations from '../ProdRecommendations/ProdRecommendations';
-import { getProductRecommendations } from '@/app/shop/prodRecommendations'; // <-- Add this line
 
 
 
@@ -47,10 +46,7 @@ export default function SideCart() {
     fetchCartId();
   }, []);
 
-
-
-
- 
+  console.log(cartId);
 
 
   if (!hydrated) return null;
@@ -158,7 +154,7 @@ export default function SideCart() {
                 <span>{formatMoney(Number(cartTotal), currency.code)}</span>
               </div>
               <button
-                className="border-black border-2 mx-auto w-96 p-2"
+                className="border-black border-2 mx-auto w-96 p-2 checkout-button"
                 onClick={() => handleCheckout(cartId)}
               >
                 <h1>Checkout</h1>

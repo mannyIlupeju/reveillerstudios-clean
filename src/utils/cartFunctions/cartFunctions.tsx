@@ -121,7 +121,7 @@ export async function handleCheckout(cartId: string | null) {
   if (!cartId) return;
 
   try {
-    const response = await fetch("api/checkout", {
+    const response = await fetch("/api/checkout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

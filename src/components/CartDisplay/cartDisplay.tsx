@@ -126,6 +126,8 @@ export default function CartDisplay({cart}:CartProps){
         fetchCartId();
     }, []);
 
+    console.log(cartId)
+
     
      return (
         <>
