@@ -124,8 +124,8 @@ export default function Newsletter() {
                 className="p-2 border border-zinc-400 rounded-md text-zinc-800"
               />
             </div>
-            <form className="flex flex-col  gap-2" onSubmit={submitRegistration}>
-              <div className="flex justify-start  gap-2">
+            <form className="flex flex-col gap-" onSubmit={submitRegistration}>
+              <div className="flex justify-start gap-2">
                 <input
                   type="checkbox"
                   id="requestUpdate"
@@ -151,10 +151,13 @@ export default function Newsletter() {
                   I agree to the Privacy Policy and Cookie Policy
                 </label>
               </div>
-              <button className="text-xl" type="submit" disabled={status === "loading"}>
+
+              
+            </form>
+              <button className="text-xl signUp-button mt-12" type="submit" disabled={status === "loading"}>
                 {status === "loading" ? "Submitting…" : "Subscribe"}
               </button>
-            </form>
+              
           </div>
         </main>
       )}

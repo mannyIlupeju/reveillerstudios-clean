@@ -141,7 +141,7 @@ const Navigation = () => {
           </div>
 
           <div className="w-[400px] h-[100px] flex items-center justify-center glass">
-            <Image src="/images/REVEILLERSTUDIOS.svg" alt="rvr logo" width={400} height={200} className="mx-auto logo" />
+            <Image src="/images/REVEILLERSTUDIOS.svg" alt="rvr logo" width={400} height={200} className="mx-auto logo" onClick={() => router.push('/')} />
           </div>
          
           <div className="p-2 flex flex-col justify-start items-center w-full">

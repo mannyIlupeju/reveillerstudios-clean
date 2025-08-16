@@ -116,13 +116,16 @@ export default function NewsletterFooter() {
           I agree to the Privacy Policy and Cookie Policy
         </label>
       </div>
+
+      <div className="my-4">
       <button
-        className='text-md mt-8'
+        className='text-md signUp-button'
         onClick={submitRegistration}
         disabled={status === 'loading'}
-      >
+        >
         {status === 'loading' ? 'Submitting…' : 'SIGN UP'}
       </button>
+      </div>
       <div className='xl:mt-12 my-8'>
         <p className='text-sm'>
           By clicking submit you agree to receive emails from Reveillerstudios
