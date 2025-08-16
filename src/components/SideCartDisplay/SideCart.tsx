@@ -29,7 +29,7 @@ export default function SideCart() {
   const [cartId, setCartId] = useState<string | null>(null);
   const [hydrated, setHydrated] = useState(false);
   const isMobile = useIsMobile();
-
+  const [removingItemId, setRemovingItemId] = useState<string | null>(null);
 
   
 
@@ -74,10 +74,14 @@ export default function SideCart() {
       dispatch(clearCart());
     } else if (cartId) {
       try {
+        setRemovingItemId(item.id);
         await removeCartItem(item.id, cartId, dispatch);
         await refreshCart(cartId, dispatch);
       } catch (error) {
         // Optionally handle error
+        console.error("Error removing item from cart:", error);
+      } finally {
+        setRemovingItemId(null);
       }
     }
   };
@@ -141,8 +145,9 @@ export default function SideCart() {
                   <button
                     onClick={() => handleRemoveItem(item)}
                     className="flex items-center mt-2 py-2 w-32 text-zinc-800 rounded bg-transparent hover:bg-red-500 justify-center text-center transition-colors"
+                    disabled={removingItemId === item.id}
                   >
-                    Remove
+                    {removingItemId === item.id ? 'Removing...' : 'Remove'}
                   </button>
                 </div>
               </div>
