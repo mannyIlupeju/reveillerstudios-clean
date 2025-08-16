@@ -14,17 +14,25 @@ import { removeCartItem, updateCartQty, refreshCart, handleCheckout } from "../.
 import useIsMobile from '../../../hooks/useIsMobile';
 import { useCurrency } from '../../Context/context/CurrencyContext';
 import { formatMoney } from '../../utils/formatMoney';
+import ProdRecommendations from '../ProdRecommendations/ProdRecommendations';
+import { getProductRecommendations } from '@/app/shop/prodRecommendations'; // <-- Add this line
 
-export default function SideCart() {
 
+
+
+export default function SideCart() { 
   const router = useRouter();
   const dispatch = useDispatch();
-  const { setIsCartOpen, isCartOpen } = useGlobalContext();
+  const { setIsCartOpen, isCartOpen, recommendedItems} = useGlobalContext();
+  // const [recommendedItems, setRecommendedItems] = useState<any[]>([]);
   const { currency } = useCurrency();
   const cartItems = useSelector((state: RootState) => state.cart.cart);
   const [cartId, setCartId] = useState<string | null>(null);
   const [hydrated, setHydrated] = useState(false);
   const isMobile = useIsMobile();
+
+
+  
 
   useEffect(() => {
     setHydrated(true);
@@ -38,6 +46,12 @@ export default function SideCart() {
     }
     fetchCartId();
   }, []);
+
+
+
+
+ 
+
 
   if (!hydrated) return null;
 
@@ -96,7 +110,8 @@ export default function SideCart() {
             <h1 className="mx-auto">Your Bag</h1>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-6 cursor-pointer justify-center">
+          <div className="flex-col flex-1 overflow-auto p-6 cursor-pointer justify-center gap-8">
+            <div className="flex flex-col gap-12">
             {cartItems.length !== 0 ? cartItems.map((item) => (
               <div key={item.id} className="flex flex-row">
                 <div className="w-48 relative ">
@@ -129,26 +144,32 @@ export default function SideCart() {
                   </div>
                   <button
                     onClick={() => handleRemoveItem(item)}
-                    className="flex items-start mt-2 py-2 text-zinc-800 rounded hover:underline"
+                    className="flex items-start mt-2 py-2 w-fit text-zinc-800 rounded hover:bg-red-500 hover:justify-center hover:text-center hover:w-32"
                   >
                     Remove
                   </button>
                 </div>
               </div>
-            )) : 'You miss 100% of the shots you dont take - Wayne Gretzky - Michael Scott '}
+            )) : 'Your Cart is Empty.'}
+            </div>
             <div className="mt-8 flex flex-col gap-4">
               <div className="flex justify-between">
                 <span className="text-lg">Sub Total:  </span>
                 <span>{formatMoney(Number(cartTotal), currency.code)}</span>
               </div>
               <button
-                className="border-black border-2 w-full p-2"
-                onClick={handleGoToCart}
+                className="border-black border-2 mx-auto w-96 p-2"
+                onClick={() => handleCheckout(cartId)}
               >
-                <h1>VIEW BAG</h1>
+                <h1>Checkout</h1>
               </button>
             </div>
+          <div className="mt-14">
+            <h2 className="text-lg">You might also want to check these out:</h2>
+            <ProdRecommendations recommendations={recommendedItems} />
           </div>
+          </div>
+
           <p className="text-xl mx-auto my-4">Estimated Total: {currency.code} {formatMoney(Number(cartTotal), currency.code)} </p>
           <button
             className="bg-zinc-800 w-full text-white p-4 mx-auto"

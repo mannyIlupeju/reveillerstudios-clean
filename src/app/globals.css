@@ -336,6 +336,26 @@ border: 1px solid rgba(235, 120, 22, 0.3);
 }
 
 
+.glass {
+  position: relative;
+  overflow: hidden;
+}
+
+
+.glass::before {
+  content: "";
+  position: absolute; inset: 0;
+  backdrop-filter: blur(14px);
+  background: rgba(255,255,255,0.06); /* tweak as needed */
+  z-index: 0;
+}
+.logo {
+  position: relative; z-index: 1;
+  background: transparent;
+  mix-blend-mode: normal;    /* prevents odd blending */
+  isolation: auto;           /* neutralize isolate effects */
+  filter: none;
+}
 
 .glassBox {
   background: hsla(0, 5%, 96%, 0.93);
@@ -416,7 +436,7 @@ font-family: 'Satoshi-Medium', sans-serif;
   
 }
 
-.addToCartBox {
+/* .addToCartBox {
   background: rgba(17, 215, 62, 0.68);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -424,6 +444,88 @@ font-family: 'Satoshi-Medium', sans-serif;
   -webkit-backdrop-filter: blur(5.4px);
   border: 1px solid rgba(17, 215, 62, 0.24);
 }
+
+.addToCartBox:hover {
+ -webkit-box-shadow: 4px 5px 15px 3px #000000; 
+box-shadow: 4px 5px 15px 3px #000000;
+} */
+
+
+
+.addToCartBox {
+  touch-action: manipulation;
+  -webkit-appearance: none;
+  appearance: none;
+  vertical-align: middle;
+  color: inherit;
+  font: inherit;
+  background: transparent;
+  text-align: inherit;
+  text-transform: inherit;
+  border-style: solid;
+  border-width: 0;
+  box-sizing: border-box;
+
+  background: rgba(17, 215, 62, 0.68);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.4px);
+  -webkit-backdrop-filter: blur(5.4px);
+  border: 1px solid rgba(17, 215, 62, 0.24);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #fafafa;
+  transition-property: border-color, transform, background-color;
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(0.55, 1, 0.15, 1);
+  will-change: transform;
+  cursor: pointer;
+}
+
+.addToCartBox:focus {
+  outline-style: solid;
+  outline-color: transparent;
+}
+
+@media (hover: hover) {
+  .addToCartBox:hover {
+    background: rgba(17, 215, 62, 0.68);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.4px);
+  -webkit-backdrop-filter: blur(5.4px);
+  border: 1px solid rgba(17, 215, 62, 0.24);
+  border-radius: 8px;
+  padding: 12px 16px;
+    transform: scale(1.04);
+    
+  }
+}
+.addToCartBox:focus-visible {
+  background: rgba(17, 215, 62, 0.68);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.4px);
+  -webkit-backdrop-filter: blur(5.4px);
+  border: 1px solid rgba(17, 215, 62, 0.24);
+  border-radius: 8px;
+  padding: 12px 16px;
+  transform: scale(1.04);
+  
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.0625em;
+  text-underline-offset: 0.125em;
+}
+.addToCartBox:active {
+  
+  transform: scale(0.96);
+  background: rgba(17, 215, 62, 0.68);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.4px);
+  -webkit-backdrop-filter: blur(5.4px);
+  border: 1px solid rgba(17, 215, 62, 0.24);
+  border-radius: 8px;
+  padding: 12px 16px;
+  background-image: radial-gradient(75% 25% at 50% 95%, rgba(255, 255, 255, 0.2), transparent)
+}
+
 
 .productTitleBox {
   background: rgba(176, 175, 175, 0.184);

@@ -2,6 +2,7 @@ import React from 'react';
 import { cookies } from 'next/headers';
 import CartDisplay from '../../components/CartDisplay/cartDisplay';
 import Link from 'next/link';
+import { getProductRecommendations } from '../shop/prodRecommendations';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,9 +16,7 @@ export default async function CartPage() {
 
     const country = userCountry === 'CA' ? 'CA' : 'US';
 
-    // console.log("Cart ID:", cartId);
-    // console.log("User Country:", userCountry);
-    // console.log("Country variable passed:", country);
+
 
     if (!cartId) {
       return (
@@ -121,8 +120,6 @@ export default async function CartPage() {
       }
     );
 
-    // console.log("Response status:", response);
-
     
 
     if (!response.ok) {
@@ -131,7 +128,6 @@ export default async function CartPage() {
     }
 
     const json = await response.json();
-    // console.log("Cart data received:", json);
     const cart = json?.data?.cart;
 
     if (!cart) {
@@ -147,7 +143,6 @@ export default async function CartPage() {
 
     return <CartDisplay cart={cart} />;
   } catch (error) {
-    // console.error('Error loading cart:', error);
     return (
       <main className="flex flex-col gap-8 justify-center items-center h-screen">
         <p>Something went wrong loading your cart.</p>

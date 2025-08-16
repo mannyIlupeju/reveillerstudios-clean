@@ -59,9 +59,8 @@ export async function getProductRecommendations(productId: string, country: stri
         },
       });
 
-      // console.log(response)
   
-      return response.data.productRecommendations.slice(0,4);
+      return response.data?.productRecommendations.slice(0,4);
     } catch (error) {
       console.error('Error fetching recommendations:', error);
       return [];

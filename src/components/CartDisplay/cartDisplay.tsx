@@ -12,6 +12,7 @@ import {useEffect, useState} from 'react';
 import { RootState } from "../../../store/store";
 import { useCurrency } from '../../Context/context/CurrencyContext';
 import { formatMoney } from '../../utils/formatMoney';   
+import Navigation from "../Navigation/Navigation";
 
 type LineEdge = {
     node: {
@@ -52,8 +53,8 @@ interface CartProps {
 
 
 export default function CartDisplay({cart}:CartProps){
+
    
-    
     const edges: LineEdge[] = cart.lines.edges
    
 
@@ -126,20 +127,24 @@ export default function CartDisplay({cart}:CartProps){
     }, []);
 
     
-    
      return (
-        <section>
-        <main className="flex flex-col gap-10 p-8 mx-auto min-h-screen">
+        <>
+        <Navigation/>
+        <section className="flex justify-center ">
+        <main className="flex flex-col justify-center gap-10 border-blac border-dashed p-8 mx-auto my-12 min-h-screen">
+            <div className="text-center font-bold mb-4">
+            <h1>Your Shopping Cart</h1>
+            </div>
             {cartItems.length > 0 ? (
                 <>
                     {cartItems.map((item) => (
                         <div key={item.id}
-                            className='flex flex-row mx-auto gap-4'
+                            className='flex flex-row gap-4'
                         >
                             <Image
                                 src={item.image}
-                                width={120}
-                                height={100}
+                                width={200}
+                                height={150}
                                 priority
                                 alt={item.title}
                             />
@@ -180,7 +185,7 @@ export default function CartDisplay({cart}:CartProps){
                     <p className="text-xl mx-auto">Total: {currency.code} {formatMoney(Number(cartTotal), currency.code)} </p>
 
                     <button 
-                    className="bg-zinc-800 w-fit text-white p-4 mx-auto"
+                    className="bg-zinc-800 w-96 text-white p-4 mx-auto"
                     onClick={() => handleCheckout(cartId)}
                     >
                         Continue to Checkout
@@ -196,5 +201,6 @@ export default function CartDisplay({cart}:CartProps){
             )}
         </main>
         </section>
+        </>
     );
 }

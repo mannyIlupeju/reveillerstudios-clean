@@ -40,6 +40,13 @@ type GlobalState = {
     setShowMessage: () => void
   }
 
+  type loadedImageState = {
+    loadedImages: number[];
+    setLoadedImages: React.Dispatch<React.SetStateAction<number[]>>;
+    allLoaded: boolean;
+    setAllLoaded: React.Dispatch<React.SetStateAction<boolean>>;
+  }
+
 // Define the shape of the context, including state and update functions
 type GlobalContextType = {
   cartId: string;
@@ -75,7 +82,13 @@ type GlobalContextType = {
   setStatus: React.Dispatch<React.SetStateAction<"idle" | "loading"| "success" | "error">>;
   errorMsg: string | null;
   setErrorMsg: React.Dispatch<React.SetStateAction<string | null>>; 
-  
+  loadedImages: number[];
+  setLoadedImages: React.Dispatch<React.SetStateAction<number[]>>;
+  handleImageLoad: (index: number, imageUrl: any) => void;
+  allLoaded: boolean;
+  setAllLoaded: React.Dispatch<React.SetStateAction<boolean>>;
+  recommendedItems: any[];
+  setRecommendedItems: React.Dispatch<React.SetStateAction<any[]>>;
 };
 
 
@@ -95,6 +108,8 @@ export const GlobalProvider: React.FC<ProviderProps> = ({ children }) => {
     currentTime: '',
     currentYear:new Date().getFullYear().toString()
   });
+  const [loadedImages, setLoadedImages] = useState<number[]>([])
+  const [allLoaded, setAllLoaded] = useState(false)
   const [isHovered, setIsItemHovered] = useState<boolean | null>(null)
   const [loginClicked, setIsLoginClick] = useState<boolean>(false)
   const [registerClicked, setIsRegisterClick] = useState<boolean>(false)
@@ -108,6 +123,8 @@ export const GlobalProvider: React.FC<ProviderProps> = ({ children }) => {
   const [showMessage, setShowMessage] = useState<boolean>(false);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [recommendedItems, setRecommendedItems] = useState<any[]>([]);
+
 
 
 
@@ -122,6 +139,18 @@ export const GlobalProvider: React.FC<ProviderProps> = ({ children }) => {
     setIsRegisterClick(prevState => !prevState)
     setIsLoginClick(false)
   }
+
+   
+  
+    const handleImageLoad = (index: number, imageUrl: number[]) => {
+      setLoadedImages(prev => {
+        const updated = [...prev, index]
+        if (updated.length === imageUrl.length) {
+          setAllLoaded(true)
+        }
+        return updated
+      })
+    }
 
 
   const removeCart = (id:string) => {
@@ -200,7 +229,14 @@ export const GlobalProvider: React.FC<ProviderProps> = ({ children }) => {
         status,
         setStatus,
         errorMsg,
-        setErrorMsg
+        setErrorMsg,
+        loadedImages,
+        setLoadedImages,
+        allLoaded,
+        setAllLoaded,
+        handleImageLoad,
+        recommendedItems,
+        setRecommendedItems
       }}>
       {children}
     </GlobalContext.Provider>
