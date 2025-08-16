@@ -100,7 +100,7 @@ export default function Newsletter() {
             </div>
             <div className="">
               <h1 className="text-xl items-center">Join the RVS community</h1>
-              <p>Be the first to know about exclusive drops, restocks and special offers - straight to your inbox</p>
+              <p>Get 20% off your first order and be the first to know about exclusive drops, restocks and special offers - straight to your inbox</p>
             </div>
             <div className="flex flex-col gap-4">
               <input

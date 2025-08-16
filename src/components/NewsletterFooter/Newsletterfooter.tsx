@@ -66,7 +66,7 @@ export default function NewsletterFooter() {
         <h1 className='text-xl'>Join the RVS community</h1>
       </div>
       <div className='flex flex-col gap-2 mt-4'>
-        <p className='text-sm'>Be the first to know about exclusive drops, restocks and special offers - straight to your inbox</p>
+        <p className='text-sm'>Get 20% off your first order and be the first to know about exclusive drops, restocks and special offers - straight to your inbox</p>
       </div>
       <div className='flex flex-col lg:flex-row gap-4 my-4 '>
         <input
