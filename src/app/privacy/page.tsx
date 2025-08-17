@@ -1,7 +1,15 @@
 import Script from 'next/script';
 import React from 'react';
+import Head from 'next/head';
 
 export default function Privacy() {
+
+  <Head>
+  <title>Privacy- Reveiller Studios</title>
+  <meta name="description" content="Privacy Policy Reveillerstudios" />
+  <meta name="keywords" content="privacy policy, cookie policy, Reveillerstudios, reveillerstudios" />
+ </Head>
+
   return (
     <main className="max-w-4xl mx-auto my-10 px-4 py-10 text-neutral-800 h-[80vh] overflow-y-auto">
       <h1 className="text-3xl font-bold mb-4">Please click the link to view our Privacy and Cookie policy</h1>

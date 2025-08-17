@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import { cookies } from 'next/headers';
 import CartDisplay from '../../components/CartDisplay/cartDisplay';
 import Link from 'next/link';
@@ -7,6 +8,12 @@ import { getProductRecommendations } from '../shop/prodRecommendations';
 export const dynamic = 'force-dynamic';
 
 export default async function CartPage() {
+  <Head>
+  <title>Your Cart - Reveiller Studios</title>
+  <meta name="description" content="View and manage your cart items at Reveiller Studios." />
+  <meta name="keywords" content="cart, checkout, Reveiller Studios, shopping" />
+</Head>
+
   try {
     const cookieStore = await cookies();
     const { cartId, userCountry } = {

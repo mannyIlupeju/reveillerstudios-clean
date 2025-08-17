@@ -1,6 +1,7 @@
 'use client';
 
 import React, {useRef} from 'react';
+import Head from 'next/head';
 import MediaGrid from '../MediaGrid';
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
@@ -11,6 +12,13 @@ import { useFolders } from '@/Context/context/FoldersContext';
 
 
 export default function MediaPage() {
+  <Head>
+    <title>Archive - Reveiller Studios</title>
+    <meta name="description" content="View Archive works created by Reveiller Studios." />
+    <meta name="keywords" content="archive, Reveiller Studios" />
+ </Head>
+
+
   const { prefix } = useParams();
   const decodedPrefix = decodeURIComponent(prefix as string);
   

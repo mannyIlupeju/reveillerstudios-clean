@@ -1,8 +1,15 @@
 'use client'
 
 import React from 'react';
+import Head from 'next/head';
 
 export default function TermsOfService() {
+  <Head>
+    <title>Terms of Service - Reveiller Studios</title>
+    <meta name="description" content="Review the terms and conditions for using Reveiller Studios." />
+    <meta name="keywords" content="terms of service, Reveiller Studios, legal" />
+ </Head>
+
   return (
     <main className="max-w-4xl mx-auto my-10 px-4 py-10 text-neutral-800">
       <p>Please read these Terms and Conditions (“Terms”, “Terms and Conditions”) carefully before using the <a href="https://reveillerstudios.com">Reveiller Studios</a> website (the “Service”) operated by <strong>Reveiller Studios</strong> (“we”, “us”, or “our”).</p>

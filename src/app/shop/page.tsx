@@ -1,6 +1,7 @@
 // app/shop/page.tsx
 
 import React from 'react';
+import Head from 'next/head';
 import type { Metadata } from 'next';
 import { cookies, headers } from 'next/headers';
 import { fetchProducts } from '../../utils/fetchProducts/fetchProducts';
@@ -18,6 +19,14 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 
 const Page = async () => {
+
+  <Head>
+    <title> Shop - Reveiller Studios</title>
+    <meta name="description" content="Explore and shop the latest products from Reveiller Studios." />
+    <meta name="keywords" content="shop, products, Reveiller Studios, shopping" />
+  </Head>
+
+
   // 2️⃣ Detect country from cookie or header
   const cookieStore = await cookies();
   const headerStore = await headers();

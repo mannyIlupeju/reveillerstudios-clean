@@ -96,7 +96,7 @@ export default function SideCart() {
           exit={isMobile ? { y: '100%' } : { x: '100%' }}
           transition={{ type: 'spring', bounce: 0.25, visualDuration: 0.28, ease: 'easeInOut' }}
           className={`
-            fixed z-30 shadow-lg flex flex-col glassBox transition
+            fixed z-30 shadow-lg flex flex-col glassBox transition overflow-x-hidden 
             ${isMobile ? 'bottom-[85px] left-50 w-full max-h-[60vh]' : 'top-0 right-0 xl:w-[35vw]  h-screen'}
             SideCart
           `}
