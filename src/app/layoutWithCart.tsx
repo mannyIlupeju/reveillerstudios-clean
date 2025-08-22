@@ -39,23 +39,6 @@ export default function LayoutWithCart({ children, detectedCountry }: Props) {
     }, [isCartOpen]);
 
 
-    useEffect(() => {
-      const handleResize = () => {
-        if (window.innerWidth >= 768 && isMenuOpen) {
-          toggleMenu();
-        }
-      };
-
-      window.addEventListener('resize', handleResize);
-
-      // Initial check on mount
-      handleResize();
-
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }, [isMenuOpen, toggleMenu]);
-
 
     useEffect(() => {
       if (pathname === '/cart') {

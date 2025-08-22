@@ -374,9 +374,8 @@ export default function ProdDetailsConfiguration({id, title, priceRange, variant
   return (
     <aside className='xl:absolute xl:z-1 xl:top-4 xl:text-lg xl:mx-0 mx-2 xl:ml-4 text-sm flex justify-items-start flex-col w-fit gap-5 font-bold cursor-pointer'>
       <div className='prodDetailsOptionsBox p-3 xl:text-lg lg:text-md text-sm flex gap-10 w-2xl rounded-lg border-black'>
-        <span className=''>{title}</span>
-        <span>{currency.code} {formatMoney(Number(productPrice), currency.code)}</span>
-
+        <p className='text-xl font-bold'>{title}</p>
+        <p className="flex items-center">{currency.code} {formatMoney(Number(productPrice), currency.code)}</p>
       </div>
 
 
@@ -454,7 +453,7 @@ export default function ProdDetailsConfiguration({id, title, priceRange, variant
           className={
             (quantityAvailable === null || quantityAvailable === 0 || isItemAddedToCart === 'loading' || !isButtonSelected || !sizeDetails.value
               ? 'prodDetailsOptionsBox'
-              : 'addToCartBox text-zinc-800 font-semibold text-xl cursor-pointer') + ' p-4 rounded-lg'
+              : 'addToCartBox text-zinc-800 font-semibold text-xl cursor-pointer') + ' p-4 rounded-lg text-lg font-semibold'
           }
           onClick={() => {
             if (
