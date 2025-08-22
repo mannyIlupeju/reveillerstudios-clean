@@ -8,6 +8,7 @@ type OgKind = "website" | "article" | "product";
 
 type BaseOgArgs = {
   title: string;
+  type: string;
   description?: string;
   path: string;              // e.g. "/", "/products/tee-1"
   image?: string | null;     // relative or absolute; falls back to DEFAULT_OG
