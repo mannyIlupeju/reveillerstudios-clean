@@ -1,45 +1,24 @@
-'use client'
+// app/page.tsx (Server Component)
+import { type Metadata } from "next";
+import { baseOg } from "../lib/seo";
+import HomeBodyClient from "./HomebodyClient";
+import { LoadingProvider, useLoading } from "@/Context/context/LoadingContext";
 
-import React from 'react'
-import Head from 'next/head'
-import Loading from '../components/Loading/Loading'
-import { useLoading} from '../Context/context/LoadingContext'
-import ThreeSketch from '../components/Canvas/ThreeSketch'
-import Newsletter from '../components/Newsletter/Newsletter'
-import Navigation from '@/components/Navigation/Navigation'
-import Footer from '@/components/Footer/Footer'
-
-
-
+export async function generateMetadata(): Promise<Metadata> {
+  return baseOg({
+    title: "Modern Streetwear & Creative Drops",
+    description:
+      "Discover limited drops, hoodies, tees, tanks, accessories and lookbooks made with premium fabrics. Shop the latest from Reveiller Studios.",
+    path: "/",
+    type: "website",
+  });
+}
 
 
 export default function Home() {
-  <Head>
-  <title>Home Page - Reveillerstudios</title>
-  <meta name="description" content="Welcome to Reveiller Studios, your go-to destination for a blend of hand-made and custom made clothing items and accessories." />
-  <meta name="keywords" content="clothing, fashion, punk, Reveiller Studios" />
-</Head>
-
-  const {loading, setIsLoading} = useLoading();
- 
   return (
-    <>
-     <Navigation/>
-      { !loading ? 
-          (<Loading/>)
-        :
-          ( 
-            <main className="flex items-center flex-col relative overflow-x-hidden min-h-200">
-            <ThreeSketch/>
-            <Newsletter/>
-            
-
-            </main>   
-           
-          )
-      }
-      <Footer/>
-    </>   
-   )
-
+    <LoadingProvider>
+      <HomeBodyClient />
+    </LoadingProvider>
+  );
 }

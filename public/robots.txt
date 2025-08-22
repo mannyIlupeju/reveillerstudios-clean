@@ -1,0 +1,11 @@
+# robots.txt for Reveiller Studios
+User-agent: *
+Disallow: /admin/
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /api/
+Disallow: /private/
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.reveillerstudios.com/sitemap.xml

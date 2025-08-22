@@ -35,6 +35,7 @@
     "motion": "^12.6.3",
     "next": "^15.1.6",
     "next-sanity": "^0.8.5",
+    "next-sitemap": "^4.2.3",
     "node-fetch": "^2.6.9",
     "react": "^18",
     "react-dom": "^18",
