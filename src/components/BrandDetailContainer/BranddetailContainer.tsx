@@ -12,7 +12,7 @@ export default function BranddetailContainer() {
   const handleCloseMenu = () => setOpenMenu(false);
 
   return (
-    <div className="bottom-[85px] left-50 w-full max-h-[60vh] fixed z-30 shadow-lg flex flex-col glassBox transition">
+    <div className="bottom-[85px] left-1/2 -translate-x-1/2 w-[95%] max-w-md max-h-[20vh] fixed z-30 shadow-lg flex flex-col glassBox transition">
         <div className="flex flex-col gap-4 p-4">
           <Link href="/gallery" onClick={handleCloseMenu}>Archive</Link>
           <Link href="/contact" onClick={handleCloseMenu}>Contact</Link>

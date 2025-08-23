@@ -27,7 +27,7 @@ export default function Footer() {
                     />
 
                     <span className="text-sm items-center">© {timeState.currentYear} Reveillerstudios</span>
-                    <span className="text-xs">Designed and Developed in-house by machnmb</span>
+                    <span className="text-xs">Designed and Developed in-house by mannybiz</span>
                 </div>
             </div>
 
@@ -43,10 +43,10 @@ export default function Footer() {
                     </div>
                         
 
-                    <div className="flex flex-col items-center text-md lg:gap-5">
+                    <div className="flex flex-col text-md lg:gap-5">
+                        <p className="xl:w-full">Connect with us!</p>
                         <div>
-                            <p className="xl:w-full">Connect with us!</p>
-                            <ul className="flex justify-center items-center flex-col xl:flex-row gap-2 mt-4">
+                            <ul className="flex  xl:flex-row gap-2 mt-4">
                             <li >
                                 <a href="https://tiktok.com/@reveillerstudios" target="_blank" rel="noopener noreferrer">
                                 <Image src="/images/tiktokpng.webp" alt="tiktok logo" width={60} height={60}/>
