@@ -44,7 +44,7 @@ export default function SideCart() {
       setCartId(data.cartId);
     }
     fetchCartId();
-  }, []);
+  }, [cartItems]);
 
   console.log(cartId);
 
