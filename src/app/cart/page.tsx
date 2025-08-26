@@ -29,9 +29,11 @@ export default async function CartPage() {
       return (
         <main className="flex flex-col gap-8 justify-center items-center h-screen">
           <p>Your cart is empty.</p>
+       
           <Link href="/shop" className="text-blue-600 underline">
             Continue Shopping
           </Link>
+       
         </main>
       );
     }
@@ -140,10 +142,12 @@ export default async function CartPage() {
     if (!cart) {
       return (
         <main className="flex flex-col gap-8 justify-center items-center h-screen">
-          <p>Your cart is empty.</p>
+          <p className="my-4">Your cart is empty.</p>
+          <div className="mt-4">
           <Link href="/shop" className="text-blue-600 underline">
             Continue Shopping
           </Link>
+        </div>
         </main>
       );
     }
