@@ -42,6 +42,35 @@ const ThreeSketch = () => {
     scene.add(camera);
     camera.position.z = 5;
 
+    const textureLoader = new THREE.TextureLoader()
+    const particleTexture = textureLoader.load('/textures/particles/8.png')
+
+      const particleCount = 5000;
+      const particlesGeometry = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+
+      for (let i = 0; i < particleCount * 3; i++) {
+        positions[i] = (Math.random() - 0.5) * 20; // Spread particles in a 20x20x20 cube
+      }
+
+      particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+      const particlesMaterial = new THREE.PointsMaterial({
+        color: 0xff0000,
+        size: 0.15,
+        transparent: true,
+        opacity: 0.7,
+      });
+
+      particlesMaterial.size = 0.1
+      particlesMaterial.sizeAttenuation = true 
+      particlesMaterial.alphaMap = particleTexture 
+      particlesMaterial.depthWrite = false
+      particlesMaterial.blending = THREE.AdditiveBlending
+
+      const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+      scene.add(particles);
+
 
   
     
@@ -78,7 +107,7 @@ const ThreeSketch = () => {
     }
 
     // Replace existing gltfLoader.load call with loadModel
-    loadModel("/models/GLTF/10rvr3dlogoMetal.gltf");
+    loadModel("/models/bloodredlargelow/GLTF/Asset 9rvr3dlogoMetal.gltf");
 
     const controls = new OrbitControls(camera, canvas);
    
@@ -128,6 +157,9 @@ const ThreeSketch = () => {
 
             // Rotate the model if it's loaded
             modelGroup.rotation.y += 0.01;
+
+             particles.rotation.y += 0.001;
+
             controls.update()
             renderer.render(scene, camera);
         };
@@ -138,6 +170,8 @@ const ThreeSketch = () => {
             window.removeEventListener("resize", handleResize);
         };
   }, [backgroundCanvasRef]);
+
+  
 
   return (
     <>   
