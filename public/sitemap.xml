@@ -1,25 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://www.reveillerstudios.com/</loc>
-  </url>
-  <url>
-    <loc>https://www.reveillerstudios.com/about</loc>
-  </url>
-  <url>
-    <loc>https://www.reveillerstudios.com/shop</loc>
-  </url>
-  <url>
-    <loc>https://www.reveillerstudios.com/contact</loc>
-  </url>
-  <url>
-    <loc>https://www.reveillerstudios.com/privacy</loc>
-  </url>
-  <url>Sitemap: https://www.reveillerstudios.com/sitemap.xml
-    <loc>https://www.reveillerstudios.com/terms</loc>
-  </url>
-  <url>
-    <loc>https://www.reveillerstudios.com/gallery</loc>
-  </url>
-  <!-- Add more URLs below as needed -->
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+</sitemapindex>
