@@ -1,141 +1,213 @@
-'use client'
+'use client';
 
-import React, { useState, useEffect, Suspense } from 'react'
-import Link from 'next/link'
-import ProdDetailsConfiguration from './prodDetailsConfig'
-import Prodrecommendations from '@/components/ProdRecommendations/ProdRecommendations'
-import { useGlobalContext } from '@/Context/GlobalContext'
-import Image from 'next/image'
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
-import Slider from "react-slick"
-import { useCurrency } from '../../Context/context/CurrencyContext'
-import { formatMoney } from '../../utils/formatMoney'
+import React, { useEffect, useMemo } from 'react';
+import Slider from 'react-slick';
+import dynamic from 'next/dynamic';
 
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
+// Load zoomer only on the client (prevents hydration/SSR issues in sliders)
+const InnerImageZoom = dynamic(() => import('react-inner-image-zoom'), { ssr: false });
+// Correct CSS import for the package
+import 'react-inner-image-zoom/lib/styles.min.css';
 
-const ProductDetails = ({ products, recommendations }: any) => {
-  
-  const { images, descriptionHtml, title, priceRange, variants, collections, totalInventory } = products
-  const {currency } = useCurrency();
-  const {allLoaded, setAllLoaded, loadedImages, setLoadedImages, handleImageLoad, recommendedItems, setRecommendedItems} = useGlobalContext();
+import ProdDetailsConfiguration from './prodDetailsConfig';
+import Prodrecommendations from '@/components/ProdRecommendations/ProdRecommendations';
+import { useGlobalContext } from '@/Context/GlobalContext';
+import { useCurrency } from '../../Context/context/CurrencyContext';
 
+type ImageEdge = { node: { originalSrc: string; altText?: string } };
+type Product = {
+  images: { edges: ImageEdge[] };
+  descriptionHtml: string;
+  title: string;
+  priceRange: any;
+  variants: any;
+  collections: any;
+  totalInventory: number;
+};
 
-  const imageUrl = images.edges.map((item: any) => item.node)
+type Props = {
+  products: Product;
+  recommendations: any[];
+};
 
+const ProductDetails = ({ products, recommendations }: Props) => {
+  const { images, descriptionHtml, title, priceRange, variants, collections } = products;
+  const { currency } = useCurrency();
 
+  const {
+    allLoaded,
+    setAllLoaded,
+    loadedImages,
+    setLoadedImages,
+    recommendedItems,
+    setRecommendedItems,
+  } = useGlobalContext();
+
+  const imageUrl = useMemo(() => images.edges.map((e) => e.node), [images.edges]);
+
+  // Preload images so your skeleton toggles correctly (replaces onLoadingComplete from <Image/>)
   useEffect(() => {
-    setRecommendedItems(recommendations)
-  }, [recommendations]);
+    if (!imageUrl?.length) return;
 
+    let isCancelled = false;
+
+    imageUrl.forEach((item, idx) => {
+      const img = new window.Image();
+      img.src = item.originalSrc;
+      img.onload = img.onerror = () => {
+        if (isCancelled) return;
+        setLoadedImages((prev: number[]) => (prev.includes(idx) ? prev : [...prev, idx]));
+      };
+    });
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [imageUrl, setLoadedImages]);
+
+  // When all images are loaded, fade content in
+  useEffect(() => {
+    if (imageUrl.length > 0 && loadedImages.length >= imageUrl.length) {
+      setAllLoaded(true);
+    }
+  }, [imageUrl.length, loadedImages.length, setAllLoaded]);
+
+  // Recommendations
+  useEffect(() => {
+    setRecommendedItems(recommendations);
+  }, [recommendations, setRecommendedItems]);
 
   const NextArrow = (props: any) => {
-    const { onClick } = props
+    const { onClick } = props;
     return (
-      <div
+      <button
+        aria-label="Next"
         onClick={onClick}
-        className="absolute z-10 right-4 top-1/2 transform -translate-y-1/2 cursor-pointer bg-black/50 text-white p-2 rounded-full hover:bg-black transition"
+        className="absolute z-10 right-4 top-1/2 -translate-y-1/2 cursor-pointer bg-black/50 text-white p-2 rounded-full hover:bg-black transition"
       >
         ▶
-      </div>
-    )
-  }
-  
+      </button>
+    );
+  };
+
   const PrevArrow = (props: any) => {
-    const { onClick } = props
+    const { onClick } = props;
     return (
-      <div
+      <button
+        aria-label="Previous"
         onClick={onClick}
-        className="absolute z-10 left-4 top-1/2 transform -translate-y-1/2 cursor-pointer bg-black/50 text-white p-2 rounded-full hover:bg-black transition"
+        className="absolute z-10 left-4 top-1/2 -translate-y-1/2 cursor-pointer bg-black/50 text-white p-2 rounded-full hover:bg-black transition"
       >
         ◀
-      </div>
-    )
-  }
+      </button>
+    );
+  };
 
-  const settings = {
-    className: "center",
-    centerMode: true,
-    centerPadding: "1rem",
-    infinite: true,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    speed: 500,
-    autoplay: true,
-    autoplaySpeed: 5000, // 5s pause between slides
-    cssEase: "linear",
-    nextArrow: <NextArrow />, // Will be hidden on mobile
-    prevArrow: <PrevArrow />, // Will be hidden on mobile
-    swipe: true,
-    swipeToSlide: true,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          infinite: true,
-          centerPadding: "25rem",
-          speed: 500,
-          autoplay: true,
-          autoplaySpeed: 5000,
-          cssEase: "linear",
-          arrows: false, // Hide arrows on tablet/mobile
+  const settings = useMemo(
+    () => ({
+      className: 'center',
+      centerMode: true,
+      centerPadding: '1rem',
+      infinite: true,
+      slidesToShow: 2,
+      slidesToScroll: 1,
+      speed: 500,
+      autoplay: true,
+      autoplaySpeed: 5000,
+      cssEase: 'linear',
+      nextArrow: <NextArrow />,
+      prevArrow: <PrevArrow />,
+      swipe: true,
+      swipeToSlide: true,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            infinite: true,
+            centerPadding: '4rem',
+            speed: 500,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            cssEase: 'linear',
+            arrows: false,
+          },
         },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 2,
-          initialSlide: Math.min(2, imageUrl.length - 1),
-          speed: 500,
-          autoplay: true,
-          centerPadding: "1px",
-          autoplaySpeed: 5000,
-          cssEase: "linear",
-          arrows: false, // Hide arrows on mobile
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            initialSlide: Math.min(1, imageUrl.length - 1),
+            speed: 500,
+            autoplay: true,
+            centerPadding: '0.5rem',
+            autoplaySpeed: 5000,
+            cssEase: 'linear',
+            arrows: false,
+          },
         },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          centerPadding: "1px",
-          speed: 500,
-          autoplay: true,
-          autoplaySpeed: 5000,
-          cssEase: "linear",
-          arrows: false, // Hide arrows on mobile
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            centerPadding: '0.5rem',
+            speed: 500,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            cssEase: 'linear',
+            arrows: false,
+          },
         },
-      },
-    ],
-  }
+      ],
+    }),
+    [imageUrl.length]
+  );
 
   return (
     <main className="overflow-x-hidden mb-24">
-      <div className={`relative transition-opacity duration-700 ${allLoaded ? 'opacity-100' : 'opacity-0'}`}>
+      <div
+        className={`relative transition-opacity duration-700 ${
+          allLoaded ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
         {/* Image Slider */}
-        <main className="mt-10 slider-container min-h-[200px]">
+        <section className="mt-10 slider-container min-h-[200px]">
           <Slider {...settings}>
-            {imageUrl.map((item: any, index: number) => (
-             <div key={index} className="w-fit flex justify-center">
-             {!loadedImages.includes(index) && (
-               <div className="w-[600px] h-fit bg-gray-300 animate-pulse rounded-md flex " />
-             )}
-             <Image
-               src={item.originalSrc}
-               alt={item.altText || 'Product image'}
-               width={500}
-               height={500}
-               className={`${!loadedImages.includes(index) ? 'hidden' : ''}`}
-               onLoadingComplete={() => handleImageLoad(index, imageUrl)}
-             />
-           </div>
-            ))}
+            {imageUrl.map((item, index) => {
+              const isLoaded = loadedImages.includes(index);
+              return (
+                <div key={index} className="w-fit flex justify-center">
+                  {/* Skeleton */}
+                  {!isLoaded && (
+                    <div className="w-full h-full bg-gray-300 animate-pulse rounded-md" />
+                  )}
+
+                  {/* Zoomable image */}
+                  <div className={isLoaded ? 'block' : 'hidden'}>
+                    {/* Container sizing helps the zoomer layout predictably */}
+                    <div className="w-full aspect-square">
+                      <InnerImageZoom
+                        src={item.originalSrc}
+                        zoomSrc={item.originalSrc} // supply higher-res if available
+                        alt={item.altText || 'Product image'}
+                        zoomType="hover" // or "click"
+                        zoomPreload
+                        fullscreenOnMobile
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </Slider>
-        </main>
+        </section>
 
         {/* Product Configuration */}
         <ProdDetailsConfiguration
@@ -153,9 +225,8 @@ const ProductDetails = ({ products, recommendations }: any) => {
         <h2 className="text-xl font-semibold my-8">Recommended Products</h2>
         <Prodrecommendations recommendations={recommendedItems} />
       </div>
-     
     </main>
-  )
-}
+  );
+};
 
-export default ProductDetails
+export default ProductDetails;
