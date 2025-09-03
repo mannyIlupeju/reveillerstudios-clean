@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const PinchZoomImage = dynamic(() => import('../../components/PinchZoomImage/PinchZoomImage.tsx'), { ssr: false });
+const PinchZoomImage = dynamic(() => import('../../components/PinchZoomImage/PinchZoomImage'), { ssr: false });
 
 import ProdDetailsConfiguration from './prodDetailsConfig';
 import Prodrecommendations from '@/components/ProdRecommendations/ProdRecommendations';
