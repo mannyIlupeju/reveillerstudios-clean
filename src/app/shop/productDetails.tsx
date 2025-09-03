@@ -24,6 +24,7 @@ type Product = {
   title: string;
   priceRange: any;
   variants: any;
+  alt: string
   collections: any;
   totalInventory: number;
 };
@@ -195,7 +196,6 @@ const ProductDetails = ({ products, recommendations }: Props) => {
                       <InnerImageZoom
                         src={item.originalSrc}
                         zoomSrc={item.originalSrc} // supply higher-res if available
-                        alt={item.altText || 'Product image'}
                         zoomType="hover" // or "click"
                         zoomPreload
                         fullscreenOnMobile
