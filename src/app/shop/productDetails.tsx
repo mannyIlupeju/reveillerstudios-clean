@@ -186,20 +186,20 @@ const ProductDetails = ({ products, recommendations }: Props) => {
                 <div key={index} className="w-fit flex justify-center">
                   {/* Skeleton */}
                   {!isLoaded && (
-                    <div className="w-full h-full bg-gray-300 animate-pulse rounded-md" />
+                    <div className="w-[500px] h-screen bg-gray-300 animate-pulse rounded-md" />
                   )}
 
                   {/* Zoomable image */}
                   <div className={isLoaded ? 'block' : 'hidden'}>
                     {/* Container sizing helps the zoomer layout predictably */}
-                    <div className="w-full aspect-square">
+                    <div className=" aspect-square">
                       <InnerImageZoom
                         src={item.originalSrc}
                         zoomSrc={item.originalSrc} // supply higher-res if available
                         zoomType="hover" // or "click"
                         zoomPreload
                         fullscreenOnMobile
-                        className="w-full h-full object-contain"
+                        className=" object-contain"
                       />
                     </div>
                   </div>
