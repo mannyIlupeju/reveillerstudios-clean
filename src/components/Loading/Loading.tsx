@@ -7,18 +7,18 @@ import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 
 const Loading: React.FC = () => {
-  const { isLoading } = useLoading();
+  const { loading } = useLoading();
   const containerRef = useRef(null);
 
   useGSAP(() => {
-    if (isLoading) {
+    if (loading) {
       gsap.fromTo(containerRef.current, { opacity: 0 }, { opacity: 1, duration: 0.3 });
     } else {
       gsap.to(containerRef.current, { opacity: 0, duration: 0.3 });
     }
-  }, [isLoading]);
+  }, [loading]);
 
-  if (!isLoading) return null;
+  if (!loading) return null;
 
   return (
     <div ref={containerRef} className="fixed inset-0 z-[9999] grid place-items-center bg-white">
