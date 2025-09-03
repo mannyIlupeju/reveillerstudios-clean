@@ -1,4 +1,5 @@
 'use client';
+
 import React from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
@@ -7,16 +8,23 @@ type Props = {
   alt?: string;
   isTouch: boolean;
   onScaleChange?: (scale: number) => void;
+  touchAction?: React.CSSProperties['touchAction']; // allow parent to toggle swipe vs pinch
 };
 
-export default function PinchZoomImage({ src, alt, isTouch, onScaleChange }: Props) {
+export default function PinchZoomImage({
+  src,
+  alt,
+  isTouch,
+  onScaleChange,
+  touchAction,
+}: Props) {
   return (
     <TransformWrapper
       minScale={1}
       maxScale={4}
-      wheel={{ disabled: isTouch, step: 0.2 }}     // desktop wheel zoom on, mobile off
-      doubleClick={{ disabled: isTouch }}          // desktop dbl-click zoom on, mobile off
-      pinch={{ disabled: !isTouch }}               // mobile pinch on, desktop off
+      wheel={{ disabled: isTouch, step: 0.2 }}     // desktop: wheel zoom
+      doubleClick={{ disabled: isTouch }}          // desktop: double-click zoom
+      pinch={{ disabled: !isTouch }}               // mobile: pinch zoom
       panning={{ velocityDisabled: true }}
       onTransformed={({ state }) => onScaleChange?.(state.scale)}
     >
@@ -24,7 +32,8 @@ export default function PinchZoomImage({ src, alt, isTouch, onScaleChange }: Pro
         wrapperStyle={{
           width: '100%',
           height: '100%',
-          touchAction: 'none', // let pinch take precedence over the slider
+          // when zoomed on touch we usually want 'none' to prevent carousel swipe
+          touchAction: touchAction ?? 'auto',
         }}
       >
         <img
