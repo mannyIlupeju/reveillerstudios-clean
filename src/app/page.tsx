@@ -6,7 +6,7 @@ import { LoadingProvider, useLoading } from "@/Context/context/LoadingContext";
 
 export async function generateMetadata(): Promise<Metadata> {
   return baseOg({
-    title: "Modern Streetwear & Creative Drops",
+    title: "Reclaim, Refine, Reveiller",
     description:
       "Discover limited drops, hoodies, tees, tanks, accessories and lookbooks made with premium fabrics. Shop the latest from Reveiller Studios.",
     path: "/",

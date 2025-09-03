@@ -1,24 +1,36 @@
-'use client'
+'use client';
 
-import React, {useState, useEffect, useRef} from 'react'
-import Image from 'next/image'
-import { useLoading } from '@/Context/context/LoadingContext'
-import { gsap } from "gsap"
-import { useGSAP } from '@gsap/react'
+import React, { useEffect, useRef } from 'react';
+import Image from 'next/image';
+import { useLoading } from '@/Context/context/LoadingContext';
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 
+const Loading: React.FC = () => {
+  const { isLoading } = useLoading();
+  const containerRef = useRef(null);
 
+  useGSAP(() => {
+    if (isLoading) {
+      gsap.fromTo(containerRef.current, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+    } else {
+      gsap.to(containerRef.current, { opacity: 0, duration: 0.3 });
+    }
+  }, [isLoading]);
 
-const Loading:React.FC = () => {
-    const {setIsLoading} = useLoading()
-    
+  if (!isLoading) return null;
+
   return (
-    <>
-        <div className="mt-20">
-            <Image src='/images/footerlogo.png' alt="Loading artwork of Reveillerstudios logo" width={200} height={200} className="translate-y-1/2"/>
-        </div>
-   </>
- 
-    )
-}
+    <div ref={containerRef} className="fixed inset-0 z-[9999] grid place-items-center bg-white">
+      <Image
+        src="/images/footerlogo.png"
+        alt="Loading artwork of Reveillerstudios logo"
+        width={200}
+        height={200}
+        className="animate-pulse"
+      />
+    </div>
+  );
+};
 
 export default Loading;

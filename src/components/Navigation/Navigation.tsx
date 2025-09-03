@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import LinkWithLoader from '../LinkWithLoader/LinkWithLoader';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useSelector } from 'react-redux';
@@ -73,7 +74,7 @@ const NavLink = ({ name, href }: NavLinkType) => {
           </span>
         </a>
       ) : (
-        <Link href={href}>
+        <LinkWithLoader href={href}>
           <span
             className={`${underlineVisible || isActive ? 'scale-x-100' : 'scale-x-0'}`}
             data-original-text={linkName}
@@ -82,7 +83,7 @@ const NavLink = ({ name, href }: NavLinkType) => {
           >
             {linkName}
           </span>
-        </Link>
+        </LinkWithLoader>
       )}
     </div>
   );
@@ -104,11 +105,7 @@ const Navigation = () => {
 
   const router = useRouter()
 
-  
-  // const navLinks = ['Shop', 'About'].map((name) => ({
-  //   name,
-  //   href: `/${name.toLowerCase().replace(/\s+/g, '')}`,
-  // }));
+
 
   const navLinks = [
     { name: 'Shop', href: '/shop' },
