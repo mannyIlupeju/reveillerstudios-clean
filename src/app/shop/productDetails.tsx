@@ -3,7 +3,8 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import Slider from 'react-slick';
 import dynamic from 'next/dynamic';
-
+import { FaAngleLeft } from "react-icons/fa";
+import { FaAngleRight } from "react-icons/fa";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -188,22 +189,22 @@ const ProductDetails = ({ products, recommendations }: Props) => {
           aria-label="Product image carousel"
         >
           {/* Overlay navigation buttons */}
-          <button
+          <FaAngleLeft 
             type="button"
+            size={40}
             onClick={goPrev}
             aria-label="Previous image"
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-30 bg-black/60 text-white rounded-full px-3 py-2 hover:bg-black focus:outline-none focus:ring"
-          >
-            ◀
-          </button>
-          <button
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-30 "
+          />
+          
+          <FaAngleRight
             type="button"
+            size={40}
             onClick={goNext}
             aria-label="Next image"
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-30 bg-black/60 text-white rounded-full px-3 py-2 hover:bg-black focus:outline-none focus:ring"
-          >
-            ▶
-          </button>
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-30 "
+          />
+    
 
           <Slider ref={sliderRef} {...settings}>
             {imageNodes.map((item, index) => {
@@ -217,7 +218,7 @@ const ProductDetails = ({ products, recommendations }: Props) => {
 
                   {/* Image (pinch/zoom aware) */}
                   <div className={isLoaded ? 'block' : 'hidden'}>
-                    <div className="w-full max-w-[500px] aspect-square">
+                    <div className="w-full h-[600px] max-w-[600px] aspect-square">
                       <PinchZoomImage
                         src={item.originalSrc}
                         alt={item.altText}
