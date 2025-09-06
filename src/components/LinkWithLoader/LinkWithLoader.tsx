@@ -17,10 +17,13 @@ export default function LinkWithLoader({ href, children, className }: Props) {
   const { setIsLoading, loading } = useLoading();
 
   const gsapRef = React.useRef<HTMLAnchorElement | null>(null);
-  useGSAP(gsapRef, {
-    opacity: loading ? 0.5 : 1,
-    pointerEvents: loading ? 'none' : 'auto',
-  });
+  useGSAP(() => {
+
+    gsap.to(gsapRef.current, {
+      opacity: loading ? 0.5 : 1,
+      pointerEvents: loading ? 'none' : 'auto',
+    });
+  }, [loading])
 
   const handleClick = (e: React.MouseEvent) => {
     setIsLoading(true);
@@ -45,7 +48,7 @@ export default function LinkWithLoader({ href, children, className }: Props) {
 
 
   return (
-    <a href={href} onClick={handleClick} className={className}>
+    <a ref={gsapRef}href={href} onClick={handleClick} className={className}>
       {children}
     </a>
   );
