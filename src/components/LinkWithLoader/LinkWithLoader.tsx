@@ -2,6 +2,9 @@
 import { useRouter } from 'next/navigation';
 import { useLoading } from '@/Context/context/LoadingContext';
 import React from 'react';
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
+
 
 type Props = {
   href: string;
@@ -11,17 +14,35 @@ type Props = {
 
 export default function LinkWithLoader({ href, children, className }: Props) {
   const router = useRouter();
-  const { setIsLoading } = useLoading();
+  const { setIsLoading, loading } = useLoading();
+
+  const gsapRef = React.useRef<HTMLAnchorElement | null>(null);
+  useGSAP(gsapRef, {
+    opacity: loading ? 0.5 : 1,
+    pointerEvents: loading ? 'none' : 'auto',
+  });
 
   const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
     setIsLoading(true);
+    console.log("loading started...")
+    e.preventDefault();
+
+   
+
 
     // Delay to allow animation
     setTimeout(() => {
       router.push(href);
+      console.log("loading finished...")
+      console.log("navigated to ", href)
     }, 4000); // You can tweak this
+
+
+     
+
   };
+
+
 
   return (
     <a href={href} onClick={handleClick} className={className}>

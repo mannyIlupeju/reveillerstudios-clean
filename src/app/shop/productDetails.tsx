@@ -213,18 +213,19 @@ const ProductDetails = ({ products, recommendations }: Props) => {
                 <div key={index} className="w-fit flex justify-center">
                   {/* Skeleton */}
                   {!isLoaded && (
-                    <div className="w-full max-w-[500px] aspect-square bg-gray-300 animate-pulse rounded-md" />
+                    <div className="w-full max-w-[500px] h-screen aspect-square bg-gray-300 animate-pulse rounded-md" />
                   )}
 
                   {/* Image (pinch/zoom aware) */}
                   <div className={isLoaded ? 'block' : 'hidden'}>
-                    <div className="w-full h-[600px] max-w-[600px] aspect-square">
+                    <div className="w-full max-w-[600px] aspect-1/2 mb-10">
                       <PinchZoomImage
                         src={item.originalSrc}
                         alt={item.altText}
                         isTouch={isTouch}
                         onScaleChange={(s) => setZoomScale(s)}
                         touchAction={isTouch && zoomScale > 1 ? 'none' : 'auto'}
+                        className="h-screen"
                       />
                     </div>
                   </div>

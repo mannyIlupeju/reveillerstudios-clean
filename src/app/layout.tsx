@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
-
 import AppProviders from './Providers/AppProviders';
 import LayoutWithCart from './layoutWithCart';
 import CookieConsentModal from '../components/CookieConsentModal/cookieConsent';
