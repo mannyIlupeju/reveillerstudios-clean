@@ -1,10 +1,12 @@
 'use client';
-import { useRouter } from 'next/navigation';
-import { useLoading } from '@/Context/context/LoadingContext';
-import React from 'react';
-import { gsap } from 'gsap';
-import { useGSAP } from '@gsap/react';
 
+import React from 'react';
+import { useRouter, usePathname } from 'next/navigation';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { useLoading } from '@/Context/context/LoadingContext';
+
+gsap.registerPlugin(useGSAP);
 
 type Props = {
   href: string;
@@ -14,41 +16,45 @@ type Props = {
 
 export default function LinkWithLoader({ href, children, className }: Props) {
   const router = useRouter();
-  const { setIsLoading, loading } = useLoading();
+  const pathname = usePathname();
+  const { loading, setIsLoading } = useLoading();
 
-  const gsapRef = React.useRef<HTMLAnchorElement | null>(null);
-  useGSAP(() => {
+  const elRef = React.useRef<HTMLAnchorElement>(null);
 
-    gsap.to(gsapRef.current, {
-      opacity: loading ? 0.5 : 1,
-      pointerEvents: loading ? 'none' : 'auto',
-    });
-  }, [loading])
+  // Animate only the visual part (opacity)
+  useGSAP(
+    () => {
+      if (!elRef.current) return;
+      gsap.to(elRef.current, {
+        opacity: loading ? 0.5 : 1,
+        duration: 0.3,
+        ease: 'power2.out',
+        overwrite: 'auto',
+      });
+      // Directly set pointer-events based on loading
+      gsap.set(elRef.current, { pointerEvents: loading ? 'none' : 'auto' });
+    },
+    { dependencies: [loading], scope: elRef }
+  );
+
+  // CRITICAL: reset loading when the route changes
+  React.useEffect(() => {
+    setIsLoading(false);
+  }, [pathname, setIsLoading]);
 
   const handleClick = (e: React.MouseEvent) => {
-    setIsLoading(true);
-    console.log("loading started...")
     e.preventDefault();
+    setIsLoading(true);
 
-   
-
-
-    // Delay to allow animation
+    // Run any transition, then navigate
+    // If you really want a delay, keep it short
     setTimeout(() => {
       router.push(href);
-      console.log("loading finished...")
-      console.log("navigated to ", href)
-    }, 4000); // You can tweak this
-
-
-     
-
+    }, 400); // shorter feels snappier; avoid 4000ms
   };
 
-
-
   return (
-    <a ref={gsapRef}href={href} onClick={handleClick} className={className}>
+    <a ref={elRef} href={href} onClick={handleClick} className={className}>
       {children}
     </a>
   );

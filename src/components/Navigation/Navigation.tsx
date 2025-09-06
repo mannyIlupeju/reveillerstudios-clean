@@ -74,7 +74,7 @@ const NavLink = ({ name, href }: NavLinkType) => {
           </span>
         </a>
       ) : (
-        <LinkWithLoader href={href}>
+        <Link href={href}>
           <span
             className={`${underlineVisible || isActive ? 'scale-x-100' : 'scale-x-0'}`}
             data-original-text={linkName}
@@ -83,7 +83,7 @@ const NavLink = ({ name, href }: NavLinkType) => {
           >
             {linkName}
           </span>
-        </LinkWithLoader>
+        </Link>
       )}
     </div>
   );
