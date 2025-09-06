@@ -225,7 +225,6 @@ const ProductDetails = ({ products, recommendations }: Props) => {
                         isTouch={isTouch}
                         onScaleChange={(s) => setZoomScale(s)}
                         touchAction={isTouch && zoomScale > 1 ? 'none' : 'auto'}
-                        className="h-screen"
                       />
                     </div>
                   </div>
