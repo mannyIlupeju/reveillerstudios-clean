@@ -15,9 +15,9 @@ export default function Footer() {
 
   return (
      
-        <div className="flex flex-col-reverse lg:flex-row xl:gap-4 gap-10 justify-between pb-24 text-zinc-100 text-lg p-12 w-screen footer-section ">
+        <div className="flex flex-col-reverse lg:flex-row xl:gap-4 gap-10 justify-between pb-24 text-zinc-100 text-lg p-4 w-screen footer-section my-12">
             <div className="flex flex-col md:flex-row gap-10 mt-4">
-                <div className="flex flex-col lg:gap-2 w-[400px] h-[250px]">
+                <div className="flex flex-col lg:gap-2 h-[250px]">
                     <Image 
                     src='/images/footerlogo.png'
                     alt="footer logo"
@@ -26,11 +26,13 @@ export default function Footer() {
                     priority
                     />
 
-                    <span className="text-sm">All Contents of this website are the property of Reveiller studios.<br></br> No Part of this site, including all text and images may be reproduced in any form without the prior written consent of Reveiller studios</span>
-                    <span className="text-sm">Registered Company in Canada and North America 1001293176 </span>
-                    <span className="text-sm items-center">© {timeState.currentYear} Reveillerstudios</span>
-                    <br></br>
-                    <span className="text-xs">Designed and Developed in-house by mannybiz</span>
+                    <div className="text-sm md:text-xs md:w-[500px] p-2">
+                        <span>All Contents of this website are the property of Reveillerstudios.<br></br> No Part of this site, including all text and images may be reproduced in any form without the prior written consent of Reveiller studios.</span>
+                        <p>Registered Company in Canada and North America 1001293176 </p>
+                        <span className="items-center">© {timeState.currentYear} Reveillerstudios</span>
+                    </div>
+                        <br></br>
+                        <span className="text-xs">Designed and Developed in-house by mannybiz</span>
                 </div>
             </div>
 
