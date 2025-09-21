@@ -1,6 +1,14 @@
 import Script from 'next/script';
 import React from 'react';
 import Head from 'next/head';
+import type { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Privacy page',
+  description: 'Shop our new releases out now'
+};
+
 
 export default function Privacy() {
 

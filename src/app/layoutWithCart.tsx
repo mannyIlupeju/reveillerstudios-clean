@@ -50,8 +50,7 @@ export default function LayoutWithCart({ children, detectedCountry }: Props) {
 
   return (
     <>
-      <div 
-        className="box3 items-center cursor-pointer xl:text-md text-xs sticky z-20">
+      <div className="box3 items-center cursor-pointer xl:text-md text-xs sticky z-20">
         <p className="ticker-text">
         Get 20% off your first order when you subscribe! Free shipping on items over 200$ !
         </p>
@@ -71,7 +70,6 @@ export default function LayoutWithCart({ children, detectedCountry }: Props) {
         ></div>
       )}
 
-      {/* <Navigation /> */}
 
       <CountrySwitchModal detectedCountry={detectedCountry} /> 
 
@@ -79,12 +77,11 @@ export default function LayoutWithCart({ children, detectedCountry }: Props) {
         {children}
       </main>
     
-      {/* <Footer /> */}
 
       <SideNav/>
     
       {isMenuOpen && !isCartOpen && <BranddetailContainer/> }
       {!isCartPage && <SideCart />}    
-</>
+    </>
   )
 }

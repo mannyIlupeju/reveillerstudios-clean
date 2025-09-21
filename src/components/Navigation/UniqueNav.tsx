@@ -109,7 +109,7 @@ const Navigation = () => {
 
   const navLinks = [
     { name: 'Shop', href: '/shop' },
-    { name: 'About', href: 'https://instagram.com/reveillerstudios' },
+    // { name: 'About', href: 'https://instagram.com/reveillerstudios' },
     { name: 'Archive', href: '/gallery' },
   ];
 

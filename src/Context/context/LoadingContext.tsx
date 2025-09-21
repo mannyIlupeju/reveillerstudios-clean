@@ -1,50 +1,41 @@
-'use client'
+'use client';
 
-import React, {useState, createContext, useContext, ReactNode} from 'react'
+import React, {
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  ReactNode,
+  Dispatch,
+  SetStateAction,
+} from 'react';
 
-type LoadState = {
-  load: boolean
+type LoadingContextValue = {
+  loading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+};
 
-}
+const LoadingContext = createContext<LoadingContextValue | undefined>(undefined);
 
-type MyContextType = {
-    loading: boolean;
-    setIsLoading:(loading:boolean) => void;
-}
+type LoadingProviderProps = { children: ReactNode };
 
-const LoadingContext = createContext<MyContextType | null>({
-    loading: true,
-    setIsLoading: () => {}
-});
+export const LoadingProvider = ({ children }: LoadingProviderProps) => {
+  // Start false so links aren’t disabled on first paint
+  const [loading, setLoading] = useState(false);
 
-type MyComponentProps = {
-    children: ReactNode;
-}
+  // Stable value; prevents unnecessary renders
+  const value = useMemo<LoadingContextValue>(
+    () => ({ loading, setIsLoading: setLoading }),
+    [loading]
+  );
 
-export const LoadingProvider: React.FC<MyComponentProps> = ({ children }: {children:ReactNode})=> {
-    const [loading, setIsLoading] = useState<LoadState>({load:true})
+  return <LoadingContext.Provider value={value}>{children}</LoadingContext.Provider>;
+};
 
-      const handleSetLoading = (loading: boolean) => {
-            setIsLoading({ load: loading });
-        };
-
-    
-
-    return (
-        <LoadingContext.Provider value={{
-            loading: loading.load, 
-            setIsLoading:handleSetLoading}}
-        >
-         {children}
-        </LoadingContext.Provider>
-    )
-
-}
-
-export const useLoading = () => {
-    const context = useContext(LoadingContext);
-    if(!context) {
-        throw new Error ('useLoading must be used within a LoadingProvider');
-    }
-    return context; 
-}
+export const useLoading = (): LoadingContextValue => {
+  const ctx = useContext(LoadingContext);
+  if (!ctx) {
+    throw new Error('useLoading must be used within a LoadingProvider');
+  }
+  return ctx;
+};

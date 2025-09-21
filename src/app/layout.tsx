@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { headers } from 'next/headers';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
@@ -49,10 +49,10 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport = {
-  width: 'device-width',
-  initialScale: 1,
-};
+// export const viewport: Viewport = {
+//   width: 'device-width',
+//   initialScale: 1,
+// };
 
 export default async function RootLayout({
   children,

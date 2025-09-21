@@ -13,7 +13,7 @@ export default function HomeBodyClient() {
   return (
     <>
       <Navigation />
-      {!loading ? (
+      {loading ? (
         <Loading />
       ) : (
         <main className="flex items-center flex-col relative overflow-x-hidden min-h-200">

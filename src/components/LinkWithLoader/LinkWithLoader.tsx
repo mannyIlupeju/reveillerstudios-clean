@@ -39,15 +39,18 @@ export default function LinkWithLoader({ href, children, className }: Props) {
 
   // CRITICAL: reset loading when the route changes
   React.useEffect(() => {
-    setIsLoading(false);
+    setIsLoading(prev => (prev ? false: prev));
   }, [pathname, setIsLoading]);
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
+    if (href === pathname) {
+    // No navigation → don’t enter loading
+     return;
+    }
+
     setIsLoading(true);
 
-    // Run any transition, then navigate
-    // If you really want a delay, keep it short
     setTimeout(() => {
       router.push(href);
     }, 400); // shorter feels snappier; avoid 4000ms

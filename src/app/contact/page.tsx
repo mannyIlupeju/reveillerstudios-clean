@@ -1,7 +1,14 @@
 import React from 'react'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Shop page',
+  description: 'Shop our new releases out now'
+};
 
 
-function page() {
+
+function Page() {
   return (
     <section className="bg-gray-200">
     <main className="bg-gray-200 flex items-center flex-col h-[80vw] my-20 ">
@@ -19,4 +26,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

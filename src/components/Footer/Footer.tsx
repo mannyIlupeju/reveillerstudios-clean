@@ -17,7 +17,7 @@ export default function Footer() {
      
         <div className="flex flex-col-reverse lg:flex-row xl:gap-4 gap-10 justify-between pb-24 text-zinc-100 text-lg p-12 w-screen footer-section ">
             <div className="flex flex-col md:flex-row gap-10 mt-4">
-                <div className="flex flex-col lg:gap-2 w-[250px] h-[250px]">
+                <div className="flex flex-col lg:gap-2 w-[400px] h-[250px]">
                     <Image 
                     src='/images/footerlogo.png'
                     alt="footer logo"
@@ -26,15 +26,19 @@ export default function Footer() {
                     priority
                     />
 
+                    <span className="text-sm">All Contents of this website are the property of Reveiller studios.<br></br> No Part of this site, including all text and images may be reproduced in any form without the prior written consent of Reveiller studios</span>
+                    <span className="text-sm">Registered Company in Canada and North America 1001293176 </span>
                     <span className="text-sm items-center">© {timeState.currentYear} Reveillerstudios</span>
+                    <br></br>
                     <span className="text-xs">Designed and Developed in-house by mannybiz</span>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 2xl:grid-cols-3 lg:grid-cols-2 gap-8 w-max mt-4">
                     <div className="flex flex-col xl:gap-5 xl:text-lg text-sm gap-2">
+                        <Link href='/privacy'className="footer-link">About</Link>
                         <Link href='/privacy'className="footer-link">Privacy policy</Link>
-                        <Link href='/terms'className="footer-link">Terms and Condition</Link>
+                        <Link href='/terms'className="footer-link">Terms and Conditions</Link>
                     </div> 
 
                      <div className="flex flex-col xl:text-lg text-sm xl:gap-5 gap-2">
@@ -46,20 +50,20 @@ export default function Footer() {
                     <div className="flex flex-col text-md lg:gap-5">
                         <p className="xl:w-full">Connect with us!</p>
                         <div>
-                            <ul className="flex  xl:flex-row gap-2 mt-4">
+                            <ul className="flex  xl:flex-row gap-2">
                             <li >
                                 <a href="https://tiktok.com/@reveillerstudios" target="_blank" rel="noopener noreferrer">
-                                <Image src="/images/tiktokpng.webp" alt="tiktok logo" width={60} height={60}/>
+                                Tiktok
                                 </a>
                             </li>
                             <li>
                                 <a href="https://instagram.com/reveillerstudios" target="_blank" rel="noopener noreferrer ">
-                                <Image src="/images/instagramlogo.webp" alt="instagram logo" width={60} height={60}/>
+                                Instagram
                                 </a>
                             </li>
                             <li>
                                 <a href='https://youtube.com/@reveillerstudios7473?si=IscpXCCkSra0prU4' target="_blank" rel="noopener noreferrer"   >
-                                <Image src="/images/youtube3.png" alt="pinterest logo" width={70} height={60}/>
+                                Youtube
                                 </a>
                             </li>
                             </ul>

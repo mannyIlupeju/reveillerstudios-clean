@@ -16,7 +16,7 @@ export default function BranddetailContainer() {
         <div className="flex flex-col gap-4 p-4">
           <Link href="/gallery" onClick={handleCloseMenu}>Archive</Link>
           <Link href="/contact" onClick={handleCloseMenu}>Contact</Link>
-          <Link href="/about" onClick={handleCloseMenu}>About</Link>
+          {/* <Link href="/about" onClick={handleCloseMenu}>About</Link> */}
         </div>
     </div>
   )

@@ -9,6 +9,8 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
+
+
 // Define the Page Component
 export default async function Page({ params }: PageProps): Promise<JSX.Element> {
   const { slug } = await params;

@@ -74,7 +74,7 @@ const NavLink = ({ name, href }: NavLinkType) => {
           </span>
         </a>
       ) : (
-        <Link href={href}>
+        <LinkWithLoader href={href}>
           <span
             className={`${underlineVisible || isActive ? 'scale-x-100' : 'scale-x-0'}`}
             data-original-text={linkName}
@@ -83,7 +83,7 @@ const NavLink = ({ name, href }: NavLinkType) => {
           >
             {linkName}
           </span>
-        </Link>
+        </LinkWithLoader>
       )}
     </div>
   );
@@ -109,7 +109,7 @@ const Navigation = () => {
 
   const navLinks = [
     { name: 'Shop', href: '/shop' },
-    { name: 'About', href: 'https://instagram.com/reveillerstudios' },
+    // { name: 'About', href: '/about' },
     { name: 'Archive', href: '/gallery' },
   ];
 
