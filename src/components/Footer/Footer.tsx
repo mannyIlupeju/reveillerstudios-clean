@@ -37,7 +37,7 @@ export default function Footer() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 2xl:grid-cols-3 lg:grid-cols-2 gap-4 mt-4">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-4">
                     <div className="flex flex-col xl:gap-5 xl:text-lg text-sm gap-2">
                         <Link href='/privacy'className="footer-link">About</Link>
                         <Link href='/privacy'className="footer-link">Privacy policy</Link>
