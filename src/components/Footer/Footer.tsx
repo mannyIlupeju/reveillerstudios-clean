@@ -15,8 +15,9 @@ export default function Footer() {
 
   return (
      
-        <div className="flex flex-col-reverse lg:flex-row xl:gap-4 gap-10 justify-between pb-24 text-zinc-100 text-lg p-4 w-screen footer-section my-12">
-            <div className="flex flex-col md:flex-row gap-10 mt-4">
+        <main>
+            <section className="flex flex-col-reverse lg:flex-row xl:gap-4 gap-10 justify-between pb-24 text-zinc-100 text-lg p-4 w-screen footer-section">
+            <div className="flex flex-col md:flex-row gap-10 mt-4 mb-32">
                 <div className="flex flex-col lg:gap-2 h-[250px]">
                     <Image 
                     src='/images/footerlogo.png'
@@ -77,7 +78,8 @@ export default function Footer() {
          
 
           <NewsletterFooter/>
-        </div>
+         </section>
+        </main>
    
      
 
