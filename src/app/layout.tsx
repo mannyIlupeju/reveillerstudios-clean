@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Reveiller Studios',
     description:
-      'Reclaim, Reframe, Reveiller. Tailored garments, limited runs, and quality fabrics.',
+      "Reimagining fashion through rebellion and refinement. Destroy, reconstruct, reveal.<br></br> Our tailored garments fuse quality fabrics, limited runs, and raw design energy into wearable art. Built for those who resist the ordinary.",
     images: ['https://www.reveillerstudios.com/og.png'],
   },
   robots: {
