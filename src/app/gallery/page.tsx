@@ -8,7 +8,7 @@ import React from 'react';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Archive',
+  title: 'Gallery / Archive',
   description: 'Explore our archive of creative works and projects.',
 };
 

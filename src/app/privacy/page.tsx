@@ -6,7 +6,6 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Privacy page',
-  description: 'Shop our new releases out now'
 };
 
 

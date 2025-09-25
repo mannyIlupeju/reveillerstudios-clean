@@ -14,14 +14,14 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.reveillerstudios.com'),
   title: {
-    default: 'Reveiller Studios',
-    template: '%s | Reveiller Studios',
+    default: 'Reveillerstudios',
+    template: '%s | Reveillerstudios',
   },
   description:
-    'Reclaim, Reframe, Reveiller. Tailored garments, limited runs, and quality fabrics.',
+    "Reimagining fashion through rebellion and refinement. Destroy, reconstruct, reveal.<br></br> Our tailored garments fuse quality fabrics, limited runs, and raw design energy into wearable art. Built for those who resist the ordinary.",
   openGraph: {
     type: 'website',
-    siteName: 'Reveiller Studios',
+    siteName: 'Reveillerstudios',
     url: 'https://www.reveillerstudios.com',
     images: [
       {

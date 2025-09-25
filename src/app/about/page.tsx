@@ -5,9 +5,9 @@ import Link from "next/link";
 import TeamInfo from "./teamInfo/page";
 
 export const metadata: Metadata = {
-  title: "About Reveiller Studios | Toronto Streetwear Brand",
+  title: "About",
   description:
-    "Reveiller Studios is a Toronto streetwear label creating limited-run garments with quality fabrics and precise fits. Learn our story, values, and process.",
+    "Reveiller Studios is a multifaceted fashion label creating limited-run garments with quality fabrics and precise fits. Learn our story, values, and process.",
   alternates: { canonical: "https://www.reveillerstudios.com/about" },
   openGraph: {
     type: "website",
@@ -111,8 +111,8 @@ export default function AboutPage() {
        <br></br>
         Call it fashion — we call it revolt.<br></br>
         In seams, in shapes, in every cult bolt.<br></br>
-        We aren’t chasing hype or elite validation,<br></br>
-        We’re bleeding heritage and fierce reclamation.
+        We aren`t chasing hype or elite validation,<br></br>
+        We`re bleeding heritage and fierce reclamation.
        </p>
 
         <br></br>
@@ -134,7 +134,7 @@ export default function AboutPage() {
 
        <p>
         From the margin to the mainstage,
-        We don’t ask to belong;
+        We don`t ask to belong;
         We cut our own page.
        </p>
        </div>

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { TEAM } from "../team-data";
 import Link from 'next/link'
 import { Metadata } from "next";
+import InteractiveAsciiScene from "@/components/Canvas/AboutCanvas";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
