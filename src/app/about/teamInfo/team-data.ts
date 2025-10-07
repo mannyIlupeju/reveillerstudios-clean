@@ -11,7 +11,7 @@ export const TEAM: TeamMember[] = [
   {
     slug: "mabel-conteh",
     name: "Mabel Conteh",
-    role: "Creative Director & Stylist",
+    role: "Styling, Creative Direction & Operations",
     bio: "Leads design direction and garment development across collections.",
     image: "/images/mabel-ascii-art.png",
     socials: [{ label: "Instagram", url: "https://instagram.com/…" }],
@@ -19,7 +19,7 @@ export const TEAM: TeamMember[] = [
   {
     slug: "tony-igelenyah",
     name: "Tony Igelenyah",
-    role: "Operations Lead",
+    role: "Manufacturing & Operations",
     bio: "Runs production ops, supplier relations, and drop logistics.",
     image: "/images/ttt-ascii-art.png",
   },
