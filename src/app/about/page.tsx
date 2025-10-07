@@ -57,7 +57,7 @@ export default function AboutPage() {
   };
 
   return (
-    <main className="mx-auto px-6 space-y-10">
+    <main className="mx-auto p-8 space-y-10">
       <Script
         id="org-jsonld"
         type="application/ld+json"
@@ -73,8 +73,17 @@ export default function AboutPage() {
         <h1 className="text-4xl font-semibold">About</h1>
       </header>
 
-     <section className="flex md:flex-row flex-col gap-20">
-      <div className=" p-8 text-zinc-700  font-serif leading-relaxed tracking-wide space-y-4">
+      <section className="space-y-3">
+        <h2 className="text-2xl font-medium">The Story</h2>
+        <p>
+          Originally starting as an artbrand in 2016, born out of a need to represent a voice that did not exist in Fashion at the time<br></br> Reveillerstudios was a platform for young artists to find their creativity and build their skills early in their careers.<br></br> 
+          From creating art wearables, creative directing and styling projects for other brands<br></br> The brand has fully matured into a full functioning fashion brand taking all of these experiences to create a new platform that showcases our creative identity.<br></br>
+          On our third iteration, our goal is to be more direct and cut through the noise with creative projects that embodies our belief system and identity.
+        </p>
+      </section>
+
+     <section className="flex md:flex-row flex-col mt-20 gap-20">
+      <div className=" text-zinc-700 font-serif leading-relaxed tracking-wide space-y-4">
         <h1 className="text-2xl font-bold uppercase">
           To the Ones Who Never Fit
         </h1>
@@ -143,14 +152,7 @@ export default function AboutPage() {
       <TeamInfo/>
     </section>
 
-      <section className="space-y-3">
-        <h2 className="text-2xl font-medium">The Story</h2>
-        <p>
-          Originally starting as an artbrand in 2016, born out of a need to represent a voice that did not exist in Fashion at the time<br></br> Reveillerstudios was a platform for young artists to find their creativity and build their skills early in their careers.<br></br> 
-          From creating art wearables, creative directing and styling projects for other brands<br></br> The brand has fully matured into a full functioning fashion brand taking all of these experiences to create a new platform that showcases our creative identity.<br></br>
-          On our third iteration, our goal is to be more direct and cut through the noise with creative projects that embodies our belief system and identity.
-        </p>
-      </section>
+    
 
      
     
