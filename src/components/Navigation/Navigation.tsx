@@ -114,8 +114,6 @@ const Navigation = () => {
   ];
 
 
-
-
   const cartState = useSelector((state: RootState) => state.cart)
   const cartQty = Number(cartState.totalQuantity)
   
@@ -137,7 +135,7 @@ const Navigation = () => {
             />
           </div>
 
-          <div className="w-[400px] h-[100px] flex items-center justify-center glass">
+          <div className="w-[400px] h-[100px] flex items-center justify-center">
             <Image src="/images/REVEILLERSTUDIOS.svg" alt="rvr logo" width={400} height={200} className="mx-auto logo" onClick={() => router.push('/')} />
           </div>
          
@@ -172,7 +170,7 @@ const Navigation = () => {
       {/* Responsive menu */}
       <div className="xl:hidden flex flex-col h-fit cursor-pointer ">
         <div className="flex justify-items-start h-fit" onClick={() => router.push('/') }>
-        <div className="w-[400px] h-[100px] flex items-center justify-center glass">
+        <div className="w-[400px] h-[100px] flex items-center justify-center">
             <Image src="/images/REVEILLERSTUDIOS.svg" alt="rvr logo" width={400} height={200} className="mx-auto logo" />
           </div>
         </div>
