@@ -5,12 +5,13 @@ import About from "@/components/About/About";
 
 type PageProps = { params: { slug: string } };
 
-export function generateStaticParams() {
+// (Optional) helps with build-time typing
+export function generateStaticParams(): { slug: string }[] {
   return TEAM.map((m) => ({ slug: m.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps){
-  const {slug} = params;
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = params; // ✅ no await
   const member = TEAM.find((m) => m.slug === slug);
   if (!member) return { title: "Team Member Not Found" };
   return {
@@ -19,15 +20,9 @@ export async function generateMetadata({ params }: PageProps){
   };
 }
 
-
-
-
-export default async function TeamMemberPage({ params }: PageProps) {
- 
-  const { slug } = await params;              // ✅ await
+export default function TeamMemberPage({ params }: PageProps) { // ✅ no async needed
+  const { slug } = params; // ✅ plain object
   const member = TEAM.find((m) => m.slug === slug);
-  if (!member) return notFound();      
-
-  // ✅ pass the resolved member down
+  if (!member) return notFound();
   return <About member={member} />;
 }
