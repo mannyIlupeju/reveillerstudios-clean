@@ -7,10 +7,10 @@ import { TEAM } from "./team-data";
 export default function TeamInfo() {
 
   return (
-    <div className="p-8 flex flex-col gap-8">
+    <div className="p-8 flex flex-col gap-4">
       <h2 className="text-3xl font-semibold">Core Team</h2>
 
-      <div className="flex flex-wrap md:flex-nowrap md:gap-10">
+      <div className="flex flex-wrap gap-4">
         {TEAM.map((m) => (
           <Link
             key={m.slug}
@@ -21,8 +21,8 @@ export default function TeamInfo() {
               <Image
                 src={m.image}
                 alt={`${m.name} portrait`}
-                width={400}
-                height={400}
+                width={300}
+                height={300}
                 className="rounded-2xl object-cover"
                 priority={false}
               />
