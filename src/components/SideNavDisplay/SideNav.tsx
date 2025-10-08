@@ -48,7 +48,8 @@ const SideNav = () => {
                     </button>
                     <Link href='/' className={linkClass('/')}>Home</Link>
                     <Link href='/shop' className={linkClass('/shop')}>Shop</Link>
-                    {/* <a href="https://instagram.com/reveillerstudios" target="_blank" rel="noopener noreferrer" className={linkClass('/about')}>About</a> */}
+                    <Link href='/about' className={linkClass('/about')}>About</Link>
+                   
                     {/* <Link href='/journal' className={linkClass('/journal')}>Journal</Link> */}
 
                     <div className="flex items-center" >

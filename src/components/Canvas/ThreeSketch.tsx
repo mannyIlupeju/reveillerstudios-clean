@@ -222,21 +222,11 @@ const ThreeSketch = () => {
           transition={{ duration: 1, ease: 'easeIn' }}
           className="box box2 flex justify-center items-center relative cursor-grab p-4"
           onTouchStart={() => setActiveBox('box2')}
-          onTouchEnd={e => {
-            setActiveBox(null);
-            // Only open on touch if not a mouse event
-            if (e && e.type === 'touchend') {
-              window.open('https://instagram.com/reveillerstudios', '_blank', 'noopener,noreferrer');
-            }
-          }}
+          onTouchEnd={()=> setActiveBox(null)}
           onMouseDown={() => setActiveBox('box2')}
-          onMouseUp={e => {
-            setActiveBox(null);
-            // Only open on mouse up if not a touch event
-            if (e && e.type === 'mouseup' && !('ontouchstart' in window)) {
-              window.open('https://instagram.com/reveillerstudios', '_blank', 'noopener,noreferrer');
-            }
-          }}
+          onMouseUp={() => setActiveBox('box2')}
+          onClick={() => router.push('/about')}
+
           // Remove onClick to prevent double trigger
         >
           <video 

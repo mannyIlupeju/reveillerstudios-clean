@@ -109,7 +109,7 @@ const Navigation = () => {
 
   const navLinks = [
     { name: 'Shop', href: '/shop' },
-    // { name: 'About', href: 'https://instagram.com/reveillerstudios' },
+    { name: 'About', href: '/about' },
     { name: 'Archive', href: '/gallery' },
   ];
 
@@ -137,7 +137,7 @@ const Navigation = () => {
             />
           </div>
 
-         <div className="w-[400px] h-[100px] flex items-center justify-center">
+          <div className="w-[400px] h-[100px] flex items-center justify-center">
             <Image src="/images/REVEILLERSTUDIOS.svg" alt="rvr logo" width={400} height={200} className="mx-auto logo" onClick={() => router.push('/')} />
           </div>
          

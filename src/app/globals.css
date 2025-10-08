@@ -427,7 +427,7 @@ font-family: 'Satoshi-Medium', sans-serif;
 }
 
 .prodDetailsOptionsBox {
-  background: rgba(255, 255, 255, 0.677);
+  background: rgba(99, 240, 11, 0.1);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10.4px);
@@ -435,20 +435,6 @@ font-family: 'Satoshi-Medium', sans-serif;
   border: 1px solid rgba(255, 255, 255, 0.3);
   
 }
-
-/* .addToCartBox {
-  background: rgba(17, 215, 62, 0.68);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5.4px);
-  -webkit-backdrop-filter: blur(5.4px);
-  border: 1px solid rgba(17, 215, 62, 0.24);
-}
-
-.addToCartBox:hover {
- -webkit-box-shadow: 4px 5px 15px 3px #000000; 
-box-shadow: 4px 5px 15px 3px #000000;
-} */
 
 
 

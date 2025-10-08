@@ -69,21 +69,19 @@ export default function AboutPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsLd) }}
       />
 
-      <header className="my-8 flex justify-center">
-        <h1 className="text-4xl font-semibold">About</h1>
-      </header>
-
-      <section className="space-y-3">
+  
+       <div className="xl:p-12 flex flex-col gap-24">
+       <section className="space-y-3">
         <h2 className="text-2xl font-medium">The Story</h2>
         <p>
-          Originally starting as an artbrand in 2016, born out of a need to represent a voice that did not exist in Fashion at the time<br></br> Reveillerstudios was a platform for young artists to find their creativity and build their skills early in their careers.<br></br> 
+          A creative anger. Originally starting as an artbrand in 2016, born out of a need to make clothes and represent an ideal that was not perceived in the zeitgeist at the time <br></br> A brand that weaved politics and fashion together.<br></br> Reveillerstudios was a platform for young artists to find their creativity and build their skills early in their careers.<br></br> 
           From creating art wearables, creative directing and styling projects for other brands<br></br> The brand has fully matured into a full functioning fashion brand taking all of these experiences to create a new platform that showcases our creative identity.<br></br>
-          On our third iteration, our goal is to be more direct and cut through the noise with creative projects that embodies our belief system and identity.
+          On our second iteration, our goal is still to be loud, direct and cut through the noise with creative projects that embodies our belief system and identity.
         </p>
       </section>
 
-     <section className="flex md:flex-row flex-col mt-20 gap-20">
-      <div className=" text-zinc-700 font-serif leading-relaxed tracking-wide space-y-4">
+      <section className="flex md:flex-row flex-col gap-20">
+      <div className=" text-zinc-700  font-serif leading-relaxed tracking-wide space-y-4">
         <h1 className="text-2xl font-bold uppercase">
           To the Ones Who Never Fit
         </h1>
@@ -151,15 +149,16 @@ export default function AboutPage() {
 
       <TeamInfo/>
     </section>
+    </div>
 
-    
+     
 
      
     
 
 
-      <nav className="pt-6 border-t flex justify-end mt-8">
-        <div className="flex flex-wrap gap-4">
+      <nav className="pt-6 border-t flex justify-end">
+        <div className="flex flex-wrap gap-4 my-4">
           <Link href="/shop" className="underline">Shop the latest</Link>
           <Link href="/contact" className="underline">Contact</Link>
          

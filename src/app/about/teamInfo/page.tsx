@@ -10,7 +10,7 @@ export default function TeamInfo() {
     <div className="p-8 flex flex-col gap-8">
       <h2 className="text-3xl font-semibold">Core Team</h2>
 
-      <div className="flex flex-wrap gap-10">
+      <div className="flex flex-wrap md:flex-nowrap md:gap-10">
         {TEAM.map((m) => (
           <Link
             key={m.slug}
