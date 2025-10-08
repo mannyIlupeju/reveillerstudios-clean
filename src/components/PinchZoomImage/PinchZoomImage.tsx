@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image'
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
 type Props = {
@@ -36,7 +37,7 @@ export default function PinchZoomImage({
           touchAction: touchAction ?? 'auto',
         }}
       >
-        <img
+        <Image
           src={src}
           alt={alt || 'Product image'}
           className="w-full h-full object-contain select-none"

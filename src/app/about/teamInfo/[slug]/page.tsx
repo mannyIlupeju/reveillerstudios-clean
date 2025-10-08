@@ -9,8 +9,8 @@ export function generateStaticParams() {
   return TEAM.map((m) => ({ slug: m.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const {slug} = await params;
+export async function generateMetadata({ params }: PageProps){
+  const {slug} = params;
   const member = TEAM.find((m) => m.slug === slug);
   if (!member) return { title: "Team Member Not Found" };
   return {
