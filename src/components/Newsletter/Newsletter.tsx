@@ -81,6 +81,15 @@ export default function Newsletter() {
         <main className="fixed z-10 -translate-y-[3rem] text-zinc-900 inset-0 flex items-center justify-center xl:top-22 top-32 p-4">
           <div className="max-w-sm md:w-fit subscriptionBox p-5 flex flex-col justify-center gap-5 text-sm  ">
             <div className="flex justify-end button">
+              <button 
+                aria-label="Close"
+                onClick={() => setShowModal(false)}
+                onTouchStart={e => e.currentTarget.classList.add('rotate-45')}
+                onTouchEnd={e => e.currentTarget.classList.remove('rotate-45')}
+                onMouseDown={e => e.currentTarget.classList.add('rotate-45')}
+                onMouseUp={e => e.currentTarget.classList.remove('rotate-45')}
+              >
+          
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -88,15 +97,12 @@ export default function Newsletter() {
                 strokeWidth="1.5"
                 stroke="currentColor"
                 className="size-6 transition-transform duration-300 w-10 h-10 cursor-pointer rotate-0 hover:rotate-45 active:rotate-45 focus:rotate-45"
-                onClick={() => setShowModal(false)}
-                onTouchStart={e => e.currentTarget.classList.add('rotate-45')}
-                onTouchEnd={e => e.currentTarget.classList.remove('rotate-45')}
-                onMouseDown={e => e.currentTarget.classList.add('rotate-45')}
-                onMouseUp={e => e.currentTarget.classList.remove('rotate-45')}
+                
                 tabIndex={0}
-              >
+                >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
               </svg>
+              </button>
             </div>
             <div className="">
               <h1 className="text-xl items-center">Join the RVS community</h1>
