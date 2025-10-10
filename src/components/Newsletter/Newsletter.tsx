@@ -36,6 +36,7 @@ export default function Newsletter() {
 
   // Restore submitRegistration function
   async function submitRegistration(e?: React.FormEvent) {
+    console.log('clicked')
     if (e) e.preventDefault();
     if (!userData.termsAgreed) {
       alert("Please agree to the Terms of Service & Privacy Policy");
@@ -78,8 +79,8 @@ export default function Newsletter() {
         <ConfirmationMessage status={status} errorMsg={errorMsg} onClose={handleCloseConfirmation}/>
       )}
       {showModal && !showConfirmation && (
-        <main className="fixed z-10 -translate-y-[3rem] text-zinc-900 inset-0 flex items-center justify-center xl:top-22 top-32 p-4">
-          <div className="max-w-sm md:w-fit subscriptionBox p-5 flex flex-col justify-center gap-5 text-sm  ">
+        <main className="fixed md:-translate-y-[6rem] z-20 translate-y-[1rem] text-zinc-900 inset-0 flex items-center justify-center md:top-22 top-6 p-4">
+          <div className="max-w-sm md:w-fit subscriptionBox p-5 flex flex-col justify-center md:gap-5 gap-2 md:text-md text-sm ">
             <div className="flex justify-end button">
               <button 
                 aria-label="Close"
@@ -96,7 +97,7 @@ export default function Newsletter() {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="size-6 transition-transform duration-300 w-10 h-10 cursor-pointer rotate-0 hover:rotate-45 active:rotate-45 focus:rotate-45"
+                className="size-6 transition-transform duration-300 md:w-10 md:h-10  cursor-pointer rotate-0 hover:rotate-45 active:rotate-45 focus:rotate-45"
                 
                 tabIndex={0}
                 >
@@ -105,10 +106,10 @@ export default function Newsletter() {
               </button>
             </div>
             <div className="">
-              <h1 className="text-xl items-center">Join the RVS community</h1>
+              <h1 className="md:text-xl text-md items-center">Join the RVS community</h1>
               <p>Get 20% off your first order and be the first to know about exclusive drops, restocks and special offers - straight to your inbox</p>
             </div>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col md:gap-4 gap-2">
               <input
                 type="name"
                 id="fullName"
@@ -127,7 +128,7 @@ export default function Newsletter() {
                 onChange={e => setUserData({ ...userData, email: e.target.value })}
                 required
                 placeholder='Email Address'
-                className="p-2 border border-zinc-400 rounded-md text-zinc-800"
+                className="p-2 border md:text-md text-sm border-zinc-400 rounded-md text-zinc-800"
               />
             </div>
             <form className="flex flex-col gap-" onSubmit={submitRegistration}>
@@ -139,12 +140,13 @@ export default function Newsletter() {
                   checked={userData.requestUpdate}
                   name="requestUpdate"
                   value="requestUpdate"
+                  className="md:text-md text-sm"
                 />
-                <label htmlFor="continueUpdate">
+                <label htmlFor="continueUpdate" >
                   Keep me updated with the latest news and best offers
                 </label>
               </div>
-              <div className="flex justify-start gap-2">
+              <div className="flex justify-start gap-2 md:text-md text-sm">
                 <input
                   type="checkbox"
                   id="termsAgreed"
@@ -160,7 +162,11 @@ export default function Newsletter() {
 
               
             </form>
-              <button className="text-xl signUp-button mt-12" type="submit" disabled={status === "loading"}>
+              <button 
+              onClick={submitRegistration}
+              className="md:text-xl signUp-button mt-12 text-sm" 
+              type="submit" 
+              disabled={status === "loading"}>
                 {status === "loading" ? "Submitting…" : "Subscribe"}
               </button>
               

@@ -17,8 +17,8 @@ export default function HomeBodyClient() {
         <Loading />
       ) : (
         <main className="flex items-center flex-col relative overflow-x-hidden min-h-200">
-          <ThreeSketch />
           <Newsletter />
+          <ThreeSketch />
         </main>
       )}
       <Footer />
