@@ -42,6 +42,8 @@ export default function PinchZoomImage({
           alt={alt || 'Product image'}
           className="w-full h-full object-contain select-none"
           draggable={false}
+          width={600}
+          height={600}
         />
       </TransformComponent>
     </TransformWrapper>
