@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
+import Image from 'next/image';
 import { headers } from 'next/headers';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
@@ -72,10 +73,11 @@ export default async function RootLayout({
           bgClass="bg-black text-white"
           splash={
             <div className="flex flex-col items-center justify-center">
-              <img
+              <Image
                 src="/images/rvrspinninglogo-unscreen2.gif"
                 alt="Loading Reveiller"
                 className="w-96 h-96"
+      
               />
               <p className="mt-4 text-xl font-medium animate-pulse">
                 Welcome to Reveiller Studios
