@@ -103,143 +103,222 @@ export default function Privacy() {
           </div>
         </section>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">The Rights of Users Based on the General Data Protection Regulation (GDPR)</h2>
-          <div className="text-gray-700 space-y-4">
-            <p>Users may exercise certain rights regarding their Data processed by the Owner.</p>
-            <p>In particular, Users have the right to do the following, to the extent permitted by law:</p>
-            <ul className="list-disc pl-6 space-y-2">
-              <li><strong>Withdraw their consent at any time.</strong> Users have the right to withdraw consent where they have previously given their consent to the processing of their Personal Data.</li>
-              <li><strong>Object to processing of their Data.</strong> Users have the right to object to the processing of their Data if the processing is carried out on a legal basis other than consent.</li>
-              <li><strong>Access their Data.</strong> Users have the right to learn if Data is being processed by the Owner, obtain disclosure regarding certain aspects of the processing and obtain a copy of the Data undergoing processing.</li>
-              <li><strong>Verify and seek rectification.</strong> Users have the right to verify the accuracy of their Data and ask for it to be updated or corrected.</li>
-              <li><strong>Restrict the processing of their Data.</strong> Users have the right to restrict the processing of their Data. In this case, the Owner will not process their Data for any purpose other than storing it.</li>
-              <li><strong>Have their Personal Data deleted or otherwise removed.</strong> Users have the right to obtain the erasure of their Data from the Owner.</li>
-              <li><strong>Receive their Data and have it transferred to another controller.</strong> Users have the right to receive their Data in a structured, commonly used and machine readable format and, if technically feasible, to have it transmitted to another controller without any hindrance.</li>
-              <li><strong>Lodge a complaint.</strong> Users have the right to bring a claim before their competent data protection authority.</li>
-            </ul>
-            <p>Users are also entitled to learn about the legal basis for Data transfers abroad including to any international organization governed by public international law or set up by two or more countries, such as the UN, and about the security measures taken by the Owner to safeguard their Data.</p>
-          </div>
+       <section className="mb-8">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+        Definitions and Legal References
+      </h2>
 
-          <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">Details About the Right to Object to Processing</h3>
-          <div className="text-gray-700 space-y-4">
-            <p>Where Personal Data is processed for a public interest, in the exercise of an official authority vested in the Owner or for the purposes of the legitimate interests pursued by the Owner, Users may object to such processing by providing a ground related to their particular situation to justify the objection.</p>
-            <p>Users must know that, however, should their Personal Data be processed for direct marketing purposes, they can object to that processing at any time, free of charge and without providing any justification. Where the User objects to processing for direct marketing purposes, the Personal Data will no longer be processed for such purposes. To learn whether the Owner is processing Personal Data for direct marketing purposes, Users may refer to the relevant sections of this document.</p>
-          </div>
+      <div className="text-gray-700 space-y-6">
 
-          <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">How to Exercise These Rights</h3>
-          <p className="text-gray-700">Any requests to exercise User rights can be directed to the Owner through the contact details provided in this document. Such requests are free of charge and will be answered by the Owner as early as possible and always within one month, providing Users with the information required by law. Any rectification or erasure of Personal Data or restriction of processing will be communicated by the Owner to each recipient, if any, to whom the Personal Data has been disclosed unless this proves impossible or involves disproportionate effort. At the Users request, the Owner will inform them about those recipients.</p>
-        </section>
+        <div>
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">
+            Personal Data (or Data)
+          </h3>
+          <p>
+            Any information that directly, indirectly, or in connection with other
+            information - including a personal identification number - allows
+            for the identification or identifiability of a natural person.
+          </p>
+        </div>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Additional Information About Data Collection and Processing</h2>
-          
-          <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">Legal Action</h3>
-          <div className="text-gray-700 space-y-4">
-            <p>The Users Personal Data may be used for legal purposes by the Owner in Court or in the stages leading to possible legal action arising from improper use of this Application or the related Services.</p>
-            <p>The User declares to be aware that the Owner may be required to reveal personal data upon request of public authorities.</p>
-          </div>
+        <div>
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">
+            Usage Data
+          </h3>
+          <p>
+            Information collected automatically through this Application (or
+            third-party services employed in this Application), which can include:
+            the IP addresses or domain names of the computers utilized by the Users
+            who use this Application, the URI addresses (Uniform Resource
+            Identifier), the time of the request, the method used to submit the
+            request to the server, the size of the file received in response, the
+            numerical code indicating the status of the server's answer (successful
+            outcome, error, etc.), the country of origin, the features of the
+            browser and the operating system used by the User, the various time
+            details per visit (e.g., time spent on each page within the
+            Application), the details about the path followed within the
+            Application, and other parameters about the device operating system and
+            the User's IT environment.
+          </p>
+        </div>
 
-          <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">Additional Information About Users Personal Data</h3>
-          <p className="text-gray-700">In addition to the information contained in this privacy policy, this Application may provide the User with additional and contextual information concerning particular Services or the collection and processing of Personal Data upon request.</p>
+        <div>
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">User</h3>
+          <p>
+            The individual using this Application who, unless otherwise specified,
+            coincides with the Data Subject.
+          </p>
+        </div>
 
-          <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">System Logs and Maintenance</h3>
-          <p className="text-gray-700">For operation and maintenance purposes, this Application and any third-party services may collect files that record interaction with this Application (System logs) or use other Personal Data (such as the IP Address) for this purpose.</p>
+        <div>
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">
+            Data Subject
+          </h3>
+          <p>The natural person to whom the Personal Data refers.</p>
+        </div>
 
-          <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">Information Not Contained in This Policy</h3>
-          <p className="text-gray-700">More details concerning the collection or processing of Personal Data may be requested from the Owner at any time. Please see the contact information at the beginning of this document.</p>
-        </section>
+        <div>
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">
+            Data Processor (or Processor)
+          </h3>
+          <p>
+            The natural or legal person, public authority, agency or other body
+            which processes Personal Data on behalf of the Controller, as described
+            in this privacy policy.
+          </p>
+        </div>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Changes to This Privacy Policy</h2>
-          <div className="text-gray-700 space-y-4">
-            <p>The Owner reserves the right to make changes to this privacy policy at any time by notifying its Users on this page and possibly within this Application and/or - as far as technically and legally feasible - sending a notice to Users via any contact information available to the Owner. It is strongly recommended to check this page often, referring to the date of the last modification listed at the bottom.</p>
-            <p>Should the changes affect processing activities performed on the basis of the Users consent, the Owner shall collect new consent from the User, where required.</p>
-          </div>
-        </section>
+        <div>
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">
+            Data Controller (or Owner)
+          </h3>
+          <p>
+            The natural or legal person, public authority, agency or other body
+            which, alone or jointly with others, determines the purposes and means
+            of the processing of Personal Data, including the security measures
+            concerning the operation and use of this Application. The Data
+            Controller, unless otherwise specified, is the Owner of this Application.
+          </p>
+        </div>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Definitions and Legal References</h2>
-          
-          <div className="text-gray-700 space-y-6">
-            <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Personal Data (or Data)</h3>
-              <p>Any information that directly, indirectly, or in connection with other information — including a personal identification number — allows for the identification or identifiability of a natural person.</p>
-            </div>
+        <div>
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">
+            This Application
+          </h3>
+          <p>
+            The means by which the Personal Data of the User is collected and
+            processed.
+          </p>
+        </div>
 
-            <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Usage Data</h3>
-              <p>Information collected automatically through this Application (or third-party services employed in this Application), which can include: the IP addresses or domain names of the computers utilized by the Users who use this Application, the URI addresses (Uniform Resource Identifier), the time of the request, the method utilized to submit the request to the server, the size of the file received in response, the numerical code indicating the status of the servers answer (successful outcome, error, etc.), the country of origin, the features of the browser and the operating system utilized by the User, the various time details per visit (e.g., the time spent on each page within the Application) and the details about the path followed within the Application with special reference to the sequence of pages visited, and other parameters about the device operating system and/or the Users IT environment.</p>
-            </div>
+        <div>
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">Service</h3>
+          <p>
+            The service provided by this Application as described in the relative
+            terms (if available) and on this site/application.
+          </p>
+        </div>
 
-            <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">User</h3>
-              <p>The individual using this Application who, unless otherwise specified, coincides with the Data Subject.</p>
-            </div>
+        <div>
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">
+            European Union (or EU)
+          </h3>
+          <p>
+            Unless otherwise specified, all references made within this document to
+            the European Union include all current member states of the European
+            Union and the European Economic Area.
+          </p>
+        </div>
 
-            <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Data Subject</h3>
-              <p>The natural person to whom the Personal Data refers.</p>
-            </div>
+      </div>
+    </section>
 
-            <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Data Processor (or Processor)</h3>
-              <p>The natural or legal person, public authority, agency or other body which processes Personal Data on behalf of the Controller, as described in this privacy policy.</p>
-            </div>
+    <section className="mb-8 pb-4 border-t pt-6">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+        Legal Information
+      </h2>
+      <p className="text-gray-700">
+        This privacy policy relates solely to this Application, if not stated
+        otherwise within this document.
+      </p>
+    </section>
 
-            <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Data Controller (or Owner)</h3>
-              <p>The natural or legal person, public authority, agency or other body which, alone or jointly with others, determines the purposes and means of the processing of Personal Data, including the security measures concerning the operation and use of this Application. The Data Controller, unless otherwise specified, is the Owner of this Application.</p>
-            </div>
+    <section className="mb-8 pb-4 border-t pt-6">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+        Mobile Terms of Service
+      </h2>
 
-            <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">This Application</h3>
-              <p>The means by which the Personal Data of the User is collected and processed.</p>
-            </div>
+      <p className="text-sm text-gray-600 mb-4">
+        Reveiller Studios<br />
+        Last updated: Nov. 18, 2025
+      </p>
 
-            <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Service</h3>
-              <p>The service provided by this Application as described in the relative terms (if available) and on this site/application.</p>
-            </div>
+      <div className="text-gray-700 space-y-4">
 
-            <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">European Union (or EU)</h3>
-              <p>Unless otherwise specified, all references made within this document to the European Union include all current member states to the European Union and the European Economic Area.</p>
-            </div>
-          </div>
-        </section>
+        <p>
+          The Reveiller Studios mobile message service (the 'Service') is operated
+          by Reveiller Studios ('Reveiller Studios', 'we', or 'us'). Your use of the
+          Service constitutes your agreement to these terms and conditions ('Mobile
+          Terms'). We may modify or cancel the Service or any of its features
+          without notice. To the extent permitted by applicable law, we may also
+          modify these Mobile Terms at any time, and your continued use of the
+          Service following the effective date of any such changes shall constitute
+          your acceptance of such changes.
+        </p>
 
-        <section className="mb-8 pb-4 border-t pt-6">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Legal Information</h2>
-          <p className="text-gray-700">This privacy policy relates solely to this Application, if not stated otherwise within this document.</p>
-        </section>
+        <p>
+          By consenting to Reveiller Studios SMS/text messaging service, you agree
+          to receive recurring SMS/text messages from and on behalf of Reveiller
+          Studios through your wireless provider to the mobile number you provided,
+          even if your mobile number is registered on any state or federal Do Not
+          Call list. Text messages may be sent using an automatic telephone dialing
+          system or other technology. Promotional messages may include promotions,
+          specials, and other marketing offers (e.g., cart reminders).
+        </p>
 
-        <section className="mb-8 pb-4 border-t pt-6">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Mobile Terms of Service</h2>
-          <p className="text-sm text-gray-600 mb-4">Reveiller Studios<br />Last updated: Nov. 18, 2025</p>
-          
-          <div className="text-gray-700 space-y-4">
-            <p>The Reveiller Studios mobile message service (the 'Service') is operated by Reveiller Studios ('Reveiller Studios', 'we', or 'us'). Your use of the Service constitutes your agreement to these terms and conditions ('Mobile Terms'). We may modify or cancel the Service or any of its features without notice. To the extent permitted by applicable law, we may also modify these Mobile Terms at any time and your continued use of the Service following the effective date of any such changes shall constitute your acceptance of such changes.</p>
-            
-            <p>By consenting to Reveiller Studioss SMS/text messaging service, you agree to receive recurring SMS/text messages from and on behalf of Reveiller Studios through your wireless provider to the mobile number you provided, even if your mobile number is registered on any state or federal Do Not Call list. Text messages may be sent using an automatic telephone dialing system or other technology. Promotional messages may include promotions, specials, and other marketing offers (e.g., cart reminders).</p>
-            
-            <p>You understand that you do not have to sign up for this program in order to make any purchases, and your consent is not a condition of any purchase with Reveiller Studios. Your participation in this program is completely voluntary.</p>
-            
-            <p>We do not charge for the Service, but you are responsible for all charges and fees associated with text messaging imposed by your wireless provider. Message frequency varies. Message and data rates may apply. Check your mobile plan and contact your wireless provider for details. You are solely responsible for all charges related to SMS/text messages, including charges from your wireless provider.</p>
-            
-            <p>You may opt-out of the Service at any time. Text the single keyword command <strong>STOP</strong> to <a href="tel:+18335694052" className="text-blue-600 hover:underline">+1 (833) 569-4052</a> or click the unsubscribe link (where available) in any text message to cancel. You will receive a one-time opt-out confirmation text message. No further messages will be sent to your mobile device, unless initiated by you. If you have subscribed to other Reveiller Studios mobile message programs and wish to cancel, except where applicable law requires otherwise, you will need to opt out separately from those programs by following the instructions provided in their respective mobile terms.</p>
-            
-            <p>For Service support or assistance, text <strong>HELP</strong> to <a href="tel:+18335694052" className="text-blue-600 hover:underline">+1 (833) 569-4052</a> or email <a href="mailto:reveillerstudios@outlook.com" className="text-blue-600 hover:underline">reveillerstudios@outlook.com</a>.</p>
-            
-            <p>We may change any short code or telephone number we use to operate the Service at any time and will notify you of these changes. You acknowledge that any messages, including any STOP or HELP requests, you send to a short code or telephone number we have changed may not be received and we will not be responsible for honoring requests made in such messages.</p>
-            
-            <p>The wireless carriers supported by the Service are not liable for delayed or undelivered messages. You agree to provide us with a valid mobile number. If you get a new mobile number, you will need to sign up for the program with your new number.</p>
-            
-            <p>To the extent permitted by applicable law, you agree that we will not be liable for failed, delayed, or misdirected delivery of any information sent through the Service, any errors in such information, and/or any action you may or may not take in reliance on the information or Service.</p>
-            
-            <p>We respect your right to privacy. To see how we collect and use your personal information, please see our Privacy Notice.</p>
-          </div>
-        </section>
+        <p>
+          You understand that you do not have to sign up for this program in order
+          to make any purchases, and your consent is not a condition of any purchase
+          with Reveiller Studios. Your participation in this program is completely
+          voluntary.
+        </p>
+
+        <p>
+          We do not charge for the Service, but you are responsible for all charges
+          and fees associated with text messaging imposed by your wireless provider.
+          Message frequency varies. Message and data rates may apply.
+        </p>
+
+        <p>
+          You may opt-out of the Service at any time. Text the single keyword command
+          <strong> STOP </strong> to{' '}
+          <a href="tel:+18335694052" className="text-blue-600 hover:underline">
+            +1 (833) 569-4052
+          </a>{' '}
+          or click the unsubscribe link (where available) in any text message to
+          cancel. You will receive a one-time opt-out confirmation text message. No
+          further messages will be sent to your mobile device unless initiated by
+          you. If you subscribe to other Reveiller Studios mobile programs, you must
+          opt out separately from those programs as well.
+        </p>
+
+        <p>
+          For Service support or assistance, send a request to{' '}
+          email{' '}
+          <a
+            href="mailto:contact@reveillerstudios.com"
+            className="text-blue-600 hover:underline"
+          >
+            contact@reveillerstudios.com
+          </a>.
+        </p>
+
+        <p>
+          We may change any short code or phone number we use to operate the Service
+          at any time. Any messages you send to a changed number may not be received,
+          and we are not responsible for honoring requests sent to old numbers.
+        </p>
+
+        <p>
+          Wireless carriers are not liable for delayed or undelivered messages. You
+          agree to provide us with a valid mobile number. If you get a new mobile
+          number, you must re-enroll in the program.
+        </p>
+
+        <p>
+          To the extent permitted by law, you agree that we will not be liable for
+          failed, delayed, or misdirected delivery of any information sent through
+          the Service, any errors in such information, and any action you may or may
+          not take in reliance on the Service.
+        </p>
+
+        <p>
+          We respect your privacy. To see how we collect and use your personal
+          information, please review our Privacy Notice.
+        </p>
+
+      </div>
+     </section>
 
         <footer className="text-center text-sm text-gray-500 mt-12 pt-6 border-t">
           <p>Last updated: {new Date().toLocaleDateString()}</p>
