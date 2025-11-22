@@ -4,7 +4,7 @@ import { headers } from 'next/headers';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
 import AppProviders from './Providers/AppProviders';
-import LayoutWithCart from './layoutWithCart';
+import LayoutWithCart from '../components/LayoutWithCart/layoutWithCart';
 import CookieConsentModal from '../components/CookieConsentModal/cookieConsent';
 import PreloaderGate from '../components/PreloaderGate/PreloaderGate';
 import ScrollManager from '@/components/ScrollManager/ScrollManager';
