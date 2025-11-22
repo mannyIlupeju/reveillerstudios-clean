@@ -45,7 +45,7 @@ export default function Privacy() {
             <p>Complete details on each type of Personal Data collected are provided in the dedicated sections of this privacy policy or by specific explanation texts displayed prior to the Data collection. Personal Data may be freely provided by the User, or, in case of Usage Data, collected automatically when using this Application.</p>
             <p>Unless specified otherwise, all Data requested by this Application is mandatory and failure to provide this Data may make it impossible for this Application to provide its services. In cases where this Application specifically states that some Data is not mandatory, Users are free not to communicate this Data without consequences to the availability or the functioning of the Service.</p>
             <p>Users who are uncertain about which Personal Data is mandatory are welcome to contact the Owner.</p>
-            <p>Any use of Cookies – or of other tracking tools — by this Application or by the owners of third-party services used by this Application serves the purpose of providing the Service required by the User, in addition to any other purposes described in the present document and in the Cookie Policy.</p>
+            <p>Any use of Cookies or of other tracking tools by this Application or by the owners of third-party services used by this Application serves the purpose of providing the Service required by the User, in addition to any other purposes described in the present document and in the Cookie Policy.</p>
             <p>Users are responsible for any third-party Personal Data obtained, published or shared through this Application.</p>
           </div>
         </section>
@@ -61,12 +61,12 @@ export default function Privacy() {
 
           <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">Place</h3>
           <div className="text-gray-700 space-y-4">
-            <p>The Data is processed at the Owner's operating offices and in any other places where the parties involved in the processing are located.</p>
-            <p>Depending on the User's location, data transfers may involve transferring the User's Data to a country other than their own. To find out more about the place of processing of such transferred Data, Users can check the section containing details about the processing of Personal Data.</p>
+            <p>The Data is processed at the Owners operating offices and in any other places where the parties involved in the processing are located.</p>
+            <p>Depending on the Users location, data transfers may involve transferring the Users Data to a country other than their own. To find out more about the place of processing of such transferred Data, Users can check the section containing details about the processing of Personal Data.</p>
           </div>
 
           <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">Retention Time</h3>
-          <p className="text-gray-700">Unless specified otherwise in this document, Personal Data shall be processed and stored for as long as required by the purpose they have been collected for and may be retained for longer due to applicable legal obligation or based on the Users' consent.</p>
+          <p className="text-gray-700">Unless specified otherwise in this document, Personal Data shall be processed and stored for as long as required by the purpose they have been collected for and may be retained for longer due to applicable legal obligation or based on the Users consent.</p>
         </section>
 
         <section className="mb-8">
@@ -92,11 +92,11 @@ export default function Privacy() {
 
           <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">Further Information About Retention Time</h3>
           <div className="text-gray-700 space-y-4">
-            <p>Unless specified otherwise in this document, Personal Data shall be processed and stored for as long as required by the purpose they have been collected for and may be retained for longer due to applicable legal obligation or based on the Users' consent.</p>
+            <p>Unless specified otherwise in this document, Personal Data shall be processed and stored for as long as required by the purpose they have been collected for and may be retained for longer due to applicable legal obligation or based on the Users consent.</p>
             <p>Therefore:</p>
             <ul className="list-disc pl-6 space-y-2">
               <li>Personal Data collected for purposes related to the performance of a contract between the Owner and the User shall be retained until such contract has been fully performed.</li>
-              <li>Personal Data collected for the purposes of the Owner's legitimate interests shall be retained as long as needed to fulfill such purposes. Users may find specific information regarding the legitimate interests pursued by the Owner within the relevant sections of this document or by contacting the Owner.</li>
+              <li>Personal Data collected for the purposes of the Owners legitimate interests shall be retained as long as needed to fulfill such purposes. Users may find specific information regarding the legitimate interests pursued by the Owner within the relevant sections of this document or by contacting the Owner.</li>
             </ul>
             <p>The Owner may be allowed to retain Personal Data for a longer period whenever the User has given consent to such processing, as long as such consent is not withdrawn. Furthermore, the Owner may be obliged to retain Personal Data for a longer period whenever required to fulfil a legal obligation or upon order of an authority.</p>
             <p>Once the retention period expires, Personal Data shall be deleted. Therefore, the right of access, the right to erasure, the right to rectification and the right to data portability cannot be enforced after expiration of the retention period.</p>
@@ -128,7 +128,7 @@ export default function Privacy() {
           </div>
 
           <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">How to Exercise These Rights</h3>
-          <p className="text-gray-700">Any requests to exercise User rights can be directed to the Owner through the contact details provided in this document. Such requests are free of charge and will be answered by the Owner as early as possible and always within one month, providing Users with the information required by law. Any rectification or erasure of Personal Data or restriction of processing will be communicated by the Owner to each recipient, if any, to whom the Personal Data has been disclosed unless this proves impossible or involves disproportionate effort. At the Users' request, the Owner will inform them about those recipients.</p>
+          <p className="text-gray-700">Any requests to exercise User rights can be directed to the Owner through the contact details provided in this document. Such requests are free of charge and will be answered by the Owner as early as possible and always within one month, providing Users with the information required by law. Any rectification or erasure of Personal Data or restriction of processing will be communicated by the Owner to each recipient, if any, to whom the Personal Data has been disclosed unless this proves impossible or involves disproportionate effort. At the Users request, the Owner will inform them about those recipients.</p>
         </section>
 
         <section className="mb-8">
@@ -136,11 +136,11 @@ export default function Privacy() {
           
           <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">Legal Action</h3>
           <div className="text-gray-700 space-y-4">
-            <p>The User's Personal Data may be used for legal purposes by the Owner in Court or in the stages leading to possible legal action arising from improper use of this Application or the related Services.</p>
+            <p>The Users Personal Data may be used for legal purposes by the Owner in Court or in the stages leading to possible legal action arising from improper use of this Application or the related Services.</p>
             <p>The User declares to be aware that the Owner may be required to reveal personal data upon request of public authorities.</p>
           </div>
 
-          <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">Additional Information About User's Personal Data</h3>
+          <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">Additional Information About Users Personal Data</h3>
           <p className="text-gray-700">In addition to the information contained in this privacy policy, this Application may provide the User with additional and contextual information concerning particular Services or the collection and processing of Personal Data upon request.</p>
 
           <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">System Logs and Maintenance</h3>
@@ -154,7 +154,7 @@ export default function Privacy() {
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Changes to This Privacy Policy</h2>
           <div className="text-gray-700 space-y-4">
             <p>The Owner reserves the right to make changes to this privacy policy at any time by notifying its Users on this page and possibly within this Application and/or - as far as technically and legally feasible - sending a notice to Users via any contact information available to the Owner. It is strongly recommended to check this page often, referring to the date of the last modification listed at the bottom.</p>
-            <p>Should the changes affect processing activities performed on the basis of the User's consent, the Owner shall collect new consent from the User, where required.</p>
+            <p>Should the changes affect processing activities performed on the basis of the Users consent, the Owner shall collect new consent from the User, where required.</p>
           </div>
         </section>
 
@@ -169,7 +169,7 @@ export default function Privacy() {
 
             <div>
               <h3 className="text-lg font-semibold text-gray-800 mb-2">Usage Data</h3>
-              <p>Information collected automatically through this Application (or third-party services employed in this Application), which can include: the IP addresses or domain names of the computers utilized by the Users who use this Application, the URI addresses (Uniform Resource Identifier), the time of the request, the method utilized to submit the request to the server, the size of the file received in response, the numerical code indicating the status of the server's answer (successful outcome, error, etc.), the country of origin, the features of the browser and the operating system utilized by the User, the various time details per visit (e.g., the time spent on each page within the Application) and the details about the path followed within the Application with special reference to the sequence of pages visited, and other parameters about the device operating system and/or the User's IT environment.</p>
+              <p>Information collected automatically through this Application (or third-party services employed in this Application), which can include: the IP addresses or domain names of the computers utilized by the Users who use this Application, the URI addresses (Uniform Resource Identifier), the time of the request, the method utilized to submit the request to the server, the size of the file received in response, the numerical code indicating the status of the servers answer (successful outcome, error, etc.), the country of origin, the features of the browser and the operating system utilized by the User, the various time details per visit (e.g., the time spent on each page within the Application) and the details about the path followed within the Application with special reference to the sequence of pages visited, and other parameters about the device operating system and/or the Users IT environment.</p>
             </div>
 
             <div>
@@ -221,13 +221,13 @@ export default function Privacy() {
           <div className="text-gray-700 space-y-4">
             <p>The Reveiller Studios mobile message service (the "Service") is operated by Reveiller Studios ("Reveiller Studios", "we", or "us"). Your use of the Service constitutes your agreement to these terms and conditions ("Mobile Terms"). We may modify or cancel the Service or any of its features without notice. To the extent permitted by applicable law, we may also modify these Mobile Terms at any time and your continued use of the Service following the effective date of any such changes shall constitute your acceptance of such changes.</p>
             
-            <p>By consenting to Reveiller Studios's SMS/text messaging service, you agree to receive recurring SMS/text messages from and on behalf of Reveiller Studios through your wireless provider to the mobile number you provided, even if your mobile number is registered on any state or federal Do Not Call list. Text messages may be sent using an automatic telephone dialing system or other technology. Promotional messages may include promotions, specials, and other marketing offers (e.g., cart reminders).</p>
+            <p>By consenting to Reveiller Studioss SMS/text messaging service, you agree to receive recurring SMS/text messages from and on behalf of Reveiller Studios through your wireless provider to the mobile number you provided, even if your mobile number is registered on any state or federal Do Not Call list. Text messages may be sent using an automatic telephone dialing system or other technology. Promotional messages may include promotions, specials, and other marketing offers (e.g., cart reminders).</p>
             
             <p>You understand that you do not have to sign up for this program in order to make any purchases, and your consent is not a condition of any purchase with Reveiller Studios. Your participation in this program is completely voluntary.</p>
             
             <p>We do not charge for the Service, but you are responsible for all charges and fees associated with text messaging imposed by your wireless provider. Message frequency varies. Message and data rates may apply. Check your mobile plan and contact your wireless provider for details. You are solely responsible for all charges related to SMS/text messages, including charges from your wireless provider.</p>
             
-            <p>You may opt-out of the Service at any time. Text the single keyword command <strong>STOP</strong> to <a href="tel:+18335694052" className="text-blue-600 hover:underline">+1 (833) 569-4052</a> or click the unsubscribe link (where available) in any text message to cancel. You'll receive a one-time opt-out confirmation text message. No further messages will be sent to your mobile device, unless initiated by you. If you have subscribed to other Reveiller Studios mobile message programs and wish to cancel, except where applicable law requires otherwise, you will need to opt out separately from those programs by following the instructions provided in their respective mobile terms.</p>
+            <p>You may opt-out of the Service at any time. Text the single keyword command <strong>STOP</strong> to <a href="tel:+18335694052" className="text-blue-600 hover:underline">+1 (833) 569-4052</a> or click the unsubscribe link (where available) in any text message to cancel. You will receive a one-time opt-out confirmation text message. No further messages will be sent to your mobile device, unless initiated by you. If you have subscribed to other Reveiller Studios mobile message programs and wish to cancel, except where applicable law requires otherwise, you will need to opt out separately from those programs by following the instructions provided in their respective mobile terms.</p>
             
             <p>For Service support or assistance, text <strong>HELP</strong> to <a href="tel:+18335694052" className="text-blue-600 hover:underline">+1 (833) 569-4052</a> or email <a href="mailto:reveillerstudios@outlook.com" className="text-blue-600 hover:underline">reveillerstudios@outlook.com</a>.</p>
             

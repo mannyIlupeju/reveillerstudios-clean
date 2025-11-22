@@ -4,7 +4,7 @@ import React, {useState} from 'react'
 import NewsletterFooter from '@/components/NewsletterFooter/Newsletterfooter'
 import ConfirmationMessage from '@/components/ResponseMessages/confirmationMessage';
 
-export default function page() {
+export default function Page() {
   const [userData, setUserData] = useState({
      fullName: '',
      email: '',
