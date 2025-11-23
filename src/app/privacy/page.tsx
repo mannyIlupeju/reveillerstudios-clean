@@ -125,21 +125,21 @@ export default function Privacy() {
           <h3 className="text-lg font-semibold text-gray-800 mb-2">
             Usage Data
           </h3>
-          <p>
-            Information collected automatically through this Application (or
-            third-party services employed in this Application), which can include:
-            the IP addresses or domain names of the computers utilized by the Users
-            who use this Application, the URI addresses (Uniform Resource
-            Identifier), the time of the request, the method used to submit the
-            request to the server, the size of the file received in response, the
-            numerical code indicating the status of the server's answer (successful
-            outcome, error, etc.), the country of origin, the features of the
-            browser and the operating system used by the User, the various time
-            details per visit (e.g., time spent on each page within the
-            Application), the details about the path followed within the
-            Application, and other parameters about the device operating system and
-            the User's IT environment.
-          </p>
+         <p>
+          Information collected automatically through this Application (or
+          third-party services employed in this Application), which can include:
+          the IP addresses or domain names of the computers utilized by the Users
+          who use this Application, the URI addresses (Uniform Resource
+          Identifier), the time of the request, the method used to submit the
+          request to the server, the size of the file received in response, the
+          numerical code indicating the status of the servers answer (successful
+          outcome, error, etc.), the country of origin, the features of the
+          browser and the operating system used by the User, the various time
+          details per visit (e.g., time spent on each page within the
+          Application), the details about the path followed within the
+          Application, and other parameters about the device operating system and
+          the Users IT environment.
+        </p>
         </div>
 
         <div>
@@ -151,9 +151,7 @@ export default function Privacy() {
         </div>
 
         <div>
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">
-            Data Subject
-          </h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">Data Subject</h3>
           <p>The natural person to whom the Personal Data refers.</p>
         </div>
 
@@ -195,7 +193,7 @@ export default function Privacy() {
           <h3 className="text-lg font-semibold text-gray-800 mb-2">Service</h3>
           <p>
             The service provided by this Application as described in the relative
-            terms (if available) and on this site/application.
+            terms (if available) and on this site or application.
           </p>
         </div>
 
@@ -210,112 +208,112 @@ export default function Privacy() {
           </p>
         </div>
 
-      </div>
-    </section>
+        </div>
+        </section>
 
-    <section className="mb-8 pb-4 border-t pt-6">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-        Legal Information
-      </h2>
-      <p className="text-gray-700">
-        This privacy policy relates solely to this Application, if not stated
-        otherwise within this document.
-      </p>
-    </section>
+        <section className="mb-8 pb-4 border-t pt-6">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+            Legal Information
+          </h2>
+          <p className="text-gray-700">
+            This privacy policy relates solely to this Application, if not stated
+            otherwise within this document.
+          </p>
+        </section>
 
-    <section className="mb-8 pb-4 border-t pt-6">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-        Mobile Terms of Service
-      </h2>
+        <section className="mb-8 pb-4 border-t pt-6">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+            Mobile Terms of Service
+          </h2>
 
-      <p className="text-sm text-gray-600 mb-4">
-        Reveiller Studios<br />
-        Last updated: Nov. 18, 2025
-      </p>
+          <p className="text-sm text-gray-600 mb-4">
+            Reveiller Studios<br />
+            Last updated: Nov. 18, 2025
+          </p>
 
-      <div className="text-gray-700 space-y-4">
+          <div className="text-gray-700 space-y-4">
 
-        <p>
-          The Reveiller Studios mobile message service (the 'Service') is operated
-          by Reveiller Studios ('Reveiller Studios', 'we', or 'us'). Your use of the
-          Service constitutes your agreement to these terms and conditions ('Mobile
-          Terms'). We may modify or cancel the Service or any of its features
-          without notice. To the extent permitted by applicable law, we may also
-          modify these Mobile Terms at any time, and your continued use of the
-          Service following the effective date of any such changes shall constitute
-          your acceptance of such changes.
-        </p>
+            <p>
+              The Reveiller Studios mobile message service (the Service) is operated
+              by Reveiller Studios (Reveiller Studios, we, or us). Your use of the
+              Service constitutes your agreement to these terms and conditions
+              (Mobile Terms). We may modify or cancel the Service or any of its features
+              without notice. To the extent permitted by applicable law, we may also
+              modify these Mobile Terms at any time, and your continued use of the
+              Service following the effective date of any such changes shall constitute
+              your acceptance of such changes.
+            </p>
 
-        <p>
-          By consenting to Reveiller Studios SMS/text messaging service, you agree
-          to receive recurring SMS/text messages from and on behalf of Reveiller
-          Studios through your wireless provider to the mobile number you provided,
-          even if your mobile number is registered on any state or federal Do Not
-          Call list. Text messages may be sent using an automatic telephone dialing
-          system or other technology. Promotional messages may include promotions,
-          specials, and other marketing offers (e.g., cart reminders).
-        </p>
+     <p>
+      By consenting to Reveiller Studios SMS or text messaging service, you agree
+      to receive recurring SMS or text messages from and on behalf of Reveiller
+      Studios through your wireless provider to the mobile number you provided,
+      even if your mobile number is registered on any state or federal Do Not
+      Call list. Text messages may be sent using an automatic telephone dialing
+      system or other technology. Promotional messages may include promotions,
+      specials, and other marketing offers such as cart reminders.
+    </p>
 
-        <p>
-          You understand that you do not have to sign up for this program in order
-          to make any purchases, and your consent is not a condition of any purchase
-          with Reveiller Studios. Your participation in this program is completely
-          voluntary.
-        </p>
+    <p>
+      You understand that you do not have to sign up for this program in order
+      to make any purchases, and your consent is not a condition of any purchase
+      with Reveiller Studios. Your participation in this program is completely
+      voluntary.
+    </p>
 
-        <p>
-          We do not charge for the Service, but you are responsible for all charges
-          and fees associated with text messaging imposed by your wireless provider.
-          Message frequency varies. Message and data rates may apply.
-        </p>
+    <p>
+      We do not charge for the Service, but you are responsible for all charges
+      and fees associated with text messaging imposed by your wireless provider.
+      Message frequency varies. Message and data rates may apply.
+    </p>
 
-        <p>
-          You may opt-out of the Service at any time. Text the single keyword command
-          <strong> STOP </strong> to{' '}
-          <a href="tel:+18335694052" className="text-blue-600 hover:underline">
-            +1 (833) 569-4052
-          </a>{' '}
-          or click the unsubscribe link (where available) in any text message to
-          cancel. You will receive a one-time opt-out confirmation text message. No
-          further messages will be sent to your mobile device unless initiated by
-          you. If you subscribe to other Reveiller Studios mobile programs, you must
-          opt out separately from those programs as well.
-        </p>
+    <p>
+      You may opt out of the Service at any time. Text the single keyword command
+      <strong> STOP </strong> to 
+      <a href="tel:+18335694052" className="text-blue-600 hover:underline">
+        +1 (833) 569-4052
+      </a>
+      or click the unsubscribe link where available in any text message to
+      cancel. You will receive a one time opt out confirmation text message. No
+      further messages will be sent to your mobile device unless initiated by
+      you. If you subscribe to other Reveiller Studios mobile programs, you must
+      opt out separately from those programs as well.
+    </p>
 
-        <p>
-          For Service support or assistance, send a request to{' '}
-          email{' '}
-          <a
-            href="mailto:contact@reveillerstudios.com"
-            className="text-blue-600 hover:underline"
-          >
-            contact@reveillerstudios.com
-          </a>.
-        </p>
+    <p>
+      For Service support or assistance, send a request by email to 
+      <a
+        href="mailto:contact@reveillerstudios.com"
+        className="text-blue-600 hover:underline"
+      >
+        contact@reveillerstudios.com
+      </a>.
+    </p>
 
-        <p>
-          We may change any short code or phone number we use to operate the Service
-          at any time. Any messages you send to a changed number may not be received,
-          and we are not responsible for honoring requests sent to old numbers.
-        </p>
+    <p>
+      We may change any short code or phone number we use to operate the Service
+      at any time. Any messages you send to a changed number may not be received,
+      and we are not responsible for honoring requests sent to old numbers.
+    </p>
 
-        <p>
-          Wireless carriers are not liable for delayed or undelivered messages. You
-          agree to provide us with a valid mobile number. If you get a new mobile
-          number, you must re-enroll in the program.
-        </p>
+    <p>
+      Wireless carriers are not liable for delayed or undelivered messages. You
+      agree to provide us with a valid mobile number. If you get a new mobile
+      number, you must re enroll in the program.
+    </p>
 
-        <p>
-          To the extent permitted by law, you agree that we will not be liable for
-          failed, delayed, or misdirected delivery of any information sent through
-          the Service, any errors in such information, and any action you may or may
-          not take in reliance on the Service.
-        </p>
+    <p>
+      To the extent permitted by law, you agree that we will not be liable for
+      failed, delayed, or misdirected delivery of any information sent through
+      the Service, any errors in such information, and any action you may or may
+      not take in reliance on the Service.
+    </p>
 
-        <p>
-          We respect your privacy. To see how we collect and use your personal
-          information, please review our Privacy Notice.
-        </p>
+    <p>
+      We respect your privacy. To see how we collect and use your personal
+      information, please review our Privacy Notice.
+    </p>
+
 
       </div>
      </section>
