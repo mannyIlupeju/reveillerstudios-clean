@@ -96,14 +96,14 @@ export default function ProductGrid({ items, isProductGrid = true }: Props) {
                   }
                 }
               }}
-              className="relative w-full aspect-[3/3.5]"
+              className="relative w-full aspect-[2/3]"
             >
               {primaryImage && (
                 <Image
                   src={isHovered && hoverImage ? hoverImage : primaryImage}
                   alt={item.title}
                   fill
-                  className={`transform transition hover:scale-105 optimized ${
+                  className={`transform transition hover:scale-105 object-contain optimized ${
                     !isAvailable ? 'opacity-50' : ''
                   }`}
                   loading="lazy"
@@ -118,7 +118,7 @@ export default function ProductGrid({ items, isProductGrid = true }: Props) {
               )}
             </div>
 
-            <div className="text-center xl:text-lg text-xs font-satoshi flex flex-col justify-center gap-2 font-light -mt-4 productTitleBox w-full p-2">
+            <div className="text-center xl:text-sm text-xs font-satoshi flex flex-col justify-center gap-2 font-light -mt-4 productTitleBox w-full p-2">
               <h1>{item.title}</h1>
               <span>
                 {currency.code} {formatMoney(

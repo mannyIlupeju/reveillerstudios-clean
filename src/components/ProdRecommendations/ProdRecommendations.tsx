@@ -24,13 +24,13 @@ function ProdRecommendations({recommendations}:any) {
                         <Image
                           src={item.featuredImage.url}
                           alt={item.featuredImage.altText || 'Product'}
-                          width={200}
-                          height={150}
-                          className="object-cover rounded-md aspect-[2/3] w-fit flex justify-end"
+                          width={400}
+                          height={400}
+                          className="object-contain rounded-md w-fit h-fit flex justify-end"
                         />
                       </Link>
                     ) : (
-                      <div className="w-[200px] h-[200px] bg-gray-300 animate-pulse rounded-md" />
+                      <div className="w-[400px] h-[200px] bg-gray-300 animate-pulse rounded-md" />
                     )}
                   </div>
 

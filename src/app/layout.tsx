@@ -73,12 +73,16 @@ export default async function RootLayout({
           bgClass="bg-black text-white"
           splash={
             <div className="flex flex-col items-center justify-center">
+              <div className="relative w-96 h-96">
               <Image
                 src="/images/rvrspinninglogo-unscreen2.gif"
                 alt="Loading Reveiller"
+                width={400}
+                height={400}
                 className="w-96 h-96"
-      
+                priority
               />
+              </div>
               <p className="mt-4 text-xl font-medium animate-pulse">
                 Welcome to Reveiller Studios
               </p>

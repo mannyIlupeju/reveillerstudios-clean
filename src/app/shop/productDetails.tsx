@@ -218,7 +218,7 @@ const ProductDetails = ({ products, recommendations }: Props) => {
 
                   {/* Image (pinch/zoom aware) */}
                   <div className={isLoaded ? 'block' : 'hidden'}>
-                    <div className="w-full max-w-[600px] aspect-1/3 mb-10">
+                    <div className="w-full max-w-[600px] aspect-1/2 mb-10">
                       <PinchZoomImage
                         src={item.originalSrc}
                         alt={item.altText}
@@ -247,7 +247,7 @@ const ProductDetails = ({ products, recommendations }: Props) => {
 
       {/* Recommendations */}
       <div className="p-4">
-        <h2 className="text-xl font-semibold my-8">Recommended Products</h2>
+        <h2 className="text-xl font-semibold ">Recommended Products</h2>
         <Prodrecommendations recommendations={recommendedItems} />
       </div>
     </main>

@@ -380,6 +380,7 @@ export default function ProdDetailsConfiguration({id, title, priceRange, variant
 
 
       {/* Size options display buttons */}
+      <h2>Select Size</h2>
       <div
         className='flex flex-row justify-around xl:gap-8 gap-2 w-fit'
         key={productVariants.id}
@@ -403,11 +404,11 @@ export default function ProdDetailsConfiguration({id, title, priceRange, variant
 
 
         {/* Remaining quantity available notifier */}
-        {isButtonSelected && quantityAvailable !== null && (
+        {/* {isButtonSelected && quantityAvailable !== null && (
           <div className='prodDetailsOptionsBox w-fit p-3'>
             <p>{`Only ${quantityAvailable} item(s) remaining`}</p>
           </div>
-        )}
+        )} */}
 
 
 
