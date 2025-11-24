@@ -374,13 +374,13 @@ export default function ProdDetailsConfiguration({id, title, priceRange, variant
   return (
     <aside className='xl:absolute xl:z-1 xl:top-4 xl:text-lg xl:mx-0 mx-2 xl:ml-4 text-sm flex justify-items-start flex-col w-fit gap-5 font-bold cursor-pointer'>
       <div className='prodDetailsOptionsBox p-3 xl:text-lg lg:text-md text-sm flex gap-10 w-2xl rounded-lg border-black'>
-        <p className='text-2xl font-extra bold font-satoshi'>{title}</p>
+        <p className='text-md font-extra bold font-satoshi'>{title}</p>
         <p className="flex items-center text-md">{currency.code} {formatMoney(Number(productPrice), currency.code)}</p>
       </div>
 
-
+      <section className="flex flex-col">
       {/* Size options display buttons */}
-      <h2>Select Size</h2>
+      <h2>Please select a Size</h2>
       <div
         className='flex flex-row justify-around xl:gap-8 gap-2 w-fit'
         key={productVariants.id}
@@ -400,15 +400,16 @@ export default function ProdDetailsConfiguration({id, title, priceRange, variant
           );
         })}
       </div>
+      </section>
 
 
 
         {/* Remaining quantity available notifier */}
-        {/* {isButtonSelected && quantityAvailable !== null && (
+        {isButtonSelected && quantityAvailable !== null && (
           <div className='prodDetailsOptionsBox w-fit p-3'>
             <p>{`Only ${quantityAvailable} item(s) remaining`}</p>
           </div>
-        )} */}
+        )}
 
 
 

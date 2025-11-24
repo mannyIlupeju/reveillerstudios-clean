@@ -183,7 +183,7 @@ const ProductDetails = ({ products, recommendations }: Props) => {
       >
         {/* Carousel + Buttons */}
         <section
-          className="relative mt-10 slider-container min-h-[200px]"
+          className="relative mt-10 slider-container min-h-[100px]"
           tabIndex={0}
           onKeyDown={onKeyNav}
           aria-label="Product image carousel"
@@ -247,7 +247,7 @@ const ProductDetails = ({ products, recommendations }: Props) => {
 
       {/* Recommendations */}
       <div className="p-4">
-        <h2 className="text-xl font-semibold ">Recommended Products</h2>
+        <h2 className="text-xl font-semibold ">You may also like</h2>
         <Prodrecommendations recommendations={recommendedItems} />
       </div>
     </main>

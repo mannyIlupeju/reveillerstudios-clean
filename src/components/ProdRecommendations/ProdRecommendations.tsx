@@ -10,11 +10,13 @@ function ProdRecommendations({recommendations}:any) {
 
    const {allLoaded, setAllLoaded, loadedImages, setLoadedImages} = useGlobalContext();
 
+   console.log(recommendations)
+
 
   return (
      <section className={`p-3 ml-2 xl:mt-4 mt-2 transition-opacity duration-700 ${allLoaded ? 'opacity-100' : 'opacity-0'}`}>
         {recommendations?.length > 0 && (
-          <section className="px-4">
+          <section className="">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-fit">
               {recommendations.map((item: any, index: number) => (
                 <div className="flex flex-col" key={item.id || index}>
@@ -24,9 +26,9 @@ function ProdRecommendations({recommendations}:any) {
                         <Image
                           src={item.featuredImage.url}
                           alt={item.featuredImage.altText || 'Product'}
-                          width={400}
-                          height={400}
-                          className="object-contain rounded-md w-fit h-fit flex justify-end"
+                          width={800}
+                          height={800}
+                          className="object-contain rounded-md w-fit h-fit aspect-[2/3] flex justify-end"
                         />
                       </Link>
                     ) : (
@@ -37,13 +39,13 @@ function ProdRecommendations({recommendations}:any) {
                   {/* Text Skeletons */}
                   <div className="flex flex-col mx-auto align-bottom space-y-2">
                     {item.title ? (
-                      <h3 className="text-sm">{item.title}</h3>
+                      <h3 className="text-xs">{item.title}</h3>
                     ) : (
                       <div className="h-6 bg-gray-300 rounded w-[150px] animate-pulse" />
                     )}
 
                     {item.priceRange ? (
-                      <p>
+                      <p className="text-sm">
                       {currency.code} {formatMoney(Number(item.priceRange.minVariantPrice.amount), currency.code)}
                       </p>
                     ) : (

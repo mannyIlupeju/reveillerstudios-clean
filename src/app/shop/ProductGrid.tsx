@@ -75,8 +75,8 @@ export default function ProductGrid({ items, isProductGrid = true }: Props) {
         const id = item.id?.match(/\d+/g)?.join('') || item.id;
         const isAvailable = item.variants.edges[0]?.node.availableForSale;
         const isHovered = hoveredId === id;
-        const primaryImage = item.images.edges[0]?.node.originalSrc;
-        const hoverImage = item.images.edges[1]?.node.originalSrc;
+        const primaryImage = item.images.edges[1]?.node.originalSrc;
+        const hoverImage = item.images.edges[2]?.node.originalSrc;
 
         return (
           <Link href={`/shop/allProducts/${item.handle}`} key={id}>
