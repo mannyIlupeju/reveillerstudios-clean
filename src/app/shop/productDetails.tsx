@@ -136,7 +136,7 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
     className: "center",
     centerMode: true,
     infinite: true,
-    centerPadding: "48.3rem",
+    centerPadding: "50rem",
     dots: true,
     speed: 500,
     slidesToShow: 2,
@@ -153,7 +153,7 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
     {
       breakpoint: 1536,
       settings: {
-        centerPadding: "15rem",
+        centerPadding: "8rem",
         slidesToShow: 2,
         slidesToScroll: 1,
         swipe: canSwipe,        // Changed from true
@@ -195,7 +195,7 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
       breakpoint: 640,
       settings: {
         centerMode: true,
-        centerPadding: "2rem",
+        centerPadding: "0rem",
         slidesToShow: 1,
         slidesToScroll: 1,
         swipe: canSwipe,        // Changed from true
