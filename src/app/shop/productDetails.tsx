@@ -105,7 +105,7 @@ const ProductDetails: React.FC<Props> = ({ products, recommendations }) => {
     return () => {
       cancelled = true;
     };
-  }, [imgCount, imageNodes, setLoadedImages]);
+  }, [imgCount, imageNodes, setLoadedImages, setAllLoaded]);
 
   // Fade in when all preloaded
   useEffect(() => {
@@ -142,7 +142,6 @@ const ProductDetails: React.FC<Props> = ({ products, recommendations }) => {
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 1,
-    touchMove: canSwipe,
     arrows: false, // We're using custom arrows
     adaptiveHeight: false,
     swipe: true,              // Enable swipe
