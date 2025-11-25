@@ -216,7 +216,7 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
       breakpoint: 480,           // xs - mobile portrait
       settings: {
         centerMode: true,
-        centerPadding: "5%",
+        centerPadding: "2%",
         slidesToShow: 1,
         slidesToScroll: 1,
         swipe: canSwipe,
@@ -263,8 +263,8 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
 
                 return (
                   <div key={index}>
-                    <div className="relative h-[700px] max-w-8xl md:h-[500px] lg:h-[800px] flex mx-auto">
-                     <div className="aspect-[1/2]">
+                    <div className="relative h-[700px] max-w-8xl md:h-[500px] lg:h-[700px] flex mx-auto">
+                     <div className="aspect-[2/3]">
                       <PinchZoomImage
                         src={item.originalSrc}
                         alt={alt}
