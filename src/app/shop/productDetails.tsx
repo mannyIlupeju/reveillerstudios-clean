@@ -242,7 +242,7 @@ const ProductDetails: React.FC<Props> = ({ products, recommendations }) => {
 
                 return (
                   <div key={index}>
-                    <div className="relative h-[700px] max-w-4xl md:h-[500px] lg:h-[800px] flex mx-auto justify-center">
+                    <div className="relative h-[700px] max-w-8xl md:h-[500px] lg:h-[800px] flex mx-auto justify-center">
                       <PinchZoomImage
                         src={item.originalSrc}
                         alt={alt}
