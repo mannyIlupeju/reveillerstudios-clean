@@ -133,77 +133,98 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
 };
 
   const settings = {
-    className: "center",
-    centerMode: true,
-    infinite: true,
-    centerPadding: "50rem",
-    dots: true,
-    speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    arrows: false,
-    adaptiveHeight: false,
-    swipe: canSwipe,              // Changed from true
-    swipeToSlide: canSwipe,       // Changed from true
-    touchMove: canSwipe,          // Changed from true
-    touchThreshold: 5,
-    draggable: canSwipe,   
+  className: "center",
+  centerMode: true,
+  infinite: true,
+  centerPadding: "10%",        // Use percentage for better scaling
+  dots: true,
+  speed: 500,
+  slidesToShow: 1,             // Show 1 slide for best centering
+  slidesToScroll: 1,
+  arrows: false,
+  adaptiveHeight: true,        // Changed to true for better responsive behavior
+  swipe: canSwipe,
+  swipeToSlide: canSwipe,
+  touchMove: canSwipe,
+  touchThreshold: 5,
+  draggable: canSwipe,
  
-    responsive: [
+  responsive: [
     {
-      breakpoint: 1536,
+      breakpoint: 1920,          // Extra large desktop
       settings: {
-        centerPadding: "8rem",
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        swipe: canSwipe,        // Changed from true
-        touchMove: canSwipe,    // Changed from true
-      }
-    },
-    {
-      breakpoint: 1280,
-      settings: {
-        centerPadding: "10rem",
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        swipe: canSwipe,        // Changed from true
-        touchMove: canSwipe,    // Changed from true
-      }
-    },
-    {
-      breakpoint: 1024,
-      settings: {
-        centerPadding: "5rem",
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        swipe: canSwipe,        // Changed from true
-        touchMove: canSwipe,    // Changed from true
-      }
-    },
-    {
-      breakpoint: 768,
-      settings: {
-        centerMode: true,
-        centerPadding: "3rem",
+        centerPadding: "25%",
         slidesToShow: 1,
         slidesToScroll: 1,
-        swipe: canSwipe,        // Changed from true
-        touchMove: canSwipe,    // Changed from true
+        swipe: canSwipe,
+        touchMove: canSwipe,
       }
     },
     {
-      breakpoint: 640,
+      breakpoint: 1536,          // 2xl - large desktop
       settings: {
-        centerMode: true,
-        centerPadding: "0rem",
+        centerPadding: "20%",
         slidesToShow: 1,
         slidesToScroll: 1,
-        swipe: canSwipe,        // Changed from true
-        touchMove: canSwipe,    // Changed from true
+        swipe: canSwipe,
+        touchMove: canSwipe,
+      }
+    },
+    {
+      breakpoint: 1280,          // xl - desktop
+      settings: {
+        centerPadding: "18%",
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        swipe: canSwipe,
+        touchMove: canSwipe,
+      }
+    },
+    {
+      breakpoint: 1024,          // lg - laptop
+      settings: {
+        centerPadding: "15%",
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        swipe: canSwipe,
+        touchMove: canSwipe,
+      }
+    },
+    {
+      breakpoint: 768,           // md - tablet
+      settings: {
+        centerMode: true,
+        centerPadding: "2%",
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        swipe: canSwipe,
+        touchMove: canSwipe,
+      }
+    },
+    {
+      breakpoint: 640,           // sm - mobile landscape
+      settings: {
+        centerMode: true,
+        centerPadding: "10%",
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        swipe: canSwipe,
+        touchMove: canSwipe,
+      }
+    },
+    {
+      breakpoint: 480,           // xs - mobile portrait
+      settings: {
+        centerMode: true,
+        centerPadding: "5%",
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        swipe: canSwipe,
+        touchMove: canSwipe,
       }
     }
   ]
-  };
+};
 
   return (
     <main className="overflow-x-hidden">
