@@ -33,7 +33,7 @@ function layout({children}: {children: React.ReactNode}) {
     <>
       <Navigation />
 
-      <main className="flex flex-col w-fit">
+      <main className="flex flex-col">
         {children}
       </main>
 

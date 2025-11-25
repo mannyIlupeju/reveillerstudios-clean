@@ -137,7 +137,7 @@ const ProductDetails: React.FC<Props> = ({ products, recommendations }) => {
     className: "center",
     centerMode: true,
     infinite: true,
-    centerPadding: "20rem",
+    centerPadding: "18.3rem",
     dots: true,
     speed: 500,
     slidesToShow: 2,
@@ -147,29 +147,62 @@ const ProductDetails: React.FC<Props> = ({ products, recommendations }) => {
     touchMove: canSwipe,
     arrows: false, // We're using custom arrows
     adaptiveHeight: false,
+    swipe: true,              // Enable swipe
+    swipeToSlide: true,       // Allow swiping to any slide
+    touchMove: true,          // Enable touch move
+    touchThreshold: 5,        // Minimum distance for swipe (lower = more sensitive)
+    draggable: true,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1536,     // 2xl screens
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
+          centerPadding: "15rem",
           slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2
+          slidesToScroll: 1,
+          swipe: true,
+          touchMove: true,
         }
       },
       {
-        breakpoint: 480,
+        breakpoint: 1280,     // xl screens
         settings: {
+          centerPadding: "10rem",
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          swipe: true,
+          touchMove: true,
+        }
+      },
+      {
+        breakpoint: 1024,     // lg screens
+        settings: {
+          centerPadding: "5rem",
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          swipe: true,
+          touchMove: true,
+        }
+      },
+      {
+        breakpoint: 768,      // md screens (tablets)
+        settings: {
+          centerMode: true,
+          centerPadding: "3rem",
           slidesToShow: 1,
-          slidesToScroll: 1
+          slidesToScroll: 1,
+          swipe: true,
+          touchMove: true,
+        }
+      },
+      {
+        breakpoint: 640,      // sm screens (mobile)
+        settings: {
+          centerMode: true,
+          centerPadding: "2rem",
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          swipe: true,
+          touchMove: true,
         }
       }
     ]
@@ -212,7 +245,7 @@ const ProductDetails: React.FC<Props> = ({ products, recommendations }) => {
 
                 return (
                   <div key={index}>
-                    <div className="relative h-[700px] md:h-[500px] lg:h-[800px] flex items-center justify-center">
+                    <div className="relative h-[700px] md:h-[500px] lg:h-[800px] flex mx-auto justify-center">
                       <PinchZoomImage
                         src={item.originalSrc}
                         alt={alt}
