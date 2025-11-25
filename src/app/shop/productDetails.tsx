@@ -142,8 +142,6 @@ const ProductDetails: React.FC<Props> = ({ products, recommendations }) => {
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 1,
-    swipe: canSwipe,
-    swipeToSlide: canSwipe,
     touchMove: canSwipe,
     arrows: false, // We're using custom arrows
     adaptiveHeight: false,
