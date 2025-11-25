@@ -119,90 +119,90 @@ const ProductDetails: React.FC<Props> = ({ products, recommendations }) => {
     setRecommendedItems(recommendations);
   }, [recommendations, setRecommendedItems]);
 
-  // Zoom/swipe coordination
   const [zoomScale, setZoomScale] = useState<number>(1);
-  const canSwipe = !isTouch || zoomScale === 1;
+const canSwipe = !isTouch || zoomScale === 1;
 
-  // Slider ref + overlay buttons
-  const sliderRef = useRef<Slider | null>(null);
-  const goPrev = () => sliderRef.current?.slickPrev();
-  const goNext = () => sliderRef.current?.slickNext();
+// Slider ref + overlay buttons
+const sliderRef = useRef<Slider | null>(null);
+const goPrev = () => sliderRef.current?.slickPrev();
+const goNext = () => sliderRef.current?.slickNext();
 
-  const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
-    if (e.key === 'ArrowLeft') goPrev();
-    if (e.key === 'ArrowRight') goNext();
-  };
+const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
+  if (e.key === 'ArrowLeft') goPrev();
+  if (e.key === 'ArrowRight') goNext();
+};
 
   const settings = {
     className: "center",
     centerMode: true,
     infinite: true,
-    centerPadding: "18.3rem",
+    centerPadding: "48.3rem",
     dots: true,
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 1,
-    arrows: false, // We're using custom arrows
+    arrows: false,
     adaptiveHeight: false,
-    swipe: true,              // Enable swipe
-    swipeToSlide: true,       // Allow swiping to any slide
-    touchMove: true,          // Enable touch move
-    touchThreshold: 5,        // Minimum distance for swipe (lower = more sensitive)
-    draggable: true,
+    swipe: canSwipe,              // Changed from true
+    swipeToSlide: canSwipe,       // Changed from true
+    touchMove: canSwipe,          // Changed from true
+    touchThreshold: 5,
+    draggable: canSwipe,   
+ 
     responsive: [
-      {
-        breakpoint: 1536,     // 2xl screens
-        settings: {
-          centerPadding: "15rem",
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          swipe: true,
-          touchMove: true,
-        }
-      },
-      {
-        breakpoint: 1280,     // xl screens
-        settings: {
-          centerPadding: "10rem",
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          swipe: true,
-          touchMove: true,
-        }
-      },
-      {
-        breakpoint: 1024,     // lg screens
-        settings: {
-          centerPadding: "5rem",
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          swipe: true,
-          touchMove: true,
-        }
-      },
-      {
-        breakpoint: 768,      // md screens (tablets)
-        settings: {
-          centerMode: true,
-          centerPadding: "3rem",
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          swipe: true,
-          touchMove: true,
-        }
-      },
-      {
-        breakpoint: 640,      // sm screens (mobile)
-        settings: {
-          centerMode: true,
-          centerPadding: "2rem",
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          swipe: true,
-          touchMove: true,
-        }
+    {
+      breakpoint: 1536,
+      settings: {
+        centerPadding: "15rem",
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        swipe: canSwipe,        // Changed from true
+        touchMove: canSwipe,    // Changed from true
       }
-    ]
+    },
+    {
+      breakpoint: 1280,
+      settings: {
+        centerPadding: "10rem",
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        swipe: canSwipe,        // Changed from true
+        touchMove: canSwipe,    // Changed from true
+      }
+    },
+    {
+      breakpoint: 1024,
+      settings: {
+        centerPadding: "5rem",
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        swipe: canSwipe,        // Changed from true
+        touchMove: canSwipe,    // Changed from true
+      }
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        centerMode: true,
+        centerPadding: "3rem",
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        swipe: canSwipe,        // Changed from true
+        touchMove: canSwipe,    // Changed from true
+      }
+    },
+    {
+      breakpoint: 640,
+      settings: {
+        centerMode: true,
+        centerPadding: "2rem",
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        swipe: canSwipe,        // Changed from true
+        touchMove: canSwipe,    // Changed from true
+      }
+    }
+  ]
   };
 
   return (
@@ -242,15 +242,17 @@ const ProductDetails: React.FC<Props> = ({ products, recommendations }) => {
 
                 return (
                   <div key={index}>
-                    <div className="relative h-[700px] max-w-8xl md:h-[500px] lg:h-[800px] flex mx-auto justify-center">
+                    <div className="relative h-[700px] max-w-8xl md:h-[500px] lg:h-[800px] flex mx-auto">
+                     <div className="aspect-[1/2]">
                       <PinchZoomImage
                         src={item.originalSrc}
                         alt={alt}
                         isTouch={isTouch}
                         onScaleChange={(s: number) => setZoomScale(s)}
                         touchAction={isTouch && zoomScale > 1 ? 'none' : 'auto'}
-                        className="aspect-[1/2]"
-                      />
+                        
+                        />
+                    </div>
                     </div>
                   </div>
                 );
