@@ -249,6 +249,7 @@ const ProductDetails: React.FC<Props> = ({ products, recommendations }) => {
                         isTouch={isTouch}
                         onScaleChange={(s: number) => setZoomScale(s)}
                         touchAction={isTouch && zoomScale > 1 ? 'none' : 'auto'}
+                        className="aspect-[1/2]"
                       />
                     </div>
                   </div>
