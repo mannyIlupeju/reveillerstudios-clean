@@ -17,7 +17,9 @@ function Page() {
 
       <div>
         <p>Orders / Customer Service:</p>
-        <span>reveillerstudios@outlook.com</span>
+        <a href="mailto:contact@reveillerstudios.com">
+          <span>contact@reveillerstudios.com</span>
+        </a>
       </div>
       
     </main>
