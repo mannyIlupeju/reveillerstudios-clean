@@ -50,7 +50,7 @@ const ProductCategories: React.FC<ProductCategoriesProps> = ({ collections }) =>
 
   // ✅ Main render
   return (
-    <div className="flex xl:flex-col justify-center lg:gap-2 ">
+    <div className="lg:flex xl:flex-col justify-center lg:gap-2 hidden ">
       {collections.map((item) => {
         const { id, title, handle } = item;
 

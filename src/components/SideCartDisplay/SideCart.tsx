@@ -160,7 +160,7 @@ export default function SideCart() {
               </div>
                {cartItems.length > 0 && (
                   <button
-                    className="border-black border-2 mx-auto w-96 p-2 checkout-button"
+                    className="border-black border-2 mx-auto p-2 checkout-button"
                     onClick={() => handleCheckout(cartId)}
                   >
                     <h1>Checkout</h1>

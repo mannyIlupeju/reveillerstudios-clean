@@ -108,7 +108,7 @@ const Navigation = () => {
 
 
   const navLinks = [
-    { name: 'Shop', href: '/shop' },
+    { name: 'Shop', href: '/shop/collections/all' },
     { name: 'About', href: '/about' },
     { name: 'Archive', href: '/gallery' },
   ];

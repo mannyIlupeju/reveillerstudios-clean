@@ -70,7 +70,7 @@ export default function ProductGrid({ items, isProductGrid = true }: Props) {
   const handleMouseLeave = () => setHoveredId(null);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-x-12 gap-y-12 ps-8">
+    <div className="grid justify-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-x-12 gap-y-12 ps-8">
       {sortedProducts.map((item) => {
         const id = item.id?.match(/\d+/g)?.join('') || item.id;
         const isAvailable = item.variants.edges[0]?.node.availableForSale;

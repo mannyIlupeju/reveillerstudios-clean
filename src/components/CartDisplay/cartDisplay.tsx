@@ -133,74 +133,106 @@ export default function CartDisplay({cart}:CartProps){
         <>
         <Navigation/>
         <section className="flex justify-center ">
-        <main className="flex flex-col justify-center gap-10 border-blac border-dashed p-8 mx-auto mt-8">
-            <div className="text-center font-bold mb-4">
-            <h1>Your Shopping Cart</h1>
-            </div>
-            {cartItems.length > 0 ? (
-                <>
-                    {cartItems.map((item) => (
-                        <div key={item.id}
-                            className='flex flex-row gap-4'
-                        >
-                            <Image
-                                src={item.image}
-                                width={200}
-                                height={150}
-                                priority
-                                alt={item.title}
-                            />
+        <main className="flex flex-col justify-center gap-6 md:gap-10 border-black border-dashed p-4 md:p-8 mx-auto mt-4 md:mt-8 max-w-6xl">
+        <div className="text-center font-bold mb-2 md:mb-4">
+            <h1 className="text-xl md:text-2xl lg:text-3xl">Your Shopping Cart</h1>
+        </div>
+        
+        {cartItems.length > 0 ? (
+            <>
+            <div className="flex flex-col gap-4 md:gap-6">
+                {cartItems.map((item) => (
+                <div 
+                    key={item.id}
+                    className="flex flex-col sm:flex-row gap-4 pb-4 border-b border-gray-200 last:border-b-0"
+                >
+                    {/* Image */}
+                    <div className="flex-shrink-0 w-full sm:w-32 md:w-48 lg:w-56 mx-auto sm:mx-0">
+                    <Image
+                        src={item.image}
+                        width={200}
+                        height={150}
+                        priority
+                        alt={item.title}
+                        className="w-full h-auto object-cover rounded"
+                    />
+                    </div>
 
-                            <div className="flex flex-col justify-center">
-                                <h1>{item.title}</h1>
-                                <p> 
-                                    Price: {formatMoney(Number(item.price * item.quantity), currency.code)}
-                                </p>
-                                <p>Size: {item.size.value}</p>
-                                <p className='font-bold text-lg'>
-                                    Quantity:  {item.quantity}
-                                </p>
-                                <div className='flex  w-fit mt-2'>
-                                    <button 
-                                        className='disabled:opacity-50'
-                                        onClick={() => updateCartQty(item.id, cartId, Math.max(0, item.quantity - 1), dispatch)}
-                                    >
-                                        <FaMinus className='flex self-center' />
-                                    </button>
-                                    <button
-                                        className="p-2 hover:bg-gray-100 rounded"
-                                        onClick={() => updateCartQty(item.id, cartId, item.quantity + 1, dispatch)}
-                                    >
-                                        <FaPlus className="w-4 h-4" />
-                                    </button>
-                                </div>
-                                <button 
-                                    onClick={() => cartId && removeCartItem(item.id, cartId, dispatch)}
-                                    className="flex items-start mt-2  py-2 text-zinc-900 rounded  hover:underline"
-                                >
-                                    Remove
-                                </button>
-                            </div>
+                    {/* Product Details */}
+                    <div className="flex flex-col justify-between flex-grow">
+                    <div>
+                        <h2 className="text-base md:text-lg font-semibold mb-2">{item.title}</h2>
+                        <p className="text-sm md:text-base text-gray-700"> 
+                        Price: {formatMoney(Number(item.price * item.quantity), currency.code)}
+                        </p>
+                        <p className="text-sm md:text-base text-gray-700">Size: {item.size.value}</p>
+                    </div>
+
+                    {/* Quantity Controls */}
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3 mt-3">
+                        <div className="flex items-center gap-3">
+                        <span className="font-bold text-sm md:text-base">Quantity:</span>
+                        <div className="flex items-center gap-2 border border-gray-300 rounded-lg p-1">
+                            <button 
+                            className="disabled:opacity-50 p-2 hover:bg-gray-100 rounded transition-colors"
+                            onClick={() => updateCartQty(item.id, cartId, Math.max(0, item.quantity - 1), dispatch)}
+                            aria-label="Decrease quantity"
+                            >
+                            <FaMinus className="w-3 h-3 md:w-4 md:h-4" />
+                            </button>
+                            
+                            <span className="min-w-[2rem] text-center font-semibold text-sm md:text-base">
+                            {item.quantity}
+                            </span>
+                            
+                            <button
+                            className="p-2 hover:bg-gray-100 rounded transition-colors"
+                            onClick={() => updateCartQty(item.id, cartId, item.quantity + 1, dispatch)}
+                            aria-label="Increase quantity"
+                            >
+                            <FaPlus className="w-3 h-3 md:w-4 md:h-4" />
+                            </button>
                         </div>
-                    ))}
+                        </div>
 
-                    <p className="text-xl mx-auto">Total: {currency.code} {formatMoney(Number(cartTotal), currency.code)} </p>
-
-                    <button 
-                    className="bg-zinc-800 w-96 text-white p-4 font-bold text-lg mx-auto checkout-button"
-                    onClick={() => handleCheckout(cartId)}
-                    >
-                        Continue to Checkout
-                    </button>
-                </>
-            ) : (
-                <div className="flex justify-center">
-                    <h1>Cart is empty</h1>
-                    <Link href="/shop" className="text-blue-600 underline">
-                        Continue Shopping
-                    </Link>
+                        {/* Remove Button */}
+                        <button 
+                        onClick={() => cartId && removeCartItem(item.id, cartId, dispatch)}
+                        className="text-sm md:text-base text-red-600 hover:text-red-800 hover:underline transition-colors self-start sm:self-center"
+                        >
+                        Remove
+                        </button>
+                    </div>
+                    </div>
                 </div>
-            )}
+                ))}
+            </div>
+
+            {/* Total and Checkout */}
+            <div className="flex flex-col gap-4 mt-4 sticky bottom-0 bg-white pt-4 border-t border-gray-200">
+                <p className="text-lg md:text-xl lg:text-2xl font-bold text-center">
+                Total: {currency.code} {formatMoney(Number(cartTotal), currency.code)}
+                </p>
+
+                <button 
+                className="bg-zinc-800 hover:bg-zinc-900 w-full max-w-md text-white p-3 md:p-4 mb-24 font-bold text-base md:text-lg mx-auto rounded-lg transition-colors checkout-button"
+                onClick={() => handleCheckout(cartId)}
+                >
+                Continue to Checkout
+                </button>
+            </div>
+            </>
+        ) : (
+            <div className="flex flex-col items-center justify-center gap-4 py-8">
+            <h2 className="text-lg md:text-xl">Your cart is empty</h2>
+            <Link 
+                href="/shop" 
+                className="bg-zinc-800 hover:bg-zinc-900 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+            >
+                Continue Shopping
+            </Link>
+            </div>
+        )}
         </main>
         </section>
         </>

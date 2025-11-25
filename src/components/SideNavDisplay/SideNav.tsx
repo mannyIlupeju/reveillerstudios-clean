@@ -32,7 +32,7 @@ const SideNav = () => {
   const cartState = useSelector((state: RootState) => state.cart)
   const cartQty = Number(cartState.totalQuantity)
 
-  const {isMenuOpen, setOpenMenu, toggleMenu, isCartOpen, toggleCart} = useGlobalContext()
+  const {isMenuOpen, setOpenMenu, toggleMenu, isCartOpen, toggleCart, isShopHovered, setIsShopHovered} = useGlobalContext()
   
   useEffect(() => {
     setCartQuantity(cartQty)
@@ -47,7 +47,13 @@ const SideNav = () => {
                       <Image src="/images/rvrspinninglogo-unscreen2.gif" alt="rvr spinning logo" width={30} height={30}/>
                     </button>
                     <Link href='/' className={linkClass('/')}>Home</Link>
-                    <Link href='/shop' className={linkClass('/shop')}>Shop</Link>
+                    <Link 
+                    href='/shop' 
+                    className={linkClass('/shop')}
+                    onClick={()=> setIsShopHovered(!isShopHovered)}
+                    >
+                     Shop
+                    </Link>
                     <Link href='/about' className={linkClass('/about')}>About</Link>
                    
                     {/* <Link href='/journal' className={linkClass('/journal')}>Journal</Link> */}

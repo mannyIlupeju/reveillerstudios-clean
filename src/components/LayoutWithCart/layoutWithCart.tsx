@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import SideNav from '../SideNavDisplay/SideNav';
 import SideCart from '../SideCartDisplay/SideCart';
 import CountrySwitchModal from '../CountrySwitchModal/CountrySwitchModal';
 import BranddetailContainer from '../BrandDetailContainer/BranddetailContainer';
-import {useGlobalContext} from '../../Context/GlobalContext'
+import ShopContainer from '../ShopContainer/ShopContainer';
+import { useGlobalContext } from '../../Context/GlobalContext';
 import { usePathname } from 'next/navigation';
 
 type Props = {
@@ -14,12 +15,36 @@ type Props = {
 };
 
 export default function LayoutWithCartClient({ children, detectedCountry }: Props) {
-  const { isCartOpen, setIsCartOpen, isMenuOpen, toggleMenu } = useGlobalContext();
+  const { isCartOpen, setIsCartOpen, isMenuOpen, isShopHovered, setOpenMenu } = useGlobalContext();
   const pathname = usePathname();
+  const [isMobile, setIsMobile] = useState(false);
 
   const isCartPage = pathname === '/cart';
   const isPasswordRoute = pathname === '/password';
 
+  // Detect if screen is mobile (< 1024px)
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    // Check on mount
+    checkMobile();
+
+    // Add resize listener
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Close ShopContainer when switching from mobile to desktop
+  useEffect(() => {
+    if (!isMobile && isShopHovered) {
+      setOpenMenu(false); // Assuming this controls isShopHovered
+    }
+  }, [isMobile, isShopHovered, setOpenMenu]);
+
+  // Handle body overflow when cart is open
   useEffect(() => {
     if (isCartOpen) {
       document.body.style.overflowY = 'hidden';
@@ -35,11 +60,14 @@ export default function LayoutWithCartClient({ children, detectedCountry }: Prop
     };
   }, [isCartOpen]);
 
+  // Close cart when navigating to cart page
   useEffect(() => {
     if (pathname === '/cart') {
       setIsCartOpen(false);
     }
   }, [pathname, setIsCartOpen]);
+
+  const toggleMenu = () => setOpenMenu(!isMenuOpen);
 
   // Password route: minimal layout
   if (isPasswordRoute) {
@@ -73,8 +101,9 @@ export default function LayoutWithCartClient({ children, detectedCountry }: Prop
 
       <SideNav />
       {isMenuOpen && !isCartOpen && <BranddetailContainer />}
+      {/* ShopContainer only shows on mobile */}
+      {isMobile && isShopHovered && !isCartOpen && <ShopContainer />}
       {!isCartPage && <SideCart />}
     </>
   );
 }
-

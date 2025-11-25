@@ -67,6 +67,8 @@ type GlobalContextType = {
   isCartOpen: boolean;
   setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setOpenSideCart: React.Dispatch<React.SetStateAction<boolean>>;
+  isShopHovered: boolean;
+  setIsShopHovered: React.Dispatch<React.SetStateAction<boolean>>;
   toggleCart:()=>void;
   setIsLoginClick:React.Dispatch<React.SetStateAction<boolean>>;
   setIsRegisterClick:React.Dispatch<React.SetStateAction<boolean>>;
@@ -111,6 +113,7 @@ export const GlobalProvider: React.FC<ProviderProps> = ({ children }) => {
   const [loadedImages, setLoadedImages] = useState<number[]>([])
   const [allLoaded, setAllLoaded] = useState(false)
   const [isHovered, setIsItemHovered] = useState<boolean | null>(null)
+  const [isShopHovered, setIsShopHovered] = useState<boolean>(false)
   const [loginClicked, setIsLoginClick] = useState<boolean>(false)
   const [registerClicked, setIsRegisterClick] = useState<boolean>(false)
   const [isMenuOpen, setOpenMenu] = useState<boolean>(false)
@@ -179,6 +182,11 @@ export const GlobalProvider: React.FC<ProviderProps> = ({ children }) => {
    
   };
 
+  const shopMenu=()=> {
+    console.log("true")
+    setIsShopHovered((prevState)=> !prevState);
+  }
+
 
   const toggleCart = () => {
     setIsCartOpen((prevState) => !prevState)
@@ -206,6 +214,8 @@ export const GlobalProvider: React.FC<ProviderProps> = ({ children }) => {
         setIsItemHovered,
         isMenuOpen,
         setOpenMenu,
+        isShopHovered,
+        setIsShopHovered,
         toggleMenu,
         setOpenSideCart,
         setIsCartOpen,

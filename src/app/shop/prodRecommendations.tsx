@@ -1,6 +1,6 @@
 import client from '../../lib/shopify/shopify-client/shopify-client'
 import { recommendationQuery } from "@/lib/shopify/queries/queries";
-import ProductDetails from './productDetails';
+
 
 type Product = {
     id: string;

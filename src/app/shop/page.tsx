@@ -79,7 +79,7 @@ const Page = async () => {
           <ProductCategories collections={collections} />
         </aside>
 
-        <section className="flex-1 p-8">
+        <section className="flex justify-center flex-1 p-8">
           <ProductGrid items={products} isProductGrid={false} />
         </section>
       </main>
