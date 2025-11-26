@@ -132,6 +132,7 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
   if (e.key === 'ArrowRight') goNext();
 };
 
+
   const settings = {
   className: "center",
   centerMode: true,
@@ -149,9 +150,10 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
   touchThreshold: 5,
   draggable: canSwipe,
  
+  
   responsive: [
     {
-      breakpoint: 2257,          // Extra large desktop
+      breakpoint: 2034,          // Extra large desktop
       settings: {
         centerPadding: "1px",
         slidesToShow: 3,
@@ -161,7 +163,7 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
       }
     },
     {
-      breakpoint: 2034,          // Extra large desktop
+      breakpoint: 1920,          // Extra large desktop
       settings: {
         centerPadding: "1px",
         slidesToShow: 3,
@@ -284,7 +286,7 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
                 return (
                   <div key={index}>
                     <div className="relative h-[700px] max-w-8xl md:h-[500px] lg:h-[700px] flex mx-auto">
-                     <div className="lg:aspect-[2/3] aspec-[1/2]">
+                     <div className="lg:aspect-[2/3] aspect-[1/2]">
                       <PinchZoomImage
                         src={item.originalSrc}
                         alt={alt}
