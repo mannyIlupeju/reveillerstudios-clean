@@ -66,6 +66,21 @@ const ProductDetails: React.FC<Props> = ({ products, recommendations }) => {
   } = useGlobalContext();
 
   const isTouch = useIsTouch();
+  const [isMounted, setIsMounted] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  // Handle mounting and window resize
+  useEffect(() => {
+    setIsMounted(true);
+    setWindowWidth(window.innerWidth);
+
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Safe array of image nodes
   const imageNodes: ImageNode[] = useMemo(() => {
@@ -120,143 +135,97 @@ const ProductDetails: React.FC<Props> = ({ products, recommendations }) => {
   }, [recommendations, setRecommendedItems]);
 
   const [zoomScale, setZoomScale] = useState<number>(1);
-const canSwipe = !isTouch || zoomScale === 1;
+  const canSwipe = !isTouch || zoomScale === 1;
 
-// Slider ref + overlay buttons
-const sliderRef = useRef<Slider | null>(null);
-const goPrev = () => sliderRef.current?.slickPrev();
-const goNext = () => sliderRef.current?.slickNext();
+  // Slider ref + overlay buttons
+  const sliderRef = useRef<Slider | null>(null);
+  const goPrev = () => sliderRef.current?.slickPrev();
+  const goNext = () => sliderRef.current?.slickNext();
 
-const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
-  if (e.key === 'ArrowLeft') goPrev();
-  if (e.key === 'ArrowRight') goNext();
-};
+  const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
+    if (e.key === 'ArrowLeft') goPrev();
+    if (e.key === 'ArrowRight') goNext();
+  };
 
+  // Determine settings based on current window width
+  const isDesktop = windowWidth >= 1280;
 
   const settings = {
-  className: "center",
-  centerMode: true,
-  infinite: true,
-  centerPadding: "0px",        // Use percentage for better scaling
-  dots: true,
-  speed: 500,
-  slidesToShow: 1,             // Show 1 slide for best centering
-  slidesToScroll: 1,
-  arrows: false,
-  adaptiveHeight: true,        // Changed to true for better responsive behavior
-  swipe: canSwipe,
-  swipeToSlide: canSwipe,
-  touchMove: canSwipe,
-  touchThreshold: 5,
-  draggable: canSwipe,
- 
-  
-  responsive: [
-    {
-      breakpoint: 2410,          // Extra large desktop
-      settings: {
-        centerPadding: "1px",
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        swipe: canSwipe,
-        touchMove: canSwipe,
+    className: "center",
+    centerMode: isDesktop,
+    infinite: true,
+    centerPadding: isDesktop ? "1px" : "0px",
+    dots: true,
+    speed: 500,
+    slidesToShow: isDesktop ? 3 : 1,
+    slidesToScroll: 1,
+    arrows: false,
+    adaptiveHeight: true,
+    swipe: canSwipe,
+    swipeToSlide: canSwipe,
+    touchMove: canSwipe,
+    touchThreshold: 5,
+    draggable: canSwipe,
+    initialSlide: 0,
+    focusOnSelect: isDesktop,
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          centerMode: false,
+          centerPadding: "0px",
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          swipe: canSwipe,
+          touchMove: canSwipe,
+        }
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          centerMode: false,
+          centerPadding: "0px",
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          swipe: canSwipe,
+          touchMove: canSwipe,
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          centerMode: false,
+          centerPadding: "0px",
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          swipe: canSwipe,
+          touchMove: canSwipe,
+        }
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          centerMode: false,
+          centerPadding: "0px",
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          swipe: canSwipe,
+          touchMove: canSwipe,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          centerMode: false,
+          centerPadding: "0px",
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          swipe: canSwipe,
+          touchMove: canSwipe,
+        }
       }
-    },
-    {
-      breakpoint: 2034,          // Extra large desktop
-      settings: {
-        centerPadding: "1px",
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        swipe: canSwipe,
-        touchMove: canSwipe,
-      }
-    },
-    {
-      breakpoint: 1920,          // Extra large desktop
-      settings: {
-        centerPadding: "1px",
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        swipe: canSwipe,
-        touchMove: canSwipe,
-      }
-    },
-    {
-      breakpoint: 1880,          // Extra large desktop
-      settings: {
-        centerPadding: "1px",
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        swipe: canSwipe,
-        touchMove: canSwipe,
-      }
-    },
-    {
-      breakpoint: 1536,          // 2xl - large desktop
-      settings: {
-        centerPadding: "1px",
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        swipe: canSwipe,
-        touchMove: canSwipe,
-      }
-    },
-    {
-      breakpoint: 1280,          // xl - desktop
-      settings: {
-        centerPadding: "1px",
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        swipe: canSwipe,
-        touchMove: canSwipe,
-      }
-    },
-    {
-      breakpoint: 1024,          // lg - laptop
-      settings: {
-        centerPadding: "15%",
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        swipe: canSwipe,
-        touchMove: canSwipe,
-      }
-    },
-    {
-      breakpoint: 768,           // md - tablet
-      settings: {
-        centerMode: true,
-        centerPadding: "2%",
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        swipe: canSwipe,
-        touchMove: canSwipe,
-      }
-    },
-    {
-      breakpoint: 640,           // sm - mobile landscape
-      settings: {
-        centerMode: true,
-        centerPadding: "10%",
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        swipe: canSwipe,
-        touchMove: canSwipe,
-      }
-    },
-    {
-      breakpoint: 480,           // xs - mobile portrait
-      settings: {
-        centerMode: true,
-        centerPadding: "2%",
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        swipe: canSwipe,
-        touchMove: canSwipe,
-      }
-    }
-  ]
-};
+    ]
+  };
 
   return (
     <main className="overflow-x-hidden">
@@ -269,48 +238,56 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
           tabIndex={0}
         >
           {/* Overlay navigation buttons */}
-          <button
-            type="button"
-            onClick={goPrev}
-            aria-label="Previous image"
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/60 text-white rounded-full p-2 transition-colors"
-          >
-            <FaAngleLeft size={24} />
-          </button>
+          {isMounted && (
+            <>
+              <button
+                type="button"
+                onClick={goPrev}
+                aria-label="Previous image"
+                className="absolute left-2 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/60 text-white rounded-full p-2 transition-colors"
+              >
+                <FaAngleLeft size={24} />
+              </button>
 
-          <button
-            type="button"
-            onClick={goNext}
-            aria-label="Next image"
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/60 text-white rounded-full p-2 transition-colors"
-          >
-            <FaAngleRight size={24} />
-          </button>
+              <button
+                type="button"
+                onClick={goNext}
+                aria-label="Next image"
+                className="absolute right-2 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/60 text-white rounded-full p-2 transition-colors"
+              >
+                <FaAngleRight size={24} />
+              </button>
+            </>
+          )}
 
           {/* Slider Container */}
           <div className="w-screen px-4">
-            <Slider ref={sliderRef} {...settings}>
-              {imageNodes.map((item, index) => {
-                const alt = item.altText || `Product image ${index + 1}`;
+            {isMounted ? (
+              <Slider key={windowWidth} ref={sliderRef} {...settings}>
+                {imageNodes.map((item, index) => {
+                  const alt = item.altText || `Product image ${index + 1}`;
 
-                return (
-                  <div key={index}>
-                    <div className="relative h-[700px] max-w-8xl md:h-[500px] lg:h-[700px] flex mx-auto">
-                     <div className="lg:aspect-[2/3] aspect-[1/2]">
-                      <PinchZoomImage
-                        src={item.originalSrc}
-                        alt={alt}
-                        isTouch={isTouch}
-                        onScaleChange={(s: number) => setZoomScale(s)}
-                        touchAction={isTouch && zoomScale > 1 ? 'none' : 'auto'}
-                        
-                        />
+                  return (
+                    <div key={index} className="px-2">
+                      <div className="relative h-[600px] md:h-[700px] lg:h-[800px] flex items-center justify-center mx-auto">
+                        <div className="w-full h-full max-w-md mx-auto">
+                          <PinchZoomImage
+                            src={item.originalSrc}
+                            alt={alt}
+                            isTouch={isTouch}
+                            onScaleChange={(s: number) => setZoomScale(s)}
+                          />
+                        </div>
+                      </div>
                     </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </Slider>
+                  );
+                })}
+              </Slider>
+            ) : (
+              <div className="h-[600px] md:h-[700px] lg:h-[800px] flex items-center justify-center">
+                <div className="animate-pulse text-gray-400">Loading images...</div>
+              </div>
+            )}
           </div>
         </section>
 
