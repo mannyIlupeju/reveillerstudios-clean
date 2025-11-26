@@ -153,7 +153,7 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
   
   responsive: [
     {
-      breakpoint: 2400,          // Extra large desktop
+      breakpoint: 2410,          // Extra large desktop
       settings: {
         centerPadding: "1px",
         slidesToShow: 3,
