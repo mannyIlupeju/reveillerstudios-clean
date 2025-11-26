@@ -136,10 +136,10 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
   className: "center",
   centerMode: true,
   infinite: true,
-  centerPadding: "10%",        // Use percentage for better scaling
+  centerPadding: "0",        // Use percentage for better scaling
   dots: true,
   speed: 500,
-  slidesToShow: 1,             // Show 1 slide for best centering
+  slidesToShow: 3,             // Show 1 slide for best centering
   slidesToScroll: 1,
   arrows: false,
   adaptiveHeight: true,        // Changed to true for better responsive behavior
@@ -153,8 +153,8 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
     {
       breakpoint: 1920,          // Extra large desktop
       settings: {
-        centerPadding: "25%",
-        slidesToShow: 1,
+        centerPadding: "0px",
+        slidesToShow: 3,
         slidesToScroll: 1,
         swipe: canSwipe,
         touchMove: canSwipe,
@@ -173,8 +173,8 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
     {
       breakpoint: 1280,          // xl - desktop
       settings: {
-        centerPadding: "18%",
-        slidesToShow: 1,
+        centerPadding: "1rem",
+        slidesToShow: 2,
         slidesToScroll: 1,
         swipe: canSwipe,
         touchMove: canSwipe,
@@ -183,8 +183,8 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
     {
       breakpoint: 1024,          // lg - laptop
       settings: {
-        centerPadding: "15%",
-        slidesToShow: 1,
+        centerPadding: "1rem",
+        slidesToShow: 2,
         slidesToScroll: 1,
         swipe: canSwipe,
         touchMove: canSwipe,
@@ -194,7 +194,7 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
       breakpoint: 768,           // md - tablet
       settings: {
         centerMode: true,
-        centerPadding: "2%",
+        centerPadding: "1px",
         slidesToShow: 1,
         slidesToScroll: 1,
         swipe: canSwipe,
@@ -205,7 +205,7 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
       breakpoint: 640,           // sm - mobile landscape
       settings: {
         centerMode: true,
-        centerPadding: "10%",
+        centerPadding: "5%",
         slidesToShow: 1,
         slidesToScroll: 1,
         swipe: canSwipe,
@@ -213,10 +213,21 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
       }
     },
     {
-      breakpoint: 480,           // xs - mobile portrait
+      breakpoint: 440,           // xs - mobile portrait
       settings: {
         centerMode: true,
-        centerPadding: "2%",
+        centerPadding: "20rem",
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        swipe: canSwipe,
+        touchMove: canSwipe,
+      }
+    },
+    {
+      breakpoint: 400,           // xs - mobile portrait
+      settings: {
+        centerMode: true,
+        centerPadding: "0px",
         slidesToShow: 1,
         slidesToScroll: 1,
         swipe: canSwipe,
@@ -256,15 +267,15 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
           </button>
 
           {/* Slider Container */}
-          <div className="w-screen px-4">
+          <div className=" max-w-[8xl] md:w-full mx-auto px-4">
             <Slider ref={sliderRef} {...settings}>
               {imageNodes.map((item, index) => {
                 const alt = item.altText || `Product image ${index + 1}`;
 
                 return (
-                  <div key={index}>
-                    <div className="relative h-[700px] max-w-8xl md:h-[500px] lg:h-[700px] flex mx-auto">
-                     <div className="aspect-[2/3]">
+                  <div key={index} className="px-4">
+                    <div className="relative h-[700px] md:h-[500px] lg:h-[700px] flex aspect-[2/3]">
+                     <div className="w-full h-full mx-auto px-12">
                       <PinchZoomImage
                         src={item.originalSrc}
                         alt={alt}
