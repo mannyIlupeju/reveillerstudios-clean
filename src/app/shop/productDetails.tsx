@@ -153,6 +153,16 @@ const onKeyNav = (e: KeyboardEvent<HTMLElement>) => {
   
   responsive: [
     {
+      breakpoint: 2400,          // Extra large desktop
+      settings: {
+        centerPadding: "1px",
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        swipe: canSwipe,
+        touchMove: canSwipe,
+      }
+    },
+    {
       breakpoint: 2034,          // Extra large desktop
       settings: {
         centerPadding: "1px",
