@@ -10,7 +10,7 @@ export const getArchiveData = ( decodedPrefix: string | null) => {
 
 
     const resolvedTitle = decodedPrefix?.replace(/\/$/, '')?.toLowerCase();
-    console.log('Resolved title:', resolvedTitle);
+  
 
   const archiveData = ArchiveDetail.find((item) => item.title === resolvedTitle);
 
