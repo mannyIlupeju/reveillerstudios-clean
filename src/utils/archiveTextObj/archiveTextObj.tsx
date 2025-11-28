@@ -176,8 +176,8 @@ export const ArchiveDetail = [
         `
     },
      {
-        id: '10',
-        title: 'TogetherBeliefSystemKrash',
+        id: '11',
+        title: 'togetherbeliefsystemkrash',
         content: `
         <div class="max-w-2xl text-sm ">
         <p>2025</p>
