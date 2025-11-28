@@ -107,7 +107,7 @@ const ThreeSketch = () => {
     }
 
     // Replace existing gltfLoader.load call with loadModel
-    loadModel("/models/bloodredlargelow/GLTF/Asset 9rvr3dlogoMetal.gltf");
+    loadModel("/models/GLTF/10rvr3dlogoMetal.gltf");
 
     const controls = new OrbitControls(camera, canvas);
    
@@ -203,7 +203,7 @@ const ThreeSketch = () => {
             onContextMenu={e => e.preventDefault()}
           >
             <source 
-            src="https://res.cloudinary.com/doynaagx7/video/upload/v1753965430/TANKREEL1_v8qqct.mp4"
+            src="https://res.cloudinary.com/doynaagx7/video/upload/v1764343516/Timeline_1cool_zrhjrd.mov"
             />
           </video>
            {/* Overlay */}
