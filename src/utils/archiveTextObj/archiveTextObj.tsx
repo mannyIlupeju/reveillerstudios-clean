@@ -177,13 +177,13 @@ export const ArchiveDetail = [
     },
      {
         id: '11',
-        title: 'togetherbeliefsystemkrash',
+        title: 'together-beliefsystems-krash',
         content: `
         <div class="max-w-2xl text-sm ">
         <p>2025</p>
         <p>
-        This is our first ever Beanie created by us and we are really excited about how this turned out. 
-        This was a fun shoot done to showcase each beanie and the beautiful models wearing them. 
+        This is our first ever Beanie created by us and we are really excited about how this turned out. <br>
+        This was a fun shoot done to showcase each beanie and the beautiful models wearing them. <br>
         <Strong>Credits:</Strong>
         <div>
         Models: Carina, Desire and Oluji<br>
