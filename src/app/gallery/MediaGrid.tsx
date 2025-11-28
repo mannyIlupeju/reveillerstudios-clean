@@ -41,6 +41,10 @@ export default function MediaGrid({ files }: Props) {
         const ext = file?.split('.').pop()?.toLowerCase();
         const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'svg'].includes(ext || '');
         const isVideo = ['mp4', 'mov', 'MOV', 'webm', 'avi', 'mkv', 'ogg'].includes(ext || '');
+
+        // ⬇️ Skip if it's not an image or video
+       if (!isImage && !isVideo) return null;
+       
         return (
           <div key={url}>
             {isImage ? (
