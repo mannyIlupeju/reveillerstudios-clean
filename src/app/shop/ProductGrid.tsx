@@ -96,7 +96,7 @@ export default function ProductGrid({ items, isProductGrid = true }: Props) {
                   }
                 }
               }}
-              className="relative aspect-[2/3]"
+              className="relativeaspect-[2/3]"
             >
               {primaryImage && (
                 <Image
