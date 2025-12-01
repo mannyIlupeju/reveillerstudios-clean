@@ -22,60 +22,60 @@ const ANIMATION_SPEED = 0.05;
 const HOVER_SPEED = 0.5;
 
 // Audio context for sound effects
-let audioContext: AudioContext | null = null;
+// let audioContext: AudioContext | null = null;
 
-const getAudioContext = () => {
-  if (!audioContext) {
-    audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-  }
-  return audioContext;
-};
+// const getAudioContext = () => {
+//   if (!audioContext) {
+//     audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+//   }
+//   return audioContext;
+// };
 
-const playHoverSound = () => {
-  try {
-    const ctx = getAudioContext();
-    const oscillator = ctx.createOscillator();
-    const gainNode = ctx.createGain();
+// const playHoverSound = () => {
+//   try {
+//     const ctx = getAudioContext();
+//     const oscillator = ctx.createOscillator();
+//     const gainNode = ctx.createGain();
     
-    oscillator.connect(gainNode);
-    gainNode.connect(ctx.destination);
+//     oscillator.connect(gainNode);
+//     gainNode.connect(ctx.destination);
     
-    oscillator.frequency.setValueAtTime(800, ctx.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.1);
-    oscillator.type = 'sine';
+//     oscillator.frequency.setValueAtTime(1000, ctx.currentTime);
+//     oscillator.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.1);
+//     oscillator.type = 'sine';
     
-    gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+//     gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
+//     gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
     
-    oscillator.start(ctx.currentTime);
-    oscillator.stop(ctx.currentTime + 0.15);
-  } catch (error) {
-    console.error('Error playing hover sound:', error);
-  }
-};
+//     oscillator.start(ctx.currentTime);
+//     oscillator.stop(ctx.currentTime + 0.15);
+//   } catch (error) {
+//     console.error('Error playing hover sound:', error);
+//   }
+// };
 
-const playClickSound = () => {
-  try {
-    const ctx = getAudioContext();
-    const oscillator = ctx.createOscillator();
-    const gainNode = ctx.createGain();
+// const playClickSound = () => {
+//   try {
+//     const ctx = getAudioContext();
+//     const oscillator = ctx.createOscillator();
+//     const gainNode = ctx.createGain();
     
-    oscillator.connect(gainNode);
-    gainNode.connect(ctx.destination);
+//     oscillator.connect(gainNode);
+//     gainNode.connect(ctx.destination);
     
-    oscillator.frequency.setValueAtTime(600, ctx.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.2);
-    oscillator.type = 'square';
+//     oscillator.frequency.setValueAtTime(600, ctx.currentTime);
+//     oscillator.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.2);
+//     oscillator.type = 'square';
     
-    gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+//     gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
+//     gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
     
-    oscillator.start(ctx.currentTime);
-    oscillator.stop(ctx.currentTime + 0.2);
-  } catch (error) {
-    console.error('Error playing click sound:', error);
-  }
-};
+//     oscillator.start(ctx.currentTime);
+//     oscillator.stop(ctx.currentTime + 0.2);
+//   } catch (error) {
+//     console.error('Error playing click sound:', error);
+//   }
+// };
 
 function FolderDisplay({ folders }: FolderDisplayProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -273,10 +273,10 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
       const intersects = raycaster.intersectObjects(planes.map((p) => p.mesh));
       if (intersects.length > 0) {
         const clicked = planes.find((p) => p.mesh === intersects[0].object);
-        if (clicked) {
-          playClickSound();
-          router.push(`/gallery/${encodeURIComponent(clicked.folder)}`);
-        }
+        // if (clicked) {
+        //   playClickSound();
+        //   router.push(`/gallery/${encodeURIComponent(clicked.folder)}`);
+        // }
       }
     };
 
@@ -292,10 +292,10 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
         const hovered = planes.find((p) => p.mesh === intersects[0].object);
         if (hovered) {
           // Play sound only when hovering a new mesh
-          if (state.lastHoveredMesh !== hovered.mesh) {
-            playHoverSound();
-            state.lastHoveredMesh = hovered.mesh;
-          }
+          // if (state.lastHoveredMesh !== hovered.mesh) {
+          //   playHoverSound();
+          //   state.lastHoveredMesh = hovered.mesh;
+          // }
           
           showTooltip(hovered.folder, event.clientX, event.clientY);
           hoveredMeshRef.current = hovered.mesh;
