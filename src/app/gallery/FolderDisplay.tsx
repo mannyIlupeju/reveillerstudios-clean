@@ -9,6 +9,74 @@ type FolderDisplayProps = {
   folders: string[];
 };
 
+// Constants
+const FRUSTUM_SIZE = 1000;
+const SCROLL_COOLDOWN = 120;
+const DELTA_THRESHOLD = 40;
+const PLANE_WIDTH = 1000;
+const PLANE_HEIGHT = 700;
+const SPACING = { x: 250, y: 300, z: -200 };
+const ROTATION = { x: 4, y: -15, z: -1.5 };
+const HOVER_OFFSET = 400;
+const ANIMATION_SPEED = 0.05;
+const HOVER_SPEED = 0.5;
+
+// Audio context for sound effects
+let audioContext: AudioContext | null = null;
+
+const getAudioContext = () => {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+  }
+  return audioContext;
+};
+
+const playHoverSound = () => {
+  try {
+    const ctx = getAudioContext();
+    const oscillator = ctx.createOscillator();
+    const gainNode = ctx.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(ctx.destination);
+    
+    oscillator.frequency.setValueAtTime(800, ctx.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.1);
+    oscillator.type = 'sine';
+    
+    gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+    
+    oscillator.start(ctx.currentTime);
+    oscillator.stop(ctx.currentTime + 0.15);
+  } catch (error) {
+    console.error('Error playing hover sound:', error);
+  }
+};
+
+const playClickSound = () => {
+  try {
+    const ctx = getAudioContext();
+    const oscillator = ctx.createOscillator();
+    const gainNode = ctx.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(ctx.destination);
+    
+    oscillator.frequency.setValueAtTime(600, ctx.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.2);
+    oscillator.type = 'square';
+    
+    gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+    
+    oscillator.start(ctx.currentTime);
+    oscillator.stop(ctx.currentTime + 0.2);
+  } catch (error) {
+    console.error('Error playing click sound:', error);
+  }
+};
+
 function FolderDisplay({ folders }: FolderDisplayProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -16,7 +84,6 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
   const router = useRouter();
   const { setFolders } = useFolders();
 
-  // Set folders in context
   useEffect(() => {
     if (folders && folders.length > 0) {
       setFolders(folders);
@@ -26,47 +93,79 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
   useEffect(() => {
     if (!containerRef.current || !folders || folders.length === 0) return;
 
+    const cleanup = initScene();
+    return cleanup;
+  }, [folders, router]);
+
+  const initScene = () => {
     document.body.style.overflow = 'hidden';
 
+    const { scene, camera, renderer } = setupRenderer();
+    const planes = setupPlanes(scene, folders);
+    const state = createState();
+    
+    setupEventListeners(renderer, camera, planes, state);
+    animate(renderer, scene, camera, planes, state);
+
+    return () => cleanupScene(renderer, scene, planes, tooltipRef.current);
+  };
+
+  const setupRenderer = () => {
     const dpr = window.devicePixelRatio || 1;
-    const tooltipNode = tooltipRef.current;
-
     const scene = new THREE.Scene();
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(dpr);
+    const renderer = new THREE.WebGLRenderer({ 
+      antialias: true, 
+      alpha: true,
+      powerPreference: 'high-performance'
+    });
+    
+    renderer.setPixelRatio(Math.min(dpr, 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
-    containerRef.current.appendChild(renderer.domElement);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    containerRef.current!.appendChild(renderer.domElement);
 
-    const getCameraZoom = (width: number) => {
-      if (width > 1280) return 0.5;
-      if (width > 768) return 0.35;
-      return 0.32;
-    };
+    const camera = createCamera();
+    scene.add(new THREE.AmbientLight(0xffffff, 10));
 
-    const frustumSize = 1000;
+    setupResizeHandler(camera, renderer);
+
+    return { scene, camera, renderer };
+  };
+
+  const createCamera = () => {
     const aspect = window.innerWidth / window.innerHeight;
-
     const camera = new THREE.OrthographicCamera(
-      (frustumSize * aspect) / -2,
-      (frustumSize * aspect) / 2,
-      frustumSize / 2,
-      frustumSize / -2,
+      (FRUSTUM_SIZE * aspect) / -2,
+      (FRUSTUM_SIZE * aspect) / 2,
+      FRUSTUM_SIZE / 2,
+      FRUSTUM_SIZE / -2,
       1,
       5000
     );
+    
     camera.position.set(600, 800, 1000);
     camera.zoom = getCameraZoom(window.innerWidth);
     camera.updateProjectionMatrix();
+    
+    return camera;
+  };
 
+  const getCameraZoom = (width: number) => {
+    if (width > 1280) return 0.5;
+    if (width > 768) return 0.35;
+    return 0.32;
+  };
+
+  const setupResizeHandler = (camera: THREE.OrthographicCamera, renderer: THREE.WebGLRenderer) => {
     const handleResize = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
       const aspect = width / height;
 
-      camera.left = (-frustumSize * aspect) / 2;
-      camera.right = (frustumSize * aspect) / 2;
-      camera.top = frustumSize / 2;
-      camera.bottom = -frustumSize / 2;
+      camera.left = (-FRUSTUM_SIZE * aspect) / 2;
+      camera.right = (FRUSTUM_SIZE * aspect) / 2;
+      camera.top = FRUSTUM_SIZE / 2;
+      camera.bottom = -FRUSTUM_SIZE / 2;
       camera.zoom = getCameraZoom(width);
       camera.updateProjectionMatrix();
 
@@ -74,181 +173,256 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
     };
 
     window.addEventListener('resize', handleResize);
+  };
 
-    const light = new THREE.AmbientLight(0xffffff, 10);
-    scene.add(light);
-
-    const loader = new THREE.TextureLoader();
+  const setupPlanes = (scene: THREE.Scene, folders: string[]) => {
     const planes: { mesh: THREE.Mesh; folder: string }[] = [];
+    const loader = new THREE.TextureLoader();
+    let cancelled = false;
 
+    folders.forEach((folder) => {
+      const imageUrl = getImageUrl(folder);
+      
+      loader.load(imageUrl, (texture) => {
+        if (cancelled) {
+          texture.dispose();
+          return;
+        }
+        
+        configureTexture(texture, loader as any);
+        const mesh = createPlaneMesh(texture);
+        scene.add(mesh);
+        planes.push({ mesh, folder });
+        updatePlanePositions(planes, 0);
+      });
+    });
+
+    return planes;
+  };
+
+  const getImageUrl = (folder: string) => {
+    const folderPath = folder.replace(/\/?$/, '/');
+    return `https://${process.env.NEXT_PUBLIC_CLOUDFRONT_DOMAIN}/${folderPath}thumbnail.jpg`;
+  };
+
+  const configureTexture = (texture: THREE.Texture, renderer: any) => {
+    texture.colorSpace = THREE.SRGBColorSpace;
+    texture.minFilter = THREE.LinearFilter;
+    texture.magFilter = THREE.LinearFilter;
+    texture.anisotropy = renderer.capabilities?.getMaxAnisotropy?.() || 16;
+  };
+
+  const createPlaneMesh = (texture: THREE.Texture) => {
+    const geometry = new THREE.PlaneGeometry(PLANE_WIDTH, PLANE_HEIGHT);
+    const material = new THREE.MeshBasicMaterial({ 
+      map: texture, 
+      transparent: true,
+      depthTest: true,
+      depthWrite: true
+    });
+    return new THREE.Mesh(geometry, material);
+  };
+
+  const updatePlanePositions = (
+    planes: { mesh: THREE.Mesh; folder: string }[], 
+    scrollIndex: number
+  ) => {
+    planes.forEach((plane, i) => {
+      const displayIndex = (i - scrollIndex + folders.length) % folders.length;
+      const mesh = plane.mesh;
+      
+      mesh.position.set(
+        displayIndex * SPACING.x,
+        displayIndex * SPACING.y,
+        displayIndex * SPACING.z
+      );
+      
+      mesh.rotation.set(
+        THREE.MathUtils.degToRad(ROTATION.x),
+        THREE.MathUtils.degToRad(ROTATION.y),
+        THREE.MathUtils.degToRad(ROTATION.z)
+      );
+      
+      mesh.userData.baseX = mesh.position.x;
+    });
+  };
+
+  const createState = () => ({
+    scrollIndex: 0,
+    currentIndex: 0,
+    lastScrollTime: 0,
+    touchStartY: null as number | null,
+    lastHoveredMesh: null as THREE.Mesh | null,
+    cancelled: false,
+    stop: false
+  });
+
+  const setupEventListeners = (
+    renderer: THREE.WebGLRenderer,
+    camera: THREE.OrthographicCamera,
+    planes: { mesh: THREE.Mesh; folder: string }[],
+    state: ReturnType<typeof createState>
+  ) => {
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
-    let scrollIndex = 0;
-    let currentIndex = 0;
-    let lastScrollTime = 0;
-    const SCROLL_COOLDOWN = 120;
-    const DELTA_THRESHOLD = 40;
-
-    let cancelled = false;
-
     const onClick = (event: MouseEvent) => {
-      if (!renderer.domElement) return;
-      const rect = renderer.domElement.getBoundingClientRect();
-      mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-      mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-
+      updateMousePosition(event, renderer.domElement, mouse);
       raycaster.setFromCamera(mouse, camera);
+      
       const intersects = raycaster.intersectObjects(planes.map((p) => p.mesh));
       if (intersects.length > 0) {
         const clicked = planes.find((p) => p.mesh === intersects[0].object);
         if (clicked) {
+          playClickSound();
           router.push(`/gallery/${encodeURIComponent(clicked.folder)}`);
         }
       }
     };
 
     const onMouseMove = (event: MouseEvent) => {
-      if (!renderer.domElement || !tooltipRef.current) return;
-      const rect = renderer.domElement.getBoundingClientRect();
-      mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-      mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-
+      if (!tooltipRef.current) return;
+      
+      updateMousePosition(event, renderer.domElement, mouse);
       raycaster.setFromCamera(mouse, camera);
+      
       const intersects = raycaster.intersectObjects(planes.map((p) => p.mesh));
+      
       if (intersects.length > 0) {
         const hovered = planes.find((p) => p.mesh === intersects[0].object);
         if (hovered) {
-          tooltipRef.current.style.display = 'block';
-          tooltipRef.current.textContent = hovered.folder.replace(/\/$/, '').replace(/-/g, ' ');
-          tooltipRef.current.style.left = event.clientX + 10 + 'px';
-          tooltipRef.current.style.top = event.clientY + 10 + 'px';
+          // Play sound only when hovering a new mesh
+          if (state.lastHoveredMesh !== hovered.mesh) {
+            playHoverSound();
+            state.lastHoveredMesh = hovered.mesh;
+          }
+          
+          showTooltip(hovered.folder, event.clientX, event.clientY);
           hoveredMeshRef.current = hovered.mesh;
         }
       } else {
-        tooltipRef.current.style.display = 'none';
+        hideTooltip();
         hoveredMeshRef.current = null;
+        state.lastHoveredMesh = null;
       }
     };
 
     const onWheel = (event: WheelEvent) => {
       if (!folders.length || event.deltaMode !== 0) return;
+      
       const now = Date.now();
-      if (now - lastScrollTime < SCROLL_COOLDOWN) return;
-      scrollIndex = (scrollIndex + (event.deltaY > 0 ? 1 : -1) + folders.length) % folders.length;
-      lastScrollTime = now;
-      updatePlanePositions();
+      if (now - state.lastScrollTime < SCROLL_COOLDOWN) return;
+      
+      state.scrollIndex = (state.scrollIndex + (event.deltaY > 0 ? 1 : -1) + folders.length) % folders.length;
+      state.lastScrollTime = now;
+      updatePlanePositions(planes, state.scrollIndex);
     };
 
-    let touchStartY: number | null = null;
     const onTouchStart = (event: TouchEvent) => {
-      if (event.touches.length === 1) touchStartY = event.touches[0].clientY;
-    };
-
-    const onTouchMove = (event: TouchEvent) => {
-      if (touchStartY === null) return;
-      const deltaY = touchStartY - event.touches[0].clientY;
-      if (Math.abs(deltaY) > DELTA_THRESHOLD) {
-        scrollIndex = (scrollIndex + (deltaY > 0 ? 1 : -1) + folders.length) % folders.length;
-        updatePlanePositions();
-        touchStartY = event.touches[0].clientY;
+      if (event.touches.length === 1) {
+        state.touchStartY = event.touches[0].clientY;
       }
     };
 
-    const updatePlanePositions = () => {
-      planes.forEach((plane, i) => {
-        const displayIndex = (i - scrollIndex + folders.length) % folders.length;
-        const mesh = plane.mesh;
-        mesh.position.set(displayIndex * 250, displayIndex * 300, -displayIndex * 200);
-        mesh.rotation.set(
-          THREE.MathUtils.degToRad(4),
-          THREE.MathUtils.degToRad(-15),
-          THREE.MathUtils.degToRad(-1.5)
-        );
-        mesh.userData.baseX = mesh.position.x;
-      });
+    const onTouchMove = (event: TouchEvent) => {
+      if (state.touchStartY === null) return;
+      
+      const deltaY = state.touchStartY - event.touches[0].clientY;
+      if (Math.abs(deltaY) > DELTA_THRESHOLD) {
+        state.scrollIndex = (state.scrollIndex + (deltaY > 0 ? 1 : -1) + folders.length) % folders.length;
+        updatePlanePositions(planes, state.scrollIndex);
+        state.touchStartY = event.touches[0].clientY;
+      }
     };
-
-    let stop = false;
-    const animate = () => {
-      if (stop) return;
-      requestAnimationFrame(animate);
-      currentIndex += (scrollIndex - currentIndex) * 0.05;
-
-      planes.forEach(({ mesh }) => {
-        const offset = hoveredMeshRef.current === mesh ? 400 : 0;
-        const baseX = mesh.userData.baseX ?? mesh.position.x;
-        mesh.userData.baseX = baseX;
-        mesh.position.x += (baseX + offset - mesh.position.x) * 0.5;
-      });
-
-      renderer.render(scene, camera);
-    };
-
-    // Clean up planes before loading new ones
-    planes.length = 0;
-
-    folders.forEach((folder, index) => {
-      const folderPath = folder.replace(/\/?$/, '/');
-      const imageUrl = `https://${process.env.NEXT_PUBLIC_CLOUDFRONT_DOMAIN}/${folderPath}thumbnail.jpg`;
-
-      loader.load(imageUrl, (texture) => {
-        if (cancelled) {
-          texture.dispose();
-          return;
-        }
-        const geometry = new THREE.PlaneGeometry(1000, 700);
-        const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
-        const plane = new THREE.Mesh(geometry, material);
-        scene.add(plane);
-        planes.push({ mesh: plane, folder });
-
-        updatePlanePositions();
-      });
-    });
-
-    animate();
 
     renderer.domElement.addEventListener('click', onClick);
     renderer.domElement.addEventListener('mousemove', onMouseMove);
     renderer.domElement.addEventListener('wheel', onWheel);
     renderer.domElement.addEventListener('touchstart', onTouchStart, { passive: false });
     renderer.domElement.addEventListener('touchmove', onTouchMove, { passive: false });
+  };
 
-    return () => {
-      stop = true;
-      cancelled = true;
-      document.body.style.overflow = 'hidden';
-      window.removeEventListener('resize', handleResize);
-      renderer.domElement.removeEventListener('click', onClick);
-      renderer.domElement.removeEventListener('mousemove', onMouseMove);
-      renderer.domElement.removeEventListener('wheel', onWheel);
-      renderer.domElement.removeEventListener('touchstart', onTouchStart);
-      renderer.domElement.removeEventListener('touchmove', onTouchMove);
+  const updateMousePosition = (
+    event: MouseEvent, 
+    element: HTMLElement, 
+    mouse: THREE.Vector2
+  ) => {
+    const rect = element.getBoundingClientRect();
+    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+  };
 
-      // 🧼 Clean up meshes and dispose materials/textures
+  const showTooltip = (folder: string, x: number, y: number) => {
+    if (!tooltipRef.current) return;
+    
+    tooltipRef.current.style.display = 'block';
+    tooltipRef.current.textContent = folder.replace(/\/$/, '').replace(/-/g, ' ');
+    tooltipRef.current.style.left = x + 10 + 'px';
+    tooltipRef.current.style.top = y + 10 + 'px';
+  };
+
+  const hideTooltip = () => {
+    if (tooltipRef.current) {
+      tooltipRef.current.style.display = 'none';
+    }
+  };
+
+  const animate = (
+    renderer: THREE.WebGLRenderer,
+    scene: THREE.Scene,
+    camera: THREE.OrthographicCamera,
+    planes: { mesh: THREE.Mesh; folder: string }[],
+    state: ReturnType<typeof createState>
+  ) => {
+    const loop = () => {
+      if (state.stop) return;
+      requestAnimationFrame(loop);
+
+      state.currentIndex += (state.scrollIndex - state.currentIndex) * ANIMATION_SPEED;
+
       planes.forEach(({ mesh }) => {
-        scene.remove(mesh);
-        if (mesh.material instanceof THREE.Material) {
-          mesh.material.dispose();
-        }
-        mesh.geometry.dispose();
-        if ((mesh.material as any).map) {
-          (mesh.material as any).map.dispose();
-        }
+        const offset = hoveredMeshRef.current === mesh ? HOVER_OFFSET : 0;
+        const baseX = mesh.userData.baseX ?? mesh.position.x;
+        mesh.userData.baseX = baseX;
+        mesh.position.x += (baseX + offset - mesh.position.x) * HOVER_SPEED;
       });
 
-      renderer.dispose();
-
-      if (renderer.domElement.parentNode) {
-        renderer.domElement.parentNode.removeChild(renderer.domElement);
-      }
-
-      if (tooltipNode) {
-        tooltipNode.style.display = 'none';
-      }
+      renderer.render(scene, camera);
     };
-  }, [folders, router]);
+
+    loop();
+  };
+
+  const cleanupScene = (
+    renderer: THREE.WebGLRenderer,
+    scene: THREE.Scene,
+    planes: { mesh: THREE.Mesh; folder: string }[],
+    tooltip: HTMLDivElement | null
+  ) => {
+    document.body.style.overflow = 'hidden';
+    window.removeEventListener('resize', () => {});
+
+    planes.forEach(({ mesh }) => {
+      scene.remove(mesh);
+      if (mesh.material instanceof THREE.Material) {
+        mesh.material.dispose();
+      }
+      mesh.geometry.dispose();
+      if ((mesh.material as any).map) {
+        (mesh.material as any).map.dispose();
+      }
+    });
+
+    renderer.dispose();
+
+    if (renderer.domElement.parentNode) {
+      renderer.domElement.parentNode.removeChild(renderer.domElement);
+    }
+
+    if (tooltip) {
+      tooltip.style.display = 'none';
+    }
+  };
 
   return (
     <div ref={containerRef} className="w-full relative overflow-y-hidden">
