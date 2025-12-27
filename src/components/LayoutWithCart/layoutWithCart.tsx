@@ -78,7 +78,7 @@ export default function LayoutWithCartClient({ children, detectedCountry }: Prop
     <>
       <div className="box3 items-center cursor-pointer xl:text-md text-xs sticky z-20">
         <p className="ticker-text">
-          Get 20% off your first order when you subscribe! Free shipping on items over 200$ !
+          Boxing Day Sales is on this weekend! Hoodies and Sweatpants are on SALE starting now until December 30th!
         </p>
       </div>
 

@@ -12,6 +12,7 @@ import { CartItem } from '../../../store/cartSlice';
 import NavLogo from './NavLogo/NavLogo';
 import { useGlobalContext } from '../../Context/GlobalContext'
 
+
 type NavLinkType = {
   name: string;
   href: string;
@@ -145,6 +146,7 @@ const Navigation = () => {
               <br />
               A Holistic and accessible approach to Functionality & Grunge.
             </span>
+           
           </div>
         </div>
       </div>

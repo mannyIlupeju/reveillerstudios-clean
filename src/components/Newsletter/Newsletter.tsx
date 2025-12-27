@@ -160,6 +160,9 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
                 Join the RVS community
               </h1>
               <p className="text-xs">
+                Boxing Day Sales has started now! Major Discount applicable now on Hoodies and Sweatpants.
+                Shop now while Stock last! <br></br>
+                <br></br>
                 Get 20% off your first order and be the first to know about
                 exclusive drops, restocks and special offers - straight to your
                 inbox
