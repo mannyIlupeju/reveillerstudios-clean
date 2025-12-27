@@ -36,13 +36,9 @@
     "js-cookie": "^3.0.5",
     "lenis": "^1.3.8",
     "motion": "^12.6.3",
-<<<<<<< HEAD
-    "next": "15.1.11",
-    "next-sanity": "^9.12.0",
-=======
     "next": "^15.1.9",
     "next-sanity": "^11.6.10",
->>>>>>> f7a8c64 (updated announcement and newsletter bar)
+
     "next-sitemap": "^4.2.3",
     "node-fetch": "^2.6.9",
     "react": "^19.2.1",
@@ -75,13 +71,8 @@
     "@types/validator": "^13.15.2",
     "autoprefixer": "^10.0.1",
     "canvas-sketch-cli": "^1.0.4",
-<<<<<<< HEAD
-    "eslint": "^8",
-    "eslint-config-next": "15.1.9",
-=======
     "eslint": "^9.39.1",
     "eslint-config-next": "^16.0.7",
->>>>>>> f7a8c64 (updated announcement and newsletter bar)
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
     "typescript": "^5.6.3"
