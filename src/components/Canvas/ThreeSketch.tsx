@@ -19,158 +19,173 @@ const ThreeSketch = () => {
 
   
   useEffect(() => {
+  if (!backgroundCanvasRef.current) return;
 
-    if(!backgroundCanvasRef.current){
-      console.warn("backgroundCanvasRef.current is not set")
-      return;
-    }
+  let renderer: THREE.WebGLRenderer | null = null;
+  let animationId: number;
+  let particlesGeometry: THREE.BufferGeometry | null = null;
+  let particlesMaterial: THREE.PointsMaterial | null = null;
+  let dracoLoader: DRACOLoader | null = null;
+  let controls: OrbitControls | null = null;
 
-    
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xd3d3d3); // Dark gray  
-
-    const aspect = {
-      width: window.innerWidth,
-      height: window.innerHeight,
-    };
-
-
+  const initThree = () => {
     const canvas = backgroundCanvasRef.current;
     if (!canvas) return;
 
-    const camera = new THREE.PerspectiveCamera(75, aspect.width / aspect.height);
-    scene.add(camera);
+    /* ---------------- SCENE ---------------- */
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xd3d3d3);
+
+    /* ---------------- CAMERA ---------------- */
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight
+    );
     camera.position.z = 5;
+    scene.add(camera);
 
-    const textureLoader = new THREE.TextureLoader()
-    const particleTexture = textureLoader.load('/textures/particles/8.png')
+    /* ---------------- RENDERER ---------------- */
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-      const particleCount = 5000;
-      const particlesGeometry = new THREE.BufferGeometry();
-      const positions = new Float32Array(particleCount * 3);
+    /* ---------------- PARTICLES ---------------- */
+    const textureLoader = new THREE.TextureLoader();
+    const particleTexture = textureLoader.load(
+      "/textures/particles/8.png"
+    );
 
-      for (let i = 0; i < particleCount * 3; i++) {
-        positions[i] = (Math.random() - 0.5) * 20; // Spread particles in a 20x20x20 cube
-      }
+    const particleCount =
+      window.innerWidth < 768 ? 1500 : 3000;
 
-      particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    particlesGeometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
 
-      const particlesMaterial = new THREE.PointsMaterial({
-        color: 0xff0000,
-        size: 0.15,
-        transparent: true,
-        opacity: 0.7,
-      });
+    for (let i = 0; i < particleCount * 3; i++) {
+      positions[i] = (Math.random() - 0.5) * 20;
+    }
 
-      particlesMaterial.size = 0.1
-      particlesMaterial.sizeAttenuation = true 
-      particlesMaterial.alphaMap = particleTexture 
-      particlesMaterial.depthWrite = false
-      particlesMaterial.blending = THREE.AdditiveBlending
+    particlesGeometry.setAttribute(
+      "position",
+      new THREE.BufferAttribute(positions, 3)
+    );
 
-      const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-      scene.add(particles);
+    particlesMaterial = new THREE.PointsMaterial({
+      color: 0xff0000,
+      size: 0.1,
+      transparent: true,
+      opacity: 0.7,
+      alphaMap: particleTexture,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
 
+    const particles = new THREE.Points(
+      particlesGeometry,
+      particlesMaterial
+    );
+    scene.add(particles);
 
-  
-    
-    const modelGroup = new THREE.Group()
-    scene.add(modelGroup)
+    /* ---------------- MODEL ---------------- */
+    const modelGroup = new THREE.Group();
+    scene.add(modelGroup);
 
-    
-
-    const dracoLoader = new DRACOLoader();
-        // Point to public/draco/ where the Draco decoder files are located
+    dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath("/draco/");
+
     const gltfLoader = new GLTFLoader();
     gltfLoader.setDRACOLoader(dracoLoader);
 
-    // Load the model (try .gltf first, then fallback to .glb)
-    function loadModel(path: string) {
-      if (!path.endsWith('.gltf')) {
-        console.warn(`Expected a .gltf file but got: ${path}`);
-        return;
-      }
-    
-      gltfLoader.load(
-        path,
-        (gltf) => {
-          modelRef.current = gltf.scene;
-          updateModelScale();
-          modelGroup.add(modelRef.current as THREE.Object3D);
-        },
-        undefined,
-        (error) => {
-          console.error(`❌ Failed to load .gltf at ${path}:`, error);
-        }
+    const updateModelScale = () => {
+      if (!modelRef.current) return;
+
+      const scaleFactor = Math.min(
+        window.innerWidth / 50,
+        window.innerHeight / 50
       );
-    }
 
-    // Replace existing gltfLoader.load call with loadModel
-    loadModel("/models/GLTF/10rvr3dlogoMetal.gltf");
+      modelRef.current.scale.setScalar(scaleFactor * 2);
+    };
 
-    const controls = new OrbitControls(camera, canvas);
-   
-    controls.enableZoom = false;
-
-
-    function updateModelScale() {
-      const windowWidth = window.innerWidth;
-      const windowHeight = window.innerHeight;
-      const scaleFactor = Math.min(windowWidth / 50, windowHeight / 50);
-      if (modelRef.current) {
-        modelRef.current.scale.set(scaleFactor * 2, scaleFactor * 2, scaleFactor * 2);
+    gltfLoader.load(
+      "/models/GLTF/10rvr3dlogoMetal.gltf",
+      (gltf) => {
+        modelRef.current = gltf.scene;
+        updateModelScale();
+        modelGroup.add(gltf.scene);
       }
-    }
+    );
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 3);
+    /* ---------------- LIGHT ---------------- */
+    const ambientLight = new THREE.AmbientLight(
+      0xffffff,
+      3
+    );
     scene.add(ambientLight);
 
+    /* ---------------- CONTROLS ---------------- */
+    controls = new OrbitControls(camera, canvas);
+    controls.enableZoom = false;
 
-    const renderer = new THREE.WebGLRenderer({ canvas });
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-
-
+    /* ---------------- RESIZE ---------------- */
     const handleResize = () => {
-      aspect.width = window.innerWidth;
-      aspect.height = window.innerHeight;
-      camera.aspect = aspect.width / aspect.height;
+      if (!renderer) return;
+
+      camera.aspect =
+        window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
-      renderer.setSize(aspect.width, aspect.height);
-      // renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      renderer.setSize(
+        window.innerWidth,
+        window.innerHeight
+      );
+      renderer.setPixelRatio(
+        Math.min(window.devicePixelRatio, 2)
+      );
+
       updateModelScale();
     };
 
     window.addEventListener("resize", handleResize);
 
-    // Add Clock to calculate delta time for controls update
-        const rotationSpeed = 0.001; // Control speed of the rotation
+    /* ---------------- ANIMATE ---------------- */
+    const animate = () => {
+      animationId = requestAnimationFrame(animate);
 
+      modelGroup.rotation.y += 0.01;
+      particles.rotation.y += 0.001;
 
-        // Animate the scene
-        const animate = () => {
-            requestAnimationFrame(animate);
+      controls?.update();
+      renderer?.render(scene, camera);
+    };
 
-            // Rotate the model if it's loaded
-            modelGroup.rotation.y += 0.01;
+    animate();
+  };
 
-             particles.rotation.y += 0.001;
+  /* ---------------- DEFER INIT ---------------- */
+  const start = () => initThree();
 
-            controls.update()
-            renderer.render(scene, camera);
-        };
-        
-        animate();
+  if ("requestIdleCallback" in window) {
+    (window as any).requestIdleCallback(start);
+  } else {
+    setTimeout(start, 200);
+  }
 
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-  }, [backgroundCanvasRef]);
+  /* ---------------- CLEANUP ---------------- */
+  return () => {
+    if (animationId) cancelAnimationFrame(animationId);
 
+    renderer?.dispose();
+    particlesGeometry?.dispose();
+    particlesMaterial?.dispose();
+    dracoLoader?.dispose();
+    controls?.dispose();
+
+    window.removeEventListener("resize", () => {});
+  };
+}, []);
   
 
   return (
@@ -192,6 +207,7 @@ const ThreeSketch = () => {
           onClick={() => router.push('/shop/collections/new-releases')}
         >
           <video 
+            preload = "none"
             autoPlay 
             loop 
             muted 
@@ -230,6 +246,7 @@ const ThreeSketch = () => {
           // Remove onClick to prevent double trigger
         >
           <video 
+            preload = "none"
             width="auto" 
             height="auto" 
             autoPlay 
