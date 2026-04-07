@@ -6,6 +6,7 @@ import Footer from "@/components/Footer/Footer";
 import Loading from "@/components/Loading/Loading";
 import ThreeSketch from "@/components/Canvas/ThreeSketch";
 import Newsletter from "@/components/Newsletter/Newsletter";
+import ShopContainer from "@/components/ShopContainer/ShopContainer";
 
 export default function HomeBodyClient() {
   const { loading } = useLoading();

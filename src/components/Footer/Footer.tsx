@@ -22,8 +22,8 @@ export default function Footer() {
                     <Image 
                     src='/images/footerlogo.png'
                     alt="footer logo"
-                    width={250}
-                    height={250}
+                    width={100}
+                    height={100}
                     priority
                     />
 

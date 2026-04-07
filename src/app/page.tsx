@@ -1,7 +1,10 @@
 // app/page.tsx (Server Component)
 import { type Metadata } from "next";
 import { baseOg } from "../lib/seo";
+
 import HomeBodyClient from "./HomebodyClient";
+
+
 import { LoadingProvider, useLoading } from "@/Context/context/LoadingContext";
 
 export async function generateMetadata(): Promise<Metadata> {

@@ -78,7 +78,7 @@ export default function LayoutWithCartClient({ children, detectedCountry }: Prop
     <>
       <div className="box3 items-center cursor-pointer xl:text-md text-xs sticky z-20">
         <p className="ticker-text">
-          Boxing Day Sales is on this weekend! Hoodies and Sweatpants are on SALE starting now until December 30th!
+         Subscribe to our newsletter and get 20% off your first purchase!
         </p>
       </div>
 

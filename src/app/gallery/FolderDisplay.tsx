@@ -275,7 +275,8 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
         const clicked = planes.find((p) => p.mesh === intersects[0].object);
         // if (clicked) {
         //   playClickSound();
-        //   router.push(`/gallery/${encodeURIComponent(clicked.folder)}`);
+         if (!clicked) return;
+          router.push(`/gallery/${encodeURIComponent(clicked.folder)}`);
         // }
       }
     };
