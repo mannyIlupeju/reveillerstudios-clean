@@ -276,7 +276,7 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
         // if (clicked) {
         //   playClickSound();
          if (!clicked) return;
-          router.push(`/gallery/${encodeURIComponent(clicked.folder)}`);
+        router.push(`/gallery/${encodeURIComponent(clicked.folder)}`);
         // }
       }
     };
