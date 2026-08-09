@@ -5,6 +5,8 @@ export default function NewsletterFooter() {
   const [userData, setUserData] = useState({
     fullName: '',
     email: '',
+    phone: '',
+    smsConsent: false,
     requestUpdate: false,
     termsAgreed: false,
   });
@@ -16,6 +18,10 @@ export default function NewsletterFooter() {
     if (e) e.preventDefault();
     if (!userData.termsAgreed) {
       alert("Please agree to the Terms of Service & Privacy Policy");
+      return;
+    }
+    if (userData.smsConsent && !userData.phone.trim()) {
+      alert("Please enter a phone number to receive SMS updates");
       return;
     }
     setStatus("loading");
@@ -37,6 +43,8 @@ export default function NewsletterFooter() {
         setUserData({
           fullName: '',
           email: '',
+          phone: '',
+          smsConsent: false,
           requestUpdate: false,
           termsAgreed: false,
         });
@@ -89,6 +97,15 @@ export default function NewsletterFooter() {
           placeholder='Enter email address'
           className='text-zinc-800 p-2 '
         />
+        <input
+          type='tel'
+          name='phone'
+          value={userData.phone}
+          onChange={(e) => setUserData({...userData, phone: e.target.value})}
+          id='phone'
+          placeholder='Phone number (optional, e.g. +12125551234)'
+          className='text-zinc-800 p-2'
+        />
       </div>
       <div className="flex justify-start gap-2">
         <input
@@ -103,10 +120,26 @@ export default function NewsletterFooter() {
           Keep me updated with the latest news and best offers
         </label>
       </div>
+      <div className="flex justify-start items-start gap-2">
+        <input
+          type="checkbox"
+          id="smsConsent"
+          onChange={(e) => setUserData({...userData, smsConsent: e.target.checked})}
+          checked={userData.smsConsent}
+          name="smsConsent"
+          value="smsConsent"
+        />
+        <label htmlFor="smsConsent">
+          Sign up for SMS updates. By checking this box, you agree to receive recurring
+          automated marketing text messages from Reveillerstudios at the phone number
+          provided. Consent is not a condition of purchase. Msg &amp; data rates may apply.
+          Msg frequency varies. Reply STOP to cancel, HELP for help.
+        </label>
+      </div>
       <div className="flex justify-start gap-2">
         <input
           type="checkbox"
-          id="termsAgreed"  
+          id="termsAgreed"
           name="termsAgreed"
           onChange={(e) => setUserData({...userData, termsAgreed: e.target.checked})} 
           checked={userData.termsAgreed}

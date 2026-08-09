@@ -16,6 +16,8 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
   const [userData, setUserData] = useState({
     fullName: "",
     email: "",
+    phone: "",
+    smsConsent: false,
     requestUpdate: false,
     termsAgreed: false,
   });
@@ -69,6 +71,10 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
       alert("Please agree to the Terms of Service & Privacy Policy");
       return;
     }
+    if (userData.smsConsent && !userData.phone.trim()) {
+      alert("Please enter a phone number to receive SMS updates");
+      return;
+    }
     setStatus("loading");
     setErrorMsg(null);
     try {
@@ -117,9 +123,8 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
           onClick={closeModal} 
           />
           <main className="fixed md:-translate-y-[2rem] z-50 translate-y-[1rem] text-zinc-900 inset-0 flex items-center justify-center md:top-22 top-6 p-4">
-          <div 
+          <div
           className="max-w-sm md:w-fit subscriptionBox p-5 flex flex-col justify-center md:gap-5 gap-2"
-          onClick={(e) => e.preventDefault()} 
           >
             <div className="flex justify-end button">
               <button
@@ -160,12 +165,8 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
                 Join the RVS community
               </h1>
               <p className="text-xs">
-                Boxing Day Sales has started now! Major Discount applicable now on Hoodies and Sweatpants.
-                Shop now while Stock last! <br></br>
                 <br></br>
-                Get 20% off your first order and be the first to know about
-                exclusive drops, restocks and special offers - straight to your
-                inbox
+                Sign up for updates on exclusive Drops and New Releases
               </p>
             </div>
             <div className="flex flex-col md:gap-4 gap-2">
@@ -193,6 +194,17 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
                 placeholder="Email Address"
                 className="p-2 border text-xs border-zinc-400 rounded-md  text-zinc-800"
               />
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={userData.phone}
+                onChange={(e) =>
+                  setUserData({ ...userData, phone: e.target.value })
+                }
+                placeholder="Phone Number (optional, e.g. +12125551234)"
+                className="p-2 border text-xs border-zinc-400 rounded-md text-zinc-800"
+              />
             </div>
             <form className="flex flex-col gap-" onSubmit={submitRegistration}>
               <div className="flex justify-start gap-2">
@@ -212,6 +224,28 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
                 />
                 <label htmlFor="continueUpdate" className="text-xs">
                   Keep me updated with the latest news and best offers
+                </label>
+              </div>
+              <div className="flex justify-start items-start gap-2">
+                <input
+                  type="checkbox"
+                  id="smsConsent"
+                  onChange={(e) =>
+                    setUserData({
+                      ...userData,
+                      smsConsent: e.target.checked,
+                    })
+                  }
+                  checked={userData.smsConsent}
+                  name="smsConsent"
+                  value="smsConsent"
+                  className="md:text-md text-sm"
+                />
+                <label htmlFor="smsConsent" className="text-xs">
+                  Sign up for SMS updates. By checking this box, you agree to receive recurring
+                  automated marketing text messages from Reveillerstudios at the phone number
+                  provided. Consent is not a condition of purchase. Msg &amp; data rates may
+                  apply. Msg frequency varies. Reply STOP to cancel, HELP for help.
                 </label>
               </div>
               <div className="flex justify-start gap-2 md:text-md text-sm">

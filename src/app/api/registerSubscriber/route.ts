@@ -5,8 +5,13 @@ import { z } from 'zod';
 const requestBodySchema = z.object({
   email: z.string().email(),
   fullName: z.string().min(1, "Full name is required"),
+  phone: z.string().regex(/^\+[1-9]\d{7,14}$/, "Phone must include country code, e.g. +12125551234").optional().or(z.literal("")),
+  smsConsent: z.boolean().optional().default(false),
   termsAgreed: z.boolean().refine(val => val === true, "You must agree to the terms and conditions"),
   requestUpdate: z.boolean().optional().default(false),
+}).refine(data => !data.smsConsent || !!data.phone, {
+  message: "Phone number is required to opt into SMS",
+  path: ["phone"],
 });
 
 
