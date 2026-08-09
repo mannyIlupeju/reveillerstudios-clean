@@ -1,11 +1,15 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
+import { normalizePhone } from '@/utils/normalizePhone';
 
 // 1) Define your schema
 const requestBodySchema = z.object({
   email: z.string().email(),
   fullName: z.string().min(1, "Full name is required"),
-  phone: z.string().regex(/^\+[1-9]\d{7,14}$/, "Phone must include country code, e.g. +12125551234").optional().or(z.literal("")),
+  phone: z.preprocess(
+    (val) => typeof val === "string" ? normalizePhone(val) : val,
+    z.string().regex(/^\+[1-9]\d{7,14}$/, "That doesn't look like a valid phone number").optional().or(z.literal(""))
+  ),
   smsConsent: z.boolean().optional().default(false),
   termsAgreed: z.boolean().refine(val => val === true, "You must agree to the terms and conditions"),
   requestUpdate: z.boolean().optional().default(false),
@@ -21,12 +25,9 @@ export async function POST(request: Request) {
   const validation = requestBodySchema.safeParse(body);
   if (!validation.success) {
     const { fieldErrors, formErrors } = validation.error.flatten();
-    // Return the first form error or all field errors for client display
-    return NextResponse.json({
-      error: formErrors[0] || fieldErrors,
-      fieldErrors,
-      formErrors
-    }, { status: 400 });
+    // Always return a readable string in `error` — the frontend renders it as-is
+    const message = formErrors[0] || Object.values(fieldErrors).flat()[0] || "Invalid input";
+    return NextResponse.json({ error: message, fieldErrors, formErrors }, { status: 400 });
   }
   const validated = validation.data;
 
