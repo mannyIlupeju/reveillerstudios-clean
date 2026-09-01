@@ -38,20 +38,20 @@ export default function Footer() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-4">
-                    <div className="flex flex-col xl:gap-5 xl:text-lg text-sm gap-2">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-2 xl:gap-5 xl:text-md text-sm">
+                    <div className="flex flex-col  gap-2">
                         <Link href='/privacy'className="footer-link">About</Link>
                         <Link href='/privacy'className="footer-link">Privacy policy</Link>
                         <Link href='/terms'className="footer-link">Terms and Conditions</Link>
                     </div> 
 
-                     <div className="flex flex-col xl:text-lg text-sm xl:gap-5 w-fit gap-2">
+                     <div className="flex flex-col xl:gap-5 w-fit gap-2">
                         <Link href='/shipping'className="footer-link">Shipping</Link>
                         <Link href='/contact'className="footer-link ">Contact</Link>
                     </div>
                         
 
-                    <div className="flex flex-col xl:text-lg text-sm lg:gap-5 gap-2 mr-8">
+                    <div className="flex flex-col lg:gap-5 gap-2 mr-8">
                         <p className="xl:w-full">Connect with us!</p>
                         <div>
                             <ul className="flex xl:flex-row gap-2">
