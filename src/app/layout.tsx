@@ -76,6 +76,7 @@ export default async function RootLayout({
               <div className="relative w-96 h-96">
               <Image
                 src="/images/rvrspinninglogo-unscreen2.gif"
+                unoptimized
                 alt="Loading Reveiller"
                 width={400}
                 height={400}

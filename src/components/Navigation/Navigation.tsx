@@ -129,6 +129,7 @@ const Navigation = () => {
           <div className="hidden lg:flex w-fit items-start">
             <Image
               src="/images/rvrspinninglogo-unscreen2.gif"
+              unoptimized
               width={150}
               height={150}
               alt="rvr spinning logo"
