@@ -51,22 +51,22 @@ export default function Footer() {
                     </div>
                         
 
-                    <div className="flex flex-col text-md lg:gap-5 mr-8">
+                    <div className="flex flex-col xl:text-lg text-sm lg:gap-5 gap-2 mr-8">
                         <p className="xl:w-full">Connect with us!</p>
                         <div>
-                            <ul className="flex  xl:flex-row gap-2">
-                            <li >
-                                <a href="https://tiktok.com/@reveillerstudios" target="_blank" rel="noopener noreferrer">
+                            <ul className="flex xl:flex-row gap-2">
+                            <li>
+                                <a href="https://tiktok.com/@reveillerstudios" target="_blank" rel="noopener noreferrer" className="footer-link">
                                 Tiktok
                                 </a>
                             </li>
                             <li>
-                                <a href="https://instagram.com/reveillerstudios" target="_blank" rel="noopener noreferrer ">
+                                <a href="https://instagram.com/reveillerstudios" target="_blank" rel="noopener noreferrer " className="footer-link">
                                 Instagram
                                 </a>
                             </li>
                             <li>
-                                <a href='https://youtube.com/@reveillerstudios7473?si=IscpXCCkSra0prU4' target="_blank" rel="noopener noreferrer"   >
+                                <a href='https://youtube.com/@reveillerstudios7473?si=IscpXCCkSra0prU4' target="_blank" rel="noopener noreferrer" className="footer-link">
                                 Youtube
                                 </a>
                             </li>
