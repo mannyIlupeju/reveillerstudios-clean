@@ -25,3 +25,4 @@ sanity.cli.ts
 .vscode/
 
 fallback-build-manifest.jsondist/
+tsconfig.tsbuildinfo

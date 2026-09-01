@@ -23,6 +23,7 @@ export default function AppProviders({ children }: { children: ReactNode }) {
           <section className="flex justify-center mt-20 items-center">
             <Image
               src="/images/footerlogo.png"
+              unoptimized
               alt="Loading artwork of Reveillerstudios logo"
               width={800}
               height={800}

@@ -33,6 +33,7 @@ export default function BackgroundVisual() {
         loop
         muted
         playsInline
+        poster="/images/password-bg-poster.jpg"
         disablePictureInPicture
         controls={false}
         className="w-full h-full object-cover object-top"
