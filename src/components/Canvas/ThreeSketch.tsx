@@ -110,7 +110,7 @@ const ThreeSketch = () => {
     };
 
     gltfLoader.load(
-      "/models/GLTF/10rvr3dlogoMetal.gltf",
+      "/models/GLTF/10rvr3dlogoMetal.glb",
       (gltf) => {
         modelRef.current = gltf.scene;
         updateModelScale();
