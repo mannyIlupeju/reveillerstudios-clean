@@ -24,6 +24,7 @@ const Loading: React.FC = () => {
     <div ref={containerRef} className="fixed inset-0 z-[9999] grid place-items-center bg-white">
       <Image
         src="/images/footerlogo.png"
+        unoptimized
         alt="Loading artwork of Reveillerstudios logo"
         width={1000}
         height={1000}

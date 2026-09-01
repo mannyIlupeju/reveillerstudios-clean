@@ -692,6 +692,7 @@ th {
   height: 22rem;
   font-family:'Switzer-Medium', sans-serif;
   position: absolute;
+  top: 0;
   left: 4rem;
   z-index: 1;
 }
@@ -725,6 +726,7 @@ th {
   background-color: yellow;
   font-family:'Switzer-Medium', sans-serif;
   position: absolute;
+  top: 0;
   right: 35rem;
 }
 

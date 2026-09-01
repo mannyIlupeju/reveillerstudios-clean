@@ -76,7 +76,7 @@ export default function NewsletterFooter() {
       <div className='flex flex-col gap-2 mt-4'>
         <p className='text-sm'>Get 20% off your first order and be the first to know about exclusive drops, restocks and special offers - straight to your inbox</p>
       </div>
-      <div className='flex flex-col lg:flex-row gap-4 my-4 '>
+      <div className='flex flex-col lg:flex-row gap-4 mt-4'>
         <input
           type='text'
           name='fullName'
@@ -97,6 +97,8 @@ export default function NewsletterFooter() {
           placeholder='Enter email address'
           className='text-zinc-800 p-2 '
         />
+      </div>
+      <div className='flex flex-col gap-4 mb-4'>
         <input
           type='tel'
           name='phone'
@@ -104,7 +106,7 @@ export default function NewsletterFooter() {
           onChange={(e) => setUserData({...userData, phone: e.target.value})}
           id='phone'
           placeholder='Phone number (optional, e.g. +12125551234)'
-          className='text-zinc-800 p-2'
+          className='text-zinc-800 p-2 w-full'
         />
       </div>
       <div className="flex justify-start gap-2">

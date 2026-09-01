@@ -21,6 +21,7 @@ export default function Footer() {
                 <div className="flex flex-col lg:gap-2 h-[250px]">
                     <Image 
                     src='/images/footerlogo.png'
+                    unoptimized
                     alt="footer logo"
                     width={100}
                     height={100}
