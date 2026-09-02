@@ -16,6 +16,30 @@ const ThreeSketch = () => {
   const [box2Pos, setBox2Pos] = useState({ x: 0, y: 0 });
   const [activeBox, setActiveBox] = useState<string | null>(null);
 
+  // The circles rest at a fixed y-offset (see `restY` below). On short viewports that
+  // offset plus the circle's own height can exceed the canvas height, so the circles
+  // hang below the 3D canvas into empty space instead of staying inside it. Clamp the
+  // resting y so the circle's bottom edge never passes the canvas's bottom edge.
+  const box1Ref = useRef<HTMLDivElement>(null);
+  const box2Ref = useRef<HTMLDivElement>(null);
+  const restY = 300;
+  const [circleY, setCircleY] = useState(restY);
+
+  useEffect(() => {
+    const computeCircleY = () => {
+      const canvasHeight = window.innerHeight;
+      const boxHeight =
+        box1Ref.current?.offsetHeight || box2Ref.current?.offsetHeight || 0;
+      const bottomBuffer = 24;
+      const maxY = Math.max(0, canvasHeight - boxHeight - bottomBuffer);
+      setCircleY(Math.min(restY, maxY));
+    };
+
+    computeCircleY();
+    window.addEventListener("resize", computeCircleY);
+    return () => window.removeEventListener("resize", computeCircleY);
+  }, []);
+
 
   
   useEffect(() => {
@@ -196,8 +220,9 @@ const ThreeSketch = () => {
           dragConstraints={backgroundCanvasRef}
           dragElastic={0.05}
           onDragEnd={(e, info) => setBox2Pos({ x: info.point.x, y: info.point.y})}
+          ref={box1Ref}
           initial={{ x: -100, y: -400 }}
-          animate={{ x: -10, y: 300}}
+          animate={{ x: -10, y: circleY }}
           transition={{ duration: 2, ease: 'easeIn' }}
           className="box box1 flex  justify-center items-center relative cursor-grab"
           onTouchStart={() => setActiveBox('box1')}
@@ -233,8 +258,9 @@ const ThreeSketch = () => {
           drag
           dragConstraints={backgroundCanvasRef}
           dragElastic={0.05}
+          ref={box2Ref}
           initial={{ x: 500, y: -500 }}
-          animate={{ x: 500, y: 300}}
+          animate={{ x: 500, y: circleY }}
           transition={{ duration: 1, ease: 'easeIn' }}
           className="box box2 flex justify-center items-center relative cursor-grab p-4"
           onTouchStart={() => setActiveBox('box2')}
