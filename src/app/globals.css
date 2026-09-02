@@ -1,3 +1,7 @@
+/* Importing slick-carousel CSS files (must precede @tailwind / other rules per CSS spec) */
+@import 'slick-carousel/slick/slick.css';
+@import 'slick-carousel/slick/slick-theme.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -803,6 +807,3 @@ th {
 
 }
 
-/* Importing slick-carousel CSS files */
-@import 'slick-carousel/slick/slick.css';
-@import 'slick-carousel/slick/slick-theme.css';
