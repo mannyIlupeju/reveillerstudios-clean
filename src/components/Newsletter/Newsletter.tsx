@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ConfirmationMessage from '../ResponseMessages/confirmationMessage';
+import { AnimatePresence } from 'motion/react';
 
 type NewsletterProps = {
   /** If true, always open when mounted (ignore sessionStorage) */
@@ -109,13 +110,16 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
 
   return (
     <>
-      {(status === "success" || status === "error") && showConfirmation && (
-        <ConfirmationMessage
-          status={status}
-          errorMsg={errorMsg}
-          onClose={handleCloseConfirmation}
-        />
-      )}
+      <AnimatePresence>
+        {(status === "success" || status === "error") && showConfirmation && (
+          <ConfirmationMessage
+            key={status}
+            status={status}
+            errorMsg={errorMsg}
+            onClose={handleCloseConfirmation}
+          />
+        )}
+      </AnimatePresence>
 
       {showModal && !showConfirmation && (
         <>

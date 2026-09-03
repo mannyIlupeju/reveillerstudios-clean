@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import ConfirmationMessage from '../ResponseMessages/confirmationMessage';
+import { AnimatePresence } from 'motion/react';
 
 export default function NewsletterFooter() {
   const [userData, setUserData] = useState({
@@ -64,11 +65,13 @@ export default function NewsletterFooter() {
   return (
     <div className='text-sm xl:w-96 relative'>
       {/* Confirmation overlay, centered, but form remains visible */}
-      {(status === 'success' || status === 'error') && showConfirmation && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <ConfirmationMessage status={status} errorMsg={errorMsg} onClose={handleCloseConfirmation} />
-        </div>
-      )}
+      <AnimatePresence>
+        {(status === 'success' || status === 'error') && showConfirmation && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <ConfirmationMessage key={status} status={status} errorMsg={errorMsg} onClose={handleCloseConfirmation} />
+          </div>
+        )}
+      </AnimatePresence>
       {/* Form always visible */}
       <div className='flex flex-col gap-2'>
         <h1 className='text-xl'>Join the RVS community</h1>

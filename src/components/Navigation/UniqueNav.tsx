@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useSelector } from 'react-redux';
+import { useReducedMotion } from 'motion/react';
 import type { RootState } from '../../../store/store';
 import { CartItem } from '../../../store/cartSlice';
 import NavLogo from './NavLogo/NavLogo';
@@ -22,39 +23,63 @@ interface NavLinksProps {
   links: NavLinkType[];
 }
 
+// Burst length and tick rate for the scramble effect.
+const SCRAMBLE_DURATION = 300; // ms
+const SCRAMBLE_SPEED = 12; // ticks per second
 
 const NavLink = ({ name, href }: NavLinkType) => {
-  const [underlineVisible, setUnderlineVisible] = useState(false);
-  const [linkName, setLinkName] = useState(name);
-  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
-  const [isReversed, setIsReversed] = useState(false);
+  const [displayName, setDisplayName] = useState(name);
+  const isScramblingRef = useRef(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const isExternal = href.startsWith('http');
-  
-  
+  const prefersReducedMotion = useReducedMotion();
+
   const pathName = usePathname();
   const isActive = pathName?.startsWith(href);
 
-  const handleMouseEnter = (e: React.MouseEvent) => {
-    const originalText = e.currentTarget.textContent || '';
-    e.currentTarget.setAttribute('data-original-text', originalText);
+  // Character pool drawn only from the letters already in this link's own
+  // name, so the scramble never shows a letter that doesn't belong to it.
+  const poolRef = useRef(Array.from(new Set(name.replace(/\s/g, '').split(''))));
 
-    const id = setInterval(() => {
-      setIsReversed((prev) => !prev);
-      setLinkName(isReversed ? originalText.split('').reverse().join('') : originalText);
-    }, 500);
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, []);
 
-    setIntervalId(id);
+  const handleMouseEnter = () => {
+    if (prefersReducedMotion || isScramblingRef.current) return;
+    isScramblingRef.current = true;
+    const start = Date.now();
+
+    intervalRef.current = setInterval(() => {
+      if (Date.now() - start >= SCRAMBLE_DURATION) {
+        if (intervalRef.current) clearInterval(intervalRef.current);
+        setDisplayName(name);
+        isScramblingRef.current = false;
+        return;
+      }
+      setDisplayName(
+        name
+          .split('')
+          .map((char) =>
+            char === ' ' ? ' ' : poolRef.current[Math.floor(Math.random() * poolRef.current.length)]
+          )
+          .join('')
+      );
+    }, 1000 / SCRAMBLE_SPEED);
   };
 
-  const handleMouseLeave = () => {
-    if (intervalId) {
-      clearInterval(intervalId);
-      setIntervalId(null);
-    }
-    setLinkName(name);
-  };
+  const textSpan = <span className="whitespace-pre">{displayName}</span>;
 
- 
+  const underline = (
+    <span
+      aria-hidden="true"
+      className={`absolute left-0 -bottom-1 h-[1.5px] w-full bg-current origin-left transition-transform duration-200 ease-out ${
+        isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+      }`}
+    />
+  );
 
   return (
     <div className="group">
@@ -63,26 +88,20 @@ const NavLink = ({ name, href }: NavLinkType) => {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
+          className="relative inline-block"
+          onMouseEnter={handleMouseEnter}
         >
-          <span
-            className={`${underlineVisible || isActive ? 'scale-x-100' : 'scale-x-0'}`}
-            data-original-text={linkName}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
-            {linkName}
-          </span>
+          {textSpan}
+          {underline}
         </a>
       ) : (
-        <Link href={href}>
-          <span
-            className={`${underlineVisible || isActive ? 'scale-x-100' : 'scale-x-0'}`}
-            data-original-text={linkName}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
-            {linkName}
-          </span>
+        <Link
+          href={href}
+          className="relative inline-block"
+          onMouseEnter={handleMouseEnter}
+        >
+          {textSpan}
+          {underline}
         </Link>
       )}
     </div>

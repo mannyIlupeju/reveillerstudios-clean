@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useGlobalContext } from '../../Context/GlobalContext';
 import NewsletterFooter from '../NewsletterFooter/Newsletterfooter';
+import ScrambleLink from '../ScrambleLink/ScrambleLink';
 
 
 
@@ -40,14 +41,14 @@ export default function Footer() {
 
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-2 xl:gap-5 xl:text-md text-sm">
                     <div className="flex flex-col  gap-2">
-                        <Link href='/privacy'className="footer-link">About</Link>
-                        <Link href='/privacy'className="footer-link">Privacy policy</Link>
-                        <Link href='/terms'className="footer-link">Terms and Conditions</Link>
+                        <ScrambleLink href='/privacy' className="footer-link">About</ScrambleLink>
+                        <ScrambleLink href='/privacy' className="footer-link">Privacy policy</ScrambleLink>
+                        <ScrambleLink href='/terms' className="footer-link">Terms and Conditions</ScrambleLink>
                     </div> 
 
                      <div className="flex flex-col xl:gap-5 w-fit gap-2">
-                        <Link href='/shipping'className="footer-link">Shipping</Link>
-                        <Link href='/contact'className="footer-link ">Contact</Link>
+                        <ScrambleLink href='/shipping' className="footer-link">Shipping</ScrambleLink>
+                        <ScrambleLink href='/contact' className="footer-link">Contact</ScrambleLink>
                     </div>
                         
 
@@ -56,19 +57,19 @@ export default function Footer() {
                         <div>
                             <ul className="flex xl:flex-row gap-2">
                             <li>
-                                <a href="https://tiktok.com/@reveillerstudios" target="_blank" rel="noopener noreferrer" className="footer-link">
+                                <ScrambleLink href="https://tiktok.com/@reveillerstudios" external className="footer-link">
                                 Tiktok
-                                </a>
+                                </ScrambleLink>
                             </li>
                             <li>
-                                <a href="https://instagram.com/reveillerstudios" target="_blank" rel="noopener noreferrer " className="footer-link">
+                                <ScrambleLink href="https://instagram.com/reveillerstudios" external className="footer-link">
                                 Instagram
-                                </a>
+                                </ScrambleLink>
                             </li>
                             <li>
-                                <a href='https://youtube.com/@reveillerstudios7473?si=IscpXCCkSra0prU4' target="_blank" rel="noopener noreferrer" className="footer-link">
+                                <ScrambleLink href='https://youtube.com/@reveillerstudios7473?si=IscpXCCkSra0prU4' external className="footer-link">
                                 Youtube
-                                </a>
+                                </ScrambleLink>
                             </li>
                             </ul>
                         </div>
