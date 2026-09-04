@@ -1,7 +1,14 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+const REQUIRE_PASSWORD = false; // set back to true to re-enable the site-wide password gate
+
+
 export default function middleware(request: NextRequest) {
+   if (!REQUIRE_PASSWORD) {
+    return NextResponse.next();
+  }
+  
   const { pathname } = request.nextUrl;
 
   // Allow password page, auth API, subscriber API, and Next internal/static files

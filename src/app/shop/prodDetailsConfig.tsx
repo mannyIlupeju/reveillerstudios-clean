@@ -7,6 +7,7 @@ import Accordion from '../../components/Accordion/Accordion';
 import { getAccordionData  } from '../../utils/AccordionDataObj/accordion';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import Cookies from 'js-cookie'
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { useGlobalContext } from '../../Context/GlobalContext';
 import { setLoading, setError } from '../../../store/cartSlice';
 import type { RootState } from '../../../store/store';
@@ -71,6 +72,7 @@ export default function ProdDetailsConfiguration({id, title, priceRange, variant
   const cartState = useSelector((state: RootState) => state.cart)
 
   const { currency } = useCurrency();
+  const prefersReducedMotion = useReducedMotion();
 
   const {quantityAvailable, setQuantityAvailable, sizeInfo, setSizeInfo, cartId, setCartId, setIsCartOpen}= useGlobalContext()
 
@@ -393,7 +395,7 @@ export default function ProdDetailsConfiguration({id, title, priceRange, variant
               id={prices.id}
               onClick={(e) => selectSize(e, prices.id)}
               className={`
-                ${isButtonSelected == prices.id && quantityAvailable !== 0 ? `glassBox-green` : `glassBox`} rounded-xl p-3 cursor-pointer`}
+                ${isButtonSelected == prices.id && quantityAvailable !== 0 ? `glassBox-green` : `glassBox`} rounded-xl p-3 cursor-pointer transition-colors duration-200`}
             >
               {prices.selectedOptions[1]?.value || prices.selectedOptions[0]?.value || 'N/A'}
             </button>
@@ -405,41 +407,68 @@ export default function ProdDetailsConfiguration({id, title, priceRange, variant
 
 
         {/* Remaining quantity available notifier */}
-        {isButtonSelected && quantityAvailable !== null && (
-          <div className='prodDetailsOptionsBox w-fit p-3'>
-            <p>{`Only ${quantityAvailable} item(s) remaining`}</p>
-          </div>
-        )}
+        <AnimatePresence>
+          {isButtonSelected && quantityAvailable !== null && (
+            <motion.div
+              key="qty-remaining-notifier"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.2 }}
+              className='prodDetailsOptionsBox w-fit p-3'
+            >
+              <p>{`Only ${quantityAvailable} item(s) remaining`}</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
 
 
       {/* Item is sold out notifier */}
-      {quantityAvailable == 0 && (
-        <div className='prodDetailsOptionsBox w-fit p-3'>
-          <p>Item is sold out</p>
-        </div>
-      )}
+      <AnimatePresence>
+        {quantityAvailable == 0 && (
+          <motion.div
+            key="sold-out-notifier"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.2 }}
+            className='prodDetailsOptionsBox w-fit p-3'
+          >
+            <p>Item is sold out</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
 
         {/* Increase and Decrease quantity */}
-        {isButtonSelected && (
-          <div className='flex gap-5 w-fit mx-auto px-1 mt-2 '>
-            <div className="flex self-center hover:bg-orange-400 p-3 rounded-lg">
-              <FaMinus 
-                
-                onClick={() => decreaseAmt(isButtonSelected)} 
+        <AnimatePresence>
+          {isButtonSelected && (
+            <motion.div
+              key="qty-stepper"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.2 }}
+              className='flex gap-5 w-fit mx-auto px-1 mt-2 '
+            >
+              <div className="flex self-center hover:bg-orange-400 p-3 rounded-lg">
+                <FaMinus 
+                  
+                  onClick={() => decreaseAmt(isButtonSelected)} 
+                  />
+              </div>
+              <span className='font-bold text-lg bg-gray-200 p-4'>
+                {quantity[isButtonSelected] || 1}
+              </span>
+              <div className="flex self-center hover:bg-orange-400 p-3 rounded-lg">
+              <FaPlus 
+                onClick={() => increaseAmt(isButtonSelected, quantityAvailable)} 
                 />
-            </div>
-            <span className='font-bold text-lg bg-gray-200 p-4'>
-              {quantity[isButtonSelected] || 1}
-            </span>
-            <div className="flex self-center hover:bg-orange-400 p-3 rounded-lg">
-            <FaPlus 
-              onClick={() => increaseAmt(isButtonSelected, quantityAvailable)} 
-              />
-            </div>
-          </div>
-        )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
 
 
@@ -476,10 +505,20 @@ export default function ProdDetailsConfiguration({id, title, priceRange, variant
             }
           }}
         >
-          {isItemAddedToCart === 'default' && 'Add to Cart'}
-          {isItemAddedToCart === 'loading' && 
-            (<span>One moment, adding item to cart</span>)}
-          {isItemAddedToCart === 'added' && 'Item added to Cart'}
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={isItemAddedToCart}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.15 }}
+              className="inline-block"
+            >
+              {isItemAddedToCart === 'default' && 'Add to Cart'}
+              {isItemAddedToCart === 'loading' && 'One moment, adding item to cart'}
+              {isItemAddedToCart === 'added' && 'Item added to Cart'}
+            </motion.span>
+          </AnimatePresence>
         </button>
 
         {/* Loader and error UI */}

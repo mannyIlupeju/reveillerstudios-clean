@@ -4,7 +4,7 @@ import React, {useState, useEffect} from 'react'
 import { useRouter } from 'next/navigation';
 import { IoCloseOutline } from "react-icons/io5";
 import { FaMinus, FaPlus } from 'react-icons/fa';
-import {motion, AnimatePresence} from "motion/react";
+import {motion, AnimatePresence, useReducedMotion} from "motion/react";
 import Image from "next/image"
 import { useGlobalContext } from '../../Context/GlobalContext';
 import { RootState } from "../../../store/store";
@@ -30,6 +30,7 @@ export default function SideCart() {
   const [hydrated, setHydrated] = useState(false);
   const isMobile = useIsMobile();
   const [removingItemId, setRemovingItemId] = useState<string | null>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   
 
@@ -112,8 +113,17 @@ export default function SideCart() {
 
           <div className="flex-col flex-1 overflow-auto p-6 justify-center gap-8">
             <div className="flex flex-col gap-12">
+            <AnimatePresence initial={false}>
             {cartItems.length !== 0 ? cartItems.map((item) => (
-              <div key={item.id} className="flex flex-row">
+              <motion.div
+                key={item.id}
+                layout
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: prefersReducedMotion ? 0 : 0.25, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-row overflow-hidden"
+              >
                 <div className="w-48 relative ">
                   <Image
                     src={item.image}
@@ -150,8 +160,9 @@ export default function SideCart() {
                     {removingItemId === item.id ? 'Removing...' : 'Remove'}
                   </button>
                 </div>
-              </div>
+              </motion.div>
             )) : 'Your Cart is Empty.'}
+            </AnimatePresence>
             </div>
             <div className="mt-8 flex flex-col gap-4">
               <div className="flex justify-between">

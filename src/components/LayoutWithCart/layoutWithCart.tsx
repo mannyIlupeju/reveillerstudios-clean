@@ -8,6 +8,7 @@ import BranddetailContainer from '../BrandDetailContainer/BranddetailContainer';
 import ShopContainer from '../ShopContainer/ShopContainer';
 import { useGlobalContext } from '../../Context/GlobalContext';
 import { usePathname } from 'next/navigation';
+import { AnimatePresence } from 'motion/react';
 
 type Props = {
   children: React.ReactNode;
@@ -102,7 +103,9 @@ export default function LayoutWithCartClient({ children, detectedCountry }: Prop
       <SideNav />
       {isMenuOpen && !isCartOpen && <BranddetailContainer />}
       {/* ShopContainer only shows on mobile */}
-      {isMobile && isShopHovered && !isCartOpen && <ShopContainer />}
+      <AnimatePresence>
+        {isMobile && isShopHovered && !isCartOpen && <ShopContainer />}
+      </AnimatePresence>
       {!isCartPage && <SideCart />}
     </>
   );

@@ -9,6 +9,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import { removeItem, setLoading, updateQuantity, setCartItems, setError } from "../../../store/cartSlice";
 import { removeCartItem, updateCartQty, refreshCart, handleCheckout } from "../../utils/cartFunctions/cartFunctions";
 import {useEffect, useState} from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { RootState } from "../../../store/store";
 import { useCurrency } from '../../Context/context/CurrencyContext';
 import { formatMoney } from '../../utils/formatMoney';   
@@ -65,6 +66,7 @@ export default function CartDisplay({cart}:CartProps){
     const cartItems = useSelector((state: RootState) => state.cart.cart);
 
     const { currency } = useCurrency();
+    const prefersReducedMotion = useReducedMotion();
 
     const cartTotal = cartItems.reduce((total, item) => {
         return total + item.price * item.quantity;      
@@ -141,10 +143,16 @@ export default function CartDisplay({cart}:CartProps){
         {cartItems.length > 0 ? (
             <>
             <div className="flex flex-col gap-4 md:gap-6">
+                <AnimatePresence initial={false}>
                 {cartItems.map((item) => (
-                <div 
+                <motion.div 
                     key={item.id}
-                    className="flex flex-col sm:flex-row gap-4 pb-4 border-b border-gray-200 last:border-b-0"
+                    layout
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: prefersReducedMotion ? 0 : 0.25, ease: [0.16, 1, 0.3, 1] }}
+                    className="flex flex-col sm:flex-row gap-4 pb-4 border-b border-gray-200 last:border-b-0 overflow-hidden"
                 >
                     {/* Image */}
                     <div className="flex-shrink-0 w-full sm:w-32 md:w-48 lg:w-56 mx-auto sm:mx-0">
@@ -204,8 +212,9 @@ export default function CartDisplay({cart}:CartProps){
                         </button>
                     </div>
                     </div>
-                </div>
+                </motion.div>
                 ))}
+                </AnimatePresence>
             </div>
 
             {/* Total and Checkout */}
