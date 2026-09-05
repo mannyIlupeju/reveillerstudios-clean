@@ -33,8 +33,8 @@ export default function Privacy() {
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Owner and Data Controller</h2>
           <div className="text-gray-700 space-y-2">
             <p><strong>Reveillerstudios</strong></p>
-            <p>686 Toronto street, Winnipeg, MB</p>
-            <p>Owner contact email: <a href="mailto:reveillerstudios@outlook.com" className="text-blue-600 hover:underline">reveillerstudios@outlook.com</a></p>
+            <p>376 Donald Street, wpg. MB</p>
+            <p>Owner contact email: <a href="mailto:contact@reveillerstudios.com" className="text-blue-600 hover:underline">reveillerstudios@outlook.com</a></p>
           </div>
         </section>
 
@@ -281,7 +281,7 @@ export default function Privacy() {
     </p>
 
     <p>
-      For Service support or assistance, send a request by email to 
+      For Service support or assistance, send a request by email to. 
       <a
         href="mailto:contact@reveillerstudios.com"
         className="text-blue-600 hover:underline"
