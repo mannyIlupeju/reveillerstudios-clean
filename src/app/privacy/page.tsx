@@ -34,7 +34,7 @@ export default function Privacy() {
           <div className="text-gray-700 space-y-2">
             <p><strong>Reveillerstudios</strong></p>
             <p>376 Donald Street, wpg. MB</p>
-            <p>Owner contact email: <a href="mailto:contact@reveillerstudios.com" className="text-blue-600 hover:underline">reveillerstudios@outlook.com</a></p>
+            <p>Owner contact email: <a href="mailto:contact@reveillerstudios.com" className="text-blue-600 hover:underline">contact@reveillerstudios.com</a></p>
           </div>
         </section>
 
