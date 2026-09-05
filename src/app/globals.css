@@ -692,8 +692,8 @@ th {
 
 .box1{
   clip-path: circle(50% at 50% 50%);
-  width: 22rem;
-  height: 22rem;
+  width: 16rem;
+  height: 16rem;
   font-family:'Switzer-Medium', sans-serif;
   position: absolute;
   top: 0;
@@ -707,8 +707,8 @@ th {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 24rem;
-  height: 24rem;
+  width: 18rem;
+  height: 18rem;
   border-radius: 50%;
   box-shadow: 0 4px 30px 0 rgba(0,0,0,0.35), 0 0 0 10px rgba(0,0,0,0.10);
   z-index: -1;
@@ -725,8 +725,8 @@ th {
 
 .box2{
   clip-path: circle(50% at 50% 50%);
-  width: 22rem;
-  height: 22rem;
+  width: 16rem;
+  height: 16rem;
   background-color: yellow;
   font-family:'Switzer-Medium', sans-serif;
   position: absolute;
@@ -800,8 +800,8 @@ th {
 
 @media screen and (max-width:800px){
   .box {
-    width: 15rem;
-    height:15rem;
+    width: 13rem;
+    height:13rem;
   }
 
 
