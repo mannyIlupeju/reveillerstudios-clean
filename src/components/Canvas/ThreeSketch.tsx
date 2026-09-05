@@ -27,8 +27,19 @@ const ThreeSketch = () => {
   let particlesMaterial: THREE.PointsMaterial | null = null;
   let dracoLoader: DRACOLoader | null = null;
   let controls: OrbitControls | null = null;
+  let handleResize: (() => void) | null = null;
+  let cancelled = false;
+  let idleCallbackId: number | null = null;
+  let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
   const initThree = () => {
+    // React Strict Mode double-invokes this effect in dev (mount -> cleanup -> mount).
+    // Because setup is deferred below, the cleanup from the first mount can run before
+    // this callback fires; without this guard it would still run and create a second
+    // renderer/OrbitControls/animate loop layered onto the same canvas, causing visible
+    // glitching whenever the model is rotated (two loops fighting over one canvas).
+    if (cancelled) return;
+
     const canvas = backgroundCanvasRef.current;
     if (!canvas) return;
 
@@ -130,7 +141,7 @@ const ThreeSketch = () => {
     controls.enableZoom = false;
 
     /* ---------------- RESIZE ---------------- */
-    const handleResize = () => {
+    handleResize = () => {
       if (!renderer) return;
 
       camera.aspect =
@@ -152,6 +163,7 @@ const ThreeSketch = () => {
 
     /* ---------------- ANIMATE ---------------- */
     const animate = () => {
+      if (cancelled) return;
       animationId = requestAnimationFrame(animate);
 
       modelGroup.rotation.y += 0.01;
@@ -168,13 +180,22 @@ const ThreeSketch = () => {
   const start = () => initThree();
 
   if ("requestIdleCallback" in window) {
-    (window as any).requestIdleCallback(start);
+    idleCallbackId = (window as any).requestIdleCallback(start);
   } else {
-    setTimeout(start, 200);
+    timeoutId = setTimeout(start, 200);
   }
 
   /* ---------------- CLEANUP ---------------- */
   return () => {
+    cancelled = true;
+
+    // Cancel a still-pending deferred init so Strict Mode's mount/cleanup/mount
+    // in dev never results in a second renderer being created for this canvas.
+    if (idleCallbackId !== null && "cancelIdleCallback" in window) {
+      (window as any).cancelIdleCallback(idleCallbackId);
+    }
+    if (timeoutId !== null) clearTimeout(timeoutId);
+
     if (animationId) cancelAnimationFrame(animationId);
 
     renderer?.dispose();
@@ -183,7 +204,7 @@ const ThreeSketch = () => {
     dracoLoader?.dispose();
     controls?.dispose();
 
-    window.removeEventListener("resize", () => {});
+    if (handleResize) window.removeEventListener("resize", handleResize);
   };
 }, []);
   
