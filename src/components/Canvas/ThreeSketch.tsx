@@ -34,7 +34,7 @@ const ThreeSketch = () => {
 
     /* ---------------- SCENE ---------------- */
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xd3d3d3);
+    scene.background = new THREE.Color(0x000000);
 
     /* ---------------- CAMERA ---------------- */
     const camera = new THREE.PerspectiveCamera(
