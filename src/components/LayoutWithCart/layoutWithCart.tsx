@@ -79,7 +79,7 @@ export default function LayoutWithCartClient({ children, detectedCountry }: Prop
     <>
       <div className="box3 items-center cursor-pointer xl:text-md text-xs sticky z-20">
         <p className="ticker-text">
-         Subscribe to our newsletter and get 20% off your first purchase!
+         Welcome to Reveiller Studios
         </p>
       </div>
 
