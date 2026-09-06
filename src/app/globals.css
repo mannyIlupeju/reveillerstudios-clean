@@ -747,7 +747,7 @@ th {
 .box3{
   width: 100%;
   padding: 0.4rem;
-  background-color: rgb(241, 244, 241);
+  background-color: #f60505;
   overflow: hidden;
   border-top: 1px solid #f60505;
   border-bottom: 1px solid #f60505;
@@ -775,6 +775,7 @@ th {
   padding: 0 3rem;
   font-family: 'Nirvana', sans-serif;
   word-spacing: 0.4em;
+  color: #fff;
 }
 
 @media (prefers-reduced-motion: reduce) {
