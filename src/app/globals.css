@@ -76,6 +76,16 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Nirvana';
+  src: url('/NIRVANA.woff2') format('woff2'),
+    url('/NIRVANA.woff') format('woff'),
+    url('/NIRVANA.TTF') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
 
 /* @font-face {
   font-family: 'Satoshi-light';
@@ -739,7 +749,10 @@ th {
   padding: 0.4rem;
   background-color: rgb(241, 244, 241);
   overflow: hidden;
+  border-top: 1px solid #f60505;
+  border-bottom: 1px solid #f60505;
   white-space: nowrap;
+  display: flex;
 }
 
 .imageCardhover {
@@ -750,10 +763,24 @@ th {
 
 }
 
+.ticker-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: ticker-scroll 22s linear infinite;
+  will-change: transform;
+}
+
 .ticker-text {
   display: inline-block;
-  padding-left: 100%;
-  animation: ticker 30s ease-in-out infinite;
+  padding: 0 3rem;
+  font-family: 'Nirvana', sans-serif;
+  word-spacing: 0.4em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
 }
 
 .videoOverlay {
@@ -789,12 +816,12 @@ th {
 
 
 
-@keyframes ticker {
+@keyframes ticker-scroll {
   0% {
-    transform: translateX(-100%);
+    transform: translateX(0%);
   }
   100% {
-    transform: translateX(0%);
+    transform: translateX(-50%);
   }
 }
 

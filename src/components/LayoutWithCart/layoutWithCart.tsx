@@ -77,10 +77,14 @@ export default function LayoutWithCartClient({ children, detectedCountry }: Prop
 
   return (
     <>
-      <div className="box3 items-center cursor-pointer xl:text-md text-xs sticky z-20">
-        <p className="ticker-text">
-         Welcome to Reveiller Studios
-        </p>
+      <div className="box3 items-center cursor-pointer text-lg sticky z-20">
+        <div className="ticker-track" aria-hidden={false}>
+          {Array.from({ length: 16 }).map((_, i) => (
+            <span key={i} className="ticker-text uppercase">
+              Welcome to Reveiller Studios
+            </span>
+          ))}
+        </div>
       </div>
 
       {isCartOpen && !isCartPage && (
