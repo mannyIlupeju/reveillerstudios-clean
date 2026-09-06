@@ -132,7 +132,7 @@ const Navigation = () => {
   }, [cartQty]);
 
   return (
-    <nav className="flex xl:justify-between w-full justify-center gap-4 mx-auto p-2 nav-font xl:sticky z-20 top-0 glassBox-nav">
+    <nav className="flex xl:justify-between w-full justify-center gap-4 mx-auto p-2 nav-font xl:sticky z-20 xl:top-[53px] glassBox-nav">
       <div className="xl:flex hidden justify-between items-center">
         <div className="flex lg:flex-row gap-5 flex-col justify-start items-center">
           <div className="hidden lg:flex w-fit items-start">

@@ -753,6 +753,11 @@ th {
   right: 35rem;
 }
 
+/* Sticky announcement bar. Navigation.tsx's nav offsets its own sticky
+   position (xl:top-[53px], matching this bar's measured rendered
+   height) to sit just below this bar instead of overlapping it at
+   top:0 -- if this bar's height changes (padding, font-size, border),
+   re-measure and update that offset to match. */
 .box3{
   width: 100%;
   padding: 0.4rem;
