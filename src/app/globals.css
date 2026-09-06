@@ -762,6 +762,14 @@ th {
   border-bottom: 1px solid #f60505;
   white-space: nowrap;
   display: flex;
+  /* Forces this sticky element onto its own stable compositing layer.
+     Without this, some mobile WebKit browsers tear down and rebuild
+     the layer when a position:sticky element crosses its stuck
+     threshold on scroll, which can freeze a running CSS animation on
+     a descendant (the ticker-track marquee) instead of resuming it. */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
 }
 
 .imageCardhover {
