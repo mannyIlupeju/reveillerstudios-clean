@@ -262,7 +262,7 @@ const ThreeSketch = () => {
           onTouchEnd={()=> setActiveBox(null)}
           onMouseDown={() => setActiveBox('box2')}
           onMouseUp={() => setActiveBox('box2')}
-          onClick={() => router.push('/about')}
+          onClick={() => router.push('/gallery')}
 
           // Remove onClick to prevent double trigger
         >
@@ -288,7 +288,7 @@ const ThreeSketch = () => {
           <div className="absolute inset-0 bg-black/20 transition-colors duration-200" style={{background: activeBox === 'box2' ? 'rgba(255,140,0,0.5)' : 'rgba(0,0,0,0.2)'}}></div>
 
           {/* Text */}
-          <h1 className="z-20 text-white text-xl font-bold">About</h1>
+          <h1 className="z-20 text-white text-xl font-bold">Gallery</h1>
 
         </motion.div>
         
