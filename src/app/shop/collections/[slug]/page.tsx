@@ -5,13 +5,19 @@ import ProductGrid from '@/app/shop/ProductGrid'
 import ProductCategories from '@/app/shop/productCategories'
 import { collectionQuery, collectionParamQuery } from '@/lib/shopify/queries/queries';
 import Waitlist from '@/components/Waitlist/Waitlist';
+import { isShopOpen } from '@/utils/shopStatus/shopStatus';
 
 
 
 export default async function Page({params}: {params: Promise<{ slug: string }> }){
    const {slug} = await params
 
-   
+   // Skip the Shopify call entirely while the store is paused, same as
+   // /shop -- it would just fail into the catch block below anyway.
+   if (!isShopOpen) {
+     return <Waitlist />
+   }
+
    try {
      const response = await client.request(collectionQuery, {variables: { handle:slug }})
        

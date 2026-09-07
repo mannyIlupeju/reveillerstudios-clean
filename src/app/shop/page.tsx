@@ -9,6 +9,7 @@ import { fetchCategories } from '../../utils/fetchCategories/fetchCategories';
 import ProductGrid from './ProductGrid';
 import ProductCategories from './productCategories';
 import Waitlist from '@/components/Waitlist/Waitlist';
+import { isShopOpen } from '@/utils/shopStatus/shopStatus';
 
 // 1️⃣ Force per-request SSR
 export const dynamic = 'force-dynamic';
@@ -33,8 +34,6 @@ export const metadata: Metadata = {
 
 
 const Page = async () => {
-  // Toggle to `true` once Shopify is reactivated and the drop is live.
-   const isShopOpen = false;
   // 2️⃣ Detect country from cookie or header
 
   if (!isShopOpen) {
