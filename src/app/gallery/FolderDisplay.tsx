@@ -176,7 +176,7 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
   };
 
   const setupPlanes = (scene: THREE.Scene, folders: string[]) => {
-    const planes: { mesh: THREE.Mesh; folder: string }[] = [];
+    const planes: { mesh: THREE.Mesh; folder: string; hitMesh: THREE.Mesh }[] = [];
     const loader = new THREE.TextureLoader();
     let cancelled = false;
 
@@ -192,7 +192,17 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
         configureTexture(texture, loader as any);
         const mesh = createPlaneMesh(texture);
         scene.add(mesh);
-        planes.push({ mesh, folder });
+
+        // Invisible mesh used only for hover raycasting. It always mirrors
+        // the plane's resting (pre-hover-offset) transform -- see
+        // updatePlanePositions -- so the hover-slide animation below can't
+        // shift the raycast target out from under the cursor and flicker
+        // hover onto a neighboring plane. Not added to the scene since it's
+        // never rendered.
+        const hitMesh = new THREE.Mesh(mesh.geometry, new THREE.MeshBasicMaterial());
+        hitMesh.visible = false;
+
+        planes.push({ mesh, folder, hitMesh });
         updatePlanePositions(planes, 0);
       });
     });
@@ -224,7 +234,7 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
   };
 
   const updatePlanePositions = (
-    planes: { mesh: THREE.Mesh; folder: string }[], 
+    planes: { mesh: THREE.Mesh; folder: string; hitMesh: THREE.Mesh }[], 
     scrollIndex: number
   ) => {
     planes.forEach((plane, i) => {
@@ -244,6 +254,10 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
       );
       
       mesh.userData.baseX = mesh.position.x;
+
+      plane.hitMesh.position.copy(mesh.position);
+      plane.hitMesh.rotation.copy(mesh.rotation);
+      plane.hitMesh.updateMatrixWorld(true);
     });
   };
 
@@ -260,7 +274,7 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
   const setupEventListeners = (
     renderer: THREE.WebGLRenderer,
     camera: THREE.OrthographicCamera,
-    planes: { mesh: THREE.Mesh; folder: string }[],
+    planes: { mesh: THREE.Mesh; folder: string; hitMesh: THREE.Mesh }[],
     state: ReturnType<typeof createState>
   ) => {
     const raycaster = new THREE.Raycaster();
@@ -286,11 +300,15 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
       
       updateMousePosition(event, renderer.domElement, mouse);
       raycaster.setFromCamera(mouse, camera);
-      
-      const intersects = raycaster.intersectObjects(planes.map((p) => p.mesh));
-      
+
+      // Hover uses each plane's stable hitMesh rather than its live mesh --
+      // the live mesh slides on hover (HOVER_OFFSET), which would otherwise
+      // move it out from under the cursor and cause hover to flicker onto a
+      // neighboring plane.
+      const intersects = raycaster.intersectObjects(planes.map((p) => p.hitMesh));
+
       if (intersects.length > 0) {
-        const hovered = planes.find((p) => p.mesh === intersects[0].object);
+        const hovered = planes.find((p) => p.hitMesh === intersects[0].object);
         if (hovered) {
           // Play sound only when hovering a new mesh
           // if (state.lastHoveredMesh !== hovered.mesh) {
@@ -372,7 +390,7 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
     renderer: THREE.WebGLRenderer,
     scene: THREE.Scene,
     camera: THREE.OrthographicCamera,
-    planes: { mesh: THREE.Mesh; folder: string }[],
+    planes: { mesh: THREE.Mesh; folder: string; hitMesh: THREE.Mesh }[],
     state: ReturnType<typeof createState>
   ) => {
     const loop = () => {
@@ -397,13 +415,13 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
   const cleanupScene = (
     renderer: THREE.WebGLRenderer,
     scene: THREE.Scene,
-    planes: { mesh: THREE.Mesh; folder: string }[],
+    planes: { mesh: THREE.Mesh; folder: string; hitMesh: THREE.Mesh }[],
     tooltip: HTMLDivElement | null
   ) => {
     document.body.style.overflow = 'hidden';
     window.removeEventListener('resize', () => {});
 
-    planes.forEach(({ mesh }) => {
+    planes.forEach(({ mesh, hitMesh }) => {
       scene.remove(mesh);
       if (mesh.material instanceof THREE.Material) {
         mesh.material.dispose();
@@ -411,6 +429,11 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
       mesh.geometry.dispose();
       if ((mesh.material as any).map) {
         (mesh.material as any).map.dispose();
+      }
+      // hitMesh shares mesh's (already-disposed) geometry -- only its own
+      // material needs cleanup here.
+      if (hitMesh.material instanceof THREE.Material) {
+        hitMesh.material.dispose();
       }
     });
 
