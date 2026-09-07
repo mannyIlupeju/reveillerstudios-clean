@@ -1,3 +1,5 @@
+'use client'
+
 import React, {useState} from 'react'
 import ConfirmationMessage from '../ResponseMessages/confirmationMessage';
 import { AnimatePresence } from 'motion/react';
