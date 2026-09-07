@@ -4,7 +4,7 @@ import { fetchCategories } from '@/utils/fetchCategories/fetchCategories'
 import ProductGrid from '@/app/shop/ProductGrid'
 import ProductCategories from '@/app/shop/productCategories'
 import { collectionQuery, collectionParamQuery } from '@/lib/shopify/queries/queries';
-import NewsletterFooter from '@/components/NewsletterFooter/Newsletterfooter';
+import Waitlist from '@/components/Waitlist/Waitlist';
 
 
 
@@ -42,19 +42,9 @@ export default async function Page({params}: {params: Promise<{ slug: string }> 
     console.error("Error fetching collection:", error)
 
     // The Shopify store is currently paused, so this fetch always fails --
-    // show the same "closed" messaging as /shop instead of a raw error,
-    // with a way to sign up for the waitlist.
-    return (
-      <main className="flex flex-col items-center justify-center min-h-[60vh] px-4 text-center gap-6">
-        <div>
-          <h1 className="text-xs tracking-widest uppercase mb-4">Shop Closed</h1>
-          <p className="text-sm max-w-sm">
-            Shop closed, join our waitlist to hear about the next drop.
-          </p>
-        </div>
-        <NewsletterFooter />
-      </main>
-    )
+    // show the shared "shop closed, join the waitlist" state instead of a
+    // raw error.
+    return <Waitlist />
    }
   
 }

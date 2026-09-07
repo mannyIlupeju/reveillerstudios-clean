@@ -8,6 +8,7 @@ import { fetchProducts } from '../../utils/fetchProducts/fetchProducts';
 import { fetchCategories } from '../../utils/fetchCategories/fetchCategories';
 import ProductGrid from './ProductGrid';
 import ProductCategories from './productCategories';
+import Waitlist from '@/components/Waitlist/Waitlist';
 
 // 1️⃣ Force per-request SSR
 export const dynamic = 'force-dynamic';
@@ -37,14 +38,7 @@ const Page = async () => {
   // 2️⃣ Detect country from cookie or header
 
   if (!isShopOpen) {
-    return (
-      <main className="flex flex-col items-center justify-center min-h-[60vh] px-4 text-center">
-        <h1 className="text-xs tracking-widest uppercase mb-4">Shop Closed</h1>
-        <p className="text-sm max-w-sm">
-          The shop is closed right now. A new drop is on the way — check back soon.
-        </p>
-      </main>
-    )
+    return <Waitlist />
   }
 
   
