@@ -861,6 +861,10 @@ th {
   color: #fff;
 }
 
+.font-nirvana {
+  font-family: 'Nirvana', sans-serif;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ticker-track {
     animation: none;
