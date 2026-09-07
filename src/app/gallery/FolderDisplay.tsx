@@ -342,8 +342,14 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
     };
 
     const onTouchStart = (event: TouchEvent) => {
+      // Deliberately no preventDefault() here: calling it on touchstart
+      // suppresses the browser's synthesized click event entirely, which
+      // was silently breaking tap-to-open on the archive images. The
+      // canvas's touch-action: none (see setupRenderer) already stops the
+      // native page scroll/pan, and onTouchMove below still calls
+      // preventDefault once an actual swipe is detected -- a plain tap
+      // never reaches onTouchMove, so it still fires a normal click.
       if (event.touches.length === 1) {
-        event.preventDefault();
         state.touchStartY = event.touches[0].clientY;
       }
     };
