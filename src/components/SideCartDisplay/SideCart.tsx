@@ -178,10 +178,12 @@ export default function SideCart() {
                   </button>
                )}
             </div>
-          <div className="mt-32">
-            <h2 className="text-lg">You might want to check these out:</h2>
-            <ProdRecommendations recommendations={recommendedItems} />
-          </div>
+          {cartItems.length > 0 && (
+            <div className="mt-32">
+              <h2 className="text-lg">You might want to check these out:</h2>
+              <ProdRecommendations recommendations={recommendedItems} />
+            </div>
+          )}
           </div>
 
           <p className="text-xl mx-auto my-4">Estimated Total: {currency.code} {formatMoney(Number(cartTotal), currency.code)} </p>
