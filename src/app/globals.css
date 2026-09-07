@@ -381,11 +381,16 @@ border: 1px solid rgba(235, 120, 22, 0.3);
 }
 
 .glassBox-nav {
-  background: hsla(0, 5%, 96%, 0.45);
+  /* Opacity raised from 0.45 to 0.8 and blur raised from 7.9px to 32px --
+     20px blur alone still let scrolling text (e.g. product titles on
+     /shop) show through sharply enough to clash with the nav's own text.
+     At 0.8 opacity + 32px blur, whatever scrolls underneath actually fades
+     out instead of ghosting through. */
+  background: hsla(0, 5%, 96%, 0.8);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(7.9px);
-  -webkit-backdrop-filter: blur(7.9px);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
