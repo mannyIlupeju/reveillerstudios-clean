@@ -7,7 +7,12 @@ import { collectionQuery, collectionParamQuery } from '@/lib/shopify/queries/que
 import Waitlist from '@/components/Waitlist/Waitlist';
 import { isShopOpen } from '@/utils/shopStatus/shopStatus';
 
-
+// The root layout reads headers() for country detection, which makes
+// every route dynamic. Without this, Next tries to statically optimize
+// this route for on-demand params (every slug, since generateStaticParams
+// below always returns [] while Shopify is unreachable) and crashes with
+// a DYNAMIC_SERVER_USAGE error instead of just rendering per request.
+export const dynamic = 'force-dynamic';
 
 export default async function Page({params}: {params: Promise<{ slug: string }> }){
    const {slug} = await params
