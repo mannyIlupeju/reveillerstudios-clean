@@ -122,6 +122,10 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
     renderer.setPixelRatio(Math.min(dpr, 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
+    // Prevent mobile browsers from treating swipes on the canvas as a native
+    // page scroll/pan (which was lifting the whole viewport instead of only
+    // moving the carousel items) -- touch handling below is fully custom.
+    renderer.domElement.style.touchAction = 'none';
     containerRef.current!.appendChild(renderer.domElement);
 
     const camera = createCamera();
@@ -339,13 +343,19 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
 
     const onTouchStart = (event: TouchEvent) => {
       if (event.touches.length === 1) {
+        event.preventDefault();
         state.touchStartY = event.touches[0].clientY;
       }
     };
 
     const onTouchMove = (event: TouchEvent) => {
       if (state.touchStartY === null) return;
-      
+
+      // Stop the browser's native scroll/pan for this gesture -- without
+      // this, a swipe both advances the carousel AND scrolls/lifts the
+      // whole page.
+      event.preventDefault();
+
       const deltaY = state.touchStartY - event.touches[0].clientY;
       if (Math.abs(deltaY) > DELTA_THRESHOLD) {
         state.scrollIndex = (state.scrollIndex + (deltaY > 0 ? 1 : -1) + folders.length) % folders.length;
@@ -449,7 +459,11 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
   };
 
   return (
-    <div ref={containerRef} className="w-full relative overflow-y-hidden">
+    <div
+      ref={containerRef}
+      className="w-full relative overflow-y-hidden"
+      style={{ touchAction: 'none' }}
+    >
       <div
         ref={tooltipRef}
         style={{
