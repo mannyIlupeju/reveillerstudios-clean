@@ -247,7 +247,7 @@ const ThreeSketch = () => {
           <div className="absolute inset-0 bg-black/20 z-10 transition-colors duration-200" style={{background: activeBox === 'box1' ? 'rgba(255,140,0,0.5)' : 'rgba(0,0,0,0.2)'}}></div>
 
           {/* Text */}
-          <h1 className="z-20 text-white text-xl font-bold font-nirvana">Shop New Releases</h1>
+          <h1 className="z-20 text-md text-yellow-300 font-bold font-satoshi-bold uppercase tracking-widest">Shop New Releases</h1>
 
         </motion.div>
         <motion.div
@@ -288,7 +288,7 @@ const ThreeSketch = () => {
           <div className="absolute inset-0 bg-black/20 transition-colors duration-200" style={{background: activeBox === 'box2' ? 'rgba(255,140,0,0.5)' : 'rgba(0,0,0,0.2)'}}></div>
 
           {/* Text */}
-          <h1 className="z-20 text-white text-xl font-bold font-nirvana">Gallery</h1>
+          <h1 className="z-20 text-md text-yellow-400 font-bold font-satoshi-bold uppercase tracking-widest">Gallery</h1>
 
         </motion.div>
         
