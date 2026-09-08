@@ -1,4 +1,11 @@
 import React from 'react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Shipping & Returns',
+  description: 'Shipping timelines, carriers, and return policy for Reveiller Studios orders.',
+  alternates: { canonical: 'https://www.reveillerstudios.com/shipping' },
+};
 
 export default function ShippingAndReturns() {
   return (

@@ -10,6 +10,7 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'Gallery / Archive',
   description: 'Explore our archive of creative works and projects.',
+  alternates: { canonical: 'https://www.reveillerstudios.com/gallery' },
 };
 
 export default async function Page() {

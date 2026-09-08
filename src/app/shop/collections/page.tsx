@@ -1,6 +1,13 @@
 import { redirect } from 'next/navigation';
+import type { Metadata } from 'next';
 import Waitlist from '@/components/Waitlist/Waitlist';
 import { isShopOpen } from '@/utils/shopStatus/shopStatus';
+
+export const metadata: Metadata = {
+  title: 'Collections',
+  description: 'Browse Reveiller Studios product collections.',
+  alternates: { canonical: 'https://www.reveillerstudios.com/shop/collections' },
+};
 
 // There's no index of collections to show while the store is paused --
 // only /shop/collections/[slug] exists, so hitting /shop/collections

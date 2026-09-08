@@ -1,4 +1,6 @@
 import React from 'react'
+import type { Metadata } from 'next'
+import humanizeString from 'humanize-string'
 import client from '@/lib/shopify/shopify-client/shopify-client'
 import { fetchCategories } from '@/utils/fetchCategories/fetchCategories'
 import ProductGrid from '@/app/shop/ProductGrid'
@@ -14,7 +16,46 @@ import { isShopOpen } from '@/utils/shopStatus/shopStatus';
 // a DYNAMIC_SERVER_USAGE error instead of just rendering per request.
 export const dynamic = 'force-dynamic';
 
-export default async function Page({params}: {params: Promise<{ slug: string }> }){
+type PageProps = { params: Promise<{ slug: string }> };
+
+// Every collection previously shared the site's generic root title/description
+// in search results since this route had no metadata of its own. While the
+// shop is closed there's no live collection data to pull from, so this falls
+// back to a readable title derived from the slug instead of skipping metadata
+// entirely.
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const fallbackTitle = humanizeString(slug);
+  const canonical = `https://www.reveillerstudios.com/shop/collections/${slug}`;
+
+  if (!isShopOpen) {
+    return {
+      title: fallbackTitle,
+      description: `Shop the ${fallbackTitle} collection from Reveiller Studios.`,
+      alternates: { canonical },
+    };
+  }
+
+  try {
+    const response = await client.request(collectionQuery, { variables: { handle: slug } });
+    const title = response?.data?.collectionByHandle?.title || fallbackTitle;
+
+    return {
+      title,
+      description: `Shop the ${title} collection from Reveiller Studios.`,
+      alternates: { canonical },
+    };
+  } catch (error) {
+    console.error('Error fetching collection metadata:', error);
+    return {
+      title: fallbackTitle,
+      description: `Shop the ${fallbackTitle} collection from Reveiller Studios.`,
+      alternates: { canonical },
+    };
+  }
+}
+
+export default async function Page({params}: PageProps){
    const {slug} = await params
 
    // Skip the Shopify call entirely while the store is paused, same as

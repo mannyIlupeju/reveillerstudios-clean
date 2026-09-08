@@ -2,8 +2,9 @@ import React from 'react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Shop page',
-  description: 'Shop our new releases out now'
+  title: 'Contact',
+  description: 'Get in touch with Reveiller Studios for order and customer service inquiries.',
+  alternates: { canonical: 'https://www.reveillerstudios.com/contact' },
 };
 
 

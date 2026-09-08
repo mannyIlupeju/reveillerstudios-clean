@@ -1,5 +1,11 @@
 import React from 'react'
+import type { Metadata } from 'next'
 
+export const metadata: Metadata = {
+  title: 'Blog',
+  description: 'News, stories, and updates from Reveiller Studios.',
+  alternates: { canonical: 'https://www.reveillerstudios.com/blog' },
+};
 
 function page() {
   return (
