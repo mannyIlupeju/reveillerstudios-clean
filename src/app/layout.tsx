@@ -2,8 +2,6 @@ import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import Image from 'next/image';
 import { detectCountry } from '@/utils/detectCountry/detectCountry';
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Analytics } from '@vercel/analytics/next';
 import AppProviders from './Providers/AppProviders';
 import LayoutWithCart from '../components/LayoutWithCart/layoutWithCart';
 import CookieConsentModal from '../components/CookieConsentModal/cookieConsent';
@@ -94,8 +92,6 @@ export default async function RootLayout({
             <CookieConsentModal />
             <LayoutWithCart detectedCountry={country}>
               {children}
-              <SpeedInsights />
-              <Analytics />
             </LayoutWithCart>
           </AppProviders>
         </PreloaderGate>

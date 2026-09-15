@@ -23,8 +23,6 @@
     "@shopify/storefront-api-client": "^1.0.3",
     "@studio-freight/lenis": "^1.0.42",
     "@types/js-cookie": "^3.0.6",
-    "@vercel/analytics": "^1.5.0",
-    "@vercel/speed-insights": "^1.2.0",
     "bcryptjs": "^3.0.2",
     "canvas-sketch-util": "^1.10.0",
     "cookies-next": "^6.0.0",
