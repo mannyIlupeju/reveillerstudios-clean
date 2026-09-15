@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { detectCountry } from '@/utils/detectCountry/detectCountry';
 
 export async function POST(req: Request) {
   console.log("=== REMOVE ITEM API ROUTE ===");
@@ -17,7 +18,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const country = req.headers.get('x-vercel-ip-country') || 'US';
+    const country = await detectCountry();
 
     const query = `
       mutation removeCartLines($cartId: ID!, $lineIds: [ID!]!, $country: CountryCode!) @inContext(country: $country) {

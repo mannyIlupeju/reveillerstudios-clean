@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { headers } from 'next/headers';
+import { detectCountry } from '@/utils/detectCountry/detectCountry';
 
 export async function GET() {
-  const country = (await headers()).get('x-vercel-ip-country') || 'US';
+  const country = await detectCountry();
   return NextResponse.json({ country });
 }

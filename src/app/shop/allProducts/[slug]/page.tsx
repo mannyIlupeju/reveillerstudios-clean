@@ -5,8 +5,8 @@ import ProductDetails from '../../productDetails';
 import client from '../../../../lib/shopify/shopify-client/shopify-client';
 import { paramQuery, productQuery } from '@/lib/shopify/queries/queries';
 import { getProductRecommendations } from '../../prodRecommendations';
-import { cookies, headers } from 'next/headers';
 import { isShopOpen } from '@/utils/shopStatus/shopStatus';
+import { detectCountry } from '@/utils/detectCountry/detectCountry';
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -67,11 +67,7 @@ export default async function Page({ params }: PageProps): Promise<JSX.Element> 
 
   try {
     // Fetch product data using the slug
-    const [cookieStore, headerStore] = await Promise.all([cookies(), headers()]);
-    const cookie = cookieStore.get('user-country')?.value;
-    const headerCountry = headerStore.get('x-vercel-ip-country');
-
-    const country = (cookie === 'CA' || headerCountry === 'CA') ? 'CA' : 'US';
+    const country = await detectCountry();
    
 
     const response = await client.request(productQuery, { variables: { handle: slug, country } });

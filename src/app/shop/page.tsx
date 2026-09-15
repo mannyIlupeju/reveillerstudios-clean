@@ -3,13 +3,13 @@
 import React from 'react';
 import Head from 'next/head';
 import type { Metadata } from 'next';
-import { cookies, headers } from 'next/headers';
 import { fetchProducts } from '../../utils/fetchProducts/fetchProducts';
 import { fetchCategories } from '../../utils/fetchCategories/fetchCategories';
 import ProductGrid from './ProductGrid';
 import ProductCategories from './productCategories';
 import Waitlist from '@/components/Waitlist/Waitlist';
 import { isShopOpen } from '@/utils/shopStatus/shopStatus';
+import { detectCountry } from '@/utils/detectCountry/detectCountry';
 
 // 1️⃣ Force per-request SSR
 export const dynamic = 'force-dynamic';
@@ -41,11 +41,7 @@ const Page = async () => {
   }
 
   
-  const cookieStore = await cookies();
-  const headerStore = await headers();
-  const cookieCountry = cookieStore.get('user-country')?.value;
-  const headerCountry = headerStore.get('x-vercel-ip-country');
-  const country = cookieCountry === 'CA' || headerCountry === 'CA' ? 'CA' : 'US';
+  const country = await detectCountry();
 
   // 3️⃣ Pass country into your fetch helpers
   const products = await fetchProducts(country);

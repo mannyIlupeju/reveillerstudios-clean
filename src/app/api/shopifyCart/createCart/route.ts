@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { detectCountry } from '@/utils/detectCountry/detectCountry';
 
 export async function POST(req: Request) {
   try {
@@ -9,8 +10,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing or invalid line items" }, { status: 400 });
     }
 
-    const countryHeader = req.headers.get('x-vercel-ip-country');
-    const country = countryHeader === 'CA' ? 'CA' : 'US'; // default fallback
+    const country = await detectCountry(); // cookie override, then IP header
     const language = country === 'CA' ? 'EN' : 'EN'; // Adjust if needed
 
     const query = `

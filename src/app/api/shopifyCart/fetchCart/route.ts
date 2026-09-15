@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import { NextResponse } from 'next/server';
+import { detectCountry } from '@/utils/detectCountry/detectCountry';
 
 export async function POST(req: Request) {
   console.log("Incoming request method:", req.method);
@@ -14,9 +15,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing cartId" }, { status: 400 });
     }
 
-    // Get country from header (or fallback)
-    const countryHeader = req.headers.get('x-vercel-ip-country');
-    const country = countryHeader === 'CA' ? 'CA' : 'US';
+    // Resolve visitor country: cookie override, then IP header
+    const country = await detectCountry();
 
     const query = `
       query cartQuery($cartId: ID!, $country: CountryCode)

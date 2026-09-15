@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import Image from 'next/image';
-import { headers } from 'next/headers';
+import { detectCountry } from '@/utils/detectCountry/detectCountry';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
 import AppProviders from './Providers/AppProviders';
@@ -60,8 +60,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const headerStore = await headers();
-  const country = headerStore.get('x-vercel-ip-country') === 'CA' ? 'CA' : 'US';
+  const country = await detectCountry();
 
   return (
     <html lang="en">
