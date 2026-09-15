@@ -147,11 +147,11 @@ const Navigation = () => {
           </div>
 
           <div className="w-[400px] h-[100px] flex items-center justify-center">
-            <Image src="/images/REVEILLERSTUDIOS.svg" alt="rvr logo" width={400} height={200} className="mx-auto logo" onClick={() => router.push('/')} />
+            <Image src="/images/RVSWHITE.svg" alt="rvr logo" width={200} height={200} className="mx-auto logo text-white" onClick={() => router.push('/')} />
           </div>
          
           <div className="p-2 flex flex-col justify-start items-center w-full">
-            <span className="text-zinc-800 text-xs">
+            <span className="text-white text-xs">
               Existence precedes Essence.
               <br />
               A Holistic and accessible approach to Functionality & Grunge.
@@ -163,10 +163,10 @@ const Navigation = () => {
 
    
 
-      <div className="flex-row xl:flex hidden justify-end">
+      <div className="flex-row xl:flex hidden text-white justify-end">
         <div className="flex gap-5">
           <NavLinks links={navLinks}/>
-          <div className="flex items-center">
+          <div className="flex items-center text-white">
             <button onClick={() => {
               if(cartQty > 0 ) toggleCart()
             }} className={`flex gap-1 ${cartQuantity === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
@@ -183,12 +183,12 @@ const Navigation = () => {
       <div className="xl:hidden flex flex-col h-fit cursor-pointer ">
         <div className="flex justify-items-start h-fit" onClick={() => router.push('/') }>
         <div className="w-[400px] h-[100px] flex items-center justify-center">
-            <Image src="/images/REVEILLERSTUDIOS.svg" alt="rvr logo" width={400} height={200} className="mx-auto logo" />
+            <Image src="/images/RVSWHITE.svg" alt="rvr logo" width={400} height={200} className="mx-auto logo" />
           </div>
         </div>
 
          <div className="flex justify-center w-full -mt-4">
-            <span className="text-zinc-800 text-xs">
+            <span className="text-white text-xs">
               Existence precedes Essence.
             </span>
           </div>
