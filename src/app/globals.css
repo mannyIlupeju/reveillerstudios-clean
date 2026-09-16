@@ -254,13 +254,13 @@ body {
   margin: 0;
   padding: 0;
   background-color: transparent;
-  font-family:'Satoshi-Light', sans-serif;
-
-
+  font-family: 'termina', sans-serif;
+  font-weight: 400;
 }
 
 .nav-font {
-  font-family: 'Satoshi-Light', sans-serif;
+  font-family: 'termina', sans-serif;
+  font-weight: 400;
 }
 
 canvas {
@@ -404,12 +404,13 @@ border: 1px solid rgba(235, 120, 22, 0.3);
 
 .subscriptionBox {
 /* From https://css.glass */
-background: rgba(255, 252, 249, 0.78);
+background: rgba(248, 121, 2, 0.78);
 border-radius: 16px;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(9.9px);
 -webkit-backdrop-filter: blur(9.9px);
 border: 1px solid rgba(222, 157, 6, 0.98);
+
 }
 
 .thanksforSubscribing {
@@ -429,7 +430,8 @@ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(5px);
 -webkit-backdrop-filter: blur(5px);
 border: 1px solid rgba(251, 251, 251, 0.3);
-font-family: 'Satoshi-Medium', sans-serif;
+font-family: 'termina', sans-serif;
+font-weight: 400;
 }
 
 .SideCart {
@@ -439,8 +441,8 @@ font-family: 'Satoshi-Medium', sans-serif;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(251, 251, 251, 0.3);
-  font-family: 'Satoshi-Medium', sans-serif;
-  
+  font-family: 'termina', sans-serif;
+  font-weight: 400;
 }
 
 
@@ -615,7 +617,7 @@ font-family: 'Satoshi-Medium', sans-serif;
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: ITCAvantGardeStd-Bk,Arial,sans-serif;
+  font-family: 'termina', Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -671,7 +673,7 @@ font-family: 'Satoshi-Medium', sans-serif;
   color: #000;
   cursor: pointer;
   display: inline-block;
-  font-family: ITCAvantGardeStd-Bk,Arial,sans-serif;
+  font-family: 'termina', Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -773,7 +775,8 @@ th {
   clip-path: circle(50% at 50% 50%);
   width: 16rem;
   height: 16rem;
-  font-family:'Switzer-Medium', sans-serif;
+  font-family: 'termina', sans-serif;
+  font-weight: 400;
   position: absolute;
   top: 0;
   left: 4rem;
@@ -807,7 +810,8 @@ th {
   width: 16rem;
   height: 16rem;
   background-color: yellow;
-  font-family:'Switzer-Medium', sans-serif;
+  font-family: 'termina', sans-serif;
+  font-weight: 400;
   position: absolute;
   top: 0;
   right: 35rem;
@@ -870,13 +874,24 @@ th {
 .ticker-text {
   display: inline-block;
   padding: 0 3rem;
-  font-family: 'Nirvana', sans-serif;
+  font-family: 'termina', sans-serif;
+  font-weight: 400;
   word-spacing: 0.4em;
   color: #fff;
 }
 
+.newsletter-heading {
+  font-family: 'termina', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  
+
+}
+
 .font-satoshi-bold {
-  font-family: 'Satoshi-Black', sans-serif;
+  font-family: 'termina', sans-serif;
+  font-weight: 400;
 }
 
 @media (prefers-reduced-motion: reduce) {

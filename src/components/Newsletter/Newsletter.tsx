@@ -159,10 +159,10 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
               </button>
             </div>
             <div>
-              <h1 className="md:text-sm text-xs items-center">
-                Join the RVS community
+              <h1 className="md:text-2xl text-xl font-semiBold items-center newsletter-heading">
+                Join the Community
               </h1>
-              <p className="text-xs">
+              <p className="text-md">
                 <br></br>
                 Sign up for updates on exclusive Drops and New Releases
               </p>

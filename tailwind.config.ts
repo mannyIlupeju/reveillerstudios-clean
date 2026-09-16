@@ -14,8 +14,8 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       fontFamily: {
-        satoshi: ['Satoshi', 'sans-serif'],
-        switzer: ['Switzer', 'sans-serif'],
+        satoshi: ['termina', 'sans-serif'],
+        switzer: ['termina', 'sans-serif'],
       },
       rotate: {
         x30: '30deg',
