@@ -25,8 +25,6 @@ export default function ShopWaitlistForm({
   const [userData, setUserData] = useState({
     fullName: '',
     email: '',
-    phone: '',
-    smsConsent: false,
     requestUpdate: false,
     termsAgreed: false,
   });
@@ -38,10 +36,6 @@ export default function ShopWaitlistForm({
     if (e) e.preventDefault();
     if (!userData.termsAgreed) {
       alert("Please agree to the Terms of Service & Privacy Policy");
-      return;
-    }
-    if (userData.smsConsent && !userData.phone.trim()) {
-      alert("Please enter a phone number to receive SMS updates");
       return;
     }
     setStatus("loading");
@@ -63,8 +57,6 @@ export default function ShopWaitlistForm({
         setUserData({
           fullName: '',
           email: '',
-          phone: '',
-          smsConsent: false,
           requestUpdate: false,
           termsAgreed: false,
         });
@@ -138,17 +130,6 @@ export default function ShopWaitlistForm({
               className={inputClasses}
             />
           </div>
-          <div className="flex flex-col">
-            <input
-              type="tel"
-              name="phone"
-              value={userData.phone}
-              onChange={(e) => setUserData({ ...userData, phone: e.target.value })}
-              id="shop-waitlist-phone"
-              placeholder="Phone number (optional, e.g. +12125551234)"
-              className={`${inputClasses} w-full`}
-            />
-          </div>
         </div>
 
         <div className="flex justify-start gap-2">
@@ -161,21 +142,6 @@ export default function ShopWaitlistForm({
           />
           <label htmlFor="shop-waitlist-requestUpdate">
             Keep me updated with the latest news and best offers
-          </label>
-        </div>
-        <div className="flex justify-start items-start gap-2 mt-2">
-          <input
-            type="checkbox"
-            id="shop-waitlist-smsConsent"
-            onChange={(e) => setUserData({ ...userData, smsConsent: e.target.checked })}
-            checked={userData.smsConsent}
-            name="smsConsent"
-          />
-          <label htmlFor="shop-waitlist-smsConsent">
-            Sign up for SMS updates. By checking this box, you agree to receive recurring
-            automated marketing text messages from Reveillerstudios at the phone number
-            provided. Consent is not a condition of purchase. Msg &amp; data rates may apply.
-            Msg frequency varies. Reply STOP to cancel, HELP for help.
           </label>
         </div>
         <div className="flex justify-start gap-2 mt-2">

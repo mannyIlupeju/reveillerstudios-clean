@@ -17,8 +17,6 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
   const [userData, setUserData] = useState({
     fullName: "",
     email: "",
-    phone: "",
-    smsConsent: false,
     requestUpdate: false,
     termsAgreed: false,
   });
@@ -70,10 +68,6 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
     if (e) e.preventDefault();
     if (!userData.termsAgreed) {
       alert("Please agree to the Terms of Service & Privacy Policy");
-      return;
-    }
-    if (userData.smsConsent && !userData.phone.trim()) {
-      alert("Please enter a phone number to receive SMS updates");
       return;
     }
     setStatus("loading");
@@ -198,17 +192,6 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
                 placeholder="Email Address"
                 className="p-2 border text-xs border-zinc-400 rounded-md  text-zinc-800"
               />
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                value={userData.phone}
-                onChange={(e) =>
-                  setUserData({ ...userData, phone: e.target.value })
-                }
-                placeholder="Phone Number (optional, e.g. +12125551234)"
-                className="p-2 border text-xs border-zinc-400 rounded-md text-zinc-800"
-              />
             </div>
             <form className="flex flex-col gap-" onSubmit={submitRegistration}>
               <div className="flex justify-start gap-2">
@@ -228,28 +211,6 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
                 />
                 <label htmlFor="continueUpdate" className="text-xs">
                   Keep me updated with the latest news and best offers
-                </label>
-              </div>
-              <div className="flex justify-start items-start gap-2">
-                <input
-                  type="checkbox"
-                  id="smsConsent"
-                  onChange={(e) =>
-                    setUserData({
-                      ...userData,
-                      smsConsent: e.target.checked,
-                    })
-                  }
-                  checked={userData.smsConsent}
-                  name="smsConsent"
-                  value="smsConsent"
-                  className="md:text-md text-sm"
-                />
-                <label htmlFor="smsConsent" className="text-xs">
-                  Sign up for SMS updates. By checking this box, you agree to receive recurring
-                  automated marketing text messages from Reveillerstudios at the phone number
-                  provided. Consent is not a condition of purchase. Msg &amp; data rates may
-                  apply. Msg frequency varies. Reply STOP to cancel, HELP for help.
                 </label>
               </div>
               <div className="flex justify-start gap-2 md:text-md text-sm">
