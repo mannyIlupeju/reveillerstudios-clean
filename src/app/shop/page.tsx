@@ -78,7 +78,7 @@ const Page = async () => {
       />
       <main className="flex xl:flex-row flex-col gap-8 px-4">
         <h1 className="sr-only">Shop</h1>
-        <aside className="xl:sticky block xl:top-1/2 xl:-translate-y-1/2 top-10 z-10 xl:w-48 xl:self-start">
+        <aside className="xl:sticky block xl:top-[50vh] xl:-translate-y-1/2 top-10 z-10 xl:w-48 xl:self-start">
           <ProductCategories collections={collections} />
         </aside>
 
