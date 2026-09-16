@@ -17,7 +17,10 @@ function ProdRecommendations({recommendations}:any) {
      <section className={`p-3 ml-2 xl:mt-4 mt-2 transition-opacity duration-700 ${allLoaded ? 'opacity-100' : 'opacity-0'}`}>
         {recommendations?.length > 0 && (
           <section className="">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-fit">
+            <div
+              className="grid gap-6 w-full max-w-[900px]"
+              style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}
+            >
               {recommendations.map((item: any, index: number) => (
                 <div className="flex flex-col" key={item.id || index}>
                   <div className="w-full p-4 flex justify-center">
