@@ -20,15 +20,15 @@ function ProdRecommendations({recommendations}:any) {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-fit">
               {recommendations.map((item: any, index: number) => (
                 <div className="flex flex-col" key={item.id || index}>
-                  <div className="w-fit p-4 items-end">
+                  <div className="w-full p-4 flex justify-center">
                     {item.featuredImage?.url ? (
                       <Link href={`/shop/allProducts/${item.handle}`}>
                         <Image
                           src={item.featuredImage.url}
                           alt={item.featuredImage.altText || 'Product'}
-                          width={100}
-                          height={100}
-                          className="object-contain rounded-md w-fit h-fit aspect-[2/3] flex justify-end"
+                          width={132}
+                          height={198}
+                          className="object-contain rounded-md w-[8.25rem] aspect-[2/3]"
                         />
                       </Link>
                     ) : (
@@ -46,7 +46,7 @@ function ProdRecommendations({recommendations}:any) {
 
                     {item.priceRange ? (
                       <p className="text-sm">
-                      {currency.code} {formatMoney(Number(item.priceRange.minVariantPrice.amount), currency.code)}
+                      {formatMoney(Number(item.priceRange.minVariantPrice.amount), currency.code)}
                       </p>
                     ) : (
                       <div className="h-5 bg-gray-300 rounded w-[100px] animate-pulse" />
