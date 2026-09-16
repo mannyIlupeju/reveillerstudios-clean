@@ -39,7 +39,7 @@ function ProdRecommendations({recommendations}:any) {
                   {/* Text Skeletons */}
                   <div className="flex flex-col mx-auto align-bottom space-y-2">
                     {item.title ? (
-                      <h3 className="text-xs">{item.title}</h3>
+                      <h3 className="text-lg xs:text-sm">{item.title}</h3>
                     ) : (
                       <div className="h-6 bg-gray-300 rounded w-[150px] animate-pulse" />
                     )}

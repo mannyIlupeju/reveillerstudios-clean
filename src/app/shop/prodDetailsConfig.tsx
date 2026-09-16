@@ -374,15 +374,15 @@ export default function ProdDetailsConfiguration({id, title, priceRange, variant
 
 
   return (
-    <aside className='xl:absolute xl:z-1 xl:top-4 xl:text-lg xl:mx-0 mx-2 xl:ml-4 text-sm flex justify-items-start flex-col w-fit gap-5 font-bold cursor-pointer'>
-      <div className='prodDetailsOptionsBox p-3 xl:text-lg lg:text-sm text-sm flex gap-10 w-2xl rounded-lg border-black'>
-        <p className='text-sm font-extra bold font-satoshi'>{title}</p>
+    <aside className='xl:absolute xl:z-1 xl:top-12 xl:text-lg xl:mx-0 mx-2 xl:ml-4 text-sm flex justify-items-center flex-col w-fit gap-5 font-bold cursor-pointer'>
+      <div className='prodDetailsOptionsBox p-3 xl:text-xl lg:text-lg text-sm flex gap-10 w-2xl rounded-lg border-black'>
+        <p className='text-lg font-extra bold'>{title}</p>
         <p className="flex items-center text-sm">{formatMoney(Number(productPrice), currency.code)}</p>
       </div>
 
       <section className="flex flex-col">
       {/* Size options display buttons */}
-      <h2>Please select a Size</h2>
+      <h2 className="text-sm">Please select a Size</h2>
       <div
         className='flex flex-row justify-around xl:gap-8 gap-2 w-fit'
         key={productVariants.id}
