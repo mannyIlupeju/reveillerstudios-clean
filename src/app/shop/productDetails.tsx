@@ -167,7 +167,7 @@ const ProductDetails: React.FC<Props> = ({ products, recommendations }) => {
     touchThreshold: 5,
     draggable: canSwipe,
     initialSlide: 0,
-    focusOnSelect: isDesktop,
+    focusOnSelect: false,
     responsive: [
       {
         breakpoint: 1280,
@@ -268,7 +268,13 @@ const ProductDetails: React.FC<Props> = ({ products, recommendations }) => {
                   const alt = item.altText || `Product image ${index + 1}`;
 
                   return (
-                    <div key={index} className="px-2">
+                    <div
+                      key={index}
+                      className="px-2"
+                      onClick={() => {
+                        if (isDesktop) sliderRef.current?.slickGoTo(index);
+                      }}
+                    >
                       <div className="relative h-[600px] md:h-[700px] lg:h-[800px] flex items-center justify-center mx-auto">
                         <div className="w-full h-full max-w-md mx-auto">
                           <PinchZoomImage
