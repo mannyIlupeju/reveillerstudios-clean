@@ -22,8 +22,8 @@ const SideNav = () => {
   const linkClass = (path: string) =>
     `rounded-md transition-colors duration-200 ${
       pathname === path
-        ? 'bg-orange-400 text-white font-bold p-2'
-        : 'text-gray-600 hover:bg-orange-200 font-bold p-2'
+        ? 'bg-orange-400 text-white font-normal p-2'
+        : 'text-gray-600 hover:bg-orange-200 font-normal p-2'
     }`;
   
 
@@ -41,8 +41,8 @@ const SideNav = () => {
 
 
   return (
-        <div className="xl:hidden fixed bottom-2 left-1/2 -translate-x-1/2 w-[95%] max-w-md py-3 px-3 shadow-md rounded-t-md SideNav text-xs font-bold z-50 bg-white">
-                <div className=" mx-auto flex justify-center gap-4 uppercase items-center font-extrabold">
+        <div className="xl:hidden fixed bottom-2 left-1/2 -translate-x-1/2 w-[95%] max-w-md py-3 px-3 shadow-md rounded-t-md SideNav text-xs font-normal z-50 bg-white">
+                <div className=" mx-auto flex justify-center gap-4 uppercase items-center font-normal">
                     <button className="cursor-pointer" onClick={() => setOpenMenu(!isMenuOpen)}>
                       <Image src="/images/rvrspinninglogo-unscreen2.gif" alt="rvr spinning logo" width={30} height={30} unoptimized/>
                     </button>
@@ -59,7 +59,7 @@ const SideNav = () => {
                     {/* <Link href='/journal' className={linkClass('/journal')}>Journal</Link> */}
 
                     <div className="flex items-center" >
-                        <div className={`flex gap-1 ${isCartOpen ? 'bg-zinc-400 text-white font-bold p-2' : 'text-gray-600 orange-hover font-bold p-2'} rounded-md transition-colors duration-200`} onClick={toggleCart}>
+                        <div className={`flex gap-1 ${isCartOpen ? 'bg-zinc-400 text-white font-normal p-2' : 'text-gray-600 orange-hover font-normal p-2'} rounded-md transition-colors duration-200`} onClick={toggleCart}>
                             <h1>Cart</h1> 
                             <span>({cartQuantity})</span>
                         </div>
