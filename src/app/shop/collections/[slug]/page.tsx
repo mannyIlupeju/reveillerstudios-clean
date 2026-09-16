@@ -80,10 +80,10 @@ export default async function Page({params}: PageProps){
 
      return (
         <main className="flex xl:flex-row flex-col gap-8 px-4">
-          <aside className="xl:sticky block xl:top-[50vh] xl:-translate-y-1/2 top-10 z-10 xl:w-48 xl:self-start">
+          <aside className="block xl:fixed xl:left-4 xl:top-1/2 xl:-translate-y-1/2 top-10 z-10 xl:w-48">
             <ProductCategories collections={allCategories} />
           </aside>
-          <section className="flex-1 p-8">
+          <section className="flex-1 p-8 xl:pl-56">
             <ProductGrid items={collections} isProductGrid={true} />
           </section>
         </main>
