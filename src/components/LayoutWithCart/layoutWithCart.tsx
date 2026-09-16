@@ -78,12 +78,14 @@ export default function LayoutWithCartClient({ children, detectedCountry }: Prop
   return (
     <>
       <div className="box3 items-center cursor-pointer text-lg sticky top-0 z-30">
-        <div className="ticker-track" aria-hidden={false}>
-          {Array.from({ length: 16 }).map((_, i) => (
-            <span key={i} className="ticker-text uppercase">
-              Welcome to Reveiller Studios
-            </span>
-          ))}
+        <div className="ticker-layer">
+          <div className="ticker-track" aria-hidden={false}>
+            {Array.from({ length: 16 }).map((_, i) => (
+              <span key={i} className="ticker-text uppercase">
+                Welcome to Reveiller Studios
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 

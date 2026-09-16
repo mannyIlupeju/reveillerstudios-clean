@@ -817,7 +817,17 @@ th {
    position (xl:top-[53px], matching this bar's measured rendered
    height) to sit just below this bar instead of overlapping it at
    top:0 -- if this bar's height changes (padding, font-size, border),
-   re-measure and update that offset to match. */
+   re-measure and update that offset to match.
+
+   IMPORTANT: do not put `transform` (including translateZ(0) GPU-layer
+   hints) directly on this element. iOS/mobile Safari has a long-standing
+   bug where a `position: sticky` element that also has its own
+   `transform` loses its sticky behavior entirely and can appear to
+   detach, jump, or vanish while scrolling -- likely the cause of the
+   marquee "not working properly on mobile". The GPU-layer hint that
+   used to live here has been moved to .ticker-layer, a non-sticky
+   descendant, so it still isolates the ticker's animation onto its own
+   compositing layer without breaking this element's stickiness. */
 .box3{
   width: 100%;
   padding: 0.4rem;
@@ -827,14 +837,18 @@ th {
   border-bottom: 1px solid #f60505;
   white-space: nowrap;
   display: flex;
-  /* Forces this sticky element onto its own stable compositing layer.
-     Without this, some mobile WebKit browsers tear down and rebuild
-     the layer when a position:sticky element crosses its stuck
-     threshold on scroll, which can freeze a running CSS animation on
-     a descendant (the ticker-track marquee) instead of resuming it. */
+}
+
+/* Isolates the ticker's animation onto its own compositing layer so
+   mobile WebKit doesn't tear down/rebuild the layer (and freeze the
+   animation) when the ticker's ancestor -- .box3, position: sticky --
+   crosses its stuck threshold on scroll. Applied here instead of on
+   .box3 itself: see the note on .box3 above. */
+.ticker-layer {
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
   -webkit-backface-visibility: hidden;
+  will-change: transform;
 }
 
 .imageCardhover {
@@ -848,7 +862,8 @@ th {
 .ticker-track {
   display: inline-flex;
   white-space: nowrap;
-  animation: ticker-scroll 22s linear infinite;
+  /* Slowed from 22s -> 40s per request. */
+  animation: ticker-scroll 40s linear infinite;
   will-change: transform;
 }
 
