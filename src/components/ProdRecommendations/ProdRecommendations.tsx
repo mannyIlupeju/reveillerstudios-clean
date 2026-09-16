@@ -26,9 +26,9 @@ function ProdRecommendations({recommendations}:any) {
                         <Image
                           src={item.featuredImage.url}
                           alt={item.featuredImage.altText || 'Product'}
-                          width={132}
-                          height={198}
-                          className="object-contain rounded-md w-[8.25rem] aspect-[2/3]"
+                          width={160}
+                          height={240}
+                          className="object-contain rounded-md w-40 aspect-[2/3]"
                         />
                       </Link>
                     ) : (
