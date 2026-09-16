@@ -266,11 +266,24 @@ const ThreeSketch = () => {
 
           // Remove onClick to prevent double trigger
         >
-          {/* Video temporarily removed -- contains smoking, a likely trigger for
-              Klaviyo's "prohibited content" rejection during SMS registration
-              review. Re-add the <video>...<source .../></video> block (see git
-              history on this branch) once a replacement clip is ready, or once
-              this is no longer a concern. */}
+          <video 
+            preload = "none"
+            width="auto" 
+            height="auto" 
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            disablePictureInPicture
+            controls={false}
+            className="videoOverlay absolute inset-0 w-full h-full object-cover z-9 select-none pointer-events-none"
+            tabIndex={-1}
+            onContextMenu={e => e.preventDefault()}
+          >
+            <source 
+            src="https://res.cloudinary.com/doynaagx7/video/upload/v1753965091/rvryulcal_tbtijd_fr1sdk.mp4"
+            />
+          </video>
            {/* Overlay */}
           <div className="absolute inset-0 bg-black/20 transition-colors duration-200" style={{background: activeBox === 'box2' ? 'rgba(255,140,0,0.5)' : 'rgba(0,0,0,0.2)'}}></div>
 
