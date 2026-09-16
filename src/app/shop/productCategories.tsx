@@ -20,6 +20,12 @@ interface ProductCategoriesProps {
 // in-flow row (see the lg:/xl: classes below) with no special positioning.
 const XL_BREAKPOINT = 1280;
 
+// Keeps the list from ever sitting flush against the top of its column
+// (i.e. right under the nav) -- pushes the whole centered/clamped range
+// down by this much, so there's always at least this much breathing room
+// below the nav even when scrolled all the way to the top of the shop.
+const TOP_GAP_PX = 32; // 2rem
+
 const ProductCategories: React.FC<ProductCategoriesProps> = ({ collections }) => {
   const [reversedTitle, setReversedTitle] = useState<string | null>(null);
   const [hoveredID, setHoveredID] = useState<string | null>(null);
@@ -54,11 +60,11 @@ const ProductCategories: React.FC<ProductCategoriesProps> = ({ collections }) =>
       const rect = container.getBoundingClientRect();
       const contentHeight = content.offsetHeight;
       const desiredViewportTop = window.innerHeight / 2 - contentHeight / 2;
-      // Clamp to [0, container height - content height] so the list can
-      // never sit above the top of the shop's product column, or spill
-      // past its bottom into the footer.
-      const maxOffset = Math.max(0, container.offsetHeight - contentHeight);
-      const offset = Math.min(Math.max(desiredViewportTop - rect.top, 0), maxOffset);
+      // Clamp to [TOP_GAP_PX, container height - content height] so the
+      // list always keeps a bit of breathing room below the nav, and can
+      // never spill past the container's bottom into the footer.
+      const maxOffset = Math.max(TOP_GAP_PX, container.offsetHeight - contentHeight);
+      const offset = Math.min(Math.max(desiredViewportTop - rect.top, TOP_GAP_PX), maxOffset);
 
       setTopOffset(offset);
     }
