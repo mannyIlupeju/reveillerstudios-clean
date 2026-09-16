@@ -121,7 +121,7 @@ export default function ProductGrid({ items, isProductGrid = true }: Props) {
             <div className="text-center xl:text-sm text-xs font-satoshi flex flex-col justify-center gap-2 font-light -mt-4 productTitleBox w-full p-2">
               <h1>{item.title}</h1>
               <span>
-                {currency.code} {formatMoney(
+                {formatMoney(
                   Number(item.priceRange.minVariantPrice.amount),
                   currency.code
                 )}

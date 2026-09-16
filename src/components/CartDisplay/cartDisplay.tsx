@@ -220,7 +220,7 @@ export default function CartDisplay({cart}:CartProps){
             {/* Total and Checkout */}
             <div className="flex flex-col gap-4 mt-4 sticky bottom-0 bg-white pt-4 border-t border-gray-200">
                 <p className="text-lg md:text-xl lg:text-2xl font-bold text-center">
-                Total: {currency.code} {formatMoney(Number(cartTotal), currency.code)}
+                Total: {formatMoney(Number(cartTotal), currency.code)}
                 </p>
 
                 <button 
