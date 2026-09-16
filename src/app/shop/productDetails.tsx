@@ -309,7 +309,7 @@ const ProductDetails: React.FC<Props> = ({ products, recommendations }) => {
       </div>
 
       {/* Recommendations */}
-      <div className="p-4">
+      <div className="p-4 mt-32">
         <h2 className="text-xl font-semibold">You may also like</h2>
         <Prodrecommendations recommendations={recommendedItems} />
       </div>
