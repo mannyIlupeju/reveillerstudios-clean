@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 
 export type Collection = {
@@ -14,69 +14,10 @@ interface ProductCategoriesProps {
   collections: Collection[];
 }
 
-// Tailwind's default `xl` breakpoint. This component only centers itself
-// vertically in the viewport at xl and up, matching the sidebar layout the
-// shop pages switch to at that width; below it, it renders as a plain
-// in-flow row (see the lg:/xl: classes below) with no special positioning.
-const XL_BREAKPOINT = 1280;
-
-// Keeps the list from ever sitting flush against the top of its column
-// (i.e. right under the nav) -- pushes the whole centered/clamped range
-// down by this much, so there's always at least this much breathing room
-// below the nav even when scrolled all the way to the top of the shop.
-const TOP_GAP_PX = 32; // 2rem
-
 const ProductCategories: React.FC<ProductCategoriesProps> = ({ collections }) => {
   const [reversedTitle, setReversedTitle] = useState<string | null>(null);
   const [hoveredID, setHoveredID] = useState<string | null>(null);
   const [intervalID, setIntervalID] = useState<NodeJS.Timeout | null>(null);
-
-  // Manually computed "sticky, but centered" position. This used to be
-  // done with CSS (position: sticky, then position: fixed), but both had
-  // real problems: sticky's percentage-based `top` resolves against the
-  // containing block in ways that differ between Safari and Chrome inside
-  // a flex layout, and `position: fixed` isn't scoped to this section at
-  // all -- it kept floating over the footer once the product grid ended.
-  // Computing a plain pixel offset ourselves, clamped to this container's
-  // own height, sidesteps both: it behaves identically in every browser,
-  // and it can never render past the bottom of the container it lives in.
-  const containerRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [topOffset, setTopOffset] = useState<number | null>(null);
-
-  useEffect(() => {
-    function updatePosition() {
-      const container = containerRef.current;
-      const content = contentRef.current;
-      if (!container || !content) return;
-
-      if (window.innerWidth < XL_BREAKPOINT) {
-        // Below xl the category list renders inline (see the lg:flex
-        // class below) -- no absolute positioning at all.
-        setTopOffset(null);
-        return;
-      }
-
-      const rect = container.getBoundingClientRect();
-      const contentHeight = content.offsetHeight;
-      const desiredViewportTop = window.innerHeight / 2 - contentHeight / 2;
-      // Clamp to [TOP_GAP_PX, container height - content height] so the
-      // list always keeps a bit of breathing room below the nav, and can
-      // never spill past the container's bottom into the footer.
-      const maxOffset = Math.max(TOP_GAP_PX, container.offsetHeight - contentHeight);
-      const offset = Math.min(Math.max(desiredViewportTop - rect.top, TOP_GAP_PX), maxOffset);
-
-      setTopOffset(offset);
-    }
-
-    updatePosition();
-    window.addEventListener('scroll', updatePosition, { passive: true });
-    window.addEventListener('resize', updatePosition);
-    return () => {
-      window.removeEventListener('scroll', updatePosition);
-      window.removeEventListener('resize', updatePosition);
-    };
-  }, [collections]);
 
   function handleMouseEnter(e: React.MouseEvent<HTMLAnchorElement>, id: string, title: string) {
     e.preventDefault();
@@ -107,14 +48,29 @@ const ProductCategories: React.FC<ProductCategoriesProps> = ({ collections }) =>
     return <div className="text-sm text-red-500">No categories to display.</div>;
   }
 
-  // ✅ Main render
+  // Plain CSS position: sticky, centered with `top-[50vh]` + `-translate-y-1/2`.
+  // This used to bounce between position: sticky and a hand-rolled JS
+  // version (measuring scroll position and setting an absolute `top` via
+  // React state) to fix a couple of real bugs -- but the JS version traded
+  // those for a new one: driving position from React state on every scroll
+  // event lags a frame or two behind the browser's own scroll compositing,
+  // which is exactly what reads as "springy". Plain CSS sticky has no such
+  // lag since the browser positions it natively with no render round-trip.
+  //
+  // The two earlier sticky attempts failed for different, specific reasons
+  // that don't apply here: `top: 50%` resolved as a percentage of this
+  // flex item's containing block, which is ambiguous/inconsistent -- using
+  // `50vh` (a viewport length, not a percentage) sidesteps that. And the
+  // "bleeds into the footer" bug only happened after switching to
+  // `position: fixed`, which isn't scoped to any container; sticky is
+  // scoped to its own parent by definition, so it can't reproduce that.
+  // The parent `<aside>` (see shop/page.tsx) stretches to the full height
+  // of the product grid via the default flex `align-items: stretch`,
+  // giving this room to travel and actually center at different scroll
+  // depths instead of being stuck near the top immediately.
   return (
-    <div ref={containerRef} className="hidden lg:block relative h-full">
-      <div
-        ref={contentRef}
-        className="lg:flex xl:flex-col justify-center lg:gap-2"
-        style={topOffset !== null ? { position: 'absolute', top: topOffset, left: 0 } : undefined}
-      >
+    <div className="hidden lg:block h-full">
+      <div className="xl:sticky xl:top-[50vh] xl:-translate-y-1/2 mt-8 lg:flex xl:flex-col justify-center lg:gap-2">
         {collections.map((item) => {
           const { id, title, handle } = item;
 
