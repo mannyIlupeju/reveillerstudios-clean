@@ -26,7 +26,7 @@ const ConfirmationMessage: React.FC<ConfirmationMessageProps> = ({ status, error
         <div className="absolute inset-0 bg-black bg-opacity-40" onClick={onClose} />
         {/* Modal content */}
         <motion.div
-          className="relative p-8 bg-green-50 border thanksforSubscribing rounded-xl xl:max-w-2xl xl:w-full w-96 xl:text-md text-sm z-10 shadow-lg flex flex-col items-center gap-8 text-zinc-900 text-md font-satoshi"
+          className="relative p-8 bg-green-50 border thanksforSubscribing rounded-xl xl:max-w-2xl xl:w-full w-96 xl:text-sm text-sm z-10 shadow-lg flex flex-col items-center gap-8 text-zinc-900 text-sm font-satoshi"
           style={{ transformOrigin: 'center' }}
           initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.96 }}
           animate={{ opacity: 1, scale: 1 }}

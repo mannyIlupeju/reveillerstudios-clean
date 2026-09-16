@@ -126,7 +126,7 @@ export default function NewsletterFooter() {
 
       <div className="my-4">
       <button
-        className='text-md signUp-button'
+        className='text-sm signUp-button'
         onClick={submitRegistration}
         disabled={status === 'loading'}
         >

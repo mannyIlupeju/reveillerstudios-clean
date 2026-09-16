@@ -134,9 +134,9 @@ export default function SideCart() {
                   />
                 </div>
                 <div className="flex flex-col justify-center">
-                  <span className="text-md">{item.title}</span>
-                  <span className="text-md"> Price: {formatMoney(Number(item.price * item.quantity), currency.code)}</span>
-                  <span className="text-md">Size: {item.size.value}</span>
+                  <span className="text-sm">{item.title}</span>
+                  <span className="text-sm"> Price: {formatMoney(Number(item.price * item.quantity), currency.code)}</span>
+                  <span className="text-sm">Size: {item.size.value}</span>
                   <div className="flex w-fit mt-2 gap-2">
                     <button
                       className="disabled:opacity-50 hover:bg-gray-100 p-2"

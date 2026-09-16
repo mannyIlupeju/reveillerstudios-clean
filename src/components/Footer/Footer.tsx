@@ -39,7 +39,7 @@ export default function Footer() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-2 xl:gap-5 xl:text-md text-sm">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-2 xl:gap-5 xl:text-sm text-sm">
                     <div className="flex flex-col  gap-2">
                         <ScrambleLink href='/about' className="footer-link">About</ScrambleLink>
                         <ScrambleLink href='/privacy' className="footer-link">Privacy policy</ScrambleLink>

@@ -28,7 +28,7 @@ export default function Accordion({
 
 
   return (
-    <div className="prodDetailsOptionsBox p-3 rounded-lg text-md">
+    <div className="prodDetailsOptionsBox p-3 rounded-lg text-sm">
         <div className="flex justify-between">
             <h3>{data.title}</h3>
             <motion.div

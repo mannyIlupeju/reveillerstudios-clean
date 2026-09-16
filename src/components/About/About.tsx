@@ -166,7 +166,7 @@ export default function About({ member }: { member: Member }) {
         <article className="prodDetailsOptionsBox p-8 space-y-6 xl:translate-y-60 xl:absolute top-5 text-zinc-700 xl:w-96">
           <header className="flex flex-col gap-4">
             <h1 className="xl:text-3xl text-xl font-bold">{member.name}</h1>
-            <p className="text-md">Role: {member.role}</p>
+            <p className="text-sm">Role: {member.role}</p>
 
           <div className="">
           <p className="leading-7">{member.bio}</p>

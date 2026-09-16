@@ -162,7 +162,7 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
               <h1 className="md:text-2xl text-xl font-semiBold items-center newsletter-heading">
                 Join the Community
               </h1>
-              <p className="text-md">
+              <p className="text-sm">
                 <br></br>
                 Sign up for updates on exclusive Drops and New Releases
               </p>
@@ -207,13 +207,13 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
                   checked={userData.requestUpdate}
                   name="requestUpdate"
                   value="requestUpdate"
-                  className="md:text-md text-sm"
+                  className="md:text-sm text-sm"
                 />
                 <label htmlFor="continueUpdate" className="text-xs">
                   Keep me updated with the latest news and best offers
                 </label>
               </div>
-              <div className="flex justify-start gap-2 md:text-md text-sm">
+              <div className="flex justify-start gap-2 md:text-sm text-sm">
                 <input
                   type="checkbox"
                   id="termsAgreed"
@@ -234,7 +234,7 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
             </form>
             <button
               onClick={submitRegistration}
-              className="md:text-md signUp-button mt-12 text-xs"
+              className="md:text-sm signUp-button mt-12 text-xs"
               type="submit"
               disabled={status === "loading"}
             >

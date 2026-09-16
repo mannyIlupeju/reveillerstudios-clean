@@ -16,7 +16,7 @@ export default function LoginSignUp() {
         <section className=" flex lg:justify-center justify-items-start">
           <div className=" flex flex-col gap-10">
             <div className="flex flex-col gap-3">
-            <h1 className="text-md capitalize">Enjoy a tailored Experience.</h1>
+            <h1 className="text-sm capitalize">Enjoy a tailored Experience.</h1>
             <p className='text-sm'>Register / Sign in to enjoy perks and access all our services</p>
             </div>
 

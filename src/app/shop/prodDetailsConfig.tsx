@@ -375,9 +375,9 @@ export default function ProdDetailsConfiguration({id, title, priceRange, variant
 
   return (
     <aside className='xl:absolute xl:z-1 xl:top-4 xl:text-lg xl:mx-0 mx-2 xl:ml-4 text-sm flex justify-items-start flex-col w-fit gap-5 font-bold cursor-pointer'>
-      <div className='prodDetailsOptionsBox p-3 xl:text-lg lg:text-md text-sm flex gap-10 w-2xl rounded-lg border-black'>
-        <p className='text-md font-extra bold font-satoshi'>{title}</p>
-        <p className="flex items-center text-md">{currency.code} {formatMoney(Number(productPrice), currency.code)}</p>
+      <div className='prodDetailsOptionsBox p-3 xl:text-lg lg:text-sm text-sm flex gap-10 w-2xl rounded-lg border-black'>
+        <p className='text-sm font-extra bold font-satoshi'>{title}</p>
+        <p className="flex items-center text-sm">{currency.code} {formatMoney(Number(productPrice), currency.code)}</p>
       </div>
 
       <section className="flex flex-col">

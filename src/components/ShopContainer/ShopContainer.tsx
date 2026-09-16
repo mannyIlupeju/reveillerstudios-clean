@@ -73,7 +73,7 @@ export default function ShopContainer() {
             <Link
               key={id}
               href={`/shop/collections/${handle}`}
-              className="bg-orange w-fit p-2 rounded-lg xl:text-sm text-md uppercase hover:text-zinc-900 text-zinc-800"
+              className="bg-orange w-fit p-2 rounded-lg xl:text-sm text-sm uppercase hover:text-zinc-900 text-zinc-800"
               onClick={handleCloseMenu}
             >
               {title}
