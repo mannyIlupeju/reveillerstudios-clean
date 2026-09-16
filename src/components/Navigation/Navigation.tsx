@@ -100,7 +100,7 @@ const NavLink = ({ name, href }: NavLinkType) => {
 };
 
 const NavLinks: React.FC<NavLinksProps> = ({ links }) => (
-  <div className="lg:flex lg:gap-5 lg:flex-row flex-col text-md font-bold lg:items-center">
+  <div className="lg:flex lg:gap-5 lg:flex-row flex-col text-md font-normal lg:items-center">
     {links.map((link) => (
       <NavLink key={link.name} {...link} />
     ))}
@@ -151,7 +151,7 @@ const Navigation = () => {
           </div>
          
           <div className="p-2 flex flex-col justify-start items-center w-full">
-            <span className="text-white text-xs">
+            <span className="text-white text-[0.55rem]">
               Existence precedes Essence.
               <br />
               A Holistic and accessible approach to Functionality & Grunge.
@@ -188,7 +188,7 @@ const Navigation = () => {
         </div>
 
          <div className="flex justify-center w-full -mt-4">
-            <span className="text-white text-xs">
+            <span className="text-white text-[0.55rem]">
               Existence precedes Essence.
             </span>
           </div>
