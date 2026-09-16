@@ -64,11 +64,11 @@ export default function MediaPageClient({ decodedPrefix }: { decodedPrefix: stri
   }, [decodedPrefix]);
 
   return (
-    <div className="p-8">
+    <div className="p-8 text-gray-100">
       <div className="flex gap-4 mb-8">
         <button
           onClick={() => router.push('/gallery')}
-          className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 font-medium"
+          className="px-4 py-2 bg-gray-700 rounded hover:bg-gray-300 font-medium"
         >
           ← Back to Archive
         </button>

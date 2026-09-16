@@ -8,7 +8,7 @@ export default function TeamInfo() {
 
   return (
     <div className="p-8 flex flex-col gap-4">
-      <h2 className="text-3xl font-semibold">Core Team</h2>
+      <h2 className="text-3xl justify-center font-semibold">Core Team</h2>
 
       <div className="flex flex-wrap gap-4">
         {TEAM.map((m) => (

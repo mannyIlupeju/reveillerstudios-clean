@@ -260,7 +260,6 @@ body {
 
 .nav-font {
   font-family: 'termina', sans-serif;
-  font-weight: 400;
 }
 
 canvas {
@@ -394,10 +393,9 @@ border: 1px solid rgba(235, 120, 22, 0.3);
 }
 
 .glassBox-Unique {
-  background: hsla(0, 8%, 97%, 0.453);
-  border-radius: 16px;
+  background: hsla(0, 0%, 4%, 0.8);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(7.9px);
+  backdrop-filter: blur(32px);
   -webkit-backdrop-filter: blur(7.9px);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }

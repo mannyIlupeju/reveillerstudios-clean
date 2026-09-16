@@ -57,7 +57,7 @@ export default function AboutPage() {
   };
 
   return (
-    <main className="mx-auto p-8 space-y-10">
+    <main className="mx-auto p-8 space-y-10 text-gray-100">
       <Script
         id="org-jsonld"
         type="application/ld+json"
@@ -70,7 +70,7 @@ export default function AboutPage() {
       />
 
   
-       <div className="xl:p-12 flex flex-col gap-24">
+       <div className="xl:p-12 flex flex-col gap-24 text-gray-100">
        <section className="space-y-3">
         <h2 className="text-2xl font-medium">The Story</h2>
         <p>
@@ -80,8 +80,8 @@ export default function AboutPage() {
         </p>
       </section>
 
-      <section className="flex md:flex-row flex-col gap-20">
-      <div className=" text-zinc-700  font-serif leading-relaxed tracking-wide space-y-4">
+      <section className="flex md:flex-row flex-col gap-20 ">
+      {/* <div className=" font-serif leading-relaxed text-gray-100 tracking-wide space-y-4">
         <h1 className="text-2xl font-bold uppercase">
           To the Ones Who Never Fit
         </h1>
@@ -145,7 +145,7 @@ export default function AboutPage() {
         We cut our own page.
        </p>
        </div>
-      </div>
+      </div> */}
 
       <TeamInfo/>
     </section>

@@ -467,7 +467,7 @@ function FolderDisplay({ folders }: FolderDisplayProps) {
   return (
     <div
       ref={containerRef}
-      className="w-full relative overflow-y-hidden"
+      className="w-full relative overflow-y-hidden "
       style={{ touchAction: 'none' }}
     >
       <div

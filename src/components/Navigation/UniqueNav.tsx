@@ -143,7 +143,7 @@ const Navigation = () => {
   }, [cartQty]);
 
   return (
-    <nav className="xl:flex xl:justify-between hidden justify-items-start w-full gap-4 p-2 nav-font sticky z-20 top-0 left-0 glassBox-Unique">
+    <nav className="xl:flex xl:justify-between hidden justify-items-start w-full gap-4 p-2  nav-font sticky z-20 top-0 left-0 glassBox-Unique">
       <div className="xl:flex hidden justify-between items-center">
         <div className="flex lg:flex-row gap-5 flex-col justify-start items-center">
           <div className="hidden lg:flex w-fit items-start">
@@ -174,7 +174,7 @@ const Navigation = () => {
    
 
       <div className="flex-row xl:flex hidden justify-end">
-        <div className="flex gap-5">
+        <div className="flex gap-5 text-gray-100">
           <NavLinks links={navLinks}/>
           <div className="flex items-center">
             <button onClick={() => {

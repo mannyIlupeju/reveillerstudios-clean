@@ -33,7 +33,7 @@ function layout({children}: {children: React.ReactNode}) {
     <>
       <Navigation />
 
-      <main className="flex flex-col">
+      <main className="flex flex-col bg-zinc-800">
         {children}
       </main>
 
