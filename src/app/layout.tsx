@@ -53,23 +53,6 @@ export const metadata: Metadata = {
 //   initialScale: 1,
 // };
 
-// TEMPORARY: the "Welcome to Reveiller Studios" preloader splash is
-// switched off below (SHOW_PRELOADER = false) while a Klaviyo toll-free SMS
-// registration is under review. Klaviyo's compliance reviewer rejected the
-// site with "couldn't be reviewed... may include prohibited content /
-// placeholder content", and PreloaderGate has a real bug that's a strong
-// suspect: it returns `null` for everything -- including all of {children},
-// i.e. the entire site -- until client-side hydration finishes
-// (`if (!hydrated) return null` in PreloaderGate.tsx). Any reviewer that
-// fetches the page without fully executing JS (or times out before/at the
-// 2s+300ms splash) sees a blank page or a black splash screen with a logo
-// gif instead of the real site, which reads exactly like a placeholder/
-// landing page.
-// Flip SHOW_PRELOADER back to true once Klaviyo's review passes. Consider
-// also fixing PreloaderGate's `!hydrated` early return so real crawlers
-// or bots see full content immediately instead of relying on this flag.
-const SHOW_PRELOADER = false;
-
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -77,49 +60,41 @@ export default async function RootLayout({
 }>) {
   const country = await detectCountry();
 
-  const content = (
-    <AppProviders>
-      <ScrollManager/>
-      <CookieConsentModal />
-      <LayoutWithCart detectedCountry={country}>
-        {children}
-      </LayoutWithCart>
-    </AppProviders>
-  );
-
   return (
     <html lang="en">
       <body>
-        {SHOW_PRELOADER ? (
-          <PreloaderGate
-            duration={2000}
-            onlyFirstVisit={true}
-            withFade={true}
-            bgClass="bg-black text-white"
-            splash={
-              <div className="flex flex-col items-center justify-center">
-                <div className="relative w-96 h-96">
-                <Image
-                  src="/images/rvrspinninglogo-unscreen2.gif"
-                  unoptimized
-                  alt="Loading Reveiller"
-                  width={400}
-                  height={400}
-                  className="w-96 h-96"
-                  priority
-                />
-                </div>
-                <p className="mt-4 text-xl font-medium animate-pulse">
-                  Welcome to Reveiller Studios
-                </p>
+        <PreloaderGate
+          duration={2000}
+          onlyFirstVisit={true}
+          withFade={true}
+          bgClass="bg-black text-white"
+          splash={
+            <div className="flex flex-col items-center justify-center">
+              <div className="relative w-96 h-96">
+              <Image
+                src="/images/rvrspinninglogo-unscreen2.gif"
+                unoptimized
+                alt="Loading Reveiller"
+                width={400}
+                height={400}
+                className="w-96 h-96"
+                priority
+              />
               </div>
-            }
-          >
-            {content}
-          </PreloaderGate>
-        ) : (
-          content
-        )}
+              <p className="mt-4 text-xl font-medium animate-pulse">
+                Welcome to Reveiller Studios
+              </p>
+            </div>
+          }
+        >
+          <AppProviders>
+            <ScrollManager/>
+            <CookieConsentModal />
+            <LayoutWithCart detectedCountry={country}>
+              {children}
+            </LayoutWithCart>
+          </AppProviders>
+        </PreloaderGate>
       </body>
     </html>
   );
