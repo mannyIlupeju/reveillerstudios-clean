@@ -91,6 +91,11 @@ type GlobalContextType = {
   setAllLoaded: React.Dispatch<React.SetStateAction<boolean>>;
   recommendedItems: any[];
   setRecommendedItems: React.Dispatch<React.SetStateAction<any[]>>;
+  // Coordinates full-screen popups (newsletter signup, country switch) so
+  // only one is ever visible at a time -- whichever claims this first wins,
+  // everything else waits until it releases.
+  activeModal: 'newsletter' | 'country' | null;
+  setActiveModal: React.Dispatch<React.SetStateAction<'newsletter' | 'country' | null>>;
 };
 
 
@@ -127,6 +132,7 @@ export const GlobalProvider: React.FC<ProviderProps> = ({ children }) => {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [recommendedItems, setRecommendedItems] = useState<any[]>([]);
+  const [activeModal, setActiveModal] = useState<'newsletter' | 'country' | null>(null);
 
 
 
@@ -246,7 +252,9 @@ export const GlobalProvider: React.FC<ProviderProps> = ({ children }) => {
         setAllLoaded,
         handleImageLoad,
         recommendedItems,
-        setRecommendedItems
+        setRecommendedItems,
+        activeModal,
+        setActiveModal
       }}>
       {children}
     </GlobalContext.Provider>

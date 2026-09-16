@@ -1,12 +1,16 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { useGlobalContext } from '@/Context/GlobalContext';
 
 type Props = {
   detectedCountry: 'CA' | 'US';
 };
 
 const CountrySwitchModal = ({ detectedCountry }: Props) => {
-  const [showModal, setShowModal] = useState(false);
+  const { activeModal, setActiveModal } = useGlobalContext();
+  // Whether this modal WANTS to be shown, independent of whether it's
+  // actually allowed to render right now.
+  const [wantsToShow, setWantsToShow] = useState(false);
   const [savedCountry, setSavedCountry] = useState<'CA' | 'US' | null>(null);
 
   useEffect(() => {
@@ -16,21 +20,35 @@ const CountrySwitchModal = ({ detectedCountry }: Props) => {
 
     // Show modal if detected country and stored country do not match
     if (detectedCountry && stored && detectedCountry !== stored) {
-      setShowModal(true);
+      setWantsToShow(true);
     } else {
-      setShowModal(false);
+      setWantsToShow(false);
     }
   }, [detectedCountry]);
+
+  // Newsletter takes priority: only actually render once nothing else is
+  // holding the shared modal slot (or we already hold it ourselves).
+  const showModal = wantsToShow && activeModal !== 'newsletter';
+
+  useEffect(() => {
+    if (showModal) {
+      setActiveModal('country');
+    } else {
+      setActiveModal((prev) => (prev === 'country' ? null : prev));
+    }
+  }, [showModal, setActiveModal]);
 
   const switchCountry = () => {
     document.cookie = `user-country=${detectedCountry}; path=/; max-age=31536000`;
     location.reload();
   };
 
+  const dismiss = () => setWantsToShow(false);
+
   return (
     showModal ? (
-      <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
-        <div className="bg-white p-6 rounded-xl text-center max-w-md shadow-lg">
+      <div className="fixed inset-0 bg-black/50 z-[60] flex items-center justify-center">
+        <div className="bg-white p-6 rounded-xl text-center w-[90vw] max-w-sm md:max-w-md shadow-lg">
           <h2 className="text-lg font-semibold mb-2">Switch Store?</h2>
           <p className="mb-4">
             {detectedCountry === 'US'
@@ -45,7 +63,7 @@ const CountrySwitchModal = ({ detectedCountry }: Props) => {
               Yes, switch
             </button>
             <button
-              onClick={() => setShowModal(false)}
+              onClick={dismiss}
               className="border border-gray-300 px-4 py-2 rounded"
             >
               No, stay here

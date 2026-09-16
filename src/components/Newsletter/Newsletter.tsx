@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ConfirmationMessage from '../ResponseMessages/confirmationMessage';
 import { AnimatePresence } from 'motion/react';
+import { useGlobalContext } from '../../Context/GlobalContext';
 
 type NewsletterProps = {
   /** If true, always open when mounted (ignore sessionStorage) */
@@ -10,6 +11,7 @@ type NewsletterProps = {
 };
 
 export default function Newsletter({ forceShowOnMount = false, onClose }: NewsletterProps) {
+  const { activeModal, setActiveModal } = useGlobalContext();
   const [showModal, setShowModal] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -54,6 +56,16 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
       onClose();
     }
   }, [showModal, showConfirmation, onClose]);
+
+  // Claim the shared "one modal at a time" slot for as long as either the
+  // signup form or its confirmation is on screen, then release it.
+  useEffect(() => {
+    if (showModal || showConfirmation) {
+      setActiveModal('newsletter');
+    } else {
+      setActiveModal((prev) => (prev === 'newsletter' ? null : prev));
+    }
+  }, [showModal, showConfirmation, setActiveModal]);
 
   if (!showModal && !showConfirmation) return null;
 
@@ -117,12 +129,12 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
 
       {showModal && !showConfirmation && (
         <>
-          <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40"
+          <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-[60]"
           onClick={closeModal} 
           />
-          <main className="fixed md:-translate-y-[2rem] z-50 translate-y-[1rem] text-zinc-900 inset-0 flex items-center justify-center md:top-22 top-6 p-4">
+          <main className="fixed md:-translate-y-[2rem] z-[70] translate-y-[1rem] text-zinc-900 inset-0 flex items-center justify-center md:top-22 top-6 p-4">
           <div
-          className="max-w-sm md:w-fit subscriptionBox p-5 flex flex-col justify-center md:gap-5 gap-2"
+          className="w-[90vw] max-w-sm md:max-w-md subscriptionBox p-5 flex flex-col justify-center md:gap-5 gap-2"
           >
             <div className="flex justify-end button">
               <button
