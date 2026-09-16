@@ -103,7 +103,7 @@ export default function ProductGrid({ items, isProductGrid = true }: Props) {
                   src={isHovered && hoverImage ? hoverImage : primaryImage}
                   alt={item.title}
                   fill
-                  className={`transform transition hover:scale-105 flex justify-center aspect-[1/2] object-contain optimized ${
+                  className={`transform transition hover:scale-105 aspect-[1/2] object-contain object-center optimized ${
                     !isAvailable ? 'opacity-50' : ''
                   }`}
                   loading="lazy"
