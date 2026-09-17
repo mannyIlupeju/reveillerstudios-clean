@@ -43,14 +43,26 @@ const SideNav = () => {
   return (
         <div className={`xl:hidden fixed bottom-2 left-1/2 -translate-x-1/2 w-[95%] max-w-md py-3 px-3 shadow-md rounded-t-md SideNav text-xs font-normal z-50 bg-white ${activeModal ? "pointer-events-none" : ""}`}>
                 <div className=" mx-auto flex justify-center gap-4 uppercase items-center font-normal">
-                    <button className="cursor-pointer" onClick={() => setOpenMenu(!isMenuOpen)}>
+                    <button
+                      className="cursor-pointer"
+                      onClick={() => {
+                        // Only one mobile popup (this menu or the shop flyout)
+                        // should ever be open at once -- opening one closes
+                        // the other instead of letting them stack.
+                        setIsShopHovered(false);
+                        setOpenMenu(!isMenuOpen);
+                      }}
+                    >
                       <Image src="/images/rvrspinninglogo-unscreen2.gif" alt="rvr spinning logo" width={30} height={30} unoptimized/>
                     </button>
                     <Link href='/' className={linkClass('/')}>Home</Link>
-                    <Link 
-                    href='/shop' 
+                    <Link
+                    href='/shop'
                     className={linkClass('/shop')}
-                    onClick={()=> setIsShopHovered(!isShopHovered)}
+                    onClick={() => {
+                      setOpenMenu(false);
+                      setIsShopHovered(!isShopHovered);
+                    }}
                     >
                      Shop
                     </Link>
