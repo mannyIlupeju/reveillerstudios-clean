@@ -28,7 +28,7 @@ export default function Accordion({
 
 
   return (
-    <div className="prodDetailsOptionsBox p-3 rounded-lg text-sm">
+    <div className="prodDetailsOptionsBox p-3 rounded-lg text-sm w-full max-w-md">
         <div className="flex justify-between">
             <h3>{data.title}</h3>
             <motion.div
@@ -72,7 +72,7 @@ export default function Accordion({
               transition={{ duration: prefersReducedMotion ? 0 : 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="overflow-hidden"
             >
-              <div className="leading-10 mt-8">
+              <div className="leading-10 mt-8 overflow-x-auto">
                 {typeof data.content === "string" ? 
                 (<CleanMarkUp markUpText= {data.content}/>) :
                 (<CleanMarkUp markUpText={data.content.sizeChart}/>)
