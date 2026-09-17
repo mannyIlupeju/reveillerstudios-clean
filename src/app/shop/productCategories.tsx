@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useState } from 'react'
-import Link from 'next/link'
+import React from 'react'
+import ScrambleLink from '@/components/ScrambleLink/ScrambleLink'
 
 export type Collection = {
   id: string;
@@ -15,35 +15,6 @@ interface ProductCategoriesProps {
 }
 
 const ProductCategories: React.FC<ProductCategoriesProps> = ({ collections }) => {
-  const [reversedTitle, setReversedTitle] = useState<string | null>(null);
-  const [hoveredID, setHoveredID] = useState<string | null>(null);
-  const [intervalID, setIntervalID] = useState<NodeJS.Timeout | null>(null);
-
-  function handleMouseEnter(e: React.MouseEvent<HTMLAnchorElement>, id: string, title: string) {
-    e.preventDefault();
-    const element = e.currentTarget;
-    const originalText = title;
-    element.setAttribute("data-original-text", originalText);
-
-    const idInterval = setInterval(() => {
-      setReversedTitle((prev) =>
-        prev === originalText ? originalText.split("").reverse().join("") : originalText
-      );
-    }, 500);
-
-    setHoveredID(id);
-    setIntervalID(idInterval);
-  }
-
-  const handleMouseLeave = () => {
-    if (intervalID) {
-      clearInterval(intervalID);
-      setIntervalID(null);
-    }
-    setHoveredID(null);
-    setReversedTitle(null);
-  };
-
   if (!collections || collections.length === 0) {
     return <div className="text-sm text-red-500">No categories to display.</div>;
   }
@@ -75,20 +46,14 @@ const ProductCategories: React.FC<ProductCategoriesProps> = ({ collections }) =>
           const { id, title, handle } = item;
 
           return (
-            <Link
+            <ScrambleLink
               key={id}
               href={`/shop/collections/${handle}`}
-              className="orange-hover w-fit p-2 rounded-lg xl:text-sm text-xs hover:text-zinc-900 text-zinc-800"
-              data-original-text={title}
-              onMouseEnter={(e) => handleMouseEnter(e, id, title)}
-              onMouseLeave={handleMouseLeave}
-              onTouchStart={(e) => handleMouseEnter(e as any, id, title)}
-              onTouchEnd={handleMouseLeave}
+              className="orange-hover w-fit p-2 rounded-lg xl:text-sm text-xs hover:text-zinc-900 text-zinc-800 font-bold Satoshi-Medium uppercase"
+              underline={false}
             >
-              <span className="font-bold Satoshi-Medium uppercase">
-                {hoveredID === id && reversedTitle ? reversedTitle : title}
-              </span>
-            </Link>
+              {title}
+            </ScrambleLink>
           );
         })}
       </div>
