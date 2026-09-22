@@ -3,6 +3,8 @@ import type { Metadata, Viewport } from 'next';
 import Image from 'next/image';
 import { detectCountry } from '@/utils/detectCountry/detectCountry';
 import AppProviders from './Providers/AppProviders';
+import PostHogProvider from './Providers/PostHogProvider';
+import PostHogPageView from './Providers/PostHogPageView';
 import LayoutWithCart from '../components/LayoutWithCart/layoutWithCart';
 import CookieConsentModal from '../components/CookieConsentModal/cookieConsent';
 import PreloaderGate from '../components/PreloaderGate/PreloaderGate';
@@ -90,13 +92,16 @@ export default async function RootLayout({
             </div>
           }
         >
-          <AppProviders>
-            <ScrollManager/>
-            <CookieConsentModal />
-            <LayoutWithCart detectedCountry={country}>
-              {children}
-            </LayoutWithCart>
-          </AppProviders>
+          <PostHogProvider>
+            <AppProviders>
+              <PostHogPageView />
+              <ScrollManager/>
+              <CookieConsentModal />
+              <LayoutWithCart detectedCountry={country}>
+                {children}
+              </LayoutWithCart>
+            </AppProviders>
+          </PostHogProvider>
         </PreloaderGate>
       </body>
     </html>
