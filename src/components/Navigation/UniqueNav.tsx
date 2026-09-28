@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 import { useReducedMotion } from 'motion/react';
 import type { RootState } from '../../../store/store';
 import { CartItem } from '../../../store/cartSlice';
-import NavLogo from './NavLogo/NavLogo';
 import { useGlobalContext } from '../../Context/GlobalContext'
 
 type NavLinkType = {
@@ -143,7 +142,7 @@ const Navigation = () => {
   }, [cartQty]);
 
   return (
-    <nav className="xl:flex xl:justify-between hidden justify-items-start w-full gap-4 p-2  nav-font sticky z-20 top-0 left-0 glassBox-Unique">
+    <nav className="xl:flex xl:justify-between hidden justify-items-start w-full gap-4 p-2  nav-font sticky z-20 top-0 left-0 glassBox-nav">
       <div className="xl:flex hidden justify-between items-center">
         <div className="flex lg:flex-row gap-5 flex-col justify-start items-center">
           <div className="hidden lg:flex w-fit items-start">
@@ -174,7 +173,7 @@ const Navigation = () => {
    
 
       <div className="flex-row xl:flex hidden justify-end">
-        <div className="flex gap-5 text-gray-100">
+        <div className="flex gap-5 text-white">
           <NavLinks links={navLinks}/>
           <div className="flex items-center">
             <button onClick={() => {
@@ -192,11 +191,13 @@ const Navigation = () => {
       {/* Responsive menu */}
       <div className="xl:hidden flex flex-col h-fit cursor-pointer ">
         <div className="flex justify-items-start h-fit" onClick={() => router.push('/') }>
-         <NavLogo width={200} height={100} className="mx-auto"/>
+          <div className="w-[400px] h-[100px] flex items-center justify-center">
+            <Image src="/images/RVSWHITE.svg" alt="rvr logo" width={400} height={200} className="mx-auto logo" />
+          </div>
         </div>
 
          <div className="flex justify-center w-full -mt-4">
-            <span className="text-zinc-800 text-[0.55rem]">
+            <span className="text-white text-[0.55rem]">
               Existence precedes Essence.
             </span>
           </div>
