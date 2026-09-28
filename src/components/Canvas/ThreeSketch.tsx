@@ -4,16 +4,18 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { useCanvas } from '../../Context/context/CanvasContext';
-import * as motion from "motion/react-client"
 import { useRouter } from "next/navigation";
 
+// Matches the md: breakpoint the split-screen layout switches on (side-by-side
+// on desktop, stacked top/bottom on mobile) -- used to figure out which half
+// of the screen a tap/click landed in.
+const STACKED_BREAKPOINT_PX = 768;
 
 const ThreeSketch = () => {
   const { backgroundCanvasRef } = useCanvas()
   const modelRef = useRef<THREE.Group | null>(null);
   const router = useRouter();
 
-  const [box2Pos, setBox2Pos] = useState({ x: 0, y: 0 });
   const [activeBox, setActiveBox] = useState<string | null>(null);
 
 
@@ -28,6 +30,10 @@ const ThreeSketch = () => {
   let dracoLoader: DRACOLoader | null = null;
   let controls: OrbitControls | null = null;
   let handleResize: (() => void) | null = null;
+  let handlePointerDown: ((e: PointerEvent) => void) | null = null;
+  let handlePointerMove: ((e: PointerEvent) => void) | null = null;
+  let handlePointerUp: ((e: PointerEvent) => void) | null = null;
+  let handlePointerLeave: (() => void) | null = null;
   let cancelled = false;
   let idleCallbackId: number | null = null;
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
@@ -45,7 +51,10 @@ const ThreeSketch = () => {
 
     /* ---------------- SCENE ---------------- */
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000000);
+    // Transparent so the split-screen video background (rendered behind this
+    // canvas in the DOM) shows through everywhere the particles/model don't
+    // cover.
+    scene.background = null;
 
     /* ---------------- CAMERA ---------------- */
     const camera = new THREE.PerspectiveCamera(
@@ -56,9 +65,12 @@ const ThreeSketch = () => {
     scene.add(camera);
 
     /* ---------------- RENDERER ---------------- */
-    renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // alpha: true alone isn't enough -- the clear alpha still defaults to
+    // opaque, which would paint over the video background behind the canvas.
+    renderer.setClearColor(0x000000, 0);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -161,6 +173,76 @@ const ThreeSketch = () => {
 
     window.addEventListener("resize", handleResize);
 
+    /* ---------------- CLICK-THROUGH NAVIGATION ---------------- */
+    // The Shop New Releases / Gallery labels sit behind this canvas now (so
+    // the model/particles can render in front of them), and OrbitControls
+    // needs the canvas's own pointer events to drag-rotate the model. So
+    // navigation is handled here, directly on the canvas, instead of via a
+    // separate clickable overlay that would block dragging. A press that
+    // barely moves and doesn't take long counts as a tap (navigate); a press
+    // that moves past the threshold is left alone for OrbitControls to treat
+    // as a drag/orbit.
+    const DRAG_THRESHOLD_PX = 8;
+    const TAP_MAX_MS = 600;
+    let pressStart: { x: number; y: number; time: number } | null = null;
+
+    const halfAt = (clientX: number, clientY: number): "shop" | "gallery" => {
+      const stacked = window.innerWidth < STACKED_BREAKPOINT_PX;
+      return stacked
+        ? (clientY < window.innerHeight / 2 ? "shop" : "gallery")
+        : (clientX < window.innerWidth / 2 ? "shop" : "gallery");
+    };
+
+    // Mouse: the video highlights on hover, independent of pressing, and the
+    // canvas shows a grab/grabbing hand like anything else you can drag.
+    // Touch has no hover concept, so touch keeps the old press-to-highlight
+    // feedback instead.
+    handlePointerMove = (e: PointerEvent) => {
+      if (e.pointerType !== "mouse") return;
+      setActiveBox(halfAt(e.clientX, e.clientY));
+    };
+
+    handlePointerDown = (e: PointerEvent) => {
+      pressStart = { x: e.clientX, y: e.clientY, time: performance.now() };
+      if (e.pointerType === "mouse") {
+        canvas.style.cursor = "grabbing";
+      } else {
+        setActiveBox(halfAt(e.clientX, e.clientY));
+      }
+    };
+
+    handlePointerUp = (e: PointerEvent) => {
+      if (e.pointerType === "mouse") {
+        canvas.style.cursor = "grab";
+      } else {
+        setActiveBox(null);
+      }
+      if (!pressStart) return;
+
+      const moved = Math.hypot(e.clientX - pressStart.x, e.clientY - pressStart.y);
+      const elapsed = performance.now() - pressStart.time;
+      const wasTap = moved < DRAG_THRESHOLD_PX && elapsed < TAP_MAX_MS;
+      pressStart = null;
+      if (!wasTap) return; // was an orbit drag -- OrbitControls already handled it
+
+      router.push(
+        halfAt(e.clientX, e.clientY) === "shop"
+          ? "/shop/collections/new-releases"
+          : "/gallery"
+      );
+    };
+
+    handlePointerLeave = () => {
+      setActiveBox(null);
+      pressStart = null;
+      canvas.style.cursor = "grab";
+    };
+
+    canvas.addEventListener("pointerdown", handlePointerDown);
+    canvas.addEventListener("pointermove", handlePointerMove);
+    canvas.addEventListener("pointerup", handlePointerUp);
+    canvas.addEventListener("pointerleave", handlePointerLeave);
+
     /* ---------------- ANIMATE ---------------- */
     const animate = () => {
       if (cancelled) return;
@@ -205,96 +287,97 @@ const ThreeSketch = () => {
     controls?.dispose();
 
     if (handleResize) window.removeEventListener("resize", handleResize);
+
+    const canvas = backgroundCanvasRef.current;
+    if (canvas) {
+      if (handlePointerDown) canvas.removeEventListener("pointerdown", handlePointerDown);
+      if (handlePointerMove) canvas.removeEventListener("pointermove", handlePointerMove);
+      if (handlePointerUp) canvas.removeEventListener("pointerup", handlePointerUp);
+      if (handlePointerLeave) canvas.removeEventListener("pointerleave", handlePointerLeave);
+    }
   };
 }, []);
   
 
   return (
-    <>   
-      <canvas ref={backgroundCanvasRef} className="relative"/>
-        <motion.div 
-          drag
-          dragConstraints={backgroundCanvasRef}
-          dragElastic={0.05}
-          onDragEnd={(e, info) => setBox2Pos({ x: info.point.x, y: info.point.y})}
-          initial={{ x: -100, y: -400 }}
-          animate={{ x: -10, y: 300}}
-          transition={{ duration: 2, ease: 'easeIn' }}
-          className="box box1 flex  justify-center items-center relative cursor-grab"
-          onTouchStart={() => setActiveBox('box1')}
-          onTouchEnd={() => setActiveBox(null)}
-          onMouseDown={() => setActiveBox('box1')}
-          onMouseUp={() => setActiveBox(null)}
-          onClick={() => router.push('/shop/collections/new-releases')}
-        >
-          <video 
-            preload = "none"
-            autoPlay 
-            loop 
-            muted 
+    <div className="relative w-full">
+      {/* Split-screen video background: shop-releases video on top/left,
+          gallery video on bottom/right. Stacks vertically on small screens
+          so neither half gets too thin. */}
+      <div
+        className="absolute inset-0 z-0 overflow-hidden flex flex-col md:flex-row pointer-events-none"
+        aria-hidden="true"
+      >
+        <div className="relative w-full h-1/2 md:h-full md:w-1/2 overflow-hidden">
+          <video
+            preload="none"
+            autoPlay
+            loop
+            muted
             playsInline
             disablePictureInPicture
             controls={false}
-            className="videoOverlay absolute inset-0 w-full h-full object-cover z-9 select-none pointer-events-none"
+            className="absolute inset-0 w-full h-full object-cover select-none"
             tabIndex={-1}
             onContextMenu={e => e.preventDefault()}
           >
-            <source 
-            src="https://res.cloudinary.com/doynaagx7/video/upload/v1764343516/Timeline_1cool_zrhjrd.mov"
+            <source
+              src="https://res.cloudinary.com/doynaagx7/video/upload/v1764343516/Timeline_1cool_zrhjrd.mov"
             />
           </video>
-           {/* Overlay */}
-          <div className="absolute inset-0 bg-black/20 z-10 transition-colors duration-200" style={{background: activeBox === 'box1' ? 'rgba(255,140,0,0.5)' : 'rgba(0,0,0,0.2)'}}></div>
-
-          {/* Text */}
-          <h1 className="z-20 text-sm text-yellow-300 text-center font-bold uppercase tracking-widest">Shop New Releases</h1>
-
-        </motion.div>
-        <motion.div
-          drag
-          dragConstraints={backgroundCanvasRef}
-          dragElastic={0.05}
-          initial={{ x: 500, y: -500 }}
-          animate={{ x: 500, y: 300}}
-          transition={{ duration: 1, ease: 'easeIn' }}
-          className="box box2 flex justify-center items-center relative cursor-grab p-4"
-          onTouchStart={() => setActiveBox('box2')}
-          onTouchEnd={()=> setActiveBox(null)}
-          onMouseDown={() => setActiveBox('box2')}
-          onMouseUp={() => setActiveBox('box2')}
-          onClick={() => router.push('/gallery')}
-
-          // Remove onClick to prevent double trigger
-        >
-          <video 
-            preload = "none"
-            width="auto" 
-            height="auto" 
-            autoPlay 
-            loop 
-            muted 
+        </div>
+        <div className="relative w-full h-1/2 md:h-full md:w-1/2 overflow-hidden">
+          <video
+            preload="none"
+            autoPlay
+            loop
+            muted
             playsInline
             disablePictureInPicture
             controls={false}
-            className="videoOverlay absolute inset-0 w-full h-full object-cover z-9 select-none pointer-events-none"
+            className="absolute inset-0 w-full h-full object-cover select-none"
             tabIndex={-1}
             onContextMenu={e => e.preventDefault()}
           >
-            <source 
-            src="https://res.cloudinary.com/doynaagx7/video/upload/v1753965091/rvryulcal_tbtijd_fr1sdk.mp4"
+            <source
+              src="https://res.cloudinary.com/doynaagx7/video/upload/v1753965091/rvryulcal_tbtijd_fr1sdk.mp4"
             />
           </video>
-           {/* Overlay */}
-          <div className="absolute inset-0 bg-black/20 transition-colors duration-200" style={{background: activeBox === 'box2' ? 'rgba(255,140,0,0.5)' : 'rgba(0,0,0,0.2)'}}></div>
+        </div>
+      </div>
 
-          {/* Text */}
-          <h1 className="z-20 text-sm text-yellow-400 font-bold uppercase tracking-widest">Gallery</h1>
+      {/* Labels: same left/right (top/bottom on mobile) split as the video
+          behind them, so each label sits perfectly centered on its own
+          video. Purely decorative (pointer-events-none) and rendered behind
+          the canvas below, so the 3D particles/model can pass in front of
+          the text. Tapping/clicking is handled on the canvas itself so it
+          doesn't block dragging the model. */}
+      <div className="absolute inset-0 z-[5] overflow-hidden flex flex-col md:flex-row pointer-events-none" aria-hidden="true">
+        <div className="relative flex-1 flex items-center justify-center">
+          <div
+            className="absolute inset-0 transition-colors duration-200"
+            style={{ background: activeBox === 'shop' ? 'rgba(255,140,0,0.5)' : 'rgba(0,0,0,0.2)' }}
+          />
+          <h1 className="relative text-xl sm:text-2xl md:text-4xl text-yellow-300 text-center font-bold uppercase tracking-widest px-4">
+            Shop New Releases
+          </h1>
+        </div>
+        <div className="relative flex-1 flex items-center justify-center">
+          <div
+            className="absolute inset-0 transition-colors duration-200"
+            style={{ background: activeBox === 'gallery' ? 'rgba(255,140,0,0.5)' : 'rgba(0,0,0,0.2)' }}
+          />
+          <h1 className="relative text-xl sm:text-2xl md:text-4xl text-yellow-400 text-center font-bold uppercase tracking-widest px-4">
+            Gallery
+          </h1>
+        </div>
+      </div>
 
-        </motion.div>
-        
-       
-       
-    </>
+      {/* 3D particles/logo -- transparent and on top, so it renders in
+          front of the labels. Drag to orbit; tap/click (without dragging)
+          navigates to the half of the screen that was pressed. */}
+      <canvas ref={backgroundCanvasRef} className="relative z-10 cursor-grab"/>
+    </div>
   )
 };
 
