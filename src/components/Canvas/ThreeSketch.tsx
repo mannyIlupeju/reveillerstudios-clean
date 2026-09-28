@@ -45,7 +45,10 @@ const ThreeSketch = () => {
 
     /* ---------------- SCENE ---------------- */
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000000);
+    // Transparent so the split-screen video background (rendered behind this
+    // canvas in the DOM) shows through everywhere the particles/model don't
+    // cover.
+    scene.background = null;
 
     /* ---------------- CAMERA ---------------- */
     const camera = new THREE.PerspectiveCamera(
@@ -56,9 +59,12 @@ const ThreeSketch = () => {
     scene.add(camera);
 
     /* ---------------- RENDERER ---------------- */
-    renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // alpha: true alone isn't enough -- the clear alpha still defaults to
+    // opaque, which would paint over the video background behind the canvas.
+    renderer.setClearColor(0x000000, 0);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -210,8 +216,54 @@ const ThreeSketch = () => {
   
 
   return (
-    <>   
-      <canvas ref={backgroundCanvasRef} className="relative"/>
+    <div className="relative w-full">
+      {/* Split-screen video background: shop-releases video on top/left,
+          gallery video on bottom/right. Purely decorative (no clicks) --
+          the draggable circles below stay the click targets. Stacks
+          vertically on small screens so neither half gets too thin. */}
+      <div
+        className="absolute inset-0 z-0 overflow-hidden flex flex-col md:flex-row pointer-events-none"
+        aria-hidden="true"
+      >
+        <div className="relative w-full h-1/2 md:h-full md:w-1/2 overflow-hidden">
+          <video
+            preload="none"
+            autoPlay
+            loop
+            muted
+            playsInline
+            disablePictureInPicture
+            controls={false}
+            className="absolute inset-0 w-full h-full object-cover select-none"
+            tabIndex={-1}
+            onContextMenu={e => e.preventDefault()}
+          >
+            <source
+              src="https://res.cloudinary.com/doynaagx7/video/upload/v1764343516/Timeline_1cool_zrhjrd.mov"
+            />
+          </video>
+        </div>
+        <div className="relative w-full h-1/2 md:h-full md:w-1/2 overflow-hidden">
+          <video
+            preload="none"
+            autoPlay
+            loop
+            muted
+            playsInline
+            disablePictureInPicture
+            controls={false}
+            className="absolute inset-0 w-full h-full object-cover select-none"
+            tabIndex={-1}
+            onContextMenu={e => e.preventDefault()}
+          >
+            <source
+              src="https://res.cloudinary.com/doynaagx7/video/upload/v1753965091/rvryulcal_tbtijd_fr1sdk.mp4"
+            />
+          </video>
+        </div>
+      </div>
+
+      <canvas ref={backgroundCanvasRef} className="relative z-10"/>
         <motion.div 
           drag
           dragConstraints={backgroundCanvasRef}
@@ -291,10 +343,7 @@ const ThreeSketch = () => {
           <h1 className="z-20 text-sm text-yellow-400 font-bold uppercase tracking-widest">Gallery</h1>
 
         </motion.div>
-        
-       
-       
-    </>
+    </div>
   )
 };
 
