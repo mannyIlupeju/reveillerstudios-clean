@@ -6,6 +6,10 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { useCanvas } from '../../Context/context/CanvasContext';
 import { useRouter } from "next/navigation";
 
+// Matches the md: breakpoint the split-screen layout switches on (side-by-side
+// on desktop, stacked top/bottom on mobile) -- used to figure out which half
+// of the screen a tap/click landed in.
+const STACKED_BREAKPOINT_PX = 768;
 
 const ThreeSketch = () => {
   const { backgroundCanvasRef } = useCanvas()
@@ -26,6 +30,9 @@ const ThreeSketch = () => {
   let dracoLoader: DRACOLoader | null = null;
   let controls: OrbitControls | null = null;
   let handleResize: (() => void) | null = null;
+  let handlePointerDown: ((e: PointerEvent) => void) | null = null;
+  let handlePointerUp: ((e: PointerEvent) => void) | null = null;
+  let handlePointerLeave: (() => void) | null = null;
   let cancelled = false;
   let idleCallbackId: number | null = null;
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
@@ -165,6 +172,57 @@ const ThreeSketch = () => {
 
     window.addEventListener("resize", handleResize);
 
+    /* ---------------- CLICK-THROUGH NAVIGATION ---------------- */
+    // The Shop New Releases / Gallery labels sit behind this canvas now (so
+    // the model/particles can render in front of them), and OrbitControls
+    // needs the canvas's own pointer events to drag-rotate the model. So
+    // navigation is handled here, directly on the canvas, instead of via a
+    // separate clickable overlay that would block dragging. A press that
+    // barely moves and doesn't take long counts as a tap (navigate); a press
+    // that moves past the threshold is left alone for OrbitControls to treat
+    // as a drag/orbit.
+    const DRAG_THRESHOLD_PX = 8;
+    const TAP_MAX_MS = 600;
+    let pressStart: { x: number; y: number; time: number } | null = null;
+
+    const halfAt = (clientX: number, clientY: number): "shop" | "gallery" => {
+      const stacked = window.innerWidth < STACKED_BREAKPOINT_PX;
+      return stacked
+        ? (clientY < window.innerHeight / 2 ? "shop" : "gallery")
+        : (clientX < window.innerWidth / 2 ? "shop" : "gallery");
+    };
+
+    handlePointerDown = (e: PointerEvent) => {
+      pressStart = { x: e.clientX, y: e.clientY, time: performance.now() };
+      setActiveBox(halfAt(e.clientX, e.clientY));
+    };
+
+    handlePointerUp = (e: PointerEvent) => {
+      setActiveBox(null);
+      if (!pressStart) return;
+
+      const moved = Math.hypot(e.clientX - pressStart.x, e.clientY - pressStart.y);
+      const elapsed = performance.now() - pressStart.time;
+      const wasTap = moved < DRAG_THRESHOLD_PX && elapsed < TAP_MAX_MS;
+      pressStart = null;
+      if (!wasTap) return; // was an orbit drag -- OrbitControls already handled it
+
+      router.push(
+        halfAt(e.clientX, e.clientY) === "shop"
+          ? "/shop/collections/new-releases"
+          : "/gallery"
+      );
+    };
+
+    handlePointerLeave = () => {
+      setActiveBox(null);
+      pressStart = null;
+    };
+
+    canvas.addEventListener("pointerdown", handlePointerDown);
+    canvas.addEventListener("pointerup", handlePointerUp);
+    canvas.addEventListener("pointerleave", handlePointerLeave);
+
     /* ---------------- ANIMATE ---------------- */
     const animate = () => {
       if (cancelled) return;
@@ -209,6 +267,13 @@ const ThreeSketch = () => {
     controls?.dispose();
 
     if (handleResize) window.removeEventListener("resize", handleResize);
+
+    const canvas = backgroundCanvasRef.current;
+    if (canvas) {
+      if (handlePointerDown) canvas.removeEventListener("pointerdown", handlePointerDown);
+      if (handlePointerUp) canvas.removeEventListener("pointerup", handlePointerUp);
+      if (handlePointerLeave) canvas.removeEventListener("pointerleave", handlePointerLeave);
+    }
   };
 }, []);
   
@@ -216,10 +281,8 @@ const ThreeSketch = () => {
   return (
     <div className="relative w-full">
       {/* Split-screen video background: shop-releases video on top/left,
-          gallery video on bottom/right. Purely decorative -- the clickable
-          hit layer with the labels lives on top, in the same split, further
-          below. Stacks vertically on small screens so neither half gets too
-          thin. */}
+          gallery video on bottom/right. Stacks vertically on small screens
+          so neither half gets too thin. */}
       <div
         className="absolute inset-0 z-0 overflow-hidden flex flex-col md:flex-row pointer-events-none"
         aria-hidden="true"
@@ -262,49 +325,37 @@ const ThreeSketch = () => {
         </div>
       </div>
 
-      {/* 3D particles/logo -- transparent, sits between the video and the
-          click/label layer so both remain visible around it. */}
-      <canvas ref={backgroundCanvasRef} className="relative z-10"/>
-
-      {/* Clickable split-screen hit layer: same left/right (or top/bottom
-          on mobile) split as the video behind it, each half a link with its
-          label on top of the video. Replaces the old draggable circles. */}
-      <div className="absolute inset-0 z-20 flex flex-col md:flex-row">
-        <div
-          className="relative flex-1 flex items-center justify-center cursor-pointer"
-          onTouchStart={() => setActiveBox('shop')}
-          onTouchEnd={() => setActiveBox(null)}
-          onMouseDown={() => setActiveBox('shop')}
-          onMouseUp={() => setActiveBox(null)}
-          onMouseLeave={() => setActiveBox(null)}
-          onClick={() => router.push('/shop/collections/new-releases')}
-        >
+      {/* Labels: same left/right (top/bottom on mobile) split as the video
+          behind them, so each label sits perfectly centered on its own
+          video. Purely decorative (pointer-events-none) and rendered behind
+          the canvas below, so the 3D particles/model can pass in front of
+          the text. Tapping/clicking is handled on the canvas itself so it
+          doesn't block dragging the model. */}
+      <div className="absolute inset-0 z-[5] overflow-hidden flex flex-col md:flex-row pointer-events-none" aria-hidden="true">
+        <div className="relative flex-1 flex items-center justify-center">
           <div
             className="absolute inset-0 transition-colors duration-200"
             style={{ background: activeBox === 'shop' ? 'rgba(255,140,0,0.5)' : 'rgba(0,0,0,0.2)' }}
           />
-          <h1 className="relative z-10 text-xl sm:text-2xl md:text-4xl text-yellow-300 text-center font-bold uppercase tracking-widest px-4">
+          <h1 className="relative text-xl sm:text-2xl md:text-4xl text-yellow-300 text-center font-bold uppercase tracking-widest px-4">
             Shop New Releases
           </h1>
         </div>
-        <div
-          className="relative flex-1 flex items-center justify-center cursor-pointer"
-          onTouchStart={() => setActiveBox('gallery')}
-          onTouchEnd={() => setActiveBox(null)}
-          onMouseDown={() => setActiveBox('gallery')}
-          onMouseUp={() => setActiveBox(null)}
-          onMouseLeave={() => setActiveBox(null)}
-          onClick={() => router.push('/gallery')}
-        >
+        <div className="relative flex-1 flex items-center justify-center">
           <div
             className="absolute inset-0 transition-colors duration-200"
             style={{ background: activeBox === 'gallery' ? 'rgba(255,140,0,0.5)' : 'rgba(0,0,0,0.2)' }}
           />
-          <h1 className="relative z-10 text-xl sm:text-2xl md:text-4xl text-yellow-400 text-center font-bold uppercase tracking-widest px-4">
+          <h1 className="relative text-xl sm:text-2xl md:text-4xl text-yellow-400 text-center font-bold uppercase tracking-widest px-4">
             Gallery
           </h1>
         </div>
       </div>
+
+      {/* 3D particles/logo -- transparent and on top, so it renders in
+          front of the labels. Drag to orbit; tap/click (without dragging)
+          navigates to the half of the screen that was pressed. */}
+      <canvas ref={backgroundCanvasRef} className="relative z-10 cursor-grab"/>
     </div>
   )
 };
