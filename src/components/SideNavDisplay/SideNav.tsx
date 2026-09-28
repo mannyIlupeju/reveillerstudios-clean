@@ -37,6 +37,13 @@ const SideNav = () => {
   useEffect(() => {
     setCartQuantity(cartQty)
   }, [cartQty]);
+
+  // Close the shop categories flyout on any route change (Home, About, a
+  // category link, etc.) so it never lingers over a page other than the one
+  // it was opened from.
+  useEffect(() => {
+    setIsShopHovered(false);
+  }, [pathname, setIsShopHovered]);
   
 
 
@@ -56,8 +63,8 @@ const SideNav = () => {
                       <Image src="/images/rvrspinninglogo-unscreen2.gif" alt="rvr spinning logo" width={30} height={30} unoptimized/>
                     </button>
                     <Link href='/' className={linkClass('/')}>Home</Link>
-                    <Link
-                    href='/shop'
+                    <button
+                    type="button"
                     className={linkClass('/shop')}
                     onClick={() => {
                       setOpenMenu(false);
@@ -65,7 +72,7 @@ const SideNav = () => {
                     }}
                     >
                      Shop
-                    </Link>
+                    </button>
                     <Link href='/about' className={linkClass('/about')}>About</Link>
                    
                     {/* <Link href='/journal' className={linkClass('/journal')}>Journal</Link> */}
