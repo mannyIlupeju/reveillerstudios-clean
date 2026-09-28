@@ -4,7 +4,6 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { useCanvas } from '../../Context/context/CanvasContext';
-import * as motion from "motion/react-client"
 import { useRouter } from "next/navigation";
 
 
@@ -13,7 +12,6 @@ const ThreeSketch = () => {
   const modelRef = useRef<THREE.Group | null>(null);
   const router = useRouter();
 
-  const [box2Pos, setBox2Pos] = useState({ x: 0, y: 0 });
   const [activeBox, setActiveBox] = useState<string | null>(null);
 
 
@@ -218,9 +216,10 @@ const ThreeSketch = () => {
   return (
     <div className="relative w-full">
       {/* Split-screen video background: shop-releases video on top/left,
-          gallery video on bottom/right. Purely decorative (no clicks) --
-          the draggable circles below stay the click targets. Stacks
-          vertically on small screens so neither half gets too thin. */}
+          gallery video on bottom/right. Purely decorative -- the clickable
+          hit layer with the labels lives on top, in the same split, further
+          below. Stacks vertically on small screens so neither half gets too
+          thin. */}
       <div
         className="absolute inset-0 z-0 overflow-hidden flex flex-col md:flex-row pointer-events-none"
         aria-hidden="true"
@@ -263,86 +262,49 @@ const ThreeSketch = () => {
         </div>
       </div>
 
+      {/* 3D particles/logo -- transparent, sits between the video and the
+          click/label layer so both remain visible around it. */}
       <canvas ref={backgroundCanvasRef} className="relative z-10"/>
-        <motion.div 
-          drag
-          dragConstraints={backgroundCanvasRef}
-          dragElastic={0.05}
-          onDragEnd={(e, info) => setBox2Pos({ x: info.point.x, y: info.point.y})}
-          initial={{ x: -100, y: -400 }}
-          animate={{ x: -10, y: 300}}
-          transition={{ duration: 2, ease: 'easeIn' }}
-          className="box box1 flex  justify-center items-center relative cursor-grab"
-          onTouchStart={() => setActiveBox('box1')}
+
+      {/* Clickable split-screen hit layer: same left/right (or top/bottom
+          on mobile) split as the video behind it, each half a link with its
+          label on top of the video. Replaces the old draggable circles. */}
+      <div className="absolute inset-0 z-20 flex flex-col md:flex-row">
+        <div
+          className="relative flex-1 flex items-center justify-center cursor-pointer"
+          onTouchStart={() => setActiveBox('shop')}
           onTouchEnd={() => setActiveBox(null)}
-          onMouseDown={() => setActiveBox('box1')}
+          onMouseDown={() => setActiveBox('shop')}
           onMouseUp={() => setActiveBox(null)}
+          onMouseLeave={() => setActiveBox(null)}
           onClick={() => router.push('/shop/collections/new-releases')}
         >
-          <video 
-            preload = "none"
-            autoPlay 
-            loop 
-            muted 
-            playsInline
-            disablePictureInPicture
-            controls={false}
-            className="videoOverlay absolute inset-0 w-full h-full object-cover z-9 select-none pointer-events-none"
-            tabIndex={-1}
-            onContextMenu={e => e.preventDefault()}
-          >
-            <source 
-            src="https://res.cloudinary.com/doynaagx7/video/upload/v1764343516/Timeline_1cool_zrhjrd.mov"
-            />
-          </video>
-           {/* Overlay */}
-          <div className="absolute inset-0 bg-black/20 z-10 transition-colors duration-200" style={{background: activeBox === 'box1' ? 'rgba(255,140,0,0.5)' : 'rgba(0,0,0,0.2)'}}></div>
-
-          {/* Text */}
-          <h1 className="z-20 text-sm text-yellow-300 text-center font-bold uppercase tracking-widest">Shop New Releases</h1>
-
-        </motion.div>
-        <motion.div
-          drag
-          dragConstraints={backgroundCanvasRef}
-          dragElastic={0.05}
-          initial={{ x: 500, y: -500 }}
-          animate={{ x: 500, y: 300}}
-          transition={{ duration: 1, ease: 'easeIn' }}
-          className="box box2 flex justify-center items-center relative cursor-grab p-4"
-          onTouchStart={() => setActiveBox('box2')}
-          onTouchEnd={()=> setActiveBox(null)}
-          onMouseDown={() => setActiveBox('box2')}
-          onMouseUp={() => setActiveBox('box2')}
+          <div
+            className="absolute inset-0 transition-colors duration-200"
+            style={{ background: activeBox === 'shop' ? 'rgba(255,140,0,0.5)' : 'rgba(0,0,0,0.2)' }}
+          />
+          <h1 className="relative z-10 text-xl sm:text-2xl md:text-4xl text-yellow-300 text-center font-bold uppercase tracking-widest px-4">
+            Shop New Releases
+          </h1>
+        </div>
+        <div
+          className="relative flex-1 flex items-center justify-center cursor-pointer"
+          onTouchStart={() => setActiveBox('gallery')}
+          onTouchEnd={() => setActiveBox(null)}
+          onMouseDown={() => setActiveBox('gallery')}
+          onMouseUp={() => setActiveBox(null)}
+          onMouseLeave={() => setActiveBox(null)}
           onClick={() => router.push('/gallery')}
-
-          // Remove onClick to prevent double trigger
         >
-          <video 
-            preload = "none"
-            width="auto" 
-            height="auto" 
-            autoPlay 
-            loop 
-            muted 
-            playsInline
-            disablePictureInPicture
-            controls={false}
-            className="videoOverlay absolute inset-0 w-full h-full object-cover z-9 select-none pointer-events-none"
-            tabIndex={-1}
-            onContextMenu={e => e.preventDefault()}
-          >
-            <source 
-            src="https://res.cloudinary.com/doynaagx7/video/upload/v1753965091/rvryulcal_tbtijd_fr1sdk.mp4"
-            />
-          </video>
-           {/* Overlay */}
-          <div className="absolute inset-0 bg-black/20 transition-colors duration-200" style={{background: activeBox === 'box2' ? 'rgba(255,140,0,0.5)' : 'rgba(0,0,0,0.2)'}}></div>
-
-          {/* Text */}
-          <h1 className="z-20 text-sm text-yellow-400 font-bold uppercase tracking-widest">Gallery</h1>
-
-        </motion.div>
+          <div
+            className="absolute inset-0 transition-colors duration-200"
+            style={{ background: activeBox === 'gallery' ? 'rgba(255,140,0,0.5)' : 'rgba(0,0,0,0.2)' }}
+          />
+          <h1 className="relative z-10 text-xl sm:text-2xl md:text-4xl text-yellow-400 text-center font-bold uppercase tracking-widest px-4">
+            Gallery
+          </h1>
+        </div>
+      </div>
     </div>
   )
 };
