@@ -31,6 +31,7 @@ const ThreeSketch = () => {
   let controls: OrbitControls | null = null;
   let handleResize: (() => void) | null = null;
   let handlePointerDown: ((e: PointerEvent) => void) | null = null;
+  let handlePointerMove: ((e: PointerEvent) => void) | null = null;
   let handlePointerUp: ((e: PointerEvent) => void) | null = null;
   let handlePointerLeave: (() => void) | null = null;
   let cancelled = false;
@@ -192,13 +193,30 @@ const ThreeSketch = () => {
         : (clientX < window.innerWidth / 2 ? "shop" : "gallery");
     };
 
-    handlePointerDown = (e: PointerEvent) => {
-      pressStart = { x: e.clientX, y: e.clientY, time: performance.now() };
+    // Mouse: the video highlights on hover, independent of pressing, and the
+    // canvas shows a grab/grabbing hand like anything else you can drag.
+    // Touch has no hover concept, so touch keeps the old press-to-highlight
+    // feedback instead.
+    handlePointerMove = (e: PointerEvent) => {
+      if (e.pointerType !== "mouse") return;
       setActiveBox(halfAt(e.clientX, e.clientY));
     };
 
+    handlePointerDown = (e: PointerEvent) => {
+      pressStart = { x: e.clientX, y: e.clientY, time: performance.now() };
+      if (e.pointerType === "mouse") {
+        canvas.style.cursor = "grabbing";
+      } else {
+        setActiveBox(halfAt(e.clientX, e.clientY));
+      }
+    };
+
     handlePointerUp = (e: PointerEvent) => {
-      setActiveBox(null);
+      if (e.pointerType === "mouse") {
+        canvas.style.cursor = "grab";
+      } else {
+        setActiveBox(null);
+      }
       if (!pressStart) return;
 
       const moved = Math.hypot(e.clientX - pressStart.x, e.clientY - pressStart.y);
@@ -217,9 +235,11 @@ const ThreeSketch = () => {
     handlePointerLeave = () => {
       setActiveBox(null);
       pressStart = null;
+      canvas.style.cursor = "grab";
     };
 
     canvas.addEventListener("pointerdown", handlePointerDown);
+    canvas.addEventListener("pointermove", handlePointerMove);
     canvas.addEventListener("pointerup", handlePointerUp);
     canvas.addEventListener("pointerleave", handlePointerLeave);
 
@@ -271,6 +291,7 @@ const ThreeSketch = () => {
     const canvas = backgroundCanvasRef.current;
     if (canvas) {
       if (handlePointerDown) canvas.removeEventListener("pointerdown", handlePointerDown);
+      if (handlePointerMove) canvas.removeEventListener("pointermove", handlePointerMove);
       if (handlePointerUp) canvas.removeEventListener("pointerup", handlePointerUp);
       if (handlePointerLeave) canvas.removeEventListener("pointerleave", handlePointerLeave);
     }
