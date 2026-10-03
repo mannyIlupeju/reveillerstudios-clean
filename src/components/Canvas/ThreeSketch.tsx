@@ -129,7 +129,11 @@ const ThreeSketch = () => {
         window.innerHeight / 50
       );
 
-      modelRef.current.scale.setScalar(scaleFactor * 2);
+      // Half the previous size (was scaleFactor * 2) -- the model was
+      // covering too much of the split-screen video behind it, especially on
+      // mobile where it sits right across the seam between the two halves.
+      // Position is untouched, so it stays centered.
+      modelRef.current.scale.setScalar(scaleFactor);
     };
 
     gltfLoader.load(
