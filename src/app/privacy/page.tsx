@@ -28,7 +28,7 @@ export default function Privacy() {
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Owner and Data Controller</h2>
           <div className="text-gray-700 space-y-2">
             <p><strong>Reveillerstudios</strong></p>
-            <p>376 Donald Street, wpg. MB</p>
+            <p>376 Donald Street, Winnipeg, MB R3B 2J2, Canada</p>
             <p>Owner contact email: <a href="mailto:contact@reveillerstudios.com" className="text-blue-600 hover:underline">contact@reveillerstudios.com</a></p>
           </div>
         </section>
@@ -36,12 +36,20 @@ export default function Privacy() {
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Type of Data We Collect</h2>
           <div className="text-gray-700 space-y-4">
-            <p>The owner does not provide a list of Personal Data types collected.</p>
+            <p>The types of Personal Data we collect, directly from you or automatically through your use of this Application, include:</p>
+            <ul className="list-disc list-inside space-y-1">
+              <li>Contact information, such as your full name, email address, mailing address, and phone number</li>
+              <li>Order and transaction information, such as products purchased and order history</li>
+              <li>Marketing and communication preferences, such as your email and SMS/text message opt-in status</li>
+              <li>Usage Data, collected automatically when using this Application (such as IP address, browser type, pages visited, and time spent on pages)</li>
+              <li>Cookies and similar tracking technologies, as described in our Cookie Policy</li>
+            </ul>
             <p>Complete details on each type of Personal Data collected are provided in the dedicated sections of this privacy policy or by specific explanation texts displayed prior to the Data collection. Personal Data may be freely provided by the User, or, in case of Usage Data, collected automatically when using this Application.</p>
             <p>Unless specified otherwise, all Data requested by this Application is mandatory and failure to provide this Data may make it impossible for this Application to provide its services. In cases where this Application specifically states that some Data is not mandatory, Users are free not to communicate this Data without consequences to the availability or the functioning of the Service.</p>
             <p>Users who are uncertain about which Personal Data is mandatory are welcome to contact the Owner.</p>
             <p>Any use of Cookies or of other tracking tools by this Application or by the owners of third-party services used by this Application serves the purpose of providing the Service required by the User, in addition to any other purposes described in the present document and in the Cookie Policy.</p>
             <p>Users are responsible for any third-party Personal Data obtained, published or shared through this Application.</p>
+            <p><strong>We do not sell or share your mobile opt-in data or phone number with third parties for marketing purposes.</strong> Mobile opt-in consent and phone numbers collected for SMS/text messaging are used solely to deliver the Service you signed up for and are shared only with service providers (such as our SMS/email platform) who process this Data on our behalf to operate the Service.</p>
           </div>
         </section>
 
@@ -220,98 +228,16 @@ export default function Privacy() {
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">
             Mobile Terms of Service
           </h2>
-
-          <p className="text-sm text-gray-600 mb-4">
-            Reveiller Studios<br />
-            Last updated: Nov. 18, 2025
+          <p className="text-gray-700">
+            If you opted in to receive SMS/text messages from Reveiller Studios,
+            that program is governed by our separate{' '}
+            <a href="/mobile-terms" className="text-blue-600 hover:underline">
+              Mobile Terms of Service
+            </a>, which explains the types of messages you may receive, message
+            frequency, and how to opt out.
           </p>
+        </section>
 
-          <div className="text-gray-700 space-y-4">
-
-            <p>
-              The Reveiller Studios mobile message service (the Service) is operated
-              by Reveiller Studios (Reveiller Studios, we, or us). Your use of the
-              Service constitutes your agreement to these terms and conditions
-              (Mobile Terms). We may modify or cancel the Service or any of its features
-              without notice. To the extent permitted by applicable law, we may also
-              modify these Mobile Terms at any time, and your continued use of the
-              Service following the effective date of any such changes shall constitute
-              your acceptance of such changes.
-            </p>
-
-     <p>
-      By consenting to Reveiller Studios SMS or text messaging service, you agree
-      to receive recurring SMS or text messages from and on behalf of Reveiller
-      Studios through your wireless provider to the mobile number you provided,
-      even if your mobile number is registered on any state or federal Do Not
-      Call list. Text messages may be sent using an automatic telephone dialing
-      system or other technology. Promotional messages may include promotions,
-      specials, and other marketing offers such as cart reminders.
-    </p>
-
-    <p>
-      You understand that you do not have to sign up for this program in order
-      to make any purchases, and your consent is not a condition of any purchase
-      with Reveiller Studios. Your participation in this program is completely
-      voluntary.
-    </p>
-
-    <p>
-      We do not charge for the Service, but you are responsible for all charges
-      and fees associated with text messaging imposed by your wireless provider.
-      Message frequency varies. Message and data rates may apply.
-    </p>
-
-    <p>
-      You may opt out of the Service at any time. Text the single keyword command
-      <strong> STOP </strong> to 
-      <a href="tel:+18335694052" className="text-blue-600 hover:underline">
-        +1 (833) 569-4052
-      </a>
-      or click the unsubscribe link where available in any text message to
-      cancel. You will receive a one time opt out confirmation text message. No
-      further messages will be sent to your mobile device unless initiated by
-      you. If you subscribe to other Reveiller Studios mobile programs, you must
-      opt out separately from those programs as well.
-    </p>
-
-    <p>
-      For Service support or assistance, send a request by email to. 
-      <a
-        href="mailto:contact@reveillerstudios.com"
-        className="text-blue-600 hover:underline"
-      >
-        contact@reveillerstudios.com
-      </a>.
-    </p>
-
-    <p>
-      We may change any short code or phone number we use to operate the Service
-      at any time. Any messages you send to a changed number may not be received,
-      and we are not responsible for honoring requests sent to old numbers.
-    </p>
-
-    <p>
-      Wireless carriers are not liable for delayed or undelivered messages. You
-      agree to provide us with a valid mobile number. If you get a new mobile
-      number, you must re enroll in the program.
-    </p>
-
-    <p>
-      To the extent permitted by law, you agree that we will not be liable for
-      failed, delayed, or misdirected delivery of any information sent through
-      the Service, any errors in such information, and any action you may or may
-      not take in reliance on the Service.
-    </p>
-
-    <p>
-      We respect your privacy. To see how we collect and use your personal
-      information, please review our Privacy Notice.
-    </p>
-
-
-      </div>
-     </section>
 
         <footer className="text-center text-sm text-gray-500 mt-12 pt-6 border-t">
           <p>Last updated: {new Date().toLocaleDateString()}</p>

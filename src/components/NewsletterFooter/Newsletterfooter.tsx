@@ -1,6 +1,7 @@
 'use client'
 
 import React, {useState} from 'react'
+import Link from 'next/link'
 import ConfirmationMessage from '../ResponseMessages/confirmationMessage';
 import { AnimatePresence } from 'motion/react';
 
@@ -8,6 +9,8 @@ export default function NewsletterFooter() {
   const [userData, setUserData] = useState({
     fullName: '',
     email: '',
+    phone: '',
+    smsConsent: false,
     requestUpdate: false,
     termsAgreed: false,
   });
@@ -19,6 +22,10 @@ export default function NewsletterFooter() {
     if (e) e.preventDefault();
     if (!userData.termsAgreed) {
       alert("Please agree to the Terms of Service & Privacy Policy");
+      return;
+    }
+    if (userData.smsConsent && !userData.phone.trim()) {
+      alert("Please enter a phone number to opt into SMS, or uncheck the SMS box");
       return;
     }
     setStatus("loading");
@@ -40,6 +47,8 @@ export default function NewsletterFooter() {
         setUserData({
           fullName: '',
           email: '',
+          phone: '',
+          smsConsent: false,
           requestUpdate: false,
           termsAgreed: false,
         });
@@ -96,6 +105,15 @@ export default function NewsletterFooter() {
             className='text-zinc-800 p-2 '
           />
         </div>
+        <input
+          type='tel'
+          name='phone'
+          value={userData.phone}
+          onChange={(e) => setUserData({...userData, phone: e.target.value})}
+          id='footerPhone'
+          placeholder='Phone number (optional)'
+          className='text-zinc-800 p-2'
+        />
       </div>
       <div className="flex justify-start gap-2">
         <input
@@ -113,14 +131,41 @@ export default function NewsletterFooter() {
       <div className="flex justify-start gap-2">
         <input
           type="checkbox"
-          id="termsAgreed"
+          id="footerTermsAgreed"
           name="termsAgreed"
           onChange={(e) => setUserData({...userData, termsAgreed: e.target.checked})} 
           checked={userData.termsAgreed}
           value="termsAgreed"
         />
-        <label htmlFor="privacyPolicyAgreement">
-          I agree to the Privacy Policy and Cookie Policy
+        <label htmlFor="footerTermsAgreed">
+          I agree to the{' '}
+          <Link href="/privacy" target="_blank" className="underline">
+            Privacy Policy
+          </Link>{' '}
+          and Cookie Policy
+        </label>
+      </div>
+      <div className="flex justify-start gap-2 mt-2">
+        <input
+          type="checkbox"
+          id="footerSmsConsent"
+          name="smsConsent"
+          onChange={(e) => setUserData({...userData, smsConsent: e.target.checked})}
+          checked={userData.smsConsent}
+          value="smsConsent"
+        />
+        <label htmlFor="footerSmsConsent" className="text-xs leading-snug">
+          By providing your phone number, you consent to receive recurring
+          SMS messages from Reveiller Studios, including promotions and cart
+          reminders. Message frequency varies. Message and data rates may
+          apply. Reply STOP to opt out.{' '}
+          <Link href="/privacy" target="_blank" className="underline">
+            Privacy Policy
+          </Link>{' '}
+          &{' '}
+          <Link href="/mobile-terms" target="_blank" className="underline">
+            Mobile Terms
+          </Link>
         </label>
       </div>
 

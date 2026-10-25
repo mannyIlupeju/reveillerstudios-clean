@@ -32,6 +32,11 @@ export default function Footer() {
                     <div className="text-sm md:text-xs md:w-[500px] p-2">
                         <span>All Contents of this website are the property of Reveillerstudios.<br></br> No Part of this site, including all text and images may be reproduced in any form without the prior written consent of Reveiller studios.</span>
                         <p>Registered Company in Canada and North America 1001293176 </p>
+                        <p className="mt-2">
+                            Reveiller Studios<br />
+                            376 Donald Street, Winnipeg, MB R3B 2J2, Canada<br />
+                            <a href="mailto:contact@reveillerstudios.com" className="footer-link">contact@reveillerstudios.com</a>
+                        </p>
                         <span className="items-center">© {timeState.currentYear} Reveillerstudios</span>
                     </div>
                         <br></br>
@@ -44,6 +49,7 @@ export default function Footer() {
                         <ScrambleLink href='/about' className="footer-link">About</ScrambleLink>
                         <ScrambleLink href='/privacy' className="footer-link">Privacy policy</ScrambleLink>
                         <ScrambleLink href='/terms' className="footer-link">Terms and Conditions</ScrambleLink>
+                        <ScrambleLink href='/mobile-terms' className="footer-link">Mobile Terms of Service</ScrambleLink>
                     </div> 
 
                      <div className="flex flex-col xl:gap-5 w-fit gap-2">

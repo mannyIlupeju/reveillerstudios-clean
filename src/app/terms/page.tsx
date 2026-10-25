@@ -64,7 +64,7 @@ export default function TermsOfService() {
       </section>
       <section>
         <h2>10. Governing Law</h2>
-        <p>These Terms shall be governed and construed in accordance with the laws of <strong>[Your Jurisdiction]</strong>, without regard to its conflict of law provisions. You agree to submit to the personal and exclusive jurisdiction of the courts located in <strong>[Your Jurisdiction]</strong>.</p>
+        <p>These Terms shall be governed and construed in accordance with the laws of <strong>Manitoba, Canada</strong>, without regard to its conflict of law provisions. You agree to submit to the personal and exclusive jurisdiction of the courts located in <strong>Manitoba, Canada</strong>.</p>
       </section>
       <section>
         <h2>11. Severability</h2>
@@ -79,8 +79,13 @@ export default function TermsOfService() {
         <p>If you have any questions about these Terms, please contact us at:</p>
         <address>
           <strong>Reveiller Studios</strong><br />
-          Email: <a href="mailto:support@reveillerstudios.com">reveillerstudios@outlook.com</a><br />
+          376 Donald Street, Winnipeg, MB R3B 2J2, Canada<br />
+          Email: <a href="mailto:contact@reveillerstudios.com">contact@reveillerstudios.com</a><br />
         </address>
+        <p>
+          If you have questions about our SMS/text messaging program specifically,
+          please see our <a href="/mobile-terms">Mobile Terms of Service</a>.
+        </p>
       </section>
     </main>
   );
