@@ -1,6 +1,7 @@
 'use client'
 
 import React, {useState} from 'react'
+import SmsConsent from '@/components/SmsConsent/SmsConsent';
 import Link from 'next/link'
 import ConfirmationMessage from '../ResponseMessages/confirmationMessage';
 import { AnimatePresence } from 'motion/react';
@@ -145,29 +146,12 @@ export default function NewsletterFooter() {
           and Cookie Policy
         </label>
       </div>
-      <div className="flex justify-start gap-2 mt-2">
-        <input
-          type="checkbox"
-          id="footerSmsConsent"
-          name="smsConsent"
-          onChange={(e) => setUserData({...userData, smsConsent: e.target.checked})}
-          checked={userData.smsConsent}
-          value="smsConsent"
-        />
-        <label htmlFor="footerSmsConsent" className="text-xs leading-snug">
-          By providing your phone number, you consent to receive recurring
-          SMS messages from Reveiller Studios, including promotions and cart
-          reminders. Message frequency varies. Message and data rates may
-          apply. Reply STOP to opt out.{' '}
-          <Link href="/privacy" target="_blank" className="underline">
-            Privacy Policy
-          </Link>{' '}
-          &{' '}
-          <Link href="/mobile-terms" target="_blank" className="underline">
-            Mobile Terms
-          </Link>
-        </label>
-      </div>
+      <SmsConsent
+        id="footerSmsConsent"
+        checked={userData.smsConsent}
+        onChange={(checked) => setUserData({...userData, smsConsent: checked})}
+        className="text-xs"
+      />
 
       <div className="my-4">
       <button
