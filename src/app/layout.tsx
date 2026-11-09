@@ -93,9 +93,6 @@ export default async function RootLayout({
                 priority
               />
               </div>
-              <p className="mt-4 text-xl font-medium animate-pulse">
-                Welcome to Reveiller Studios
-              </p>
             </div>
           }
         >
