@@ -25,7 +25,7 @@ const Loading: React.FC = () => {
       <Image
         src="/images/footerlogo.png"
         unoptimized
-        alt="Loading artwork of Reveillerstudios logo"
+        alt="Loading artwork of Reveiller Studios logo"
         width={1000}
         height={1000}
         className="animate-pulse"

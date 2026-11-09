@@ -22,7 +22,12 @@ function Page() {
           <span>contact@reveillerstudios.com</span>
         </a>
       </div>
-      
+
+      <div className="mt-6 text-center">
+        <p>Reveiller Studios</p>
+        <p>376 Donald Street, Winnipeg, MB R3B 2J2, Canada</p>
+      </div>
+
     </main>
 
     </section>

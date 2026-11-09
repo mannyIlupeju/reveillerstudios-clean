@@ -168,7 +168,7 @@ export default function ShopWaitlistForm({
         </div>
 
         <p className="text-xs text-white/60 text-center">
-          By clicking submit you agree to receive emails from Reveillerstudios
+          By clicking submit you agree to receive emails from Reveiller Studios
           and accept our web terms of use and privacy and cookie policy apply.
         </p>
       </div>

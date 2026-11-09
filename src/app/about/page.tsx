@@ -36,8 +36,10 @@ export default function AboutPage() {
     foundingDate: "2023",
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Toronto",
-      addressRegion: "ON",
+      streetAddress: "376 Donald Street",
+      addressLocality: "Winnipeg",
+      addressRegion: "MB",
+      postalCode: "R3B 2J2",
       addressCountry: "CA"
     },
     sameAs: [
@@ -74,7 +76,7 @@ export default function AboutPage() {
        <section className="space-y-3">
         <h2 className="text-2xl font-medium">The Story</h2>
         <p>
-          A creative anger. Originally starting as an artbrand in 2016, born out of a need to make clothes and represent an ideal that was not perceived in the zeitgeist at the time <br></br> A brand that weaved politics and fashion together.<br></br> Reveillerstudios was a platform for young artists to find their creativity and build their skills early in their careers.<br></br> 
+          A creative anger. Originally starting as an artbrand in 2016, born out of a need to make clothes and represent an ideal that was not perceived in the zeitgeist at the time <br></br> A brand that weaved politics and fashion together.<br></br> Reveiller Studios was a platform for young artists to find their creativity and build their skills early in their careers.<br></br> 
           From creating art wearables, creative directing and styling projects for other brands<br></br> The brand has fully matured into a full functioning fashion brand taking all of these experiences to create a new platform that showcases our creative identity.<br></br>
           On our second iteration, our goal is still to be loud, direct and cut through the noise with creative projects that embodies our belief system and identity.
         </p>

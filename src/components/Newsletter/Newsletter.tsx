@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import ConfirmationMessage from '../ResponseMessages/confirmationMessage';
 import { AnimatePresence } from 'motion/react';
 import { useGlobalContext } from '../../Context/GlobalContext';
@@ -19,6 +20,8 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
   const [userData, setUserData] = useState({
     fullName: "",
     email: "",
+    phone: "",
+    smsConsent: false,
     requestUpdate: false,
     termsAgreed: false,
   });
@@ -82,6 +85,10 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
       alert("Please agree to the Terms of Service & Privacy Policy");
       return;
     }
+    if (userData.smsConsent && !userData.phone.trim()) {
+      alert("Please enter a phone number to opt into SMS, or uncheck the SMS box");
+      return;
+    }
     setStatus("loading");
     setErrorMsg(null);
     try {
@@ -134,7 +141,7 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
           />
           <main className="fixed md:-translate-y-[2rem] z-[70] translate-y-[1rem] text-zinc-900 inset-0 flex items-center justify-center md:top-22 top-6 p-4">
           <div
-          className="w-[90vw] max-w-sm md:max-w-md subscriptionBox p-5 flex flex-col justify-center md:gap-5 gap-2"
+          className="w-[90vw] max-w-sm md:max-w-md subscriptionBox p-5 flex flex-col justify-center md:gap-5 gap-2 max-h-[90vh] overflow-y-auto"
           >
             <div className="flex justify-end button">
               <button
@@ -204,8 +211,19 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
                 placeholder="Email Address"
                 className="p-2 border text-xs border-zinc-400 rounded-md  text-zinc-800"
               />
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={userData.phone}
+                onChange={(e) =>
+                  setUserData({ ...userData, phone: e.target.value })
+                }
+                placeholder="Phone Number (optional)"
+                className="p-2 border text-xs border-zinc-400 rounded-md  text-zinc-800"
+              />
             </div>
-            <form className="flex flex-col gap-" onSubmit={submitRegistration}>
+            <form className="flex flex-col gap-2" onSubmit={submitRegistration}>
               <div className="flex justify-start gap-2">
                 <input
                   type="checkbox"
@@ -221,7 +239,7 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
                   value="requestUpdate"
                   className="md:text-sm text-sm"
                 />
-                <label htmlFor="continueUpdate" className="text-xs">
+                <label htmlFor="requestUpdate" className="text-xs">
                   Keep me updated with the latest news and best offers
                 </label>
               </div>
@@ -239,8 +257,40 @@ export default function Newsletter({ forceShowOnMount = false, onClose }: Newsle
                   checked={userData.termsAgreed}
                   value="termsAgreed"
                 />
-                <label htmlFor="privacyPolicyAgreement" className="text-xs">
-                  I agree to the Privacy Policy and Cookie Policy
+                <label htmlFor="termsAgreed" className="text-xs">
+                  I agree to the{' '}
+                  <Link href="/privacy" target="_blank" className="underline">
+                    Privacy Policy
+                  </Link>{' '}
+                  and Cookie Policy
+                </label>
+              </div>
+              <div className="flex justify-start gap-2 md:text-sm text-sm">
+                <input
+                  type="checkbox"
+                  id="smsConsent"
+                  name="smsConsent"
+                  onChange={(e) =>
+                    setUserData({
+                      ...userData,
+                      smsConsent: e.target.checked,
+                    })
+                  }
+                  checked={userData.smsConsent}
+                  value="smsConsent"
+                />
+                <label htmlFor="smsConsent" className="text-[10px] leading-snug text-zinc-600">
+                  By providing your phone number, you consent to receive
+                  recurring SMS messages from Reveiller Studios, including
+                  promotions and cart reminders. Message frequency varies.
+                  Message and data rates may apply. Reply STOP to opt out.{' '}
+                  <Link href="/privacy" target="_blank" className="underline">
+                    Privacy Policy
+                  </Link>{' '}
+                  &{' '}
+                  <Link href="/mobile-terms" target="_blank" className="underline">
+                    Mobile Terms
+                  </Link>
                 </label>
               </div>
             </form>

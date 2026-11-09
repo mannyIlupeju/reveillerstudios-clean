@@ -24,7 +24,7 @@ export default function AppProviders({ children }: { children: ReactNode }) {
             <Image
               src="/images/footerlogo.png"
               unoptimized
-              alt="Loading artwork of Reveillerstudios logo"
+              alt="Loading artwork of Reveiller Studios logo"
               width={800}
               height={800}
             />
