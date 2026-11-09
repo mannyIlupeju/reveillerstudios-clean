@@ -30,14 +30,13 @@ export default function Footer() {
                     />
 
                     <div className="text-sm md:text-xs md:w-[500px] p-2">
-                        <span>All Contents of this website are the property of Reveillerstudios.<br></br> No Part of this site, including all text and images may be reproduced in any form without the prior written consent of Reveiller studios.</span>
-                        <p>Registered Company in Canada and North America 1001293176 </p>
+                        <span>All Contents of this website are the property of Reveiller Studios.<br></br> No Part of this site, including all text and images may be reproduced in any form without the prior written consent of Reveiller Studios.</span>
                         <p className="mt-2">
                             Reveiller Studios<br />
                             376 Donald Street, Winnipeg, MB R3B 2J2, Canada<br />
                             <a href="mailto:contact@reveillerstudios.com" className="footer-link">contact@reveillerstudios.com</a>
                         </p>
-                        <span className="items-center">© {timeState.currentYear} Reveillerstudios</span>
+                        <span className="items-center">© {timeState.currentYear} Reveiller Studios</span>
                     </div>
                         <br></br>
                         <span className="text-xs">Designed and Developed in-house by mannybiz</span>
