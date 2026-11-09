@@ -815,11 +815,8 @@ th {
   right: 35rem;
 }
 
-/* Sticky announcement bar. Navigation.tsx's nav offsets its own sticky
-   position (xl:top-[53px], matching this bar's measured rendered
-   height) to sit just below this bar instead of overlapping it at
-   top:0 -- if this bar's height changes (padding, font-size, border),
-   re-measure and update that offset to match.
+/* Legacy sticky announcement bar styles (the bar itself has been removed;
+   Navigation.tsx now sticks at xl:top-0).
 
    IMPORTANT: do not put `transform` (including translateZ(0) GPU-layer
    hints) directly on this element. iOS/mobile Safari has a long-standing
