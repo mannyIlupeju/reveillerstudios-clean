@@ -36,8 +36,10 @@ export default function AboutPage() {
     foundingDate: "2023",
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Toronto",
-      addressRegion: "ON",
+      streetAddress: "376 Donald Street",
+      addressLocality: "Winnipeg",
+      addressRegion: "MB",
+      postalCode: "R3B 2J2",
       addressCountry: "CA"
     },
     sameAs: [
