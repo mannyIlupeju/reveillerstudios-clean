@@ -1,6 +1,5 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
-import Image from 'next/image';
 import Script from 'next/script';
 import { detectCountry } from '@/utils/detectCountry/detectCountry';
 import AppProviders from './Providers/AppProviders';
@@ -8,7 +7,6 @@ import PostHogProvider from './Providers/PostHogProvider';
 import PostHogPageView from './Providers/PostHogPageView';
 import LayoutWithCart from '../components/LayoutWithCart/layoutWithCart';
 import CookieConsentModal from '../components/CookieConsentModal/cookieConsent';
-import PreloaderGate from '../components/PreloaderGate/PreloaderGate';
 import ScrollManager from '@/components/ScrollManager/ScrollManager';
 
 import './globals.css';
@@ -75,38 +73,16 @@ export default async function RootLayout({
           src="https://static.klaviyo.com/onsite/js/SjGHbz/klaviyo.js?company_id=SjGHbz"
           strategy="afterInteractive"
         />
-        <PreloaderGate
-          duration={2000}
-          onlyFirstVisit={true}
-          withFade={true}
-          bgClass="bg-black text-white"
-          splash={
-            <div className="flex flex-col items-center justify-center">
-              <div className="relative w-96 h-96">
-              <Image
-                src="/images/rvrspinninglogo-unscreen2.gif"
-                unoptimized
-                alt="Loading Reveiller"
-                width={400}
-                height={400}
-                className="w-96 h-96"
-                priority
-              />
-              </div>
-            </div>
-          }
-        >
-          <PostHogProvider>
-            <AppProviders>
-              <PostHogPageView />
-              <ScrollManager/>
-              <CookieConsentModal />
-              <LayoutWithCart detectedCountry={country}>
-                {children}
-              </LayoutWithCart>
-            </AppProviders>
-          </PostHogProvider>
-        </PreloaderGate>
+      <PostHogProvider>
+        <AppProviders>
+          <PostHogPageView />
+          <ScrollManager/>
+          <CookieConsentModal />
+          <LayoutWithCart detectedCountry={country}>
+            {children}
+          </LayoutWithCart>
+        </AppProviders>
+      </PostHogProvider>
       </body>
     </html>
   );
