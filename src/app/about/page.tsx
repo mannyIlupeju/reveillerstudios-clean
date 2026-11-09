@@ -43,9 +43,9 @@ export default function AboutPage() {
       addressCountry: "CA"
     },
     sameAs: [
-      "https://www.instagram.com/<your-handle>",
-      "https://www.tiktok.com/@<your-handle>",
-      "https://www.linkedin.com/company/<your-handle>"
+      "https://www.instagram.com/reveillerstudios",
+      "https://www.tiktok.com/@reveillerstudios",
+      "https://www.youtube.com/@reveillerstudios7473"
     ]
   };
 
