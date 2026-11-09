@@ -1,13 +1,11 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
-import Image from 'next/image';
 import { detectCountry } from '@/utils/detectCountry/detectCountry';
 import AppProviders from './Providers/AppProviders';
 import PostHogProvider from './Providers/PostHogProvider';
 import PostHogPageView from './Providers/PostHogPageView';
 import LayoutWithCart from '../components/LayoutWithCart/layoutWithCart';
 import CookieConsentModal from '../components/CookieConsentModal/cookieConsent';
-import PreloaderGate from '../components/PreloaderGate/PreloaderGate';
 import ScrollManager from '@/components/ScrollManager/ScrollManager';
 
 import './globals.css';
@@ -15,14 +13,14 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.reveillerstudios.com'),
   title: {
-    default: 'Reveillerstudios',
-    template: '%s | Reveillerstudios',
+    default: 'Reveiller Studios',
+    template: '%s | Reveiller Studios',
   },
   description:
     "Reimagining fashion through rebellion and refinement. Destroy, reconstruct, reveal.<br></br> Our tailored garments fuse quality fabrics, limited runs, and raw design energy into wearable art. Built for those who resist the ordinary.",
   openGraph: {
     type: 'website',
-    siteName: 'Reveillerstudios',
+    siteName: 'Reveiller Studios',
     url: 'https://www.reveillerstudios.com',
     images: [
       {
@@ -68,38 +66,16 @@ export default async function RootLayout({
         <link rel="stylesheet" href="https://use.typekit.net/vme8jfg.css" />
       </head>
       <body>
-        <PreloaderGate
-          duration={2000}
-          onlyFirstVisit={true}
-          withFade={true}
-          bgClass="bg-black text-white"
-          splash={
-            <div className="flex flex-col items-center justify-center">
-              <div className="relative w-96 h-96">
-              <Image
-                src="/images/rvrspinninglogo-unscreen2.gif"
-                unoptimized
-                alt="Loading Reveiller"
-                width={400}
-                height={400}
-                className="w-96 h-96"
-                priority
-              />
-              </div>
-            </div>
-          }
-        >
-          <PostHogProvider>
-            <AppProviders>
-              <PostHogPageView />
-              <ScrollManager/>
-              <CookieConsentModal />
-              <LayoutWithCart detectedCountry={country}>
-                {children}
-              </LayoutWithCart>
-            </AppProviders>
-          </PostHogProvider>
-        </PreloaderGate>
+      <PostHogProvider>
+        <AppProviders>
+          <PostHogPageView />
+          <ScrollManager/>
+          <CookieConsentModal />
+          <LayoutWithCart detectedCountry={country}>
+            {children}
+          </LayoutWithCart>
+        </AppProviders>
+      </PostHogProvider>
       </body>
     </html>
   );
