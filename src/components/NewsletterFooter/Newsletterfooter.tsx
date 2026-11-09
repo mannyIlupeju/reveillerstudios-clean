@@ -180,7 +180,7 @@ export default function NewsletterFooter() {
       </div>
       <div className='xl:mt-12 my-8'>
         <p className='text-sm'>
-          By clicking submit you agree to receive emails from Reveillerstudios
+          By clicking submit you agree to receive emails from Reveiller Studios
           and accept our web terms of use and privacy and cookie apply. Terms
           apply
         </p>

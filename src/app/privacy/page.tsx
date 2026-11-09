@@ -27,7 +27,7 @@ export default function Privacy() {
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Owner and Data Controller</h2>
           <div className="text-gray-700 space-y-2">
-            <p><strong>Reveillerstudios</strong></p>
+            <p><strong>Reveiller Studios</strong></p>
             <p>376 Donald Street, Winnipeg, MB R3B 2J2, Canada</p>
             <p>Owner contact email: <a href="mailto:contact@reveillerstudios.com" className="text-blue-600 hover:underline">contact@reveillerstudios.com</a></p>
           </div>

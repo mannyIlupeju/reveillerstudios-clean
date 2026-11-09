@@ -4,7 +4,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Password",
   description:
-    "This isn’t just fashion — it’s a manifesto. Access page for Reveillerstudios.",
+    "This isn’t just fashion — it’s a manifesto. Access page for Reveiller Studios.",
 };
 
 // 👇 No Nav, no Header, no Footer — just children.
