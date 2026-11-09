@@ -78,6 +78,10 @@ export default function MobileTermsOfService() {
             </p>
 
             <p>
+              Reveiller Studios, 376 Donald Street, Winnipeg, MB R3B 2J2, Canada.
+            </p>
+
+            <p>
               We may change any short code or phone number we use to operate the Service
               at any time. Any messages you send to a changed number may not be received,
               and we are not responsible for honoring requests sent to old numbers.
