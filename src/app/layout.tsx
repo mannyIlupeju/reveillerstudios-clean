@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import Image from 'next/image';
+import Script from 'next/script';
 import { detectCountry } from '@/utils/detectCountry/detectCountry';
 import AppProviders from './Providers/AppProviders';
 import PostHogProvider from './Providers/PostHogProvider';
@@ -68,6 +69,12 @@ export default async function RootLayout({
         <link rel="stylesheet" href="https://use.typekit.net/vme8jfg.css" />
       </head>
       <body>
+        {/* Klaviyo onsite script: renders the popup forms built in Klaviyo. */}
+        <Script
+          id="klaviyo-onsite"
+          src="https://static.klaviyo.com/onsite/js/SjGHbz/klaviyo.js?company_id=SjGHbz"
+          strategy="afterInteractive"
+        />
         <PreloaderGate
           duration={2000}
           onlyFirstVisit={true}
