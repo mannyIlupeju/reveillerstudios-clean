@@ -6,6 +6,7 @@ import Footer from "@/components/Footer/Footer";
 import Loading from "@/components/Loading/Loading";
 import ThreeSketch from "@/components/Canvas/ThreeSketch";
 import Newsletter from "@/components/Newsletter/Newsletter";
+import HomeIntro from "@/components/HomeIntro/HomeIntro";
 import ShopContainer from "@/components/ShopContainer/ShopContainer";
 
 export default function HomeBodyClient() {
@@ -22,6 +23,7 @@ export default function HomeBodyClient() {
           <ThreeSketch />
         </main>
       )}
+      <HomeIntro />
       <Footer />
     </>
   );

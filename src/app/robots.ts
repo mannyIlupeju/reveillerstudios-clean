@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/cart'],
     },
-    sitemap: 'https://reveillerstudios.com/sitemap.xml',
+    sitemap: 'https://www.reveillerstudios.com/sitemap.xml',
   };
 }

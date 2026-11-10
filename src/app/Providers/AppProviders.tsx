@@ -6,44 +6,24 @@ import { LoadingProvider } from '../../Context/context/LoadingContext';
 import { CanvasProvider } from '../../Context/context/CanvasContext';
 import { GlobalProvider } from '../../Context/GlobalContext';
 import { Provider } from 'react-redux';
-import { store, persistor } from '../../../store/store';
-import { PersistGate } from 'redux-persist/integration/react';
+import { store } from '../../../store/store';
 import { CurrencyProvider } from '../../Context/context/CurrencyContext';
 import { FoldersProvider } from '../../Context/context/FoldersContext';
-import Image from 'next/image';
 
 export default function AppProviders({ children }: { children: ReactNode }) {
-  // You need to get loading from context or props. For demo, let's assume loading is false.
-  const loading = false; // Replace with your actual loading state
-
   return (
     <Provider store={store}>
-      <PersistGate
-        loading={
-          <section className="flex justify-center mt-20 items-center">
-            <Image
-              src="/images/footerlogo.png"
-              unoptimized
-              alt="Loading artwork of Reveiller Studios logo"
-              width={800}
-              height={800}
-            />
-          </section>
-        }
-        persistor={persistor}
-      >
-        <CurrencyProvider>
-          <FoldersProvider>
-            <GlobalProvider>
-              <LoadingProvider>
-                <CanvasProvider>
-                  {children}
-                </CanvasProvider>
-              </LoadingProvider>
-            </GlobalProvider>
-          </FoldersProvider>
-        </CurrencyProvider>
-      </PersistGate>
+      <CurrencyProvider>
+        <FoldersProvider>
+          <GlobalProvider>
+            <LoadingProvider>
+              <CanvasProvider>
+                {children}
+              </CanvasProvider>
+            </LoadingProvider>
+          </GlobalProvider>
+        </FoldersProvider>
+      </CurrencyProvider>
     </Provider>
   );
 }

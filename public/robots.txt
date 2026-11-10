@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://reveillerstudios.com
-
-# Sitemaps
-Sitemap: https://reveillerstudios.com/sitemap.xml
